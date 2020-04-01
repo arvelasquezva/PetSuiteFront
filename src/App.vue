@@ -21,6 +21,12 @@
 </template>
 
 <style>
+#app {
+  font-family: 'Montserrat', sans-serif;
+  place-items: center;
+  background: #063869;
+  
+  }
   .navbarPetSuite{
     background: #40db9a;   
   }

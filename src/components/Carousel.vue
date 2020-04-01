@@ -1,5 +1,4 @@
 <template>
-  <div class="diego">
     <div class="carousel">
       <b-carousel
         id="carousel-1"
@@ -15,7 +14,6 @@
         <b-carousel-slide caption="Necesitas un Guarderia o Un Paseador para tu perro? PetSuite">
           <template v-slot:img>
             <img
-              class="img-fluid"
               height="480"
               src="../assets/Images/Slide(1).png"
               alt="image slot"
@@ -28,9 +26,8 @@
         >
           <template v-slot:img>
             <img
-              class="img-fluid h-1440"
               height="480"
-              src="../assets/Images/Slide(2).png"
+              src="../assets/Images/Slide(1).png"
               alt="image slot"
             />
           </template>
@@ -41,17 +38,14 @@
         >
           <template v-slot:img>
             <img
-              class="img-fluid h-1440"
-              width="1400"
               height="480"
-              src="../assets/Images/Slide(3).png"
+              src="../assets/Images/Slide(1).png"
               alt="image slot"
             />
           </template>
         </b-carousel-slide>
       </b-carousel>
     </div>
-  </div>
 </template>
 
 <script>
@@ -75,7 +69,5 @@ export default {
 </script>
 
 <style scoped>
-.diego {
-  height: 500px;
-}
+
 </style>
