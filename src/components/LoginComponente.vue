@@ -31,7 +31,7 @@
         </b-form-group>
 
         <b-button block pill type="submit" variant="success">Login</b-button>
-        <b-button href="/about" block pill variant="danger">Sing Up</b-button>
+        <b-button href="/signUp" block pill variant="danger">Sign Up</b-button>
       </b-form>
     </div>
   </div>
