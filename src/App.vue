@@ -9,7 +9,7 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <div>
-        <b-button href="/about" variant="light" class="ml-3"> Sign In</b-button>
+        <b-button href="/login" variant="light" class="ml-3"> Sign In</b-button>
         <b-button href="/about" variant="light" class="ml-3"> Sign Up</b-button>
         </div>
       </b-navbar-nav>
