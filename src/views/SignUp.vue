@@ -1,6 +1,7 @@
 <template>
-  <div class="signUp">
+  <div class="SignUp">
     <signUpComponente></signUpComponente>
+    <router-view class="row3"></router-view>
   </div>
 </template>
 
@@ -9,7 +10,7 @@
 import signUpComponente from '@/components/SignUpComponente.vue'
 
 export default {
-  name: "signUp",
+  name: "SignUp",
   components: {
     signUpComponente
   }

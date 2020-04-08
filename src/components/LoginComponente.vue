@@ -47,9 +47,15 @@ export default {
         password: ""
       },
       show: true
-    };
-  },
-}
+      }
+    },
+    methods: {
+      onSubmit(evt) {
+        evt.preventDefault()
+        alert(JSON.stringify(this.form))
+      }
+    }
+  }
 </script>
 
 <style scoped>

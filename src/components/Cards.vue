@@ -1,54 +1,22 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Servicios</h1>
+    <h1 class="mt-3">{{ msg }}</h1>
     <b-row class="mt-1">
-      <b-col cols="12" md="4">
-        <div class="cards">
+      <div class="cards mx-5 mb-5">
         <b-card
-          title="Paseadores"
-          img-src="https://picsum.photos/600/300/?image=25"
-          img-alt="Image"
-          img-top
+          v-for="item in cards"
+          :key="item.id"
+          :title="item.title"
+          :img-src="item.imagen"
           tag="article"
-          style="max-width: 20rem;"
+          style="max-width: 17rem;"
           class="card"
         >
-          <b-button href="#" variant="primary">Go somewhere</b-button>
+          <router-link :to="{name: 'signUp', params:{id:item.title}}">
+            <b-button variant="primary" onClick="location.reload();" >Go {{ item.title }}</b-button>
+          </router-link>
         </b-card>
-        </div>
-      </b-col>
-
-      <b-col cols="12" md="4">
-        <div class="cards">
-        <b-card
-          title="Guarderias"
-          img-src="https://picsum.photos/600/300/?image=25"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem;"
-          class="card"
-        >
-          <b-button href="#" variant="primary">Go somewhere</b-button>
-        </b-card>
-        </div>
-      </b-col>
-
-      <b-col cols="12" md="4">
-        <div class="cards">
-        <b-card
-          title="Hospeadores"
-          img-src="https://picsum.photos/600/300/?image=25"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem;"
-          class="card"
-        >
-          <b-button href="#" variant="primary">Go somewhere</b-button>
-        </b-card>
-        </div>
-      </b-col>
+      </div>
     </b-row>
   </div>
 </template>
@@ -56,16 +24,18 @@
 <script>
 export default {
   name: "Cards",
+  props: {
+    msg: String,
+    cards: [],
+  },
   data() {
-    return {
-      cards: ['1','2','3']
-    };
-  }
+    return {};
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-h1{
+h1 {
   color: #40db9a;
 }
 .body {
@@ -80,8 +50,8 @@ h1{
   display: flex;
 }
 .card {
-  color:#063869;
-  background-color: #EEF6E1;
+  color: #063869;
+  background-color: #eef6e1;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);

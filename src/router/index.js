@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import SignUp from '../views/SignUp.vue';
+import PaseadorComponente from '@/components/PaseadorComponente.vue';
+import UsuarioComponente from '@/components/UsuarioComponente.vue';
+import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
 
 
 Vue.use(VueRouter)
@@ -29,13 +33,14 @@ const routes = [{
             import ( /* webpackChunkName: "login" */ '../views/Login.vue')
     },
     {
-        path: '/signUp',
+        path: '/signUp/:id',
         name: 'signUp',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "login" */ '../views/SignUp.vue')
+        component: SignUp,
+        children: [
+            { path: '/signUp/Paseador', component: PaseadorComponente },
+            { path: '/signUp/Usuario', component: UsuarioComponente },
+            { path: '/signUp/Guarderia', component: GuarderiaComponente },
+        ]
     }
 ]
 
