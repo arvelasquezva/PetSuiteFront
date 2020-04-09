@@ -1,6 +1,6 @@
 <template>
     <div class="body">
-    <div class="SingUp">
+    <div class="SignUp">
       <img
         height="300"
         src="../assets/Images/Guarderia(1).png"
@@ -85,7 +85,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success">SingUp</b-button>
+        <b-button block pill type="submit" variant="success">SignUp</b-button>
       </b-form>
     </div>
   </div>
@@ -125,7 +125,7 @@ export default {
   place-items: center;
   overflow: hidden;
 }
-.SingUp {
+.SignUp {
   display: flex;
   padding: 30px;
   border: 1px solid #eef6e1;
