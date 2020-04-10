@@ -11,7 +11,7 @@
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1" >
           <b-form-input
             id="input-1"
-            v-model="form.DogWalkerUser"
+            v-model="form.user"
             required
             placeholder="Ej: DiegoAVelasquez"
           ></b-form-input>
@@ -38,22 +38,23 @@
         >
           <b-form-input
             id="input-3"
-            v-model="form.name"
+            v-model="form.dog_daycare_name"
             required
-            placeholder="Enter Your Name"
+            placeholder="Enter Name of Your Company"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="input-group-4"
-          label="Your Address:"
+          label="Your e-mail:"
           label-for="input-4"
         >
           <b-form-input
             id="input-4"
-            v-model="form.address"
+            v-model="form.dog_daycare_e_mail"
             required
-            placeholder="Ej: Carrera 97 # 36 - 69 Sur"
+            placeholder="Ej: xxxxx@xxxxx.com"
+            type="email"
           ></b-form-input>
         </b-form-group>
 
@@ -64,7 +65,7 @@
         >
           <b-form-input
             id="input-5"
-            v-model="form.phone"
+            v-model="form.dog_daycare_phone"
             required
             placeholder="Ej: 3208919191"
             type="number"
@@ -73,15 +74,14 @@
 
         <b-form-group
           id="input-group-6"
-          label="Your e-mail:"
+          label="Your Address:"
           label-for="input-6"
         >
           <b-form-input
             id="input-6"
-            v-model="form.mail"
+            v-model="form.dog_daycare_address"
             required
-            placeholder="Ej: xxxxx@xxxxx.com"
-            type="email"
+            placeholder="Ej: Carrera 97 # 36 - 69 Sur"
           ></b-form-input>
         </b-form-group>
 
@@ -93,17 +93,18 @@
 
 <script>
 export default {
-    name: "UsuarioComponente",
+    name: "GuarderiaComponente",
     data() {
     return {
       form: {
-        DogWalkerUser: "",
+        user: "",
         password: "",
-        name:"",
-        address:"",
-        phone: "",
-        mail:"",
-        score: null
+        dog_daycare_name:"",
+        dog_daycare_e_mail:"",
+        dog_daycare_phone: "",
+        dog_daycare_score: null,
+        dog_daycare_address:"",
+        dog_daycare_type: true
       },
       show: true
       }
@@ -112,7 +113,7 @@ export default {
       onSubmit(evt) {
         evt.preventDefault()
         let currentObj = this;
-        this.axios.post('http://placeholder', JSON.stringify(this.form))
+        this.axios.post('http://localhost:8080/api/dog_day_cares/load', JSON.stringify(this.form))
         .then(function (response) {
             alert(response.data);
         })

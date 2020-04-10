@@ -11,7 +11,7 @@
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1" >
           <b-form-input
             id="input-1"
-            v-model="form.DogWalkerUser"
+            v-model="form.user"
             required
             placeholder="Enter your User ID"
           ></b-form-input>
@@ -38,9 +38,23 @@
         >
           <b-form-input
             id="input-3"
-            v-model="form.name"
+            v-model="form.dog_walker_name"
             required
             placeholder="Enter Your Name"
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-5"
+          label="Your e-mail:"
+          label-for="input-5"
+        >
+          <b-form-input
+            id="input-5"
+            v-model="form.dog_walker_e_mail"
+            required
+            placeholder="Enter Your E-mail"
+            type="email"
           ></b-form-input>
         </b-form-group>
 
@@ -51,26 +65,14 @@
         >
           <b-form-input
             id="input-4"
-            v-model="form.phone"
+            v-model="form.dog_walker_phone"
             required
             placeholder="Enter Your Phone"
             type="number"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-4"
-          label="Your e-mail:"
-          label-for="input-4"
-        >
-          <b-form-input
-            id="input-4"
-            v-model="form.mail"
-            required
-            placeholder="Enter Your E-mail"
-            type="email"
-          ></b-form-input>
-        </b-form-group>
+        
 
         <b-button block pill type="submit" variant="success">SignUp</b-button>
       </b-form>
@@ -84,12 +86,12 @@ export default {
     data() {
     return {
       form: {
-        DogWalkerUser: "",
+        user: "",
         password: "",
-        name:"",
-        phone: "",
-        mail:"",
-        score: null
+        dog_walker_name:"",
+        dog_walker_e_mail:"",
+        dog_walker_phone: "",
+        dog_walker_score: null
       },
       show: true
       }
@@ -98,7 +100,7 @@ export default {
       onSubmit(evt) {
         evt.preventDefault()
         let currentObj = this;
-        this.axios.post('http://placeholder', JSON.stringify(this.form))
+        this.axios.post('http://localhost:8080/api/dog_walkers/load', JSON.stringify(this.form))
         .then(function (response) {
             alert(response.data);
         })

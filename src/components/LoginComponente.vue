@@ -10,9 +10,9 @@
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
-            v-model="form.UserId"
+            v-model="form.user"
             required
-            placeholder="Enter Your User ID"
+            placeholder="Enter an User ID"
           ></b-form-input>
         </b-form-group>
 
@@ -43,7 +43,7 @@ export default {
     data() {
     return {
       form: {
-        UserId: "",
+        user: "",
         password: ""
       },
       show: true
@@ -53,7 +53,7 @@ export default {
       onSubmit(evt) {
         evt.preventDefault()
         let currentObj = this;
-        this.axios.post('http://placeholder', JSON.stringify(this.form))
+        this.axios.post('http://localhost:8080/api/users/login', JSON.stringify(this.form))
         .then(function (response) {
             alert(response.data);
         })

@@ -1,5 +1,5 @@
 <template>
-    <div class="body">
+  <div class="body">
     <div class="SignUp">
       <img
         height="300"
@@ -7,11 +7,11 @@
         alt="image slot"
       />
 
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="pl-4">    
-        <b-form-group id="input-group-1" label="User ID:" label-for="input-1" >
+      <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="pl-4">
+        <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
-            v-model="form.DogWalkerUser"
+            v-model="form.user"
             required
             placeholder="Ej: DiegoAVelasquez"
           ></b-form-input>
@@ -31,14 +31,10 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-3"
-          label="Your name:"
-          label-for="input-3"
-        >
+        <b-form-group id="input-group-3" label="Your name:" label-for="input-3">
           <b-form-input
             id="input-3"
-            v-model="form.name"
+            v-model="form.client_name"
             required
             placeholder="Enter Your Name"
           ></b-form-input>
@@ -46,25 +42,12 @@
 
         <b-form-group
           id="input-group-4"
-          label="Your Address:"
+          label="Your phone:"
           label-for="input-4"
         >
           <b-form-input
             id="input-4"
-            v-model="form.address"
-            required
-            placeholder="Ej: Carrera 97 # 36 - 69 Sur"
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="input-group-5"
-          label="Your phone:"
-          label-for="input-5"
-        >
-          <b-form-input
-            id="input-5"
-            v-model="form.phone"
+            v-model="form.client_phone"
             required
             placeholder="Ej: 3208919191"
             type="number"
@@ -72,16 +55,29 @@
         </b-form-group>
 
         <b-form-group
-          id="input-group-6"
+          id="input-group-5"
           label="Your e-mail:"
+          label-for="input-5"
+        >
+          <b-form-input
+            id="input-5"
+            v-model="form.client_e_mail"
+            required
+            placeholder="Ej: xxxxx@xxxxx.com"
+            type="email"
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-6"
+          label="Your Address:"
           label-for="input-6"
         >
           <b-form-input
             id="input-6"
-            v-model="form.mail"
+            v-model="form.client_address"
             required
-            placeholder="Ej: xxxxx@xxxxx.com"
-            type="email"
+            placeholder="Ej: Carrera 97 # 36 - 69 Sur"
           ></b-form-input>
         </b-form-group>
 
@@ -93,35 +89,36 @@
 
 <script>
 export default {
-    name: "UsuarioComponente",
-    data() {
+  name: "UsuarioComponente",
+  data() {
     return {
       form: {
-        DogWalkerUser: "",
+        user: "",
         password: "",
-        name:"",
-        address:"",
-        phone: "",
-        mail:"",
-        score: null
+        client_name: "",
+        client_phone: "",
+        client_e_mail: "",
+        client_address: "",
+        score: null,
       },
-      show: true
-      }
-    },
-    methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        let currentObj = this;
-        this.axios.post('http://placeholder', JSON.stringify(this.form))
-        .then(function (response) {
-            alert(response.data);
+      show: true,
+    };
+  },
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault();
+      let currentObj = this;
+      this.axios
+        .post("http://localhost:8080/api/clients/load", JSON.stringify(this.form))
+        .then(function(response) {
+          alert(response.data);
         })
-        .catch(function (error) {
-            alert(error);
+        .catch(function(error) {
+          alert(error);
         });
-      }
-    }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -140,4 +137,3 @@ export default {
   background-color: #eef6e1;
 }
 </style>
-
