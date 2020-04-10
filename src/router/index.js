@@ -5,7 +5,7 @@ import SignUp from '../views/SignUp.vue';
 import PaseadorComponente from '@/components/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
-
+import HospeadorComponente from '@/components/HospeadorComponente.vue';
 
 Vue.use(VueRouter)
 
@@ -40,6 +40,7 @@ const routes = [{
             { path: '/signUp/Paseador', component: PaseadorComponente },
             { path: '/signUp/Usuario', component: UsuarioComponente },
             { path: '/signUp/Guarderia', component: GuarderiaComponente },
+            { path: '/signUp/Hospeador', component: HospeadorComponente },
         ]
     }
 ]
