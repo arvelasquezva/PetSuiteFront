@@ -97,10 +97,17 @@ export default {
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        alert(JSON.stringify(this.form))
+        let currentObj = this;
+        this.axios.post('http://placeholder', JSON.stringify(this.form))
+        .then(function (response) {
+            alert(response.data);
+        })
+        .catch(function (error) {
+            alert(error);
+        });
       }
     }
-  }
+}
 </script>
 
 <style scoped>
