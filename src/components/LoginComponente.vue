@@ -44,25 +44,62 @@ export default {
     return {
       form: {
         user: "",
-        password: ""
+        password: "",
+        error: false
       },
       show: true
       }
     },
+    // agregue esto
+    created () {
+  this.checkCurrentLogin()
+},
+updated () {
+  this.checkCurrentLogin()
+},
+//hasta aca
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
         let currentObj = this;
-        this.axios.post('http://localhost:8080/api/users/login', JSON.stringify(this.form))
+        this.axios
+        .post("http://localhost:8080/token", JSON.stringify( { "userName" : "generic", "id" : "generic", "role" : "ROLE_CLIENT"} ), { headers : {"Content-Type" : "application/json", "Authorization" : "Token "+string} } )
         .then(function (response) {
             alert(response.data);
         })
         .catch(function (error) {
             alert(error);
         });
-      }
+      },
+      //agregue este metodo
+      login () {
+       this.$http.post('http://localhost:8080/token', { user: this.email, password: this.password })
+      .then(request => this.loginSuccessful(request))
+      .catch(() => this.loginFailed())
+      },
+      loginSuccessful (req) {
+      if (!req.data.token) {
+          this.loginFailed()
+          return
+      }   
+         localStorage.token = req.data.token
+          this.error = false
+          this.$router.replace(this.$route.query.redirect || 'http://localhost:8080/login')
+      },
+    //este tambien
+      loginFailed () {
+      this.error = 'Login failed!'
+      delete localStorage.token
+      },
+   //y este
+   checkCurrentLogin () {
+    if (localStorage.token) {
+      this.$router.replace(this.$route.query.redirect || '/authors')
     }
   }
+   
+   }
+}
 </script>
 
 <style scoped>
