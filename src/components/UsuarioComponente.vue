@@ -108,8 +108,12 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       let currentObj = this;
-      this.axios
-        .post("http://localhost:8080/api/clients/load", JSON.stringify(this.form))
+      axios
+		//Campos userName, id y role deben formar parte del JSON para cualquier petición. En el header va solo el tipo de contenido y el 'Authorization' cuyo valor es la palabra token, un espacio y el string largo del token.
+		//Se debe tener un token para cualquier tipo de petición a cualquier sección del back que tenga /api en la dirección, así no haya un usuario loggeado, para este caso no hay usuario loggeado entonces valores de userName e ID no importan.
+		//El rol siempre debe ser el apropiado, para este caso de registro de usuario regular entonces es ROLE_CLIENT.
+		//Este es un método plantilla para obtener un token del servidor. Para pedir un token no debe ir un token en el header, claramente. Está solo como ejemplo para otras peticiones.
+ 		.post("http://localhost:8080/token", JSON.stringify( { "userName" : "generic", "id" : "generic", "role" : "ROLE_CLIENT"} ), { headers : {"Content-Type" : "application/json", "Authorization" : "Token "+string} } )
         .then(function(response) {
           alert(response.data);
         })
