@@ -62,13 +62,13 @@ export default{
   }),
 
  API_URL_USERS_LOGIN : axios.create({
-    baseURL: API_URL_USERS_LOGIN || 'http://localhost:8080/api/dog_walkers/login',
+    baseURL: API_URL_USERS_LOGIN || 'http://localhost:8080/api/users/login',
     headers: {"Content-Type": "application/json",
     "Authorization": "Token "+ localStorage.token}
   }),
 
 API_URL_USERS_ALL : axios.create({
-    baseURL: API_URL_USERS_ALL || 'http://localhost:8080/api/dog_walkers/all',
+    baseURL: API_URL_USERS_ALL || 'http://localhost:8080/api/users/all',
     headers: {"Content-Type": "application/json",
     "Authorization": "Token "+ localStorage.token}
   })
