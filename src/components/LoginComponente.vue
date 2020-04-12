@@ -52,12 +52,12 @@ export default {
       }
     },
     // agregue esto
-    created () {
+  /*  created () {
   this.checkCurrentLogin()
 },
 updated () {
   this.checkCurrentLogin()
-},
+},*/
 //hasta aca
     methods: {
       onSubmit(evt) {
@@ -95,11 +95,11 @@ updated () {
       delete localStorage.token
       },
    //y este
-   checkCurrentLogin () {
+  /* checkCurrentLogin () {
     if (localStorage.token) {
       this.$router.replace(this.$route.query.redirect || 'http://localhost:8080/login')
     }
-  }
+  }*/
    
    },
    //esto tambien

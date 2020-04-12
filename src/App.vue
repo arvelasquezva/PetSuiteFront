@@ -14,7 +14,7 @@ export default {
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },
-  created () {
+ /* created () {
     this.checkCurrentLogin()
   },
   updated () {
@@ -26,7 +26,7 @@ export default {
         this.$router.push('/?redirect=' + this.$route.path)
       }
     }
-  },
+  },*/
   components: {
     NavbarComponente
   }
