@@ -102,7 +102,7 @@ export default {
         dog_daycare_name:"",
         dog_daycare_e_mail:"",
         dog_daycare_phone: "",
-        dog_daycare_score: null,
+        dog_daycare_score: 0,
         dog_daycare_address:"",
         dog_daycare_type: true
       },
@@ -110,18 +110,31 @@ export default {
       }
     },
     methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        let currentObj = this;
-        this.axios.post('http://localhost:8080/api/dog_day_cares/load', JSON.stringify(this.form))
-        .then(function (response) {
-            alert(response.data);
+    onSubmit(evt) {
+      evt.preventDefault()
+      const url = "/api/dog_day_cares/load";
+
+      var config = {
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "Content-Type",
+          "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Headers": "*",
+          "cache-control": "no-cache",
+          "Authorization": "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+        }
+      };
+
+      this.axios
+        .post(url, this.form, config)
+        .then(function(response){
+          alert(response.data);
         })
-        .catch(function (error) {
-            alert(error);
+        .catch(function(error){
+          alert(error);
         });
-      }
     }
+  }
 }
 </script>
 

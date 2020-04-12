@@ -1,27 +1,14 @@
 <template>
   <div class="body">
     <div class="SignUp">
-      <img
-        height="300"
-        src="../assets/Images/Usuario(1).png"
-        alt="image slot"
-      />
+      <img height="300" src="../assets/Images/Usuario(1).png" alt="image slot" />
 
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="pl-4">
+      <b-form @submit="onSubmit" v-if="show" class="pl-4">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
-          <b-form-input
-            id="input-1"
-            v-model="form.user"
-            required
-            placeholder="Ej: DiegoAVelasquez"
-          ></b-form-input>
+          <b-form-input id="input-1" v-model="form.user" required placeholder="Ej: DiegoAVelasquez"></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Your password:"
-          label-for="input-2"
-        >
+        <b-form-group id="input-group-2" label="Your password:" label-for="input-2">
           <b-form-input
             id="input-2"
             v-model="form.password"
@@ -40,11 +27,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-4"
-          label="Your phone:"
-          label-for="input-4"
-        >
+        <b-form-group id="input-group-4" label="Your phone:" label-for="input-4">
           <b-form-input
             id="input-4"
             v-model="form.client_phone"
@@ -54,11 +37,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-5"
-          label="Your e-mail:"
-          label-for="input-5"
-        >
+        <b-form-group id="input-group-5" label="Your e-mail:" label-for="input-5">
           <b-form-input
             id="input-5"
             v-model="form.client_e_mail"
@@ -68,11 +47,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-6"
-          label="Your Address:"
-          label-for="input-6"
-        >
+        <b-form-group id="input-group-6" label="Your Address:" label-for="input-6">
           <b-form-input
             id="input-6"
             v-model="form.client_address"
@@ -83,6 +58,9 @@
 
         <b-button block pill type="submit" variant="success">SignUp</b-button>
       </b-form>
+      <b-card class="mt-3" header="Form Data Result">
+      <pre class="m-0">{{ form }}</pre>
+    </b-card>
     </div>
   </div>
 </template>
@@ -98,26 +76,39 @@ export default {
         client_name: "",
         client_phone: "",
         client_e_mail: "",
-        client_address: "",
-        score: null,
+        client_address: ""
       },
-      show: true,
+      show: true
     };
+    var strix =
+      "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q";
   },
   methods: {
     onSubmit(evt) {
-      evt.preventDefault();
-      let currentObj = this;
+      evt.preventDefault()
+      const url = "/api/clients/load";
+
+      var config = {
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "Content-Type",
+          "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Headers": "*",
+          "cache-control": "no-cache",
+          "Authorization": "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+        }
+      };
+
       this.axios
-        .post("http://localhost:8080/api/clients/load", JSON.stringify(this.form))
-        .then(function(response) {
+        .post(url, this.form, config)
+        .then(function(response){
           alert(response.data);
         })
-        .catch(function(error) {
+        .catch(function(error){
           alert(error);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

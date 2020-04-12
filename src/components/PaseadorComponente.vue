@@ -7,7 +7,7 @@
         alt="image slot"
       />
 
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="pl-4">    
+      <b-form @submit="onSubmit" v-if="show" class="pl-4">    
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1" >
           <b-form-input
             id="input-1"
@@ -91,24 +91,37 @@ export default {
         dog_walker_name:"",
         dog_walker_e_mail:"",
         dog_walker_phone: "",
-        dog_walker_score: null
+        dog_walker_score: 0
       },
       show: true
       }
     },
     methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        let currentObj = this;
-        this.axios.post('http://localhost:8080/api/dog_walkers/load', JSON.stringify(this.form))
-        .then(function (response) {
-            alert(response.data);
+    onSubmit(evt) {
+      evt.preventDefault()
+      const url = "/api/dog_walkers/load";
+
+      var config = {
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "Content-Type",
+          "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Headers": "*",
+          "cache-control": "no-cache",
+          "Authorization": "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+        }
+      };
+
+      this.axios
+        .post(url, this.form, config)
+        .then(function(response){
+          alert(response.data.dog_walker_name);
         })
-        .catch(function (error) {
-            alert(error);
+        .catch(function(error){
+          alert(error);
         });
-      }
     }
+  }
 }
 </script>
 
