@@ -6,6 +6,9 @@ import PaseadorComponente from '@/components/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
 import HospeadorComponente from '@/components/HospeadorComponente.vue';
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
 
 Vue.use(VueRouter)
 
@@ -51,4 +54,4 @@ const router = new VueRouter({
     routes
 })
 
-export default router
+  export default router

@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: "LoginComponente",
     data() {
@@ -82,23 +83,29 @@ updated () {
           this.loginFailed()
           return
       }   
-         localStorage.token = req.data.token
-          this.error = false
-          this.$router.replace(this.$route.query.redirect || 'http://localhost:8080/login')
+        this.error = false
+        localStorage.token = req.data.token
+        this.$store.dispatch('login')
+        this.$router.replace(this.$route.query.redirect || 'http://localhost:8080/login')
       },
     //este tambien
       loginFailed () {
       this.error = 'Login failed!'
+      this.$store.dispatch('logout')
       delete localStorage.token
       },
    //y este
    checkCurrentLogin () {
     if (localStorage.token) {
-      this.$router.replace(this.$route.query.redirect || '/authors')
+      this.$router.replace(this.$route.query.redirect || 'http://localhost:8080/login')
     }
   }
    
-   }
+   },
+   //esto tambien
+   computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
 }
 </script>
 
