@@ -38,17 +38,27 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: "LoginComponente",
     data() {
     return {
       form: {
         user: "",
-        password: ""
+        password: "",
+        error: false
       },
       show: true
       }
     },
+    // agregue esto
+  /*  created () {
+  this.checkCurrentLogin()
+},
+updated () {
+  this.checkCurrentLogin()
+},*/
+//hasta aca
     methods: {
     onSubmit(evt) {
       evt.preventDefault()
