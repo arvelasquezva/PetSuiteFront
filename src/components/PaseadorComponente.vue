@@ -1,5 +1,5 @@
 <template>
-    <div class="body">
+  <div class="body">
     <div class="SignUp">
       <img
         height="300"
@@ -7,74 +7,70 @@
         alt="image slot"
       />
 
-      <b-form @submit="onSubmit" v-if="show" class="pl-4">    
-        <b-form-group id="input-group-1" label="User ID:" label-for="input-1" >
+      <b-form @submit="onSubmit" v-if="show" class="pl-4">
+        <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
             v-model="form.user"
             required
-            placeholder="Enter your User ID"
-          ></b-form-input>
+            placeholder="Ej: DiegoAVelasquez"
+          >
+            ></b-form-input
+          >
         </b-form-group>
 
         <b-form-group
           id="input-group-2"
-          label="Your password:"
+          label="Tu contraseña:"
           label-for="input-2"
         >
           <b-form-input
             id="input-2"
             v-model="form.password"
-            required
-            placeholder="Enter password"
+            v-validate="{ required: true, min: 6 }"
+            placeholder="Ingresa una contraseña"
             type="password"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-3"
-          label="Your name:"
-          label-for="input-3"
-        >
+        <b-form-group id="input-group-3" label="Tu Nombre Completo:" label-for="input-3">
           <b-form-input
             id="input-3"
             v-model="form.dog_walker_name"
             required
-            placeholder="Enter Your Name"
+            placeholder="Ingresa tu Nombre"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="input-group-5"
-          label="Your e-mail:"
+          label="Tu correo electronico:"
           label-for="input-5"
         >
           <b-form-input
             id="input-5"
             v-model="form.dog_walker_e_mail"
             required
-            placeholder="Enter Your E-mail"
+            placeholder="Ingresa tu correo electronico"
             type="email"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="input-group-4"
-          label="Your phone:"
+          label="Tu numero de celular:"
           label-for="input-4"
         >
           <b-form-input
             id="input-4"
             v-model="form.dog_walker_phone"
-            required
-            placeholder="Enter Your Phone"
+            v-validate="{ required: true, min_value: 3000000000 }"
+            placeholder="Ej: 3208919191"
             type="number"
           ></b-form-input>
         </b-form-group>
 
-        
-
-        <b-button block pill type="submit" variant="success">SignUp</b-button>
+        <b-button block pill type="submit" variant="success">Unete a PetSuite</b-button>
       </b-form>
     </div>
   </div>
@@ -82,23 +78,23 @@
 
 <script>
 export default {
-    name: "PaseadorComponente",
-    data() {
+  name: "PaseadorComponente",
+  data() {
     return {
       form: {
         user: "",
         password: "",
-        dog_walker_name:"",
-        dog_walker_e_mail:"",
+        dog_walker_name: "",
+        dog_walker_e_mail: "",
         dog_walker_phone: "",
         dog_walker_score: 0
       },
       show: true
-      }
-    },
-    methods: {
+    };
+  },
+  methods: {
     onSubmit(evt) {
-      evt.preventDefault()
+      evt.preventDefault();
       const url = "/api/dog_walkers/load";
 
       var config = {
@@ -108,21 +104,26 @@ export default {
           "Access-Control-Allow-Methods": "POST",
           "Access-Control-Allow-Headers": "*",
           "cache-control": "no-cache",
-          "Authorization": "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+          Authorization:
+            "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
         }
       };
 
       this.axios
         .post(url, this.form, config)
-        .then(function(response){
-          alert(response.data.dog_walker_name);
+        .then(function(response) {
+          if (!response.data) {
+            alert("Usuario ya registrado pueba con otro");
+          } else {
+            alert("Bienvenido a PetSuite" + response.data.dog_walker_name);
+          }
         })
-        .catch(function(error){
+        .catch(function(error) {
           alert(error);
         });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -141,4 +142,3 @@ export default {
   background-color: #eef6e1;
 }
 </style>
-

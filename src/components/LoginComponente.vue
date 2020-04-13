@@ -1,47 +1,48 @@
 <template>
-    <div class="body">
+  <div class="body">
     <div class="login">
       <img
         height="300"
         src="../assets/Images/LogoSinFondo.png"
         alt="image slot"
       />
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit="onSubmit" v-if="show">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
             v-model="form.user"
             required
-            placeholder="Enter an User ID"
+            placeholder="Ingresa tu User ID"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="input-group-2"
-          label="Your password:"
+          label="Tu contraseña:"
           label-for="input-2"
         >
           <b-form-input
             id="input-2"
             v-model="form.password"
             required
-            placeholder="Enter password"
+            placeholder="Ingresa una contraseña"
             type="password"
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success">Login</b-button>
-        <b-button href="/signUp/all" block pill variant="danger">Sign Up</b-button>
+        <b-button block pill type="submit" variant="success">Ingresa a PetSuite</b-button>
+        <b-button href="/signUp/all" block pill variant="danger">Unete a PetSuite</b-button
+        >
       </b-form>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-    name: "LoginComponente",
-    data() {
+  name: "LoginComponente",
+  data() {
     return {
       form: {
         user: "",
@@ -49,19 +50,19 @@ export default {
         error: false
       },
       show: true
-      }
-    },
-    // agregue esto
+    };
+  },
+  // agregue esto
   /*  created () {
   this.checkCurrentLogin()
 },
 updated () {
   this.checkCurrentLogin()
 },*/
-//hasta aca
-    methods: {
+  //hasta aca
+  methods: {
     onSubmit(evt) {
-      evt.preventDefault()
+      evt.preventDefault();
       const url = "/api/users/login";
 
       var config = {
@@ -71,21 +72,26 @@ updated () {
           "Access-Control-Allow-Methods": "POST",
           "Access-Control-Allow-Headers": "*",
           "cache-control": "no-cache",
-          "Authorization": "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+          "Authorization":
+            "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
         }
       };
 
       this.axios
         .post(url, this.form, config)
-        .then(function(response){
-          alert(response.data.token);
+        .then(function(response) {
+          if (!response.data) {
+            alert("Usuario y/o Constraseña Equivocados");
+          } else {
+            alert("Usuario Logueado");
+          }
         })
-        .catch(function(error){
+        .catch(function(error) {
           alert(error);
         });
     }
   }
-  }
+};
 </script>
 
 <style scoped>
@@ -104,4 +110,3 @@ updated () {
   background-color: #eef6e1;
 }
 </style>
-

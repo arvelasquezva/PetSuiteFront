@@ -5,62 +5,67 @@
 
       <b-form @submit="onSubmit" v-if="show" class="pl-4">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
-          <b-form-input id="input-1" v-model="form.user" required placeholder="Ej: DiegoAVelasquez"></b-form-input>
+          <b-form-input id="input-1" 
+          v-model="form.user" 
+          v-validate="'required'"
+          placeholder="Ej: DiegoAVelasquez">
+          </b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="Your password:" label-for="input-2">
+        <b-form-group id="input-group-2" label="Tu contraseña:" label-for="input-2">
           <b-form-input
             id="input-2"
             v-model="form.password"
-            required
-            placeholder="Enter password"
+            v-validate="{ required: true, min:6 }" 
+            placeholder="Ingresa una contraseña"
             type="password"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-3" label="Your name:" label-for="input-3">
+        <b-form-group id="input-group-3" label="Tu Nombre Completo:" label-for="input-3">
           <b-form-input
             id="input-3"
             v-model="form.client_name"
-            required
-            placeholder="Enter Your Name"
+            v-validate="{required: true}"
+            placeholder="Ingresa tu Nombre"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-4" label="Your phone:" label-for="input-4">
+        <b-form-group id="input-group-4" label="Tu numero de celular:" label-for="input-4">
           <b-form-input
             id="input-4"
             v-model="form.client_phone"
-            required
+            v-validate="{required: true , min_value:3000000000}"
             placeholder="Ej: 3208919191"
             type="number"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-5" label="Your e-mail:" label-for="input-5">
+        <b-form-group id="input-group-5" label="Tu correo electronico:" label-for="input-5">
           <b-form-input
             id="input-5"
             v-model="form.client_e_mail"
-            required
+            v-validate="'required'"
             placeholder="Ej: xxxxx@xxxxx.com"
             type="email"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-6" label="Your Address:" label-for="input-6">
+        <b-form-group 
+          id="input-group-6" 
+          label="Tu Direccion:" 
+          label-for="input-6"
+          >
           <b-form-input
             id="input-6"
             v-model="form.client_address"
-            required
+            v-validate="'required'"
             placeholder="Ej: Carrera 97 # 36 - 69 Sur"
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success">SignUp</b-button>
+        <b-button block pill type="submit" variant="success">Unete a PetSuite</b-button>
       </b-form>
-      <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
     </div>
   </div>
 </template>
@@ -101,10 +106,14 @@ export default {
 
       this.axios
         .post(url, this.form, config)
-        .then(function(response){
-          alert(response.data);
+        .then(function(response) {
+          if (!response.data) {
+            alert("Usuario ya registrado pueba con otro");
+          } else {
+            alert("Bienvenido a PetSuite" + response.data.client_name);
+          }
         })
-        .catch(function(error){
+        .catch(function(error) {
           alert(error);
         });
     }

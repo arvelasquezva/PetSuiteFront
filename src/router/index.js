@@ -26,6 +26,7 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/About.vue')
     },
+    { path: '*', redirect: '/' },
     {
         path: '/login',
         name: 'Login',
@@ -54,4 +55,4 @@ const router = new VueRouter({
     routes
 })
 
-  export default router
+export default router
