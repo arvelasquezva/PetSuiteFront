@@ -8,8 +8,8 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <div>
-        <b-button href="/login" variant="light" class="ml-3"> Sign In</b-button>
-        <b-button href="/signUp/all" variant="light" class="ml-3"> Sign Up</b-button>
+        <b-button href="/login" variant="light" class="ml-3"> Inicia sesión</b-button>
+        <b-button href="/signUp/all" variant="light" class="ml-3"> Registrate</b-button>
         </div>
       </b-navbar-nav>
       </b-container>

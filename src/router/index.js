@@ -6,6 +6,9 @@ import PaseadorComponente from '@/components/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
 import HospeadorComponente from '@/components/HospeadorComponente.vue';
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
 
 Vue.use(VueRouter)
 
@@ -23,6 +26,7 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/About.vue')
     },
+    { path: '*', redirect: '/' },
     {
         path: '/login',
         name: 'Login',

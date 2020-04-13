@@ -1,91 +1,70 @@
 <template>
-    <div class="body">
+  <div class="body">
     <div class="SignUp">
-      <img
-        height="300"
-        src="../assets/Images/Usuario(1).png"
-        alt="image slot"
-      />
+      <img height="300" src="../assets/Images/Usuario(1).png" alt="image slot" />
 
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="pl-4">    
-        <b-form-group id="input-group-1" label="User ID:" label-for="input-1" >
-          <b-form-input
-            id="input-1"
-            v-model="form.DogWalkerUser"
-            required
-            placeholder="Ej: DiegoAVelasquez"
-          ></b-form-input>
+      <b-form @submit="onSubmit" v-if="show" class="pl-4">
+        <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
+          <b-form-input id="input-1" 
+          v-model="form.user" 
+          v-validate="'required'"
+          placeholder="Ej: DiegoAVelasquez">
+          </b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Your password:"
-          label-for="input-2"
-        >
+        <b-form-group id="input-group-2" label="Tu contraseña:" label-for="input-2">
           <b-form-input
             id="input-2"
             v-model="form.password"
-            required
-            placeholder="Enter password"
+            v-validate="{ required: true, min:6 }" 
+            placeholder="Ingresa una contraseña"
             type="password"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-3"
-          label="Your name:"
-          label-for="input-3"
-        >
+        <b-form-group id="input-group-3" label="Tu Nombre Completo:" label-for="input-3">
           <b-form-input
             id="input-3"
-            v-model="form.name"
-            required
-            placeholder="Enter Your Name"
+            v-model="form.client_name"
+            v-validate="{required: true}"
+            placeholder="Ingresa tu Nombre"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-4"
-          label="Your Address:"
-          label-for="input-4"
-        >
+        <b-form-group id="input-group-4" label="Tu numero de celular:" label-for="input-4">
           <b-form-input
             id="input-4"
-            v-model="form.address"
-            required
-            placeholder="Ej: Carrera 97 # 36 - 69 Sur"
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="input-group-5"
-          label="Your phone:"
-          label-for="input-5"
-        >
-          <b-form-input
-            id="input-5"
-            v-model="form.phone"
-            required
+            v-model="form.client_phone"
+            v-validate="{required: true , min_value:3000000000}"
             placeholder="Ej: 3208919191"
             type="number"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-6"
-          label="Your e-mail:"
-          label-for="input-6"
-        >
+        <b-form-group id="input-group-5" label="Tu correo electronico:" label-for="input-5">
           <b-form-input
-            id="input-6"
-            v-model="form.mail"
-            required
+            id="input-5"
+            v-model="form.client_e_mail"
+            v-validate="'required'"
             placeholder="Ej: xxxxx@xxxxx.com"
             type="email"
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success">SignUp</b-button>
+        <b-form-group 
+          id="input-group-6" 
+          label="Tu Direccion:" 
+          label-for="input-6"
+          >
+          <b-form-input
+            id="input-6"
+            v-model="form.client_address"
+            v-validate="'required'"
+            placeholder="Ej: Carrera 97 # 36 - 69 Sur"
+          ></b-form-input>
+        </b-form-group>
+
+        <b-button block pill type="submit" variant="success">Unete a PetSuite</b-button>
       </b-form>
     </div>
   </div>
@@ -93,28 +72,53 @@
 
 <script>
 export default {
-    name: "UsuarioComponente",
-    data() {
+  name: "UsuarioComponente",
+  data() {
     return {
       form: {
-        DogWalkerUser: "",
+        user: "",
         password: "",
-        name:"",
-        address:"",
-        phone: "",
-        mail:"",
-        score: null
+        client_name: "",
+        client_phone: "",
+        client_e_mail: "",
+        client_address: ""
       },
       show: true
-      }
-    },
-    methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        alert(JSON.stringify(this.form))
-      }
+    };
+    var strix =
+      "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q";
+  },
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault()
+      const url = "/api/clients/load";
+
+      var config = {
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "Content-Type",
+          "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Headers": "*",
+          "cache-control": "no-cache",
+          "Authorization": "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+        }
+      };
+
+      this.axios
+        .post(url, this.form, config)
+        .then(function(response) {
+          if (!response.data) {
+            alert("Usuario ya registrado pueba con otro");
+          } else {
+            alert("Bienvenido a PetSuite" + response.data.client_name);
+          }
+        })
+        .catch(function(error) {
+          alert(error);
+        });
     }
   }
+};
 </script>
 
 <style scoped>
@@ -133,4 +137,3 @@ export default {
   background-color: #eef6e1;
 }
 </style>
-
