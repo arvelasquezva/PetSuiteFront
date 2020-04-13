@@ -27,7 +27,7 @@
           <b-form-input
             id="input-2"
             v-model="form.password"
-            v-validate="{ required: true, min: 6 }"
+            required
             placeholder="Ingresa una contraseña"
             type="password"
           ></b-form-input>
@@ -64,7 +64,7 @@
           <b-form-input
             id="input-4"
             v-model="form.dog_walker_phone"
-            v-validate="{ required: true, min_value: 3000000000 }"
+            required
             placeholder="Ej: 3208919191"
             type="number"
           ></b-form-input>

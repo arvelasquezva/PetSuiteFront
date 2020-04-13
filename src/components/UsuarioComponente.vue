@@ -7,7 +7,7 @@
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input id="input-1" 
           v-model="form.user" 
-          v-validate="'required'"
+          required
           placeholder="Ej: DiegoAVelasquez">
           </b-form-input>
         </b-form-group>
@@ -16,7 +16,7 @@
           <b-form-input
             id="input-2"
             v-model="form.password"
-            v-validate="{ required: true, min:6 }" 
+            required
             placeholder="Ingresa una contraseña"
             type="password"
           ></b-form-input>
@@ -26,7 +26,7 @@
           <b-form-input
             id="input-3"
             v-model="form.client_name"
-            v-validate="{required: true}"
+            required
             placeholder="Ingresa tu Nombre"
           ></b-form-input>
         </b-form-group>
@@ -35,7 +35,7 @@
           <b-form-input
             id="input-4"
             v-model="form.client_phone"
-            v-validate="{required: true , min_value:3000000000}"
+            required
             placeholder="Ej: 3208919191"
             type="number"
           ></b-form-input>
@@ -45,7 +45,7 @@
           <b-form-input
             id="input-5"
             v-model="form.client_e_mail"
-            v-validate="'required'"
+            required
             placeholder="Ej: xxxxx@xxxxx.com"
             type="email"
           ></b-form-input>
@@ -59,7 +59,7 @@
           <b-form-input
             id="input-6"
             v-model="form.client_address"
-            v-validate="'required'"
+            required
             placeholder="Ej: Carrera 97 # 36 - 69 Sur"
           ></b-form-input>
         </b-form-group>
