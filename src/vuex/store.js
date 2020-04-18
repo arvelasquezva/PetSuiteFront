@@ -32,6 +32,7 @@ export default new Vuex.Store({
                 );
         },
         login({ commit }, credentials, config) {
+            console.log(config);
             return axios
                 .post('/api/users/login', credentials, config).
             then(({ data }) => {
