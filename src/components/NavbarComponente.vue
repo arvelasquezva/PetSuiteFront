@@ -7,9 +7,12 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <div>
+        <div v-if="!loggedIn">
         <b-button href="/login" variant="light" class="ml-3"> Inicia sesión</b-button>
         <b-button href="/signUp/all" variant="light" class="ml-3"> Registrate</b-button>
+        </div>
+        <div v-else>
+          <b-button class="logoutButton" @click="logout"></b-button>
         </div>
       </b-navbar-nav>
       </b-container>
@@ -17,9 +20,19 @@
 </template>
 
 <script>
+import {authComputed} from '../vuex/helper.js'
 export default {
   name: "NavbarComponente",
+computed: {
+  ...authComputed
+},
+methods: {
+  logout() {
+    this.$store.dispatch('logout')
+  }
 }
+}
+
 </script>
 
 

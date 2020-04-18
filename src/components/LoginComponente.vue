@@ -6,11 +6,11 @@
         src="../assets/Images/LogoSinFondo.png"
         alt="image slot"
       />
-      <b-form @submit="onSubmit" v-if="show">
+      <b-form @submit.prevent="loginUsuario">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
-            v-model="form.user"
+            v-model="user"
             required
             placeholder="Ingresa tu User ID"
           ></b-form-input>
@@ -23,7 +23,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="form.password"
+            v-model="password"
             required
             placeholder="Ingresa una contraseña"
             type="password"
@@ -39,56 +39,33 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "LoginComponente",
   data() {
     return {
-      form: {
         user: "",
-        password: "",
-        error: false
-      },
-      show: true
+        password: ""
     };
   },
-  // agregue esto
-  /*  created () {
-  this.checkCurrentLogin()
-},
-updated () {
-  this.checkCurrentLogin()
-},*/
-  //hasta aca
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      const url = "/api/users/login";
-
-      var config = {
+    loginUsuario(){
+      this.$store.dispatch('login',{
+        user: this.user,
+        password: this.password
+      },{
         headers: {
           "Content-type": "application/json",
           "Access-Control-Allow-Origin": "Content-Type",
           "Access-Control-Allow-Methods": "POST",
           "Access-Control-Allow-Headers": "*",
           "cache-control": "no-cache",
-          "Authorization":
+          Authorization:
             "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
         }
-      };
-
-      this.axios
-        .post(url, this.form, config)
-        .then(function(response) {
-          if (!response.data) {
-            alert("Usuario y/o Constraseña Equivocados");
-          } else {
-            alert("Usuario Logueado");
-          }
-        })
-        .catch(function(error) {
-          alert(error);
-        });
+      })
+      .then(()=>{
+        this.$router.push({name: 'Home'})
+      })
     }
   }
 };
