@@ -46,22 +46,13 @@ export default {
         user: "",
         password: ""
     };
+    
   },
   methods: {
     loginUsuario(){
       this.$store.dispatch('login',{
         user: this.user,
         password: this.password
-      },{
-        headers: {
-          "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "Content-Type",
-          "Access-Control-Allow-Methods": "POST",
-          "Access-Control-Allow-Headers": "*",
-          "cache-control": "no-cache",
-          Authorization:
-            "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
-        }
       })
       .then(()=>{
         this.$router.push({name: 'Home'})

@@ -42,7 +42,7 @@ new Vue({
 
 //cambios hechos comienzan aca
 
-export default {
+/*export default {
 
 
 
@@ -111,5 +111,5 @@ export default {
             }
         })
     }
-}
+}*/
 //terminan aca en caso de que haya que borrarlos o modificarlos

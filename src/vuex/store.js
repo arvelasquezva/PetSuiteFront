@@ -25,16 +25,25 @@ export default new Vuex.Store({
     actions: {
         registerUsuario({ commit }, credentials) {
             return axios
-                .post('/api/clients/load', credentials).then(
+                .post("/api/clients/load", credentials).then(
                     ({ data }) => {
                         commit('SET_USER_DATA', data)
                     }
                 );
         },
-        login({ commit }, credentials, config) {
-            console.log(config);
+        login({ commit }, credentials) {
+            console.log(credentials);
             return axios
-                .post('/api/users/login', credentials, config).
+                .post("/api/users/login", credentials, {
+                    headers: {
+                        "Content-type": "application/json",
+                        "Access-Control-Allow-Origin": "Content-Type",
+                        "Access-Control-Allow-Methods": "POST",
+                        "Access-Control-Allow-Headers": "*",
+                        "cache-control": "no-cache",
+                        Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
+                    }
+                }).
             then(({ data }) => {
                 commit('SET_USER_DATA', data)
             });
