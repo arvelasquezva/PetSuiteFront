@@ -57,7 +57,7 @@ export default {
   place-items: center;
   overflow: hidden;
 }
-.signUp {
+.SignUp {
   display: flex;
   padding: 30px;
   border: 1px solid #eef6e1;

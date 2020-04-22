@@ -31,6 +31,14 @@ export default new Vuex.Store({
                     }
                 );
         },
+      /*  registerPetition({ commit }, credentials) {
+            return axios
+                .post("/api/clients/load", credentials).then(
+                    ({ data }) => {
+                        commit('SET_USER_DATA', data)
+                    }
+                );
+        },*/
         login({ commit }, credentials) {
             console.log(credentials);
             return axios
