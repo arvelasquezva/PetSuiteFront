@@ -7,7 +7,7 @@
         alt="image slot"
       />
 
-      <b-form @submit.prevent="registerUsuario">
+      <b-form @submit.prevent="registerUsuario"  class="pl-4">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
