@@ -40,7 +40,7 @@ h1 {
 }
 .body {
   margin: 0;
-  height: 100vh;
+  height: auto;
   display: grid;
   place-items: center;
   overflow: hidden;

@@ -7,7 +7,7 @@
         alt="image slot"
       />
 
-      <b-form @submit.prevent="registerUsuario">
+      <b-form @submit.prevent="registerUsuario" class="pl-4">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
@@ -109,16 +109,17 @@ export default {
   },
   methods: {
     registerUsuario() {
-      this.$store.dispatch("registerUsuario", {
+      this.$store.dispatch("registerUsuario", [{
         user: this.user,
         password: this.password,
         client_name: this.client_name,
         client_phone: this.client_phone,
         client_e_mail: this.client_e_mail,
         client_address: this.client_address
-      })
+      }, "clients"])
       .then(()=>{
-        this.$router.push({name: 'login'})
+        alert ("Bienvenido a PetSuite")
+        this.$router.push({name: 'Login'})
       })
     },
   },
@@ -128,7 +129,7 @@ export default {
 <style scoped>
 .body {
   margin: 0;
-  height: 100vh;
+  height: auto;
   display: grid;
   place-items: center;
   overflow: hidden;

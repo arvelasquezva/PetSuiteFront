@@ -2,20 +2,7 @@
   <div class="home">
     <Carousel></Carousel>
     <div class="body">
-    <Cards msg="Servicios Que Ofrecemos" v-bind:cards="[{
-        id: 1,
-        title: 'Paseadores',
-          imagen: 'https://images.pexels.com/photos/165227/pexels-photo-165227.jpeg'
-      },{
-          id: 2,
-          title: 'Guarderias',
-          imagen: 'https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg'
-        },
-        {
-          id: 3,
-          title: 'Hospeadores',
-          imagen: 'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg'
-        }]"
+    <Cards msg="Servicios Que Ofrecemos" v-bind:cards=Tarjetas
     >></Cards>
     </div>
   </div>
@@ -31,7 +18,25 @@ export default {
   components: {
     Carousel,
     Cards,
-  }
+  },data() {
+    return {
+      Tarjetas: [{
+        id: 1,
+        title: 'Paseadores',
+          imagen: 'https://images.pexels.com/photos/165227/pexels-photo-165227.jpeg'
+      },{
+          id: 2,
+          title: 'Guarderias',
+          imagen: 'https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg'
+        },
+        {
+          id: 3,
+          title: 'Hospeadores',
+          imagen: 'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg'
+        }
+]
+    }
+  },
 }
 </script>
 <style>

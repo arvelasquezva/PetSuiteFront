@@ -10,29 +10,36 @@ export default new Vuex.Store({
     },
     mutations: {
         SET_USER_DATA(state, userData) {
-            state.user = userData
+            state.user = userData;
             localStorage.setItem('user', JSON.stringify(userData))
-            axios.defaults.headers.common['Authorization'] = `Bearer ${
+            axios.defaults.headers.common['Authorization'] = `Token ${
                 userData.token
-                }`
+                }`;
         },
         CLEAR_USER_DATA() {
-
-            localStorage.removeItem('user')
-            location.reload()
+            localStorage.removeItem('user');
+            location.reload();
         }
     },
     actions: {
-        registerUsuario({ commit }, credentials) {
+        registerUsuario({ commit }, [credentials, userClass]) {
+            console.log("/api/" + userClass + "/load");
             return axios
-                .post("/api/clients/load", credentials).then(
-                    ({ data }) => {
-                        commit('SET_USER_DATA', data)
+                .post("/api/" + userClass + "/load", credentials, {
+                    headers: {
+                        "Content-type": "application/json",
+                        "Access-Control-Allow-Origin": "Content-Type",
+                        "Access-Control-Allow-Methods": "POST",
+                        "Access-Control-Allow-Headers": "*",
+                        "cache-control": "no-cache",
+                        Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
                     }
-                );
+                }).then();
+        },
+        registerMascota({ commit }, credentials) {
+            console.log(credentials);
         },
         login({ commit }, credentials) {
-            console.log(credentials);
             return axios
                 .post("/api/users/login", credentials, {
                     headers: {

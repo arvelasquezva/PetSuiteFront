@@ -37,7 +37,7 @@ new Vue({
         )
     },
     render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
 
 
 //cambios hechos comienzan aca

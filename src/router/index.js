@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
+import MyPets from '../views/MyPets.vue';
 import PaseadorComponente from '@/components/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
@@ -35,6 +36,11 @@ const routes = [{
         // which is lazy-loaded when the route is visited.
         component: () =>
             import ( /* webpackChunkName: "login" */ '../views/Login.vue')
+    },
+    {
+        path: '/MyPets',
+        name: 'Mypets',
+        component: MyPets
     },
     {
         path: '/signUp/:id',

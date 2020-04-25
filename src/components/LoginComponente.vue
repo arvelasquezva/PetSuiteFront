@@ -69,6 +69,7 @@ export default {
   display: grid;
   place-items: center;
   overflow: hidden;
+  
 }
 .login {
   display: flex;

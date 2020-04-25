@@ -2,7 +2,23 @@
   <div class="body">
     <Cards
       msg="Registrate como:"
-      v-bind:cards="[
+      v-bind:cards=Tarjetas
+    >
+    </Cards>
+  </div>
+</template>
+
+<script>
+import Cards from "@/components/Cards.vue";
+
+export default {
+  name: "signUpComponente",
+  components: {
+    Cards
+  },
+  data() {
+    return {
+      Tarjetas: [
         {
           id: 1,
           title: 'Usuario',
@@ -23,27 +39,7 @@
           title: 'Hospeador',
           imagen: 'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg'
         }
-      ]"
-    >
-    </Cards>
-  </div>
-</template>
-
-<script>
-import Cards from "@/components/Cards.vue";
-
-export default {
-  name: "signUpComponente",
-  components: {
-    Cards
-  },
-  data() {
-    return {
-      form: {
-        UserId: "",
-        password: ""
-      },
-      show: true
+      ]
     };
   }
 };
@@ -52,7 +48,7 @@ export default {
 <style scoped>
 .body {
   margin-bottom: 20px;
-  height: 100vh;
+  height: auto;
   display: grid;
   place-items: center;
   overflow: hidden;
