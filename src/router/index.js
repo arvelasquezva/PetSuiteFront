@@ -7,6 +7,7 @@ import PaseadorComponente from '@/components/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
 import HospeadorComponente from '@/components/HospeadorComponente.vue';
+import WalkPetitionComponente from '@/components/WalkPetitionComponente.vue';
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
@@ -52,6 +53,11 @@ const routes = [{
             { path: '/signUp/Guarderia', component: GuarderiaComponente },
             { path: '/signUp/Hospeador', component: HospeadorComponente },
         ]
+    },
+    {
+        path: '/WalkPetition',
+        name: 'WalkPetition',
+        component: WalkPetitionComponente
     }
 ]
 
