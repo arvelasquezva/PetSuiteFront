@@ -114,7 +114,7 @@ export default {
           dog_notes: this.dog_notes,
         })
         .then(() => {
-          alert("Bienvenido a PetSuite");
+          alert("Has registrado a " + this.dog_name);
         });
     },
   },
@@ -126,7 +126,6 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    console.log(this.currentUser);
   },
 };
 </script>
