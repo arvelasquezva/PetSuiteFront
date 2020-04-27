@@ -2,7 +2,6 @@
   <div id="app">
     <NavbarComponente></NavbarComponente>
     <router-view />
-    <footer></footer>
   </div>
 </template>
 
@@ -41,8 +40,5 @@ export default {
 NavbarComponente{
   position: sticky;
 }
-footer{
-  background-color: #40db9a;
-  padding: 4rem 0;
-}
+
 </style>

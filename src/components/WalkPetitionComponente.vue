@@ -1,93 +1,65 @@
 <template>
   <div class="body">
     <div class="SignUp">
-      <img
-        height="300"
-        src="../assets/Images/Walker.jpg"
-        alt="image slot"
-      />
-<!-- Usuario -->
-      <b-form @submit="onSubmit" v-if="show" class="pl-4">
-        <b-form-group 
-        id="input-group-1" 
-        label="User ID:" 
-        label-for="input-1">
-          <b-form-input
-            id="input-1"
-            v-model="form.user"
-            required
-            placeholder="Ej: DiegoAVelasquez"
-          ></b-form-input>
-        </b-form-group>
-<!--Perro-->
+      <img height="300" src="../assets/Images/Walker.jpg" alt="image slot" />
+      <b-form @submit.prevent="registerPetition" class="pl-4">
+        <!--Perro-->
         <b-form-group
-          id="input-group-2"
+          id="input-group-1"
           label="Selecciona tu perro:"
-          label-for="input-2">
+          label-for="input-1"
+        >
           <b-form-select
-            id="input-2"
-            v-model="form.dog_selected" 
-            :options="form.options"
+            id="input-1"
+            v-model="dog_selected"
+            :options="Dogs"
             required
           ></b-form-select>
         </b-form-group>
-<!-- Fecha-->
+        <!-- Fecha-->
+        <b-form-group
+          id="input-group-2"
+          label="Fecha de recogida de tu perro:"
+          label-for="input-2"
+        >
+          <b-form-datepicker
+            id="example-datepicker"
+            v-model="pickup_date"
+            required
+            class="mb-2"
+          >
+          </b-form-datepicker>
+        </b-form-group>
+        <!-- Hora -->
         <b-form-group
           id="input-group-3"
-          label="Fecha de recogida de tu perro:"
-          label-for="input-3">
-          <b-form-datepicker
-            id="input-3"
-            today-button="true"
-            reset-button="true"
-            close-button="true"
-            label-close-button="Cerrar"
-            label-today-button="Selecciona Hoy"
-            label-reset-button="Limpiar"
-            v-model="form.pickup_date"
-            required
-            placeholder="Ingresa la fecha usando el botón"
-          ></b-form-datepicker>
-        </b-form-group>
-<!-- Hora -->
-        <b-form-group 
-          id="input-group-4"
           label="Hora de recogida de tu perro:"
-          label-for="input-4">
-          <b-form-timepicker 
-            id="input-4"
-            reset-button="true"
-            close-button="true"
-            label-reset-button="Limpiar"
-            label-close-button="Cerrar"
-            v-model="form.pickup_time"
-            required
-            placeholder="Ingresa la hora usando el botón"
-          ></b-form-timepicker>
-        </b-form-group>
-<!-- Dirección -->
+          label-for="input-3"
+      >
+        <b-form-timepicker
+      id="input-3"
+      now-button
+      reset-button
+      locale="en"
+      v-model="pickup_time"
+      required
+      
+    ></b-form-timepicker>
+      </b-form-group>
+
+        <!-- Observaciones -->
         <b-form-group
           id="input-group-5"
-          label="Tu Dirección:"
-          label-for="input-5">
-          <b-form-input
-            id="input-5"
-            v-model="form.client_address"
-            placeholder="Ej: Carrera 97 # 36 - 69 Sur"
-          ></b-form-input>
-        </b-form-group>
-<!-- Observaciones -->
-        <b-form-group
-          id="input-group-6"
           label="Observaciones:"
-          label-for="input-6">
+          label-for="input-5">
           <b-form-textarea
-            id="input-6"
-            v-model="form.notes"
+            id="input-5"
+            v-model="notes"
             placeholder="Escribenos algo que pienses que debamos saber sobre tu perro"
           ></b-form-textarea>
         </b-form-group>
-<!-- Fin de formulario -->
+
+        <!-- Fin de formulario -->
         <b-button block pill type="submit" variant="success"
           >Confirma tu petición</b-button
         >
@@ -100,67 +72,58 @@
 export default {
   name: "WalkPetitionComponente",
   data() {
+    currentUser: "";
     return {
-      form: {
-        user: "",
-        dog_selected: null,
-        options:[{value: null, text: "Selecciona una opción"}],
-        pickup_date: "",
-        pickup_time: "",
-        client_address: "",
-        notes: ""
-      }, 
-      show: true
+      dog_selected: null,
+      pickup_date: "",
+      pickup_time: "",
+      client_address: "",
+      notes: "",
+      Dogs: [
+        { text: "Select One", value: null },
+        "Carrots",
+        "Beans",
+        "Tomatoes",
+        "Corn",
+      ],
     };
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      const url = "/api/dog_walkers/all";
-
-      var config = {
-        headers: {
-          "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "Content-Type",
-          "Access-Control-Allow-Methods": "POST",
-          "Access-Control-Allow-Headers": "*",
-          "cache-control": "no-cache",
-          Authorization:
-            "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
-        }
-      };
-
-      this.axios
-        .post(url, this.form, config)
-        .then(function(response) {
-          if (!response.data) {
-            alert("Usuario ya registrado pueba con otro");
-          } else {
-            alert("Bienvenido a PetSuite" + response.data.dog_walker_name);
-          }
+    registerPetition() {
+      /*
+      this.$store
+        .dispatch("registerPetition", {
+          user: this.currentUser,
+          name: this.name,
+          race: this.race,
+          height: this.height,
+          weight: this.weight,
+          age: this.age,
+          notes: this.notes,
         })
-        .catch(function(error) {
-          alert(error);
+        .then(() => {
+          alert("Bienvenido a PetSuite");
         });
-    }      
-   /*registerPetition() {
-      this.$store.dispatch("registerPetition", {
-        user: this.user,
-        dog_name: this.dog_name,
-        pickup_date: this.pickup_date,
-        pickup_time: this.pickup_time,
-        client_address: this.client_address,
-        notes: this.notes
-      })
-      .then(()=>{
-        this.$router.push({name: 'login'})
-      })
-    },*/
+    */
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user")) {
+      try {
+        this.currentUser = JSON.parse(localStorage.getItem("user"));
+      } catch (e) {
+        localStorage.removeItem("user");
+      }
+    }
+    console.log(this.currentUser);
   },
 };
 </script>
 
 <style scoped>
+footer{
+  color: white;
+}
 .body {
   margin: 0;
   height: 100vh;
