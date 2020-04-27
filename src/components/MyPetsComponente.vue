@@ -7,7 +7,7 @@
         <b-form-group id="input-group-1" label="Nombre:" label-for="input-1">
           <b-form-input
             id="input-1"
-            v-model="name"
+            v-model="dog_name"
             required
             placeholder="Ej: Toby"
           >
@@ -18,7 +18,7 @@
         <b-form-group id="input-group-2" label="Raza:" label-for="input-2">
           <b-form-input
             id="input-2"
-            v-model="race"
+            v-model="dog_race"
             required
             placeholder="Ej: Pastor Aleman"
           ></b-form-input>
@@ -31,7 +31,7 @@
         >
           <b-form-input
             id="input-3"
-            v-model="height"
+            v-model="dog_height"
             required
             placeholder="Ej: 60"
             type="number"
@@ -46,7 +46,7 @@
         >
           <b-form-input
             id="input-4"
-            v-model="weight"
+            v-model="dog_weight"
             required
             placeholder="Ej: 32"
             type="number"
@@ -61,7 +61,7 @@
         >
           <b-form-input
             id="input-4"
-            v-model="age"
+            v-model="dog_age"
             required
             placeholder="Ej: 5"
             type="number"
@@ -72,7 +72,7 @@
         <b-form-group id="input-group-5" label="Algo más?:" label-for="input-5">
           <b-form-textarea
             id="input-5"
-            v-model="notes"
+            v-model="dog_notes"
             placeholder="Medicamentos, Recomendaciones, Cuidados Especiales"
             rows="3"
             max-rows="6"
@@ -93,25 +93,25 @@ export default {
   data() {
     currentUser: "";
     return {
-      name: "",
-      race: "",
-      height: "",
-      weight: "",
-      age: "",
-      notes: "",
+      dog_name: "",
+      dog_race: "",
+      dog_height: "",
+      dog_weight: "",
+      dog_age: "",
+      dog_notes: "",
     };
   },
   methods: {
     registerMascota() {
       this.$store
         .dispatch("registerMascota", {
-          user: this.currentUser,
-          name: this.name,
-          race: this.race,
-          height: this.height,
-          weight: this.weight,
-          age: this.age,
-          notes: this.notes,
+          client_id: this.currentUser.user,
+          dog_name: this.dog_name,
+          dog_race: this.dog_race,
+          dog_height: this.dog_height,
+          dog_weight: this.dog_weight,
+          dog_age: this.dog_age,
+          dog_notes: this.dog_notes,
         })
         .then(() => {
           alert("Bienvenido a PetSuite");
