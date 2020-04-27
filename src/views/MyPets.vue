@@ -42,9 +42,9 @@ export default {
   methods:{
     getDogs(){
       this.$store
-      .dispatch("getMascotaById",{
+      .dispatch("getMascotaById",
         cliente_id: this.currentUser.user
-      }).then( data =>{
+      ).then( data =>{
         this.Tarjetas = data;
       })
     }

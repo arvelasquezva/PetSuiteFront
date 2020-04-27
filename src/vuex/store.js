@@ -43,7 +43,7 @@ export default new Vuex.Store({
         },
         getMascotaById({ commit }, credentials) {
             console.log(credentials);
-            return axios.post("api/dogs/register", credentials).then();
+            return axios.post("api/dogs/findmydog", credentials).then();
 
         },
         login({ commit }, credentials) {
