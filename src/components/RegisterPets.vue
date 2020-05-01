@@ -89,9 +89,9 @@
 
 <script>
 export default {
-  name: "myPetsComponente",
+  name: "registerPets",
   data() {
-    currentUser: "";
+    currentUser = "";
     return {
       dog_name: "",
       dog_race: "",
@@ -115,6 +115,7 @@ export default {
         })
         .then(() => {
           alert("Has registrado a " + this.dog_name);
+          location.reload();
         });
     },
   },

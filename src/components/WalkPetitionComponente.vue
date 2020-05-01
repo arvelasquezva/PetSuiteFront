@@ -1,3 +1,4 @@
+import { mapState, mapGetters } from 'vuex';
 <template>
   <div class="body">
     <div class="SignUp">
@@ -12,7 +13,7 @@
           <b-form-select
             id="input-1"
             v-model="dog_selected"
-            :options="Dogs"
+            :options="valuePets"
             required
           ></b-form-select>
         </b-form-group>
@@ -35,23 +36,38 @@
           id="input-group-3"
           label="Hora de recogida de tu perro:"
           label-for="input-3"
-      >
-        <b-form-timepicker
-      id="input-3"
-      now-button
-      reset-button
-      locale="en"
-      v-model="pickup_time"
-      required
-      
-    ></b-form-timepicker>
-      </b-form-group>
+        >
+          <b-form-timepicker
+            id="input-3"
+            now-button
+            reset-button
+            locale="en"
+            v-model="pickup_time"
+            required
+          ></b-form-timepicker>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-5"
+          label="Duración en Minutos:"
+          label-for="input-5"
+        >
+          <b-form-input
+            id="input-4"
+            v-model="walk_petition_duration"
+            required
+            placeholder="Ej: 5"
+            type="number"
+            min="0"
+          ></b-form-input>
+        </b-form-group>
 
         <!-- Observaciones -->
         <b-form-group
           id="input-group-5"
           label="Observaciones:"
-          label-for="input-5">
+          label-for="input-5"
+        >
           <b-form-textarea
             id="input-5"
             v-model="notes"
@@ -60,51 +76,46 @@
         </b-form-group>
 
         <!-- Fin de formulario -->
-        <b-button block pill type="submit" variant="success"
-          >Confirma tu petición</b-button
-        >
+        <b-button block pill type="submit" variant="success">
+          Confirma tu petición
+        </b-button>
       </b-form>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
+
 export default {
   name: "WalkPetitionComponente",
   data() {
-    currentUser: "";
     return {
-      dog_selected: null,
+      currentUser: "",
+      dog_selected: "",
       pickup_date: "",
       pickup_time: "",
-      client_address: "",
       notes: "",
-      Dogs: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn",
-      ],
+      walk_petition_duration: "",
     };
+  },
+  computed: {
+    ...mapState(["pets"]),
+    ...mapGetters(["valuePets"])
   },
   methods: {
     registerPetition() {
-      /*
       this.$store
         .dispatch("registerPetition", {
-          user: this.currentUser,
-          name: this.name,
-          race: this.race,
-          height: this.height,
-          weight: this.weight,
-          age: this.age,
-          notes: this.notes,
+          user: this.currentUser.user,
+          dog_id: this.dog_selected,
+          walk_petition_date_time: this.pickup_date + " " +this.pickup_time,
+          walk_petition_notes: this.notes,
+          walk_petition_duration: this.walk_petition_duration,
+          walk_petition_address: this.currentUser.client_address
         })
-        .then(() => {
-          alert("Bienvenido a PetSuite");
-        });
-    */
+        .then(alert("Has creado una peticion"));
     },
   },
   mounted() {
@@ -115,13 +126,12 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    console.log(this.currentUser);
   },
 };
 </script>
 
 <style scoped>
-footer{
+footer {
   color: white;
 }
 .body {

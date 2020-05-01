@@ -4,7 +4,7 @@
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in Dogs"
+          v-for="item in pets"
           :key="item.id"
           :title="item.dog_name"
           tag="article"
@@ -18,15 +18,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-  name: "Dogs",
+  name: "DogsComponente",
   props: {
     msg: String,
-    Dogs: [],
   },
+computed: {
+  ...mapState([
+    'pets'
+  ])
+},
   data() {
-    return {};
-  },
+    return {
+    currentUser: ""
+    }
+  }
 };
 </script>
 

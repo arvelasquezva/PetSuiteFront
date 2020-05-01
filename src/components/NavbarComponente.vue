@@ -10,6 +10,7 @@
       <div v-if="loggedIn">
         <b-navbar-nav>
         <b-nav-item href="/MyPets">Mis Mascotas</b-nav-item>
+        <b-nav-item href="/MyPetitions">Mis Peticions</b-nav-item>
       </b-navbar-nav>
       </div>
 

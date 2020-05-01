@@ -7,12 +7,13 @@ import PaseadorComponente from '@/components/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
 import HospeadorComponente from '@/components/HospeadorComponente.vue';
-import WalkPetitionComponente from '@/components/WalkPetitionComponente.vue';
-import Vuex from 'vuex'
+import WalkActive from '@/components/WalkActive.vue';
+import WalkForAccept from '@/components/WalkForAccept.vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [{
         path: '/',
@@ -55,9 +56,14 @@ const routes = [{
         ]
     },
     {
-        path: '/WalkPetition',
-        name: 'WalkPetition',
-        component: WalkPetitionComponente
+        path: '/WalkActive',
+        name: 'WalkActive',
+        component: WalkForAccept
+    },
+    {
+        path: '/MyPetitions',
+        name: 'MyPetitions',
+        component: WalkActive
     }
 ]
 

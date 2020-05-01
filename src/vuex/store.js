@@ -1,14 +1,31 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
+import { getField } from 'vuex-map-fields';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+    strict: true,
     state: {
-        user: null
+        user: null,
+        pets: [],
+        petitions: [],
+        petitionsforActive: []
     },
     mutations: {
+        SET_USER_PET(state, petData) {
+            state.pets = petData;
+            localStorage.setItem('pet', JSON.stringify(petData));
+        },
+        SET_USER_PETITION(state, petitionData) {
+            state.petitions = petitionData;
+            localStorage.setItem('petition', JSON.stringify(petitionData));
+        },
+        SET_USER_PETITION_ACTIVE(state, petitionsActive) {
+            state.petitionsforActive = petitionsActive;
+            localStorage.setItem('petitionActive', JSON.stringify(petitionsActive));
+        },
         SET_USER_DATA(state, userData) {
             state.user = userData;
             localStorage.setItem('user', JSON.stringify(userData))
@@ -18,6 +35,7 @@ export default new Vuex.Store({
         },
         CLEAR_USER_DATA() {
             localStorage.removeItem('user');
+            localStorage.removeItem('pet');
             location.reload();
         }
     },
@@ -37,14 +55,39 @@ export default new Vuex.Store({
                 }).then();
         },
         registerMascota({ commit }, credentials) {
-            console.log(credentials);
+            console.log("Esto es lo que mando al Back en registrar Mascota " + credentials);
             return axios.post("api/dogs/register", credentials).then();
 
         },
-        getMascotaById({ commit }, credentials) {
+        registerPetition({ commit }, credentials) {
             console.log(credentials);
-            return axios.post("api/dogs/findmydog", credentials).then();
+            return axios.post("api/walkpetitions/create", credentials).then();
 
+        },
+        getMascotaById({ commit }, credentials) {
+            return axios
+                .post("api/dogs/findmydog", credentials)
+                .then(({ data }) => {
+                    commit('SET_USER_PET', data)
+                });
+        },
+        getPetitionById({ commit }) {
+            return axios
+                .get("api/walkpetitions/all")
+                .then(({ data }) => {
+                    commit('SET_USER_PETITION', data)
+                });
+        },
+        proposePetition({ commit }, credentials) {
+            return axios
+                .post("api/walkpetitions/propose", credentials);
+        },
+        getPetitionsforActive({ commit }, credentials) {
+            return axios
+                .post("api/walkpetitions/findbyuser", credentials)
+                .then(({ data }) => {
+                    commit('SET_USER_PETITION_ACTIVE', data)
+                });
         },
         login({ commit }, credentials) {
             return axios
@@ -69,6 +112,11 @@ export default new Vuex.Store({
     getters: {
         loggedIn(state) {
             return !!state.user;
+        },
+        valuePets: state => {
+            return state.pets.map((pet) => {
+                return { value: pet.dog_id, text: pet.dog_name }
+            });
         }
     }
 })
