@@ -39,6 +39,7 @@ export default {
   name: "WalkForAccept",
   data() {
     return {
+      currentUser: "",
       Petition: [],
       valor: ""
     };
@@ -51,6 +52,13 @@ export default {
         localStorage.removeItem("petition");
       }
     }
+    if (localStorage.getItem("user")) {
+      try {
+        this.currentUser = JSON.parse(localStorage.getItem("user"));
+      } catch (e) {
+        localStorage.removeItem("user");
+      }
+    }
     this.getPetition();
   },
   methods:{
@@ -61,6 +69,7 @@ export default {
     proposePetition(id_petition){
       this.$store
       .dispatch("proposePetition",{
+        walk_petition_walker_user: this.currentUser.user,
         walk_petition_id: id_petition, 
         precio_proposal: this.valor
       })

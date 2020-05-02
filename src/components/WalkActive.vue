@@ -11,23 +11,43 @@
           style="max-width: 17rem;"
           class="card"
         >
-        </b-card>  
+            <b-form-group
+              id="input-group-1"
+              label="Que deseas hacer?:"
+              label-for="input-1"
+            >
+              <b-form-select
+                id="input-1"
+                v-model="state"
+                :options="Options"
+                required
+              ></b-form-select>
+            </b-form-group>
+            <b-button variant="outline-success" type="submit" v-on:click="sendStatusPetitions(item.dog_id, item.price, item.walk_petition_walker_user)">Diego</b-button>
+        </b-card>
       </div>
     </b-row>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "WalkActive",
   data() {
+    
     return {
-      currentUser:"",
+      currentUser: "",
       Petition: [],
+      state: "",
+      Options: ["Aceptar", "Negar"],
     };
   },
-  mounted (){
+  computed: {
+    ...mapState(['petitionsforActive']),
+    ...mapGetters(['valuePetition'])
+  },
+  mounted() {
     if (localStorage.getItem("petitionActive")) {
       try {
         this.Petition = JSON.parse(localStorage.getItem("petitionActive"));
@@ -44,14 +64,22 @@ export default {
     }
     this.getPetitionsforActive();
   },
-  methods:{
-    getPetitionsforActive(){
-      this.$store
-        .dispatch("getPetitionsforActive",{
-          cadena: this.currentUser.user
-        })
+  methods: {
+    getPetitionsforActive() {
+      this.$store.dispatch("getPetitionsforActive", {
+        cadena: this.currentUser.user,
+      });
     },
-  }
+    sendStatusPetitions(dog_id, price, dogWalker) {
+      this.$store.dispatch("sendStatusPetition", {
+        dog_id: dog_id,
+        walk_invoice_price: price,
+        dog_walker_id: dogWalker,
+        client_id: this.currentUser.user,
+        walk_invoice_status: this.state,
+      });
+    },
+  },
 };
 </script>
 

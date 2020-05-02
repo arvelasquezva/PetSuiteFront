@@ -89,6 +89,11 @@ export default new Vuex.Store({
                     commit('SET_USER_PETITION_ACTIVE', data)
                 });
         },
+        sendStatusPetition({ commit }, credentials) {
+            console.log(credentials);
+            return axios
+                .post("api/walkpetitions/denyoraccept", credentials);
+        },
         login({ commit }, credentials) {
             return axios
                 .post("/api/users/login", credentials, {
@@ -116,6 +121,15 @@ export default new Vuex.Store({
         valuePets: state => {
             return state.pets.map((pet) => {
                 return { value: pet.dog_id, text: pet.dog_name }
+            });
+        },
+        valuePetition: state => {
+            return state.petitionsforActive.map((petitionforActive) => {
+                return {
+                    dog_id: petitionforActive.dog_id,
+                    dog_walker_id: petitionforActive.walk_petition_walker_user,
+                    walk_invoice_price: petitionforActive.price
+                }
             });
         }
     }
