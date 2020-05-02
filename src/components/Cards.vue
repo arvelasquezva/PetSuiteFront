@@ -13,7 +13,7 @@
           class="card"
         >
           <router-link :to="{name: 'signUp', params:{id:item.title}}">
-            <b-button variant="primary" onClick="setTimeout(() => {  location.reload(); }, 250);" >Go {{ item.title }}</b-button>
+            <b-button variant="primary" onClick="setTimeout(() => {  location.reload(); }, 250);" >Registrate como {{ item.title }}</b-button>
           </router-link>
         </b-card>
       </div>

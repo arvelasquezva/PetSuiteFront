@@ -7,10 +7,15 @@
           v-for="item in Petition"
           :key="item.id"
           :title="item.price"
+          sub-title="Este es el precio que el paseador ha ofertado"
           tag="article"
-          style="max-width: 17rem;"
-          class="card"
+          style="max-width: 17rem"
+          class="text-center"
         >
+        <b-button-group>
+          <b-button variant="success">Aceptar</b-button>
+          <b-button variant="danger">Cancelar</b-button>
+       </b-button-group>
         </b-card>  
       </div>
     </b-row>
@@ -18,14 +23,21 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "WalkActive",
+  async mounted () {
+    try {
+      await this.$store.dispatch("getPetitionsforActive")
+    } catch (error) {
+      console.error
+    }
+  },
   data() {
     return {
       currentUser:"",
-      Petition: [],
-    };
+      Petition: []
+    };    
   },
   mounted (){
     if (localStorage.getItem("petitionActive")) {

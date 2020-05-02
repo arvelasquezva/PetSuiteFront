@@ -25,6 +25,13 @@ import { mapState, mapGetters } from 'vuex';
         >
           <b-form-datepicker
             id="example-datepicker"
+            placeholder="Escoge la fecha de recogida"
+            reset-button
+            close-button
+            today-button
+            label-today-button="Elige hoy"
+            label-reset-button="Limpiar"
+            label-close-button="Cerrar"
             v-model="pickup_date"
             required
             class="mb-2"
@@ -39,8 +46,12 @@ import { mapState, mapGetters } from 'vuex';
         >
           <b-form-timepicker
             id="input-3"
-            now-button
+            placeholder="Escoge la hora de recogida"
             reset-button
+            now-button
+            label-now-button="Ahora"
+            label-reset-button="Limpiar"
+            label-close-button="Cerrar"
             locale="en"
             v-model="pickup_time"
             required
@@ -71,7 +82,7 @@ import { mapState, mapGetters } from 'vuex';
           <b-form-textarea
             id="input-5"
             v-model="notes"
-            placeholder="Escribenos algo que pienses que debamos saber sobre tu perro"
+            placeholder="Medicamentos, Recomendaciones, Cuidados Especiales"
           ></b-form-textarea>
         </b-form-group>
 
@@ -90,6 +101,13 @@ import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "WalkPetitionComponente",
+  async mounted () {
+    try {
+      await this.$store.dispatch("user")
+    } catch (error) {
+      console.error
+    }
+  },
   data() {
     return {
       currentUser: "",

@@ -36,6 +36,13 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  async created () {
+    try {
+      await this.$store.dispatch("petition")
+    } catch (error) {
+      console.error
+    }
+  },
   name: "WalkForAccept",
   data() {
     return {

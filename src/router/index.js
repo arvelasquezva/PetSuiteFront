@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
 import MyPets from '../views/MyPets.vue';
+import Forbidden from '../views/Forbidden.vue';
 import PaseadorComponente from '@/components/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
@@ -10,6 +11,7 @@ import HospeadorComponente from '@/components/HospeadorComponente.vue';
 import WalkActive from '@/components/WalkActive.vue';
 import WalkForAccept from '@/components/WalkForAccept.vue';
 import Vuex from 'vuex';
+import { authComputed } from "../vuex/helper.js";
 
 Vue.use(Vuex);
 
@@ -42,7 +44,13 @@ const routes = [{
     {
         path: '/MyPets',
         name: 'Mypets',
-        component: MyPets
+        component: MyPets,
+        beforeEnter: (to, from, next) =>{
+            if(authComputed.loggedIn){
+                next()                
+            }else {next({name:'Forbidden'}) }    
+            
+        }
     },
     {
         path: '/signUp/:id',
@@ -64,7 +72,12 @@ const routes = [{
         path: '/MyPetitions',
         name: 'MyPetitions',
         component: WalkActive
-    }
+    },
+    {
+        path: '/Forbidden',
+        name: 'Forbidden',
+        component: Forbidden
+    },
 ]
 
 const router = new VueRouter({

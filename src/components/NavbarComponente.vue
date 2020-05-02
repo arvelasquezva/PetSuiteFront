@@ -10,7 +10,8 @@
       <div v-if="loggedIn">
         <b-navbar-nav>
         <b-nav-item href="/MyPets">Mis Mascotas</b-nav-item>
-        <b-nav-item href="/MyPetitions">Mis Peticions</b-nav-item>
+        <b-nav-item href="/MyPetitions">Mis Peticiones</b-nav-item>
+        <b-nav-item href="/WalkActive"> Prueba peticiones pendientes"solo paseadores"</b-nav-item>
       </b-navbar-nav>
       </div>
 
@@ -23,7 +24,7 @@
             Registrate</b-button>
         </div>
         <div v-else>
-          <b-button class="logoutButton" @click="logout" variant="light">
+          <b-button class="logoutButton" @click="logout" href="/" variant="light">
             Cierra Sesión</b-button>
         </div>
       </b-navbar-nav>
