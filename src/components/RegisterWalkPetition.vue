@@ -1,4 +1,3 @@
-import { mapState, mapGetters } from 'vuex';
 <template>
   <div class="body">
     <div class="SignUp">

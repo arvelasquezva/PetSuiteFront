@@ -11,6 +11,34 @@
           class="card"
         >
           <b-card-body>
+          <b-card-body>
+            <b-card-title><strong>{{ item.user }}</strong> quiere que pasees a su perro <strong>{{item.dog_name}}</strong></b-card-title>
+            <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
+            <b-card-text
+              ><strong>Debes recogerlo en: </strong
+              >{{ item.walk_petition_address }}
+            </b-card-text>
+            <b-card-text
+              ><strong>El paseo empezara: </strong
+              >{{ item.walk_petition_date_time }}
+            </b-card-text>
+            <b-card-text
+              ><strong>El paseo durará: </strong
+              >{{ item.walk_petition_duration }} minutos</b-card-text
+            >
+            <b-card-text> <strong>Detalles de {{item.dog_name}}: </strong> 
+            <ul>
+              <li>Peso: {{ item.dog_weight }} Kg</li>
+              <li>Altura: {{ item.dog_height }} cm</li>
+              <li>Más: {{ item.dog_notes }} </li>
+            </ul>
+              
+            </b-card-text>
+            <b-card-text
+              ><strong>El usuario {{ item.user }} te recomienda: </strong
+              >{{ item.walk_petition_notes }}
+            </b-card-text>
+          </b-card-body>
             <b-card-title><strong>{{ item.user }}</strong> quiere que pasees a su perro <strong>{{item.dog_name}}</strong></b-card-title>
             <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
             <b-card-text

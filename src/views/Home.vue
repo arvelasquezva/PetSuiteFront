@@ -26,6 +26,13 @@ export default {
     Cards,
     RegisterWalkPetition,
   },
+  async created () {
+    try {
+      await this.$store.dispatch("user")
+    } catch (error) {
+      console.error
+    }
+  },
   data() {
     return {
       currentUser:"",

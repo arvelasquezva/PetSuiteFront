@@ -90,6 +90,13 @@
 <script>
 export default {
   name: "registerPets",
+  async mounted () {
+    try {
+      await this.$store.dispatch("user")
+    } catch (error) {
+      console.error
+    }
+  },
   data() {
     currentUser = "";
     return {
