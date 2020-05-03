@@ -59,8 +59,7 @@ export default {
   },
   methods: {
     getDogs() {
-      this.$store
-        .dispatch("getMascotaById", {
+      this.$store.dispatch("getMascotaById", {
           cadena: this.currentUser.user
           });
     },

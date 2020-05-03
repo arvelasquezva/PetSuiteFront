@@ -21,19 +21,40 @@
 import { mapState } from 'vuex';
 export default {
   name: "DogsComponente",
-  props: {
-    msg: String,
-  },
-computed: {
-  ...mapState([
-    'pets'
-  ])
-},
   data() {
     return {
-    currentUser: ""
+    currentUser: "",
+    pets: []
     }
-  }
+  },
+  props: {
+    msg: String,
+   
+  },
+created() {
+    if (localStorage.getItem("pet")) {
+      try {
+        this.pets = JSON.parse(localStorage.getItem("pet"));
+      } catch (e) {
+        localStorage.removeItem("pet");
+      }
+    }
+    if (localStorage.getItem("user")) {
+      try {
+        this.currentUser = JSON.parse(localStorage.getItem("user"));
+      } catch (e) {
+        localStorage.removeItem("user");
+      }
+    }
+    this.getMascotas();
+  },
+  methods: {
+    getMascotas(){
+      this.$store.dispatch("getMascotaById", {
+          cadena: this.currentUser.user
+          });
+    }
+  },
 };
 </script>
 

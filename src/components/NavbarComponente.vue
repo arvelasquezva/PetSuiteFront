@@ -11,7 +11,6 @@
         <b-navbar-nav>
         <b-nav-item href="/MyPets">Mis Mascotas</b-nav-item>
         <b-nav-item href="/MyPetitions">Mis Peticiones</b-nav-item>
-        <b-nav-item href="/WalkActive"> Prueba peticiones pendientes"solo paseadores"</b-nav-item>
       </b-navbar-nav>
       </div>
 
