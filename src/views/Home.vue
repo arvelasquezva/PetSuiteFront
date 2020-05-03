@@ -6,7 +6,7 @@
         <Cards msg="Servicios Que Ofrecemos" v-bind:cards="Tarjetas"></Cards>
       </div>
       <div v-else>
-          <WalkPetitionComponente></WalkPetitionComponente>
+          <RegisterWalkPetition></RegisterWalkPetition>
       </div>
     </div>
   </div>
@@ -25,13 +25,6 @@ export default {
     Carousel,
     Cards,
     RegisterWalkPetition,
-  },
-  async created () {
-    try {
-      await this.$store.dispatch("user")
-    } catch (error) {
-      console.error
-    }
   },
   data() {
     return {

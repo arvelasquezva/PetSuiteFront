@@ -45,12 +45,6 @@ const routes = [{
         path: '/MyPets',
         name: 'Mypets',
         component: MyPets,
-        beforeEnter: (to, from, next) =>{
-            if(authComputed.loggedIn){
-                next()                
-            }else {next({name:'Forbidden'}) }    
-            
-        }
     },
     {
         path: '/signUp/:id',
@@ -64,14 +58,14 @@ const routes = [{
         ]
     },
     {
-        path: '/WalkForAccept',
-        name: 'WalkForAccept',
-        component: WalkForAccept
+        path: '/WalkActive',
+        name: 'WalkActive',
+        component: WalkActive
     },
     {
         path: '/MyPetitions',
         name: 'MyPetitions',
-        component: WalkActive
+        component: WalkForAccept
     },
     {
         path: '/Forbidden',

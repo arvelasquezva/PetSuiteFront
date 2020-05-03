@@ -11,34 +11,6 @@
           class="card"
         >
           <b-card-body>
-          <b-card-body>
-            <b-card-title><strong>{{ item.user }}</strong> quiere que pasees a su perro <strong>{{item.dog_name}}</strong></b-card-title>
-            <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
-            <b-card-text
-              ><strong>Debes recogerlo en: </strong
-              >{{ item.walk_petition_address }}
-            </b-card-text>
-            <b-card-text
-              ><strong>El paseo empezara: </strong
-              >{{ item.walk_petition_date_time }}
-            </b-card-text>
-            <b-card-text
-              ><strong>El paseo durará: </strong
-              >{{ item.walk_petition_duration }} minutos</b-card-text
-            >
-            <b-card-text> <strong>Detalles de {{item.dog_name}}: </strong> 
-            <ul>
-              <li>Peso: {{ item.dog_weight }} Kg</li>
-              <li>Altura: {{ item.dog_height }} cm</li>
-              <li>Más: {{ item.dog_notes }} </li>
-            </ul>
-              
-            </b-card-text>
-            <b-card-text
-              ><strong>El usuario {{ item.user }} te recomienda: </strong
-              >{{ item.walk_petition_notes }}
-            </b-card-text>
-          </b-card-body>
             <b-card-title><strong>{{ item.user }}</strong> quiere que pasees a su perro <strong>{{item.dog_name}}</strong></b-card-title>
             <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
             <b-card-text
@@ -95,9 +67,9 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
-  name: "WalkForAccept",
+  name: "WalkActive",
   data() {
     return {
       show: false,
@@ -105,6 +77,14 @@ export default {
       Petition: [],
       valor: "",
     };
+  },
+  async mounted () {
+    try {
+      await this.$store.dispatch("getPetitionById")
+    } 
+    catch (error) {
+      console.log(error);
+    }
   },
   created() {
     if (localStorage.getItem("petition")) {
@@ -121,12 +101,8 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.getPetition();
   },
   methods: {
-    getPetition() {
-      this.$store.dispatch("getPetitionById");
-    },
     proposePetition(id_petition) {
       this.$store.dispatch("proposePetition", {
         walk_petition_walker_user: this.currentUser.user,

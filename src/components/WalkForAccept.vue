@@ -39,16 +39,8 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 export default {
-  async created () {
-    try {
-      await this.$store.dispatch("petition")
-    } catch (error) {
-      console.error
-    }
-  },
   name: "WalkForAccept",
   data() {
-    
     return {
       currentUser: "",
       Petition: [],
@@ -58,6 +50,15 @@ export default {
         { text: 'Negar', value: "Negar"},
         ]
     };
+  },
+  async mounted () {
+    try {
+      await this.$store.dispatch("getPetitionsforActive", {
+        cadena: this.currentUser.user,
+      });
+    } catch (error) {
+      console.error
+    }
   },
   computed: {
     ...mapState(['petitionsforActive']),
@@ -78,14 +79,8 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.getPetitionsforActive();
   },
   methods: {
-    getPetitionsforActive() {
-      this.$store.dispatch("getPetitionsforActive", {
-        cadena: this.currentUser.user,
-      });
-    },
     sendStatusPetitions(dog_id, price, dogWalker) {
       this.$store.dispatch("sendStatusPetition", {
         dog_id: dog_id,
