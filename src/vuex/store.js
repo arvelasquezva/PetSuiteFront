@@ -11,7 +11,10 @@ export default new Vuex.Store({
         user: null,
         pets: [],
         petitions: [],
-        petitionsforActive: []
+        petitionsforActive: [],
+        walksAccept: [],
+        walksProgress: [],
+        walksDone: []
     },
     mutations: {
         SET_USER_PET(state, petData) {
@@ -22,10 +25,23 @@ export default new Vuex.Store({
             state.petitions = petitionData;
             localStorage.setItem('petition', JSON.stringify(petitionData));
         },
-        SET_USER_PETITION_ACTIVE(state, petitionsActive) {
+        SET_WALKER_PETITION_ACTIVE(state, petitionsActive) {
             state.petitionsforActive = petitionsActive;
             localStorage.setItem('petitionActive', JSON.stringify(petitionsActive));
         },
+        SET_WALKER_WALKSACCEPT(state, walksAccept) {
+            state.walksAccept = walksAccept;
+            localStorage.setItem('walksAccept', JSON.stringify(walksAccept));
+        },
+        SET_WALKER_WALKSPROGRESS(state, walksProgress) {
+            state.walksProgress = walksProgress;
+            localStorage.setItem('walksProgress', JSON.stringify(walksProgress));
+        },
+        SET_USER_WALKSDONE(state, walksDone) {
+            state.walksDone = walksDone;
+            localStorage.setItem('walksDone', JSON.stringify(walksDone));
+        },
+
         SET_USER_DATA(state, userData) {
             state.user = userData;
             localStorage.setItem('user', JSON.stringify(userData))
@@ -78,6 +94,35 @@ export default new Vuex.Store({
                     commit('SET_USER_PETITION', data)
                 });
         },
+        getWalksAccept({ commit }, credentials) {
+            return axios
+                .post("api/walkinvoices/invoicesAccepted", credentials)
+                .then(({ data }) => {
+                    commit('SET_WALKER_WALKSACCEPT', data)
+                });
+        },
+        getWalksProgress({ commit }, credentials) {
+            return axios
+                .post("api/walkinvoices/invoicesProgress", credentials)
+                .then(({ data }) => {
+                    commit('SET_WALKER_WALKSPROGRESS', data)
+                });
+        },
+        getWalksDone({ commit }, credentials) {
+            return axios
+                .post("api/walkinvoices/invoicesEndedClient", credentials)
+                .then(({ data }) => {
+                    commit('SET_USER_WALKSDONE', data)
+                });
+        },
+        updateStatusWalk({ commit }, credentials) {
+            return axios
+                .post("/api/walkinvoices/updateInvoiceStatus", credentials);
+        },
+        rateWalker({ commit }, credentials) {
+            return axios
+                .post("/api/walkinvoices/score", credentials);
+        },
         proposePetition({ commit }, credentials) {
             return axios
                 .post("api/walkpetitions/propose", credentials);
@@ -86,7 +131,7 @@ export default new Vuex.Store({
             return axios
                 .post("api/walkpetitions/findbyuser", credentials)
                 .then(({ data }) => {
-                    commit('SET_USER_PETITION_ACTIVE', data)
+                    commit('SET_WALKER_PETITION_ACTIVE', data)
                 });
         },
         sendStatusPetition({ commit }, credentials) {

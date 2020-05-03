@@ -6,7 +6,7 @@
         <Cards msg="Servicios Que Ofrecemos" v-bind:cards="Tarjetas"></Cards>
       </div>
       <div v-else>
-          <WalkPetitionComponente></WalkPetitionComponente>
+          <RegisterWalkPetition></RegisterWalkPetition>
       </div>
     </div>
   </div>
