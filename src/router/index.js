@@ -8,8 +8,11 @@ import PaseadorComponente from '@/components/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/GuarderiaComponente.vue';
 import HospeadorComponente from '@/components/HospeadorComponente.vue';
-import WalkActive from '@/components/WalkActive.vue';
+import WalkPetitionActive from '@/components/Walker/WalkPetitionActive.vue';
+import WalksAccept from '@/components/Walker/WalksAccept.vue';
+import WalksProgress from '@/components/Walker/WalksProgress.vue';
 import WalkForAccept from '@/components/WalkForAccept.vue';
+import WalksDone from '@/components/WalksDone.vue';
 import Vuex from 'vuex';
 import { authComputed } from "../vuex/helper.js";
 
@@ -58,19 +61,34 @@ const routes = [{
         ]
     },
     {
-        path: '/WalkActive',
-        name: 'WalkActive',
-        component: WalkActive
+        //Ruta para las peticiones a proponer precio
+        path: '/WalkPetitionActive',
+        name: 'WalkPetitionActive',
+        component: WalkPetitionActive
     },
     {
+        //Ruta para las peticiones a aceptar precio
         path: '/MyPetitions',
         name: 'MyPetitions',
         component: WalkForAccept
     },
     {
-        path: '/Forbidden',
-        name: 'Forbidden',
-        component: Forbidden
+        //Ruta para las peticiones aceptadas
+        path: '/WalksAccept',
+        name: 'WalksAccept',
+        component: WalksAccept
+    },
+    {
+        //Ruta para las peticiones en progreso
+        path: '/WalksProgress',
+        name: 'WalksProgress',
+        component: WalksProgress
+    },
+    {
+        //Ruta para las ver recibos terminados y calificar paseador
+        path: '/WalksDone',
+        name: 'WalksDone',
+        component: WalksDone
     },
 ]
 

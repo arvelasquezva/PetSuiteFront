@@ -11,9 +11,9 @@
           class="card"
         >
         <b-card-body>
-            <b-card-title>La Petición Para Tu Perro: {{ item.dog_id }}</b-card-title>
+            <b-card-title><strong>La Petición Para Tu Perro: </strong>{{ item.dog_name }}</b-card-title>
             <b-card-text>El paseador: <strong> {{ item.walk_petition_walker_user }}</strong> te propone:</b-card-text>
-            <b-card-text><strong> ${{item.price}} </strong></b-card-text>
+            <b-card-text><strong> ${{item.precio_proposal}} </strong></b-card-text>
             
           </b-card-body>
             <b-form-group
@@ -28,8 +28,7 @@
                 required
               ></b-form-select>
             </b-form-group>
-            <b-button block variant="success" type="submit" v-on:click="sendStatusPetitions(item.dog_id, item.price, item.walk_petition_walker_user)">Aceptar</b-button>
-            <b-button block variant="success" type="submit" v-on:click="sendStatusPetitions(item.dog_id, item.price, item.walk_petition_walker_user)">Negar</b-button>
+            <b-button block variant="success" type="submit" v-on:click="sendStatusPetitions(item.dog_id, item.precio_proposal, item.walk_petition_walker_user)">{{state}}</b-button>
         </b-card>
       </div>
     </b-row>
