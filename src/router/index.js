@@ -56,8 +56,8 @@ const routes = [{
         ]
     },
     {
-        path: '/WalkActive',
-        name: 'WalkActive',
+        path: '/WalkForAccept',
+        name: 'WalkForAccept',
         component: WalkForAccept
     },
     {

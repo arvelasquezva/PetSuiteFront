@@ -6,24 +6,60 @@
         <b-card
           v-for="item in Petition"
           :key="item.id"
-          :title="item.price"
           tag="article"
-          style="max-width: 17rem;"
+          style="max-width: 20rem;"
           class="card"
         >
-            <b-form-group
-              id="input-group-1"
-              label="Que deseas hacer?:"
-              label-for="input-1"
+          <b-card-body>
+            <b-card-title><strong>{{ item.user }}</strong> quiere que pasees a su perro <strong>{{item.dog_name}}</strong></b-card-title>
+            <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
+            <b-card-text
+              ><strong>Debes recogerlo en: </strong
+              >{{ item.walk_petition_address }}
+            </b-card-text>
+            <b-card-text
+              ><strong>El paseo empezara: </strong
+              >{{ item.walk_petition_date_time }}
+            </b-card-text>
+            <b-card-text
+              ><strong>El paseo durará: </strong
+              >{{ item.walk_petition_duration }} minutos</b-card-text
             >
-              <b-form-select
-                id="input-1"
-                v-model="state"
-                :options="Options"
-                required
-              ></b-form-select>
-            </b-form-group>
-            <b-button variant="outline-success" type="submit" v-on:click="sendStatusPetitions(item.dog_id, item.price, item.walk_petition_walker_user)">Diego</b-button>
+            <b-card-text> <strong>Detalles de {{item.dog_name}}: </strong> 
+            <ul>
+              <li>Peso: {{ item.dog_weight }} Kg</li>
+              <li>Altura: {{ item.dog_height }} cm</li>
+              <li>Más: {{ item.dog_notes }} </li>
+            </ul>
+              
+            </b-card-text>
+            <b-card-text
+              ><strong>El usuario {{ item.user }} te recomienda: </strong
+              >{{ item.walk_petition_notes }}
+            </b-card-text>
+          </b-card-body>
+          <b-form-group
+            id="input-group-5"
+            label="Propon un precio:"
+            label-for="input-5"
+          >
+            <b-form-input
+              id="input-4"
+              v-model="valor"
+              required
+              placeholder="Ej: 10000"
+              type="number"
+              min="1000"
+            ></b-form-input>
+          </b-form-group>
+          <b-button
+            variant="info"
+            v-on:click="proposePetition(item.walk_petition_id)"
+            >Proponle un precio a {{ item.user }}</b-button
+          >
+          <b-modal v-model="show">
+            <p class="my-4">Le has enviado a {{item.user}} $ {{valor}}</p>
+          </b-modal>
         </b-card>
       </div>
     </b-row>
@@ -31,28 +67,23 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 export default {
-  name: "WalkActive",
+  name: "WalkForAccept",
   data() {
-    
     return {
+      show: false,
       currentUser: "",
       Petition: [],
-      state: "",
-      Options: ["Aceptar", "Negar"],
+      valor: "",
     };
   },
-  computed: {
-    ...mapState(['petitionsforActive']),
-    ...mapGetters(['valuePetition'])
-  },
-  mounted() {
-    if (localStorage.getItem("petitionActive")) {
+  created() {
+    if (localStorage.getItem("petition")) {
       try {
-        this.Petition = JSON.parse(localStorage.getItem("petitionActive"));
+        this.Petition = JSON.parse(localStorage.getItem("petition"));
       } catch (e) {
-        localStorage.removeItem("petitionActive");
+        localStorage.removeItem("petition");
       }
     }
     if (localStorage.getItem("user")) {
@@ -62,22 +93,18 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.getPetitionsforActive();
+    this.getPetition();
   },
   methods: {
-    getPetitionsforActive() {
-      this.$store.dispatch("getPetitionsforActive", {
-        cadena: this.currentUser.user,
-      });
+    getPetition() {
+      this.$store.dispatch("getPetitionById");
     },
-    sendStatusPetitions(dog_id, price, dogWalker) {
-      this.$store.dispatch("sendStatusPetition", {
-        dog_id: dog_id,
-        walk_invoice_price: price,
-        dog_walker_id: dogWalker,
-        client_id: this.currentUser.user,
-        walk_invoice_status: this.state,
-      });
+    proposePetition(id_petition) {
+      this.$store.dispatch("proposePetition", {
+        walk_petition_walker_user: this.currentUser.user,
+        walk_petition_id: id_petition,
+        precio_proposal: this.valor,
+      }).then(this.show=true);
     },
   },
 };

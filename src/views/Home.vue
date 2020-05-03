@@ -16,7 +16,7 @@
 import { authComputed } from "../vuex/helper.js";
 import Carousel from "@/components/Carousel.vue";
 import Cards from "@/components/Cards.vue";
-import WalkPetitionComponente from "@/components/WalkPetitionComponente.vue";
+import RegisterWalkPetition from "@/components/RegisterWalkPetition.vue";
 import { mapState} from 'vuex';
 
 export default {
@@ -24,7 +24,7 @@ export default {
   components: {
     Carousel,
     Cards,
-    WalkPetitionComponente,
+    RegisterWalkPetition,
   },
   data() {
     return {

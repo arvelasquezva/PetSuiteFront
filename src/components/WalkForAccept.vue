@@ -6,50 +6,62 @@
         <b-card
           v-for="item in Petition"
           :key="item.id"
-          :title="item.user"
           tag="article"
           style="max-width: 17rem;"
           class="card"
         >
-        <b-form-group
-          id="input-group-5"
-          label="Propon un precio:"
-          label-for="input-5"
-        >
-          <b-form-input
-            id="input-4"
-            v-model="valor"
-            required
-            placeholder="Ej: 5"
-            type="number"
-            min="1000"
-          ></b-form-input>
-        </b-form-group>
-        <b-button variant="info" v-on:click="proposePetition(item.walk_petition_id)">Pasea al perro de {{item.user}}</b-button>
+        <b-card-body>
+            <b-card-title>La Petición Para Tu Perro: {{ item.dog_id }}</b-card-title>
+            <b-card-text>El paseador: <strong> {{ item.walk_petition_walker_user }}</strong> te propone:</b-card-text>
+            <b-card-text><strong> ${{item.price}} </strong></b-card-text>
+            
+          </b-card-body>
+            <b-form-group
+              id="input-group-1"
+              label="Que deseas hacer?:"
+              label-for="input-1"
+            >
+              <b-form-select
+                id="input-1"
+                v-model="state"
+                :options="Options"
+                required
+              ></b-form-select>
+            </b-form-group>
+            <b-button block variant="success" type="submit" v-on:click="sendStatusPetitions(item.dog_id, item.price, item.walk_petition_walker_user)">Aceptar</b-button>
+            <b-button block variant="success" type="submit" v-on:click="sendStatusPetitions(item.dog_id, item.price, item.walk_petition_walker_user)">Negar</b-button>
         </b-card>
-        
       </div>
     </b-row>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "WalkForAccept",
   data() {
+    
     return {
       currentUser: "",
       Petition: [],
-      valor: ""
+      state: "",
+      Options: [
+        { text: 'Aceptar', value: "Aceptar"},
+        { text: 'Negar', value: "Negar"},
+        ]
     };
   },
-  created (){
-    if (localStorage.getItem("petition")) {
+  computed: {
+    ...mapState(['petitionsforActive']),
+    ...mapGetters(['valuePetition'])
+  },
+  mounted() {
+    if (localStorage.getItem("petitionActive")) {
       try {
-        this.Petition = JSON.parse(localStorage.getItem("petition"));
+        this.Petition = JSON.parse(localStorage.getItem("petitionActive"));
       } catch (e) {
-        localStorage.removeItem("petition");
+        localStorage.removeItem("petitionActive");
       }
     }
     if (localStorage.getItem("user")) {
@@ -59,22 +71,24 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.getPetition();
+    this.getPetitionsforActive();
   },
-  methods:{
-    getPetition(){
-      this.$store
-        .dispatch("getPetitionById")
+  methods: {
+    getPetitionsforActive() {
+      this.$store.dispatch("getPetitionsforActive", {
+        cadena: this.currentUser.user,
+      });
     },
-    proposePetition(id_petition){
-      this.$store
-      .dispatch("proposePetition",{
-        walk_petition_walker_user: this.currentUser.user,
-        walk_petition_id: id_petition, 
-        precio_proposal: this.valor
-      })
-    }
-  }
+    sendStatusPetitions(dog_id, price, dogWalker) {
+      this.$store.dispatch("sendStatusPetition", {
+        dog_id: dog_id,
+        walk_invoice_price: price,
+        dog_walker_id: dogWalker,
+        client_id: this.currentUser.user,
+        walk_invoice_status: this.state,
+      });
+    },
+  },
 };
 </script>
 
