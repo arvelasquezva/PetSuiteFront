@@ -2,7 +2,6 @@
   <div id="app">
     <NavbarComponente></NavbarComponente>
     <router-view />
-    <footer></footer>
   </div>
 </template>
 
@@ -12,6 +11,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'app',
   computed: {
+    
     ...mapGetters({ currentUser: 'currentUser' })
   },
  /* created () {
@@ -41,8 +41,5 @@ export default {
 NavbarComponente{
   position: sticky;
 }
-footer{
-  background-color: #40db9a;
-  padding: 4rem 0;
-}
+
 </style>

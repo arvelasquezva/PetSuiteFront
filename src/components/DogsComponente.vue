@@ -4,17 +4,13 @@
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in cards"
+          v-for="item in pets"
           :key="item.id"
-          :title="item.title"
-          :img-src="item.imagen"
+          :title="item.dog_name"
           tag="article"
           style="max-width: 17rem;"
           class="card"
         >
-          <router-link :to="{name: 'signUp', params:{id:item.title}}">
-            <b-button variant="primary" onClick="setTimeout(() => {  location.reload(); }, 250);" >Go {{ item.title }}</b-button>
-          </router-link>
         </b-card>
       </div>
     </b-row>
@@ -22,14 +18,42 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-  name: "Cards",
+  name: "DogsComponente",
+  data() {
+    return {
+    currentUser: "",
+    pets: []
+    }
+  },
   props: {
     msg: String,
-    cards: [],
+   
   },
-  data() {
-    return {};
+created() {
+    if (localStorage.getItem("pet")) {
+      try {
+        this.pets = JSON.parse(localStorage.getItem("pet"));
+      } catch (e) {
+        localStorage.removeItem("pet");
+      }
+    }
+    if (localStorage.getItem("user")) {
+      try {
+        this.currentUser = JSON.parse(localStorage.getItem("user"));
+      } catch (e) {
+        localStorage.removeItem("user");
+      }
+    }
+    this.getMascotas();
+  },
+  methods: {
+    getMascotas(){
+      this.$store.dispatch("getMascotaById", {
+          cadena: this.currentUser.user
+          });
+    }
   },
 };
 </script>
@@ -40,7 +64,7 @@ h1 {
 }
 .body {
   margin: 0;
-  height: 100vh;
+  height: auto;
   display: grid;
   place-items: center;
   overflow: hidden;
