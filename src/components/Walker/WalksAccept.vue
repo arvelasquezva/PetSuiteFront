@@ -10,9 +10,14 @@
           style="max-width: 20rem;"
           class="card"
         >
-        <b-card-body>
-            <b-card-title> No olvides pasear a <strong>{{ item.dog_name }}</strong></b-card-title>
-            <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
+          <b-card-body>
+            <b-card-title>
+              No olvides pasear a
+              <strong>{{ item.dog_name }}</strong></b-card-title
+            >
+            <b-card-sub-title class="mb-2"
+              >Raza: {{ item.dog_race }}</b-card-sub-title
+            >
             <b-card-text
               ><strong>Debes recogerlo en: </strong
               >{{ item.walk_invoice_address }}
@@ -29,23 +34,24 @@
               ><strong>El usuario {{ item.client_id }} te recomienda: </strong
               >{{ item.walk_invoice_notes }}
             </b-card-text>
-            <b-card-text><strong>El precio de este paseo es: </strong>${{ item.walk_invoice_price }}
+            <b-card-text
+              ><strong>El precio de este paseo es: </strong>${{
+                item.walk_invoice_price
+              }}
             </b-card-text>
           </b-card-body>
-        <b-button
+          <b-button
             variant="success"
             block
             v-on:click="actualizarEstado(item.walk_invoice_id)"
             >Empieza el Paseo</b-button
           >
-          <b-modal
-        v-model="show">
-        <p class="my-4">Has iniciado el paseo para {{ item.dog_name}}</p>
-      </b-modal>
+          <b-modal v-model="show">
+            <p class="my-4">Has iniciado el paseo para {{ item.dog_name }}</p>
+          </b-modal>
         </b-card>
       </div>
     </b-row>
-    
   </div>
 </template>
 
@@ -55,7 +61,7 @@ export default {
   name: "WalksAccept",
   data() {
     return {
-      show:false,
+      show: false,
       currentUser: "",
       Petition: [],
     };
@@ -79,16 +85,17 @@ export default {
   },
   methods: {
     getWalksAccept() {
-      this.$store.dispatch("getWalksAccept",{
+      this.$store.dispatch("getWalksAccept", {
         cadena: this.currentUser.user,
       });
     },
-    actualizarEstado(walk_invoice_id){
-      this.$store.dispatch("updateStatusWalk",{
-        entero : walk_invoice_id
-      })
-      .then(this.show= true)
-    }
+    actualizarEstado(walk_invoice_id) {
+      this.$store
+        .dispatch("updateStatusWalk", {
+          entero: walk_invoice_id,
+        })
+        .then((this.show = true));
+    },
   },
 };
 </script>

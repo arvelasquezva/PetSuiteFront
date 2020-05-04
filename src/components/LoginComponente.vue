@@ -54,9 +54,13 @@ export default {
         user: this.user,
         password: this.password
       })
-      .then(()=>{
-        this.$router.push({name: 'Home'})
-      })
+      .then(({ data }) => {
+          if (data === "") {
+            alert("Error al Iniciar Sesión");
+          } else {
+            this.$router.push({name: 'Home'})
+          }
+        });
     }
   }
 };

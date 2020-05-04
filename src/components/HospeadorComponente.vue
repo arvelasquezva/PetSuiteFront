@@ -120,10 +120,14 @@ export default {
         dog_daycare_address: this.dog_daycare_address,
         dog_daycare_type: this.dog_daycare_type
       }, "dog_day_cares"])
-      .then(()=>{
-        alert ("Bienvenido a PetSuite")
-        this.$router.push({name: 'Login'})
-      })
+      .then(({ data }) => {
+          if (data === "") {
+            alert("Error al Registrarte");
+          } else {
+            alert ("Bienvenido a PetSuite")
+        	this.$router.push({name: 'Login'})
+          }
+        });
     },
   },
 };

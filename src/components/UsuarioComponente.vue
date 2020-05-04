@@ -117,10 +117,14 @@ export default {
         client_e_mail: this.client_e_mail,
         client_address: this.client_address
       }, "clients"])
-      .then(()=>{
-        alert ("Bienvenido a PetSuite")
-        this.$router.push({name: 'Login'})
-      })
+      .then(({ data }) => {
+          if (data === "") {
+            alert("Error al Registrarte");
+          } else {
+            alert ("Bienvenido a PetSuite")
+        	  this.$router.push({name: 'Login'})
+          }
+        });
     },
   },
 };

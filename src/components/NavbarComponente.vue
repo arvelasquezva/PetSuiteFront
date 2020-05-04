@@ -8,23 +8,41 @@
         Petsuite
       </b-navbar-brand>
       <div v-if="loggedIn">
-        <b-navbar-nav>
-        <b-nav-item href="/MyPets">Mis Mascotas</b-nav-item>
-        <b-nav-item href="/MyPetitions">Mis Peticiones</b-nav-item>
-      </b-navbar-nav>
+        <div v-if="rolIn==='ROLE_CLIENT'">
+          <b-navbar-nav>
+            <b-nav-item href="/MyPets">Mis Mascotas</b-nav-item>
+            <b-nav-item href="/MyPetitions">Mis Peticiones</b-nav-item>
+            <b-nav-item href="/WalksDone">Califica tu paseo</b-nav-item>
+          </b-navbar-nav>
+        </div>
+        <div v-else-if="rolIn==='ROLE_DOGWALKER'">
+          <b-navbar-nav>
+            <b-nav-item href="/WalkPetitionActive">Solicitudes Pendientes</b-nav-item>
+            <b-nav-item href="/WalksAccept">Paseos Por Empezar</b-nav-item>
+            <b-nav-item href="/WalksProgress">Paseos En Progreso</b-nav-item>
+          </b-navbar-nav>
+        </div>
       </div>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <div v-if="!loggedIn">
           <b-button href="/login" variant="light" class="ml-3">
-            Inicia sesión</b-button>
+            Inicia sesión</b-button
+          >
           <b-button href="/signUp/all" variant="light" class="ml-3">
-            Registrate</b-button>
+            Registrate</b-button
+          >
         </div>
         <div v-else>
-          <b-button class="logoutButton" @click="logout" href="/" variant="light">
-            Cierra Sesión</b-button>
+          <b-button
+            class="logoutButton"
+            @click="logout"
+            href="/login"
+            variant="light"
+          >
+            Cierra Sesión</b-button
+          >
         </div>
       </b-navbar-nav>
     </b-container>

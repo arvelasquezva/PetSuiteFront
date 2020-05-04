@@ -1,6 +1,8 @@
 <template>
   <div class="body">
+    <h1>Solicita un Paseo</h1>
     <div class="SignUp">
+      
       <img height="300" src="../assets/Images/Walker.jpg" alt="image slot" />
       <b-form @submit.prevent="registerPetition" class="pl-4">
         <!--Perro-->
@@ -79,7 +81,7 @@
           Confirma tu petición
         </b-button>
       </b-form>
-      <b-modal v-model="show">
+      <b-modal centered v-model="show">
         <p class="my-4">Has creado una petición para un paseo</p>
       </b-modal>
     </div>
@@ -117,7 +119,14 @@ export default {
           walk_petition_duration: this.walk_petition_duration,
           walk_petition_address: this.currentUser.client_address,
         })
-        .then();
+        .then(({ data }) => {
+          console.log(data);
+          if (data === "") {
+            alert("El perro ya se encuentra en un paseo activo");
+          } else {
+            this.show = true;
+          }
+        });
     },
   },
   mounted() {

@@ -56,7 +56,12 @@ export default new Vuex.Store({
         CLEAR_USER_DATA() {
             localStorage.removeItem('user');
             localStorage.removeItem('pet');
-            location.reload();
+            localStorage.removeItem('petitions');
+            localStorage.removeItem('petitionsforActive');
+            localStorage.removeItem('walksDone');
+            localStorage.removeItem('walksProgress');
+            localStorage.removeItem('walksAccept');
+            localStorage.removeItem('petsActive');
         }
     },
     actions: {
@@ -81,13 +86,7 @@ export default new Vuex.Store({
         },
         registerPetition({ commit }, credentials) {
             console.log(credentials);
-            return axios.post("api/walkpetitions/create", credentials)
-                .then(({ data }) => {
-                    console.log(data);
-                    if (data === "") {
-                        alert("El perro ya se encuentra en un paseo activo");
-                    }
-                });
+            return axios.post("api/walkpetitions/create", credentials);
 
         },
         getMascotaById({ commit }, credentials) {
@@ -185,14 +184,8 @@ export default new Vuex.Store({
                 return { value: pet.dog_id, text: pet.dog_name }
             });
         },
-        valuePetition: state => {
-            return state.petitionsforActive.map((petitionforActive) => {
-                return {
-                    dog_id: petitionforActive.dog_id,
-                    dog_walker_id: petitionforActive.walk_petition_walker_user,
-                    walk_invoice_price: petitionforActive.price
-                }
-            });
+        rolIn(state) {
+            return state.user.role
         }
     }
 })

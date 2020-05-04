@@ -100,10 +100,14 @@ export default {
         dog_walker_phone: this.dog_walker_phone,
         dog_walker_score: this.dog_walker_score
       }, "dog_walkers"])
-      .then(()=>{
-        alert ("Bienvenido a PetSuite")
-        this.$router.push({name: 'Login'})
-      })
+      .then(({ data }) => {
+          if (data === "") {
+            alert("Error al Registrarte");
+          } else {
+            alert ("Bienvenido a PetSuite")
+        	this.$router.push({name: 'Login'})
+          }
+        });
     },
   },
 };

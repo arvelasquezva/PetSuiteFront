@@ -9,7 +9,7 @@
           :title="item.title"
           :img-src="item.imagen"
           tag="article"
-          style="max-width: 17rem;"
+          style="max-width: 15rem;"
           class="card"
         >
           <router-link :to="{name: 'signUp', params:{id:item.title}}">
