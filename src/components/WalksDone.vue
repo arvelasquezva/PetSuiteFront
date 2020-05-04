@@ -7,12 +7,20 @@
           v-for="item in Petition"
           :key="item.id"
           tag="article"
-          style="max-width: 20rem;"
+          style="max-width: 17rem;"
           class="card"
         >
+        <b-card-body>
+            <b-card-title> El paseo para: <strong>{{ item.dog_name }}</strong> ha terminado</b-card-title>
+            <b-card-text> El paseador ha sido: <strong>{{item.dog_walker_id}}</strong></b-card-text>
+          </b-card-body>
+          <b-modal
+        v-model="show">
+        <p class="my-4">Has calificado a {{item.dog_walker_id}}</p>
+      </b-modal>
         <b-form-group
               id="input-group-1"
-              label="Califica al paseador:"
+              label="Que calificación merece?"
               label-for="input-1"
             >
               <b-form-select
@@ -23,9 +31,10 @@
               ></b-form-select>
             </b-form-group>
         <b-button
-            variant="success" 
+            variant="success"
+            block
             v-on:click="calificarPaseador(item.walk_invoice_id, item.dog_walker_id,score )"
-            >Da tu calificación</b-button
+            >Califica a {{item.dog_walker_id}}</b-button
           >
 
         </b-card>
@@ -41,6 +50,7 @@ export default {
   data() {
     return {
       currentUser: "",
+      show: false,
       score: "",
       Petition: [],
       Options: [
@@ -80,7 +90,7 @@ export default {
         walk_invoice_id : walk_invoice_id,
         dog_walker_id : dog_walker_id,
         walker_score: score
-      })
+      }).then(this.show=true)
     }
   },
 };

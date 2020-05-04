@@ -12,7 +12,7 @@
         >
         <b-card-body>
             <b-card-title><strong>La Petición Para Tu Perro: </strong>{{ item.dog_name }}</b-card-title>
-            <b-card-text>El paseador: <strong> {{ item.walk_petition_walker_user }}</strong> te propone:</b-card-text>
+            <b-card-text>El paseador: <strong> {{ item.walk_petition_walker_user }}</strong> te propone: </b-card-text>
             <b-card-text><strong> ${{item.precio_proposal}} </strong></b-card-text>
             
           </b-card-body>
@@ -50,20 +50,11 @@ export default {
         ]
     };
   },
-  async mounted () {
-    try {
-      await this.$store.dispatch("getPetitionsforActive", {
-        cadena: this.currentUser.user,
-      });
-    } catch (error) {
-      console.error
-    }
-  },
   computed: {
     ...mapState(['petitionsforActive']),
     ...mapGetters(['valuePetition'])
   },
-  mounted() {
+  created() {
     if (localStorage.getItem("petitionActive")) {
       try {
         this.Petition = JSON.parse(localStorage.getItem("petitionActive"));
@@ -78,8 +69,14 @@ export default {
         localStorage.removeItem("user");
       }
     }
+    this.getPetitionsforActive();
   },
   methods: {
+    getPetitionsforActive() {
+      this.$store.dispatch("getPetitionsforActive",{
+        cadena: this.currentUser.user,
+      });
+    },
     sendStatusPetitions(dog_id, price, dogWalker) {
       this.$store.dispatch("sendStatusPetition", {
         dog_id: dog_id,

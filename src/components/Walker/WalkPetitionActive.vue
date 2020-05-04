@@ -38,6 +38,8 @@
               >{{ item.walk_petition_notes }}
             </b-card-text>
           </b-card-body>
+
+          
           <b-form-group
             id="input-group-5"
             label="Propon un precio:"

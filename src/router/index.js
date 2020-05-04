@@ -12,6 +12,7 @@ import WalkPetitionActive from '@/components/Walker/WalkPetitionActive.vue';
 import WalksAccept from '@/components/Walker/WalksAccept.vue';
 import WalksProgress from '@/components/Walker/WalksProgress.vue';
 import WalkForAccept from '@/components/WalkForAccept.vue';
+import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
 import WalksDone from '@/components/WalksDone.vue';
 import Vuex from 'vuex';
 import { authComputed } from "../vuex/helper.js";
@@ -89,6 +90,12 @@ const routes = [{
         path: '/WalksDone',
         name: 'WalksDone',
         component: WalksDone
+    },
+    {
+        //Ruta para las ver los perros a cargo de un paseador
+        path: '/DogsInMyCharge',
+        name: 'DogsInMyCharge',
+        component: DogsInMyCharge
     },
 ]
 

@@ -11,10 +11,11 @@ export default new Vuex.Store({
         user: null,
         pets: [],
         petitions: [],
-        petitionsforActive: [],
-        walksAccept: [],
-        walksProgress: [],
-        walksDone: []
+        petitionsforActive: [], //Paseos por aceptar precio
+        walksAccept: [], // Paseos por empezar
+        walksProgress: [], //Paseos en progreso
+        walksDone: [], //Paseos terminados para calificar
+        petsActive: [], //Perros a cargo de un paseador
     },
     mutations: {
         SET_USER_PET(state, petData) {
@@ -41,7 +42,10 @@ export default new Vuex.Store({
             state.walksDone = walksDone;
             localStorage.setItem('walksDone', JSON.stringify(walksDone));
         },
-
+        SET_WALKER_PETS_ACTIVE(state, petsActive) {
+            state.petsActive = petsActive;
+            localStorage.setItem('petsActive', JSON.stringify(petsActive));
+        },
         SET_USER_DATA(state, userData) {
             state.user = userData;
             localStorage.setItem('user', JSON.stringify(userData))
@@ -77,7 +81,13 @@ export default new Vuex.Store({
         },
         registerPetition({ commit }, credentials) {
             console.log(credentials);
-            return axios.post("api/walkpetitions/create", credentials).then();
+            return axios.post("api/walkpetitions/create", credentials)
+                .then(({ data }) => {
+                    console.log(data);
+                    if (data === "") {
+                        alert("El perro ya se encuentra en un paseo activo");
+                    }
+                });
 
         },
         getMascotaById({ commit }, credentials) {
@@ -132,6 +142,13 @@ export default new Vuex.Store({
                 .post("api/walkpetitions/findbyuser", credentials)
                 .then(({ data }) => {
                     commit('SET_WALKER_PETITION_ACTIVE', data)
+                });
+        },
+        getDogsInMyCharge({ commit }, credentials) {
+            return axios
+                .post("api/walkinvoices/dogsByWalkerAndStatusProgress", credentials)
+                .then(({ data }) => {
+                    commit('SET_WALKER_PETS_ACTIVE', data)
                 });
         },
         sendStatusPetition({ commit }, credentials) {

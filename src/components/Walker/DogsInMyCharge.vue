@@ -1,34 +1,40 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Paseos En Curso</h1>
+    <h1 class="mt-3">Perros a mi cargo</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
           v-for="item in Petition"
           :key="item.id"
           tag="article"
-          style="max-width: 20rem;"
+          style="max-width: 19rem;"
           class="card"
-        ><b-card-body>
-            <b-card-title> Termina el paseo para: <strong>{{ item.dog_name }}</strong></b-card-title>
+        >
+        <b-card-body>
+            <b-card-title> Tu perro se llama: <strong>{{ item.dog_name }}</strong></b-card-title>
             <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
             <b-card-text
-              ><strong>Debes dejarlo en: </strong
-              >{{ item.walk_invoice_address }}
+              ><strong>El perro le pertenece: </strong
+              >{{ item.user}}
+            </b-card-text>
+            <b-card-text
+              ><strong>Peso: </strong
+              >{{ item.dog_weight }} kg
             </b-card-text>  
-            <b-card-text><strong>Debes cobrar: </strong>${{ item.walk_invoice_price }}
+            <b-card-text
+              ><strong>Peso: </strong
+              >{{ item.dog_height }} cm
+            </b-card-text>  
+            <b-card-text
+              ><strong>Edad: </strong
+              >{{ item.dog_age}} años
+            </b-card-text>
+            <b-card-text
+              ><strong>Notas: </strong
+              >{{ item.dog_notes}} 
             </b-card-text>
           </b-card-body>
-        <b-button
-            variant="danger"
-            block
-            v-on:click="actualizarEstado(item.walk_invoice_id)"
-        >Termina el Paseo</b-button
-          >
-          <b-modal
-        v-model="show">
-        <p class="my-4">Has terminado el paseo para {{ item.dog_name}}</p>
-      </b-modal>
+          
         </b-card>
       </div>
     </b-row>
@@ -38,20 +44,19 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "WalksProgress",
+  name: "DogsInMyCharge",
   data() {
     return {
-      show:false,
       currentUser: "",
       Petition: [],
     };
   },
   created() {
-    if (localStorage.getItem("walksProgress")) {
+    if (localStorage.getItem("petsActive")) {
       try {
-        this.Petition = JSON.parse(localStorage.getItem("walksProgress"));
+        this.Petition = JSON.parse(localStorage.getItem("petsActive"));
       } catch (e) {
-        localStorage.removeItem("walksProgress");
+        localStorage.removeItem("petsActive");
       }
     }
     if (localStorage.getItem("user")) {
@@ -61,20 +66,14 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.walksProgress();
+    this.dogsInMyCharge();
   },
   methods: {
-    walksProgress() {
-      this.$store.dispatch("getWalksProgress",{
+    dogsInMyCharge() {
+      this.$store.dispatch("getDogsInMyCharge",{
         cadena: this.currentUser.user,
       });
     },
-    actualizarEstado(walk_invoice_id){
-      this.$store.dispatch("updateStatusWalk",{
-        entero : walk_invoice_id
-      }).then(this.show=true)
-
-    }
   },
 };
 </script>

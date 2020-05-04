@@ -79,8 +79,7 @@
           Confirma tu petición
         </b-button>
       </b-form>
-      <b-modal
-        v-model="show">
+      <b-modal v-model="show">
         <p class="my-4">Has creado una petición para un paseo</p>
       </b-modal>
     </div>
@@ -89,7 +88,6 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-
 
 export default {
   name: "RegisterWalkPetition",
@@ -106,7 +104,7 @@ export default {
   },
   computed: {
     ...mapState(["pets"]),
-    ...mapGetters(["valuePets"])
+    ...mapGetters(["valuePets"]),
   },
   methods: {
     registerPetition() {
@@ -114,12 +112,12 @@ export default {
         .dispatch("registerPetition", {
           user: this.currentUser.user,
           dog_id: this.dog_selected,
-          walk_petition_date_time: this.pickup_date + " " +this.pickup_time,
+          walk_petition_date_time: this.pickup_date + " " + this.pickup_time,
           walk_petition_notes: this.notes,
           walk_petition_duration: this.walk_petition_duration,
-          walk_petition_address: this.currentUser.client_address
+          walk_petition_address: this.currentUser.client_address,
         })
-        .then(this.show=true);
+        .then();
     },
   },
   mounted() {

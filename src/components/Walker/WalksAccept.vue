@@ -10,14 +10,42 @@
           style="max-width: 20rem;"
           class="card"
         >
+        <b-card-body>
+            <b-card-title> No olvides pasear a <strong>{{ item.dog_name }}</strong></b-card-title>
+            <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
+            <b-card-text
+              ><strong>Debes recogerlo en: </strong
+              >{{ item.walk_invoice_address }}
+            </b-card-text>
+            <b-card-text
+              ><strong>El paseo debe empezar : </strong
+              >{{ item.walk_invoice_date }}
+            </b-card-text>
+            <b-card-text
+              ><strong>El paseo durará: </strong
+              >{{ item.walk_invoice_duration }} minutos</b-card-text
+            >
+            <b-card-text
+              ><strong>El usuario {{ item.client_id }} te recomienda: </strong
+              >{{ item.walk_invoice_notes }}
+            </b-card-text>
+            <b-card-text><strong>El precio de este paseo es: </strong>${{ item.walk_invoice_price }}
+            </b-card-text>
+          </b-card-body>
         <b-button
-            variant="info"
+            variant="success"
+            block
             v-on:click="actualizarEstado(item.walk_invoice_id)"
-            >Cambia el estado</b-button
+            >Empieza el Paseo</b-button
           >
+          <b-modal
+        v-model="show">
+        <p class="my-4">Has iniciado el paseo para {{ item.dog_name}}</p>
+      </b-modal>
         </b-card>
       </div>
     </b-row>
+    
   </div>
 </template>
 
@@ -27,6 +55,7 @@ export default {
   name: "WalksAccept",
   data() {
     return {
+      show:false,
       currentUser: "",
       Petition: [],
     };
@@ -58,6 +87,7 @@ export default {
       this.$store.dispatch("updateStatusWalk",{
         entero : walk_invoice_id
       })
+      .then(this.show= true)
     }
   },
 };
