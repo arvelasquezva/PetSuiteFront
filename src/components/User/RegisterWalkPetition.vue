@@ -3,7 +3,7 @@
     <h1>Solicita un Paseo</h1>
     <div class="SignUp">
       
-      <img height="300" src="../assets/Images/Walker.jpg" alt="image slot" />
+      <img height="300" src="@/assets/Images/Walker.jpg" alt="image slot" />
       <b-form @submit.prevent="registerPetition" class="pl-4">
         <!--Perro-->
         <b-form-group

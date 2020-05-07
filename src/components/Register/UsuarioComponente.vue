@@ -3,7 +3,7 @@
     <div class="SignUp">
       <img
         height="300"
-        src="../assets/Images/Usuario(1).png"
+        src="@/assets/Images/Usuario(1).png"
         alt="image slot"
       />
 
