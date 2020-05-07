@@ -92,9 +92,9 @@
         >
           <b-form-input
             id="input-7"
-            v-model="dog_daycare_address"
+            v-model="dog_daycare_price_base"
             required
-            number=""
+            type="number"
             placeholder="Ej: 10000"
           ></b-form-input>
         </b-form-group>
@@ -119,6 +119,7 @@ export default {
         dog_daycare_phone: "",
         dog_daycare_score: 0,
         dog_daycare_address: "",
+        dog_daycare_price_base,
         dog_daycare_type: true
     };
   },
@@ -132,7 +133,8 @@ export default {
         dog_daycare_phone: this.dog_daycare_phone,
         dog_daycare_score: this.dog_daycare_score,
         dog_daycare_address: this.dog_daycare_address,
-        dog_daycare_type: this.dog_daycare_type
+        dog_daycare_type: this.dog_daycare_type,
+        dog_daycare_price_base: this.dog_daycare_price_base
       },"dog_day_cares"])
       .then(({ data }) => {
           if (data === "") {

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
 import MyPets from '../views/MyPets.vue';
+import DogDayCareServices from '../views/DogDayCareServices.vue';
 import Forbidden from '../views/Forbidden.vue';
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/Register/UsuarioComponente.vue';
@@ -49,6 +50,11 @@ const routes = [{
         path: '/MyPets',
         name: 'Mypets',
         component: MyPets,
+    },
+    {
+        path: '/MyServices',
+        name: 'MyServices',
+        component: DogDayCareServices,
     },
     {
         path: '/signUp/:id',

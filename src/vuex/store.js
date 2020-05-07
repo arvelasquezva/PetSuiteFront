@@ -16,6 +16,7 @@ export default new Vuex.Store({
         walksProgress: [], //Paseos en progreso
         walksDone: [], //Paseos terminados para calificar
         petsActive: [], //Perros a cargo de un paseador
+        services: [], //Servicios de una Guarderia
     },
     mutations: {
         SET_USER_PET(state, petData) {
@@ -53,6 +54,11 @@ export default new Vuex.Store({
                 userData.token
                 }`;
         },
+        SET_DOGDAYCARE_SERVICES(state, servicesData) {
+            state.services = servicesData;
+            localStorage.setItem('services', JSON.stringify(servicesData));
+        },
+
         CLEAR_USER_DATA() {
             localStorage.removeItem('user');
             localStorage.removeItem('pet');
@@ -62,6 +68,7 @@ export default new Vuex.Store({
             localStorage.removeItem('walksProgress');
             localStorage.removeItem('walksAccept');
             localStorage.removeItem('petsActive');
+            localStorage.removeItem('services');
         }
     },
     actions: {
@@ -80,7 +87,7 @@ export default new Vuex.Store({
                 }).then();
         },
         registerMascota({ commit }, credentials) {
-            console.log("Esto es lo que mando al Back en registrar Mascota " + credentials);
+
             return axios.post("api/dogs/register", credentials).then();
 
         },
@@ -94,6 +101,13 @@ export default new Vuex.Store({
                 .post("api/dogs/findmydog", credentials)
                 .then(({ data }) => {
                     commit('SET_USER_PET', data)
+                });
+        },
+        getServicesById({ commit }, credentials) {
+            return axios
+                .post("api/dogs/findmydog", credentials)
+                .then(({ data }) => {
+                    commit('SET_DOGDAYCARE_SERVICES', data)
                 });
         },
         getPetitionById({ commit }) {
@@ -151,7 +165,10 @@ export default new Vuex.Store({
                 });
         },
         sendStatusPetition({ commit }, credentials) {
-            console.log(credentials);
+            return axios
+                .post("api/walkpetitions/denyoraccept", credentials);
+        },
+        registerServicesDogDayCare({ commit }, credentials) {
             return axios
                 .post("api/walkpetitions/denyoraccept", credentials);
         },
