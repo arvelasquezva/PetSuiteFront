@@ -11,8 +11,8 @@
 
 <script>
 import { authComputed } from "../vuex/helper.js";
-import registerPets from "@/components/RegisterPets.vue";
-import DogsComponente from "@/components/DogsComponente.vue";
+import registerPets from "@/components/User/RegisterPets.vue";
+import DogsComponente from "@/components/User/DogsComponente.vue";
 
 export default {
   name: "MyPets",

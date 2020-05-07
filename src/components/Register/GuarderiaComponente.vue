@@ -85,6 +85,20 @@
           ></b-form-input>
         </b-form-group>
 
+        <b-form-group
+          id="input-group-7"
+          label="Agrega un precio base por cuidado de mascota:"
+          label-for="input-7"
+        >
+          <b-form-input
+            id="input-7"
+            v-model="dog_daycare_address"
+            required
+            number=""
+            placeholder="Ej: 10000"
+          ></b-form-input>
+        </b-form-group>
+
         <b-button block pill type="submit" variant="success"
           >Unete a PetSuite</b-button
         >

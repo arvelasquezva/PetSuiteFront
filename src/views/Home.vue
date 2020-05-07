@@ -12,7 +12,7 @@
 <script>
 import { authComputed } from "../vuex/helper.js";
 import Carousel from "@/components/Carousel.vue";
-import RegisterWalkPetition from "@/components/RegisterWalkPetition.vue";
+import RegisterWalkPetition from "@/components/User/RegisterWalkPetition.vue";
 import { mapState} from 'vuex';
 
 export default {
