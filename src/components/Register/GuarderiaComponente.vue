@@ -1,13 +1,8 @@
 <template>
   <div class="body">
     <div class="SignUp">
-      <img
-        height="300"
-        src="@/assets/Images/Guarderia(1).png"
-        alt="image slot"
-      />
-
-      <b-form @submit.prevent="registerUsuario" class="pl-4">
+      <img height="300" src="@/assets/Images/Guarderia(1).png" alt="image slot"/>
+   <b-form @submit.prevent="registerUsuario" class="pl-4">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
@@ -119,7 +114,7 @@ export default {
         dog_daycare_phone: "",
         dog_daycare_score: 0,
         dog_daycare_address: "",
-        dog_daycare_price_base,
+        dog_daycare_price_base: "",
         dog_daycare_type: true
     };
   },

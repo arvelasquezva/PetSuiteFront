@@ -4,6 +4,7 @@
     <div class="body">
       <div v-if="rolIn==='ROLE_CLIENT'">
           <RegisterWalkPetition></RegisterWalkPetition>
+          <RegisterDaycare></RegisterDaycare>
       </div>
     </div>
   </div>
@@ -13,6 +14,7 @@
 import { authComputed } from "../vuex/helper.js";
 import Carousel from "@/components/Carousel.vue";
 import RegisterWalkPetition from "@/components/User/RegisterWalkPetition.vue";
+import RegisterDaycare from "@/components/User/RegisterDaycare.vue";
 import { mapState} from 'vuex';
 
 export default {
@@ -20,6 +22,7 @@ export default {
   components: {
     Carousel,
     RegisterWalkPetition,
+    RegisterDaycare
   },
   data() {
     return {

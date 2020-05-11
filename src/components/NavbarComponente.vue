@@ -43,6 +43,13 @@
           >
             Cierra Sesión</b-button
           >
+          <b-button
+            class="ml-3"
+            href="/Profile"
+            variant="light"
+          >
+            Perfil</b-button
+          >
         </div>
       </b-navbar-nav>
     </b-container>
@@ -51,6 +58,7 @@
 
 <script>
 import { authComputed } from "../vuex/helper.js";
+import { mapState } from 'vuex';
 export default {
   name: "NavbarComponente",
   computed: {

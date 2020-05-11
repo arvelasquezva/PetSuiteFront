@@ -3,8 +3,9 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
 import MyPets from '../views/MyPets.vue';
-import DogDayCareServices from '../views/DogDayCareServices.vue';
+import Profile from '../views/Profile.vue';
 import Forbidden from '../views/Forbidden.vue';
+import DogDayCareServices from '../views/DogDayCareServices.vue';
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/Register/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/Register/GuarderiaComponente.vue';
@@ -16,7 +17,6 @@ import WalkForAccept from '@/components/User/WalkForAccept.vue';
 import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
 import WalksDone from '@/components/User/WalksDone.vue';
 import Vuex from 'vuex';
-import { authComputed } from "../vuex/helper.js";
 
 Vue.use(Vuex);
 
@@ -50,6 +50,11 @@ const routes = [{
         path: '/MyPets',
         name: 'Mypets',
         component: MyPets,
+    },
+    {
+        path: '/Forbidden',
+        name: 'Forbidden',
+        component: Forbidden,
     },
     {
         path: '/MyServices',
@@ -102,6 +107,12 @@ const routes = [{
         path: '/DogsInMyCharge',
         name: 'DogsInMyCharge',
         component: DogsInMyCharge
+    },
+    {
+        //Ruta para las ver los perros a cargo de un paseador
+        path: '/Profile',
+        name: 'Profile',
+        component: Profile
     },
 ]
 

@@ -33,7 +33,8 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-3" label="Tu Nombre Completo:" label-for="input-3">
+        <b-form-group id="input-group-3" 
+        label="Tu Nombre Completo:" label-for="input-3">
           <b-form-input
             id="input-3"
             v-model="dog_walker_name"

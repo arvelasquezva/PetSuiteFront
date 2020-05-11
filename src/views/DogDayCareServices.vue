@@ -15,10 +15,10 @@ import RegisterServices from "@/components/Dog_Day_Care/RegisterServices.vue";
 import ServicesComponente from "@/components/Dog_Day_Care/ServicesComponente.vue";
 
 export default {
-  name: "MyPets",
+  name: "DogDayCareServices",
   components: {
-    registerPets,
-    DogsComponente,
+    RegisterServices,
+    ServicesComponente
   },
 };
 </script>
