@@ -146,8 +146,8 @@ footer {
   color: white;
 }
 .body {
-  margin: 0;
-  height: 100vh;
+  margin-top: 10px;
+  height: auto;
   display: grid;
   place-items: center;
   overflow: hidden;

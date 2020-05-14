@@ -50,9 +50,9 @@ created() {
   },
   methods: {
     getMascotas(){
-      this.$store.dispatch("getMascotaById", {
+      this.$store.dispatch("getMascotaByUser", {
           cadena: this.currentUser.user
-          });
+      });
     }
   },
 };

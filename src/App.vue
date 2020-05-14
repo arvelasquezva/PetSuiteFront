@@ -14,19 +14,6 @@ export default {
     
     ...mapGetters({ currentUser: 'currentUser' })
   },
- /* created () {
-    this.checkCurrentLogin()
-  },
-  updated () {
-    this.checkCurrentLogin()
-  },
-  methods: {
-    checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/') {
-        this.$router.push('/?redirect=' + this.$route.path)
-      }
-    }
-  },*/
   components: {
     NavbarComponente
   }

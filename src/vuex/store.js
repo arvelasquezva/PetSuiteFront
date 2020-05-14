@@ -87,30 +87,17 @@ export default new Vuex.Store({
                 }).then();
         },
         updateUsuario({ commit }, [credentials, userClass]) {
-            console.log("/api/" + userClass + "/update");
-            return axios
-                .post("/api/" + userClass + "/update", credentials, {
-                    headers: {
-                        "Content-type": "application/json",
-                        "Access-Control-Allow-Origin": "Content-Type",
-                        "Access-Control-Allow-Methods": "POST",
-                        "Access-Control-Allow-Headers": "*",
-                        "cache-control": "no-cache",
-                        Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodG92YXJzIiwidXNlclBhc3N3b3JkIjoiNzg5Iiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.WqdSPO5QV2S9ZRtpOHjl9KPnVYCxT1JpDQQ-cnv0-XKohThHApMy8OiIkNLRomwVoHlCjvE0W92Pj-QW8ayIWw"
-                    }
-                }).then();
+            return axios.post("/api/" + userClass + "/update", credentials).then();
         },
         registerMascota({ commit }, credentials) {
-
             return axios.post("api/dogs/register", credentials).then();
-
         },
         registerPetition({ commit }, credentials) {
             console.log(credentials);
             return axios.post("api/walkpetitions/create", credentials);
 
         },
-        getMascotaById({ commit }, credentials) {
+        getMascotaByUser({ commit }, credentials) {
             return axios
                 .post("api/dogs/findmydog", credentials)
                 .then(({ data }) => {
