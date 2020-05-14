@@ -22,6 +22,11 @@
             <b-nav-item href="/WalksProgress">Paseos En Progreso</b-nav-item>
           </b-navbar-nav>
         </div>
+        <div v-else-if="rolIn==='ROLE_DOGDAYCARE'">
+          <b-navbar-nav>
+            <b-nav-item href="/MyServices">Mis Servicios</b-nav-item>
+          </b-navbar-nav>
+        </div>
       </div>
 
       <!-- Right aligned nav items -->

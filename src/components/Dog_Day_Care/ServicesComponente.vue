@@ -6,11 +6,15 @@
         <b-card
           v-for="item in services"
           :key="item.id"
-          :title="item.dog_name"
           tag="article"
           style="max-width: 17rem;"
           class="card"
         >
+        <b-card-body>
+          <b-card-title><strong>{{item.dogdaycare_Service_Name}}</strong></b-card-title>
+          <b-card-sub-title>$ {{item.dogdaycare_Service_Price}}</b-card-sub-title>
+          <b-card-text><strong>Descripción: </strong>{{ item.dogdaycare_Service_Description }} </b-card-text>
+        </b-card-body>
         </b-card>
       </div>
     </b-row>
@@ -24,21 +28,15 @@ export default {
   data() {
     return {
     currentUser: "",
-    services: []
     }
+  },
+  computed: {
+    ...mapState(["services"]),
   },
   props: {
     msg: String,
-   
   },
 created() {
-    if (localStorage.getItem("service")) {
-      try {
-        this.services = JSON.parse(localStorage.getItem("service"));
-      } catch (e) {
-        localStorage.removeItem("service");
-      }
-    }
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
@@ -50,7 +48,7 @@ created() {
   },
   methods: {
     getServices(){
-      this.$store.dispatch("getServicesById", {
+      this.$store.dispatch("getServicesByUser", {
           cadena: this.currentUser.user
           });
     }

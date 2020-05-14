@@ -55,10 +55,9 @@ export default {
         password: this.password
       })
       .then(({ data }) => {
-          if (data === "") {
+          if (data == null) {
             alert("Error al Registrarte");
           } else {
-            alert ("Bienvenido a PetSuite")
         	this.$router.push({name: 'Home'})
           }
         });

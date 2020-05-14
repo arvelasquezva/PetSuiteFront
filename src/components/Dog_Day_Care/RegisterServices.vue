@@ -1,9 +1,8 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Registra a tu perro:</h1>
+    <h1 class="mt-3">Registra tu servicio:</h1>
     <div class="SignUp">
-      <b-form @submit.prevent="registerMascota">
-        <h2>Ingresa los datos de tu perro:</h2>
+      <b-form @submit.prevent="registerServicio">
         <b-form-group id="input-group-1" label="Nombre del servicio:" label-for="input-1">
           <b-form-input
             id="input-1"
@@ -16,7 +15,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Altura en cm:"
+          label="Precio:"
           label-for="input-2"
         >
           <b-form-input
@@ -27,6 +26,17 @@
             type="number"
             min="0"
           ></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="input-group-5" label="Descripción del Servicio" label-for="input-5">
+          <b-form-textarea
+            id="input-5"
+            required
+            v-model="services_description"
+            placeholder="Información adicional"
+            rows="3"
+            max-rows="6"
+          ></b-form-textarea>
         </b-form-group>
 
         <b-button block pill type="submit" variant="success"
@@ -45,18 +55,20 @@ export default {
     return {
       services_name: "",
       services_price: "",
+      services_description: "",
     };
   },
   methods: {
-    registerMascota() {
+    registerServicio() {
       this.$store
         .dispatch("registerServicesDogDayCare", {
-          client_id: this.currentUser.user,
-          services_name: this.services_name,
-          services_price: this.services_price,
+          dogdaycare_Service_ClientId: this.currentUser.user,
+          dogdaycare_Service_Name: this.services_name,
+          dogdaycare_Service_Price: this.services_price,
+          dogdaycare_Service_Description: this.services_description,
         })
         .then(() => {
-          alert("Has registrado tu servicio " + this.dog_name);
+          alert("Has registrado tu servicio " + this.services_name);
           location.reload();
         });
     },

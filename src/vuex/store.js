@@ -104,9 +104,13 @@ export default new Vuex.Store({
                     commit('SET_USER_PET', data)
                 });
         },
-        getServicesById({ commit }, credentials) {
+        getServicesByUser({ commit }, credentials) {
             return axios
-                .post("api/dogs/findmydog", credentials)
+                .get("api/dogdaycareservices/myServices", {
+                    params: {
+                        user: 'jose'
+                    }
+                })
                 .then(({ data }) => {
                     commit('SET_DOGDAYCARE_SERVICES', data)
                 });
@@ -171,7 +175,7 @@ export default new Vuex.Store({
         },
         registerServicesDogDayCare({ commit }, credentials) {
             return axios
-                .post("api/walkpetitions/denyoraccept", credentials);
+                .post("api/dogdaycareservices/load", credentials);
         },
         login({ commit }, credentials) {
             return axios
