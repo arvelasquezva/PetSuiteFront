@@ -16,7 +16,9 @@ export default new Vuex.Store({
         walksProgress: [], //Paseos en progreso
         walksDone: [], //Paseos terminados para calificar
         petsActive: [], //Perros a cargo de un paseador
+        dogDayCares: [], //Guarderias
         services: [], //Servicios de una Guarderia
+        servicesUser: [], //Servicios que puede ver el cliente
     },
     mutations: {
         SET_USER_PET(state, petData) {
@@ -54,9 +56,17 @@ export default new Vuex.Store({
                 userData.token
                 }`;
         },
+        SET_DOGDAYCARE_DATA(state, dogDayCareData) {
+            state.dogDayCares = dogDayCareData;
+            localStorage.setItem('dogDayCares', JSON.stringify(dogDayCareData));
+        },
         SET_DOGDAYCARE_SERVICES(state, servicesData) {
             state.services = servicesData;
             localStorage.setItem('services', JSON.stringify(servicesData));
+        },
+        SET_CLIENT_SERVICES(state, servicesData) {
+            state.servicesUser = servicesData;
+            localStorage.setItem('servicesUser', JSON.stringify(servicesData));
         },
 
         CLEAR_USER_DATA() {
@@ -95,7 +105,10 @@ export default new Vuex.Store({
         registerPetition({ commit }, credentials) {
             console.log(credentials);
             return axios.post("api/walkpetitions/create", credentials);
-
+        },
+        registerDayCarePetition({ commit }, credentials) {
+            console.log(credentials);
+            return axios.post("/api/dog_day_care_invoices/load", credentials);
         },
         getMascotaByUser({ commit }, credentials) {
             return axios
@@ -113,6 +126,17 @@ export default new Vuex.Store({
                 })
                 .then(({ data }) => {
                     commit('SET_DOGDAYCARE_SERVICES', data)
+                });
+        },
+        getServicesByClient({ commit }, credentials) {
+            return axios
+                .get("/api/clients/myServicesAvailables", {
+                    params: {
+                        user: 'jose'
+                    }
+                })
+                .then(({ data }) => {
+                    commit('SET_CLIENT_SERVICES', data)
                 });
         },
         getPetitionById({ commit }) {
@@ -141,6 +165,13 @@ export default new Vuex.Store({
                 .post("api/walkinvoices/invoicesEndedClient", credentials)
                 .then(({ data }) => {
                     commit('SET_USER_WALKSDONE', data)
+                });
+        },
+        getDogDayCares({ commit }) {
+            return axios
+                .get("api/clients/allDogDayCares")
+                .then(({ data }) => {
+                    commit('SET_DOGDAYCARE_DATA', data)
                 });
         },
         updateStatusWalk({ commit }, credentials) {
@@ -204,6 +235,11 @@ export default new Vuex.Store({
         valuePets: state => {
             return state.pets.map((pet) => {
                 return { value: pet.dog_id, text: pet.dog_name }
+            });
+        },
+        valueServices: state => {
+            return state.servicesUser.map((service) => {
+                return { value: service.dog_daycare_service_id, text: service.dogdaycare_Service_Name }
             });
         },
         rolIn(state) {

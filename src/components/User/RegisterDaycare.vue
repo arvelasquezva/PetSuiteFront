@@ -1,10 +1,9 @@
 <template>
   <div class="body">
-    <h1>Inscribete en una guarderia</h1>
+    <h1>Solicita un paseo a {{ $route.params.id }}</h1>
     <div class="SignUp">
-      
       <img height="300" src="@/assets/Images/Daycare.jpg" alt="image slot" />
-      <b-form @submit.prevent="registerPetition" class="pl-4">
+      <b-form @submit.prevent="registerDayCarePetition" class="pl-4">
         <!--Perro-->
         <b-form-group
           id="input-group-1"
@@ -50,39 +49,35 @@
 
         <b-form-group
           id="input-group-5"
-          label="Duración en Minutos:"
+          label="Duración en Horas:"
           label-for="input-5"
         >
           <b-form-input
             id="input-4"
-            v-model="walk_petition_duration"
+            v-model="dog_daycare_duration"
             required
             placeholder="Ej: 5"
             type="number"
             min="0"
-          ></b-form-input>
+          >
+          </b-form-input>
         </b-form-group>
-
-        <!-- Observaciones -->
-        <b-form-group
-          id="input-group-5"
-          label="Observaciones:"
-          label-for="input-5"
-        >
-          <b-form-textarea
-            id="input-5"
-            v-model="notes"
-            placeholder="Alguna solicitud para el paseador"
-          ></b-form-textarea>
+        <!-- Servicios -->
+        <b-form-group label="Servicios que ofrece:">
+          <b-form-checkbox-group
+            id="checkbox-group-1"
+            v-model="selected"
+            :options="valueServices"
+            name="flavour-1"
+          ></b-form-checkbox-group>
         </b-form-group>
-
         <!-- Fin de formulario -->
         <b-button block pill type="submit" variant="success">
           Confirma tu petición
         </b-button>
       </b-form>
       <b-modal centered v-model="show">
-        <p class="my-4">Has creado una petición para un paseo</p>
+        <p class="my-4">Has creado una petición para Guarderia</p>
       </b-modal>
     </div>
   </div>
@@ -96,37 +91,43 @@ export default {
   data() {
     return {
       show: false,
+      selected: [],
       currentUser: "",
       dog_selected: "",
       pickup_date: "",
       pickup_time: "",
-      notes: "",
-      walk_petition_duration: "",
+      dog_daycare_duration: "",
     };
   },
   computed: {
     ...mapState(["pets"]),
     ...mapGetters(["valuePets"]),
+    ...mapGetters(["valueServices"]),
   },
   methods: {
-    registerPetition() {
+    registerDayCarePetition() {
       this.$store
-        .dispatch("registerPetition", {
-          user: this.currentUser.user,
-          dog_id: this.dog_selected,
-          walk_petition_date_time: this.pickup_date + " " + this.pickup_time,
-          walk_petition_notes: this.notes,
-          walk_petition_duration: this.walk_petition_duration,
-          walk_petition_address: this.currentUser.client_address,
+        .dispatch("registerDayCarePetition", {
+          dog_daycare_invoice_date: this.pickup_date + " " + this.pickup_time,
+          dog_daycare_invoice_duration: this.dog_daycare_duration,
+          dog_daycare_invoice_status: true,
+          dog_daycare_invoice_dogdaycare_id: this.$route.params.id,
+          dog_daycare_invoice_client_id: this.currentUser.user,
+          dog_daycare_invoice_dog_id: this.dog_selected,
+          dog_daycare_invoice_services: this.selected
         })
         .then(({ data }) => {
           console.log(data);
           if (data === "") {
-            alert("El perro ya se encuentra en un paseo activo");
+            alert("El perro ya se encuentra en un Guarderia");
           } else {
             this.show = true;
           }
         });
+    },
+    getServices() {
+      this.$store.dispatch("getServicesByClient", {
+      });
     },
   },
   mounted() {
@@ -137,6 +138,7 @@ export default {
         localStorage.removeItem("user");
       }
     }
+    this.getServices();
   },
 };
 </script>
@@ -146,13 +148,15 @@ footer {
   color: white;
 }
 .body {
-  margin-top: 10px;
+  margin: 10px;
+
   height: auto;
   display: grid;
   place-items: center;
   overflow: hidden;
 }
 .SignUp {
+  margin-bottom: 50px;
   display: flex;
   padding: 30px;
   border: 1px solid #eef6e1;
