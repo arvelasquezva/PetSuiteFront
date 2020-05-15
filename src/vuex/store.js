@@ -87,6 +87,22 @@ export default new Vuex.Store({
                 }).then();
         },
         updateUsuario({ commit }, [credentials, userClass]) {
+            console.log(credentials);
+            console.log("/api/" + userClass + "/update");
+            return axios
+                .post("/api/" + userClass + "/update", credentials, {
+                    headers: {
+                        "Content-type": "application/json",
+                        "Access-Control-Allow-Origin": "Content-Type",
+                        "Access-Control-Allow-Methods": "POST",
+                        "Access-Control-Allow-Headers": "*",
+                        "cache-control": "no-cache",
+                        Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodG92YXJzIiwidXNlclBhc3N3b3JkIjoiNzg5Iiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.WqdSPO5QV2S9ZRtpOHjl9KPnVYCxT1JpDQQ-cnv0-XKohThHApMy8OiIkNLRomwVoHlCjvE0W92Pj-QW8ayIWw"
+                    }
+                }).then();
+        },
+        updateMascota({ commit }, [credentials, userClass]) {
+            console.log(credentials);
             console.log("/api/" + userClass + "/update");
             return axios
                 .post("/api/" + userClass + "/update", credentials, {

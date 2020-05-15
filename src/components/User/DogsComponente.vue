@@ -1,16 +1,18 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">{{ msg }}</h1>
+    <h1 class="mt-3">Tus perros</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
-        <b-card
+        <b-card          
           v-for="item in pets"
           :key="item.id"
+          :pet="pet"
+          :currentUser="currentUser"
           :title="item.dog_name"
           tag="article"
           style="max-width: 17rem;"
           class="card"
-        >
+         >
         </b-card>
       </div>
     </b-row>
@@ -19,17 +21,20 @@
 
 <script>
 import { mapState } from 'vuex';
+import UpdatePets from '@/components/Update/UpdatePets.vue'
 export default {
   name: "DogsComponente",
+  components: {
+    UpdatePets
+  },
   data() {
     return {
-    currentUser: "",
+    currentUser: {},
     pets: []
     }
   },
   props: {
-    msg: String,
-   
+    msg: String,   
   },
 created() {
     if (localStorage.getItem("pet")) {

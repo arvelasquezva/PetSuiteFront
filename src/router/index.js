@@ -109,11 +109,10 @@ const routes = [{
         component: DogsInMyCharge
     },
     {
-        //Ruta para las ver los perros a cargo de un paseador
         path: '/Profile',
         name: 'Profile',
         component: Profile
-    },
+    }
 ]
 
 const router = new VueRouter({

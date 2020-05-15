@@ -8,8 +8,9 @@
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
-            v-model="user"            
-            :placeholder="currentUser.user"            
+            v-model="proposedClientUser"
+            required
+            readonly           
           ></b-form-input>
         </b-form-group>
 
@@ -20,10 +21,9 @@
         >
           <b-form-input
             id="input-2"
-            v-model="password"
-            required
-            :placeholder="currentUser.password"
+            v-model="proposedClientPassword"
             type="password"
+            required
           ></b-form-input>
         </b-form-group>
 
@@ -34,8 +34,8 @@
         >
           <b-form-input
             id="input-3"
-            v-model="client_name"
-            :placeholder="currentUser.dog_daycare_name"
+            v-model="proposedClientName"
+            required
           ></b-form-input>
         </b-form-group>
 
@@ -46,9 +46,9 @@
         >
           <b-form-input
             id="input-4"
-            v-model="client_e_mail"
-            :placeholder="currentUser.dog_daycare_e_mail"
+            v-model="proposedClientEmail"
             type="email"
+            required
           ></b-form-input>
         </b-form-group>
 
@@ -59,9 +59,9 @@
         >
           <b-form-input
             id="input-5"
-            v-model="client_phone"
-            :placeholder="currentUser.dog_daycare_phone"
+            v-model="proposedClientPhone"
             type="number"
+            required
           ></b-form-input>
         </b-form-group>
 
@@ -72,8 +72,8 @@
         >
           <b-form-input
             id="input-6"
-            v-model="client_address"
-            :placeholder="currentUser.dog_daycare_address"
+            v-model="proposedClientAddress"
+            required
           ></b-form-input>
         </b-form-group>
 
@@ -84,9 +84,8 @@
         >
           <b-form-input
             id="input-7"
-            v-model="client_price_base"
+            v-model="proposedClientPriceBase"
             type="number"
-            :placeholder="currentUser.dog_daycare_base"
           ></b-form-input>
         </b-form-group>
 
@@ -108,25 +107,26 @@ export default {
   name: "UpdateDaycare",
   data() {
     return {
-      user: "",
-      password: "",
-      client_name: "",
-      client_phone: "",
-      client_e_mail: "",
-      client_address: "",
-      client_price_base: "",     
+      currentUser:{},
+      proposedClientUser:"",
+      proposedClientPassword:"", 
+      proposedClientName:"",
+      proposedClientPhone:"",
+      proposedClientEmail:"",
+      proposedClientAddress:"",
+      proposedClientPriceBase:"",    
     };
   },
   methods: {
     updateUsuario() {
       this.$store.dispatch("updateUsuario", [{
-        user: this.user,
-        password: this.password,
-        client_name: this.client_name,
-        client_e_mail: this.client_e_mail,
-        client_phone: this.client_phone,
-        client_address: this.client_address,
-        client_price_base: this.client_price_base
+       user: this.proposedClientUser,
+        password: this.proposedClientPassword,
+        client_name: this.proposedClientName,
+        client_phone: this.proposedClientPhone,
+        client_e_mail: this.proposedClientEmail,
+        client_address: this.proposedClientAddress,
+        client_price_base: this.proposedClientPriceBase
       }, "clients"])
       .then(({ data }) => {
           if (data === "") {
@@ -143,6 +143,13 @@ export default {
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
+        this.proposedClientUser = this.currentUser.user
+        this.proposedClientPassword = this.currentUser.password
+        this.proposedClientName = this.currentUser.dog_daycare_name
+        this.proposedClientPhone = this.currentUser.dog_daycare_phone
+        this.proposedClientEmail = this.currentUser.dog_daycare_e_mail
+        this.proposedClientAddress = this.currentUser.dog_daycare_address
+        this.proposedClientPriceBase = this.currentUser.dog_daycare_price_base
       } catch (e) {
         localStorage.removeItem("user");
       }
