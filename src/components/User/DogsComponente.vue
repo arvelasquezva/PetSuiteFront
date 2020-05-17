@@ -3,38 +3,32 @@
     <h1 class="mt-3">Tus perros</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
-        <b-card          
-          v-for="item in pets"
-          :key="item.id"
+        <UpdatePets 
+          v-for="pet in pets"
+          :key="pet.id"
           :pet="pet"
-          :currentUser="currentUser"
-          :title="item.dog_name"
+          :currenUser="currentUser"
+          :title="pet.dog_name"
           tag="article"
           style="max-width: 17rem;"
-          class="card"
-         >
-        </b-card>
-      </div>
+          class="card">
+        </UpdatePets>
+        </div>
     </b-row>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import UpdatePets from '@/components/Update/UpdatePets.vue'
+import UpdatePets from '@/components/Update/UpdatePets.vue';
 export default {
   name: "DogsComponente",
-  components: {
-    UpdatePets
-  },
+  components: { UpdatePets },
   data() {
     return {
     currentUser: {},
-    pets: []
+    pets: [],
     }
-  },
-  props: {
-    msg: String,   
   },
 created() {
     if (localStorage.getItem("pet")) {
