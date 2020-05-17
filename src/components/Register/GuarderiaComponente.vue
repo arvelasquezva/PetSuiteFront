@@ -93,6 +93,19 @@
             placeholder="Ej: 10000"
           ></b-form-input>
         </b-form-group>
+        <b-form-group
+          id="input-group-8"
+          label="Agrega un impuesto por perros grandes:"
+          label-for="input-8"
+        >
+          <b-form-input
+            id="input-7"
+            v-model="dog_daycare_tax"
+            required
+            type="number"
+            placeholder="Ej: 10000"
+          ></b-form-input>
+        </b-form-group>
 
         <b-button block pill type="submit" variant="success"
           >Unete a PetSuite</b-button
@@ -115,6 +128,7 @@ export default {
         dog_daycare_score: 0,
         dog_daycare_address: "",
         dog_daycare_price_base: "",
+        dog_daycare_tax: "",
         dog_daycare_type: true
     };
   },
@@ -129,7 +143,8 @@ export default {
         dog_daycare_score: this.dog_daycare_score,
         dog_daycare_address: this.dog_daycare_address,
         dog_daycare_type: this.dog_daycare_type,
-        dog_daycare_price_base: this.dog_daycare_price_base
+        dog_daycare_price_base: this.dog_daycare_price_base,
+        dog_daycare_tax: this.dog_daycare_tax
       },"dog_day_cares"])
       .then(({ data }) => {
           if (data === "") {

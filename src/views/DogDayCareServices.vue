@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
       <RegisterServices class="m-4"></RegisterServices>
     </div>
     <div class="col-md-7">

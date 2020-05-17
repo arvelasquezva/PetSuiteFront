@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
 import MyPets from '../views/MyPets.vue';
 import Profile from '../views/Profile.vue';
+import DogDayCares from '../views/DogDayCares.vue';
 import Forbidden from '../views/Forbidden.vue';
 import DogDayCareServices from '../views/DogDayCareServices.vue';
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
@@ -71,6 +72,12 @@ const routes = [{
             { path: '/signUp/Guarderia', component: GuarderiaComponente },
             { path: '/signUp/Hospeador', component: HospeadorComponente },
         ]
+    },
+    {
+        //Ruta para las Guarderias
+        path: '/dogDayCares/:id',
+        name: 'dogDayCares',
+        component: DogDayCares
     },
     {
         //Ruta para las peticiones a proponer precio

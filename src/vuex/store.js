@@ -16,7 +16,9 @@ export default new Vuex.Store({
         walksProgress: [], //Paseos en progreso
         walksDone: [], //Paseos terminados para calificar
         petsActive: [], //Perros a cargo de un paseador
+        dogDayCares: [], //Guarderias
         services: [], //Servicios de una Guarderia
+        servicesUser: [], //Servicios que puede ver el cliente
     },
     mutations: {
         SET_USER_PET(state, petData) {
@@ -54,9 +56,17 @@ export default new Vuex.Store({
                 userData.token
                 }`;
         },
+        SET_DOGDAYCARE_DATA(state, dogDayCareData) {
+            state.dogDayCares = dogDayCareData;
+            localStorage.setItem('dogDayCares', JSON.stringify(dogDayCareData));
+        },
         SET_DOGDAYCARE_SERVICES(state, servicesData) {
             state.services = servicesData;
             localStorage.setItem('services', JSON.stringify(servicesData));
+        },
+        SET_CLIENT_SERVICES(state, servicesData) {
+            state.servicesUser = servicesData;
+            localStorage.setItem('servicesUser', JSON.stringify(servicesData));
         },
 
         CLEAR_USER_DATA() {
@@ -84,60 +94,49 @@ export default new Vuex.Store({
                         "cache-control": "no-cache",
                         Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
                     }
-                }).then();
+                });
         },
         updateUsuario({ commit }, [credentials, userClass]) {
-            console.log(credentials);
-            console.log("/api/" + userClass + "/update");
-            return axios
-                .post("/api/" + userClass + "/update", credentials, {
-                    headers: {
-                        "Content-type": "application/json",
-                        "Access-Control-Allow-Origin": "Content-Type",
-                        "Access-Control-Allow-Methods": "POST",
-                        "Access-Control-Allow-Headers": "*",
-                        "cache-control": "no-cache",
-                        Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodG92YXJzIiwidXNlclBhc3N3b3JkIjoiNzg5Iiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.WqdSPO5QV2S9ZRtpOHjl9KPnVYCxT1JpDQQ-cnv0-XKohThHApMy8OiIkNLRomwVoHlCjvE0W92Pj-QW8ayIWw"
-                    }
-                }).then();
-        },
-        updateMascota({ commit }, [credentials, userClass]) {
-            console.log(credentials);
-            console.log("/api/" + userClass + "/update");
-            return axios
-                .post("/api/" + userClass + "/update", credentials, {
-                    headers: {
-                        "Content-type": "application/json",
-                        "Access-Control-Allow-Origin": "Content-Type",
-                        "Access-Control-Allow-Methods": "POST",
-                        "Access-Control-Allow-Headers": "*",
-                        "cache-control": "no-cache",
-                        Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodG92YXJzIiwidXNlclBhc3N3b3JkIjoiNzg5Iiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.WqdSPO5QV2S9ZRtpOHjl9KPnVYCxT1JpDQQ-cnv0-XKohThHApMy8OiIkNLRomwVoHlCjvE0W92Pj-QW8ayIWw"
-                    }
-                }).then();
+            return axios.post("/api/" + userClass + "/update", credentials).then();
         },
         registerMascota({ commit }, credentials) {
-
             return axios.post("api/dogs/register", credentials).then();
-
         },
         registerPetition({ commit }, credentials) {
             console.log(credentials);
             return axios.post("api/walkpetitions/create", credentials);
-
         },
-        getMascotaById({ commit }, credentials) {
+        registerDayCarePetition({ commit }, credentials) {
+            console.log(credentials);
+            return axios.post("/api/dog_day_care_invoices/load", credentials);
+        },
+        getMascotaByUser({ commit }, credentials) {
             return axios
                 .post("api/dogs/findmydog", credentials)
                 .then(({ data }) => {
                     commit('SET_USER_PET', data)
                 });
         },
-        getServicesById({ commit }, credentials) {
+        getServicesByUser({ commit }, credentials) {
             return axios
-                .post("api/dogs/findmydog", credentials)
+                .get("api/dogdaycareservices/myServices", {
+                    params: {
+                        user: 'jose'
+                    }
+                })
                 .then(({ data }) => {
                     commit('SET_DOGDAYCARE_SERVICES', data)
+                });
+        },
+        getServicesByClient({ commit }, credentials) {
+            return axios
+                .get("/api/clients/myServicesAvailables", {
+                    params: {
+                        user: 'jose'
+                    }
+                })
+                .then(({ data }) => {
+                    commit('SET_CLIENT_SERVICES', data)
                 });
         },
         getPetitionById({ commit }) {
@@ -166,6 +165,13 @@ export default new Vuex.Store({
                 .post("api/walkinvoices/invoicesEndedClient", credentials)
                 .then(({ data }) => {
                     commit('SET_USER_WALKSDONE', data)
+                });
+        },
+        getDogDayCares({ commit }) {
+            return axios
+                .get("api/clients/allDogDayCares")
+                .then(({ data }) => {
+                    commit('SET_DOGDAYCARE_DATA', data)
                 });
         },
         updateStatusWalk({ commit }, credentials) {
@@ -200,7 +206,7 @@ export default new Vuex.Store({
         },
         registerServicesDogDayCare({ commit }, credentials) {
             return axios
-                .post("api/walkpetitions/denyoraccept", credentials);
+                .post("api/dogdaycareservices/load", credentials);
         },
         login({ commit }, credentials) {
             return axios
@@ -229,6 +235,11 @@ export default new Vuex.Store({
         valuePets: state => {
             return state.pets.map((pet) => {
                 return { value: pet.dog_id, text: pet.dog_name }
+            });
+        },
+        valueServices: state => {
+            return state.servicesUser.map((service) => {
+                return { value: service.dog_daycare_service_id, text: service.dogdaycare_Service_Name }
             });
         },
         rolIn(state) {
