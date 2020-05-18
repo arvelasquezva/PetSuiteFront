@@ -89,12 +89,10 @@
 
 <script>
 export default {
-  props: ['pets', 'currentUser'],
+  props: ['pet', 'currentUser'],
   name: "DogsComponente",
   data() {
     return {
-    currentUser: {},
-    pets: [],
     proposedDogName: "",
     proposedDogRace: "",
     proposedDogHeight: "",
@@ -103,7 +101,7 @@ export default {
     proposedDogNotes: ""
     }
   },
-  mounted() {
+  created() {
     if (localStorage.getItem("pet")) {
       try {
         this.pets = JSON.parse(localStorage.getItem("pet"));

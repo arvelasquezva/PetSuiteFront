@@ -13,6 +13,7 @@
             <b-nav-item href="/MyPets">Mis Mascotas</b-nav-item>
             <b-nav-item href="/MyPetitions">Mis Peticiones</b-nav-item>
             <b-nav-item href="/WalksDone">Califica tu paseo</b-nav-item>
+            <b-nav-item href="/SearchDaycare">Busca una guarderia</b-nav-item>
           </b-navbar-nav>
         </div>
         <div v-else-if="rolIn==='ROLE_DOGWALKER'">

@@ -79,13 +79,25 @@
 
         <b-form-group
           id="input-group-7"
-          label="Agrega un precio base por cuidado de mascota:"
+          label="Precio base por cuidado de mascota:"
           label-for="input-7"
         >
           <b-form-input
             id="input-7"
             v-model="proposedClientPriceBase"
             type="number"
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-8"
+          label="Impuesto por perros grandes:"
+          label-for="input-8"
+        >
+          <b-form-input
+            id="input-8"
+            v-model="proposedClientTax"
+            required
           ></b-form-input>
         </b-form-group>
 
@@ -114,19 +126,21 @@ export default {
       proposedClientPhone:"",
       proposedClientEmail:"",
       proposedClientAddress:"",
-      proposedClientPriceBase:"",    
+      proposedClientPriceBase:"",
+      proposedClientTax:"",    
     };
   },
   methods: {
     updateUsuario() {
       this.$store.dispatch("updateUsuario", [{
-       user: this.proposedClientUser,
+        user: this.proposedClientUser,
         password: this.proposedClientPassword,
         client_name: this.proposedClientName,
         client_phone: this.proposedClientPhone,
         client_e_mail: this.proposedClientEmail,
         client_address: this.proposedClientAddress,
-        client_price_base: this.proposedClientPriceBase
+        client_price_base: this.proposedClientPriceBase,
+        client_tax: this.proposedClientTax        
       }, "clients"])
       .then(({ data }) => {
           if (data === "") {
@@ -150,6 +164,7 @@ export default {
         this.proposedClientEmail = this.currentUser.dog_daycare_e_mail
         this.proposedClientAddress = this.currentUser.dog_daycare_address
         this.proposedClientPriceBase = this.currentUser.dog_daycare_price_base
+        this.proposedClientTax = this.currentUser.dog_daycare_tax
       } catch (e) {
         localStorage.removeItem("user");
       }

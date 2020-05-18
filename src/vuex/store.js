@@ -96,7 +96,13 @@ export default new Vuex.Store({
                     }
                 });
         },
+        buscarGuarderia({ commit }, [credentials, userClass]) {
+            return axios.post("/api/" + userClass + "/searchdaycarebyname", credentials).then();
+        },
         updateUsuario({ commit }, [credentials, userClass]) {
+            return axios.post("/api/" + userClass + "/update", credentials).then();
+        },
+        updateMascota({ commit }, [credentials, userClass]) {
             return axios.post("/api/" + userClass + "/update", credentials).then();
         },
         registerMascota({ commit }, credentials) {
