@@ -26,6 +26,7 @@
         <div v-else-if="rolIn==='ROLE_DOGDAYCARE'">
           <b-navbar-nav>
             <b-nav-item href="/MyServices">Mis Servicios</b-nav-item>
+            <b-nav-item href="/CaresActive">Cuidados Pendientes</b-nav-item>
           </b-navbar-nav>
         </div>
       </div>
@@ -41,21 +42,8 @@
           >
         </div>
         <div v-else>
-          <b-button
-            class="mr-3"
-            href="/Profile"
-            variant="light"
-          >
-            Perfil</b-button
-          >
-          <b-button
-            class="logoutButton"
-            @click="logout"
-            href="/login"
-            variant="light"
-          >
-            Cierra Sesión</b-button
-          >
+          <b-button class="mr-3" href="/Profile" variant="light"> Perfil </b-button>
+          <b-button class="logoutButton" @click="logout" href="/login" variant="light"> Cierra Sesión</b-button>
         </div>
       </b-navbar-nav>
     </b-container>

@@ -4,7 +4,7 @@
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in Petition"
+          v-for="item in walksDone"
           :key="item.id"
           tag="article"
           style="max-width: 17rem;"
@@ -36,7 +36,6 @@
             v-on:click="calificarPaseador(item.walk_invoice_id, item.dog_walker_id,score )"
             >Califica a {{item.dog_walker_id}}</b-button
           >
-
         </b-card>
       </div>
     </b-row>
@@ -52,7 +51,6 @@ export default {
       currentUser: "",
       show: false,
       score: "",
-      Petition: [],
       Options: [
         { text: '1', value: "1"},
         { text: '2', value: "2"},
@@ -62,14 +60,10 @@ export default {
         ]
     };
   },
+  computed: {
+    ...mapState(["walksDone"]),
+  },
   created() {
-    if (localStorage.getItem("walksDone")) {
-      try {
-        this.Petition = JSON.parse(localStorage.getItem("walksDone"));
-      } catch (e) {
-        localStorage.removeItem("walksDone");
-      }
-    }
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));

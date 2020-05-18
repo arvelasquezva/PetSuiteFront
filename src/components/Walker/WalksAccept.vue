@@ -4,7 +4,7 @@
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in Petition"
+          v-for="item in walksAccept"
           :key="item.id"
           tag="article"
           style="max-width: 20rem;"
@@ -63,17 +63,12 @@ export default {
     return {
       show: false,
       currentUser: "",
-      Petition: [],
     };
   },
+  computed: {
+    ...mapState(["walksAccept"]),
+  },
   created() {
-    if (localStorage.getItem("walksAccept")) {
-      try {
-        this.Petition = JSON.parse(localStorage.getItem("walksAccept"));
-      } catch (e) {
-        localStorage.removeItem("walksAccept");
-      }
-    }
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));

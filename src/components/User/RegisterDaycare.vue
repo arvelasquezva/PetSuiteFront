@@ -1,9 +1,14 @@
 <template>
   <div class="body">
-    <h1>Solicita un paseo a {{ $route.params.id }}</h1>
+    <h1>Solicita la guarderia {{ $route.params.id }}</h1>
     <div class="SignUp">
+      <div class="row">
+        <div class="col-md-5">
       <img height="300" src="@/assets/Images/Daycare.jpg" alt="image slot" />
-      <b-form @submit.prevent="registerDayCarePetition" class="pl-4">
+      <h1>Valor: {{dog_daycare_invoice_price}}</h1>
+      </div>
+      <div class="col-md-7">
+      <b-form @submit.prevent="makeDayCarePetition" class="pl-4">
         <!--Perro-->
         <b-form-group
           id="input-group-1"
@@ -75,7 +80,10 @@
         <b-button block pill type="submit" variant="success">
           Confirma tu petición
         </b-button>
+        
       </b-form>
+      </div>
+      </div>
       <b-modal centered v-model="show">
         <p class="my-4">Has creado una petición para Guarderia</p>
       </b-modal>
@@ -91,6 +99,7 @@ export default {
   data() {
     return {
       show: false,
+      dog_daycare_invoice_price: 0,
       selected: [],
       currentUser: "",
       dog_selected: "",
@@ -105,9 +114,9 @@ export default {
     ...mapGetters(["valueServices"]),
   },
   methods: {
-    registerDayCarePetition() {
-      this.$store
-        .dispatch("registerDayCarePetition", {
+    makeDayCarePetition() {
+      console.log(this.dog_daycare_duration);
+      this.$store.dispatch("registerDayCarePetition", {
           dog_daycare_invoice_date: this.pickup_date + " " + this.pickup_time,
           dog_daycare_invoice_duration: this.dog_daycare_duration,
           dog_daycare_invoice_status: true,
@@ -121,6 +130,7 @@ export default {
           if (data === "") {
             alert("El perro ya se encuentra en un Guarderia");
           } else {
+            this.dog_daycare_invoice_price = data.dog_daycare_invoice_price
             this.show = true;
           }
         });

@@ -18,6 +18,7 @@ import WalkForAccept from '@/components/User/WalkForAccept.vue';
 import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
 import WalksDone from '@/components/User/WalksDone.vue';
 import SearchDayCare from '@/components/Dog_Day_Care/SearchDaycare.vue';
+import CaresActive from '@/components/Dog_Day_Care/CaresActives.vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
@@ -120,12 +121,16 @@ const routes = [{
         path: '/Profile',
         name: 'Profile',
         component: Profile
-    }
-    ,
+    },
     {
         path: '/SearchDaycare',
         name: 'SearchDaycare',
         component: SearchDayCare
+    },
+    {
+        path: '/CaresActive',
+        name: 'CaresActive',
+        component: CaresActive
     }
 ]
 

@@ -3,41 +3,44 @@
     <h1 class="mt-3">Tus perros</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
-        <UpdatePets 
+        <b-card
           v-for="pet in pets"
           :key="pet.id"
-          :pet="pet"
-          :currenUser="currentUser"
-          :title="pet.dog_name"
           tag="article"
           style="max-width: 17rem;"
-          class="card">
-        </UpdatePets>
-        </div>
+          class="card"
+        >
+          <b-card-body>
+            <b-card-title
+              ><strong>{{ pet.dog_name }}</strong></b-card-title>
+            <b-card-sub-title>
+              <strong>Raza: </strong>{{ pet.dog_race }}
+            </b-card-sub-title>
+             <b-card-text><strong>Peso: </strong>{{ pet.dog_weight }} Kg</b-card-text>
+             <b-card-text><strong>Edad: </strong>{{ pet.dog_age }} años </b-card-text>
+             <b-card-text><strong>Altura: </strong>{{ pet.dog_height }} Cm</b-card-text>
+          </b-card-body>
+        </b-card>
+      </div>
     </b-row>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import UpdatePets from '@/components/Update/UpdatePets.vue';
+import { mapState } from "vuex";
+import UpdatePets from "@/components/Update/UpdatePets.vue";
 export default {
   name: "DogsComponente",
   components: { UpdatePets },
   data() {
     return {
-    currentUser: {},
-    pets: [],
-    }
+      currentUser: {},
+    };
   },
-created() {
-    if (localStorage.getItem("pet")) {
-      try {
-        this.pets = JSON.parse(localStorage.getItem("pet"));
-      } catch (e) {
-        localStorage.removeItem("pet");
-      }
-    }
+  computed: {
+    ...mapState(["pets"]),
+  },
+  created() {
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
@@ -48,11 +51,11 @@ created() {
     this.getMascotas();
   },
   methods: {
-    getMascotas(){
+    getMascotas() {
       this.$store.dispatch("getMascotaByUser", {
-          cadena: this.currentUser.user
+        cadena: this.currentUser.user,
       });
-    }
+    },
   },
 };
 </script>

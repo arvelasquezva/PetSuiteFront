@@ -68,7 +68,6 @@ export default {
     return {
       show: false,
       currentUser: "",
-      Petition: [],
       state: "",
       Options: [
         { text: "Aceptar", value: "Aceptar" },
