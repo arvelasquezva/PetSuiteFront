@@ -84,17 +84,21 @@
           >Actualiza tus datos</b-button
         >
       </b-form>
+      <b-modal centered v-model="show">
+        <p class="my-4">Has actualizado los datos de paseador</p>
+      </b-modal>
     </div>
       </div>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "UpdateClient", 
   data() {
     return {  
+      show: false,
       currentUser:{},
       proposedClientUser:"",
       proposedClientPassword:"", 
@@ -118,9 +122,8 @@ export default {
           if (data === "") {
             alert("Error al actualizar datos");
           } else {
-            alert ("Has actualizado tus datos")
-            this.$store.dispatch("logout");
-            location.replace('/login');
+            this.show = true          
+            this.$router.push({name: 'Home'})
           }
         });
     },
