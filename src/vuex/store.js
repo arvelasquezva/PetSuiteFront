@@ -104,14 +104,15 @@ export default new Vuex.Store({
                     }
                 });
         },
-        
+
         buscarGuarderia({ commit }, [credentials, userClass]) {
             return axios.post("/api/" + userClass + "/searchdaycarebyname", credentials);
         },
         async updateUsuario({ commit }, [credentials, userClass]) {
-                const { data } = await axios
-                    .post("/api/" + userClass + "/update", credentials);
-                commit('SET_USER_DATA', data);
+            console.log(credentials);
+            const { data } = await axios
+                .post("/api/" + userClass + "/update", credentials);
+            commit('SET_USER_DATA', data);
         },
         async updateMascota({ commit }, [credentials, userClass]) {
             await axios.post("/api/" + userClass + "/update", credentials);

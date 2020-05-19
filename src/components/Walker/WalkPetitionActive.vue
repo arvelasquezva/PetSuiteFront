@@ -4,7 +4,7 @@
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in Petition"
+          v-for="item in petitions"
           :key="item.id"
           tag="article"
           style="max-width: 20rem;"
@@ -76,26 +76,13 @@ export default {
     return {
       show: false,
       currentUser: "",
-      Petition: [],
       valor: "",
     };
   },
-  async mounted () {
-    try {
-      await this.$store.dispatch("getPetitionById")
-    } 
-    catch (error) {
-      console.log(error);
-    }
+  computed: {
+    ...mapState(["petitions"]),
   },
   created() {
-    if (localStorage.getItem("petition")) {
-      try {
-        this.Petition = JSON.parse(localStorage.getItem("petition"));
-      } catch (e) {
-        localStorage.removeItem("petition");
-      }
-    }
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
@@ -103,6 +90,7 @@ export default {
         localStorage.removeItem("user");
       }
     }
+    this.$store.dispatch("getPetitionById");
   },
   methods: {
     proposePetition(id_petition) {

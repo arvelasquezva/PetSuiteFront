@@ -85,7 +85,7 @@
         >
       </b-form>
       <b-modal centered v-model="show">
-        <p class="my-4">Has actualizado los datos de paseador</p>
+        <p class="my-4">Has actualizado tus datos</p>
       </b-modal>
     </div>
       </div>
@@ -116,16 +116,14 @@ export default {
         client_name: this.proposedClientName,
         client_phone: this.proposedClientPhone,
         client_e_mail: this.proposedClientEmail,
-        client_address: this.proposedClientAddress
+        client_address: this.proposedClientAddress,
+        token: this.currentUser.token,
+        role: this.currentUser.role
       }, "clients"])
-      .then(({ data }) => {
-          if (data === "") {
-            alert("Error al actualizar datos");
-          } else {
-            this.show = true          
-            this.$router.push({name: 'Home'})
-          }
-        });
+      .then(() => {
+          alert("Has actualizado tus datos");
+          this.$router.push({name: 'Home'});
+      });
     },
   },
   created() {
@@ -139,7 +137,7 @@ export default {
         this.proposedClientEmail = this.currentUser.client_e_mail
         this.proposedClientAddress = this.currentUser.client_address
       } catch (e) {
-        localStorage.removeItem("user");
+        console.log(e);
       }
     }
   }

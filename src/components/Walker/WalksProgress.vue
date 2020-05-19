@@ -4,7 +4,7 @@
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in Petition"
+          v-for="item in walksProgress"
           :key="item.id"
           tag="article"
           style="max-width: 20rem;"
@@ -43,8 +43,10 @@ export default {
     return {
       show:false,
       currentUser: "",
-      Petition: [],
     };
+  },
+  computed: {
+    ...mapState(["walksProgress"]),
   },
   created() {
     if (localStorage.getItem("walksProgress")) {

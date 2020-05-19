@@ -8,7 +8,7 @@
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
-            v-model="proposedClientUser"
+            v-model="proposeddog_daycareUser"
             required
             readonly           
           ></b-form-input>
@@ -21,7 +21,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="proposedClientPassword"
+            v-model="proposeddog_daycarePassword"
             type="password"
             required
           ></b-form-input>
@@ -34,7 +34,7 @@
         >
           <b-form-input
             id="input-3"
-            v-model="proposedClientName"
+            v-model="proposeddog_daycareName"
             required
           ></b-form-input>
         </b-form-group>
@@ -46,7 +46,7 @@
         >
           <b-form-input
             id="input-4"
-            v-model="proposedClientEmail"
+            v-model="proposeddog_daycareEmail"
             type="email"
             required
           ></b-form-input>
@@ -59,7 +59,7 @@
         >
           <b-form-input
             id="input-5"
-            v-model="proposedClientPhone"
+            v-model="proposeddog_daycarePhone"
             type="number"
             required
           ></b-form-input>
@@ -72,7 +72,7 @@
         >
           <b-form-input
             id="input-6"
-            v-model="proposedClientAddress"
+            v-model="proposeddog_daycareAddress"
             required
           ></b-form-input>
         </b-form-group>
@@ -84,7 +84,7 @@
         >
           <b-form-input
             id="input-7"
-            v-model="proposedClientPriceBase"
+            v-model="proposeddog_daycarePriceBase"
             type="number"
           ></b-form-input>
         </b-form-group>
@@ -96,7 +96,7 @@
         >
           <b-form-input
             id="input-8"
-            v-model="proposedClientTax"
+            v-model="proposeddog_daycareTax"
             required
           ></b-form-input>
         </b-form-group>
@@ -120,51 +120,49 @@ export default {
   data() {
     return {
       currentUser:{},
-      proposedClientUser:"",
-      proposedClientPassword:"", 
-      proposedClientName:"",
-      proposedClientPhone:"",
-      proposedClientEmail:"",
-      proposedClientAddress:"",
-      proposedClientPriceBase:"",
-      proposedClientTax:"",    
+      proposeddog_daycareUser:"",
+      proposeddog_daycarePassword:"", 
+      proposeddog_daycareName:"",
+      proposeddog_daycarePhone:"",
+      proposeddog_daycareEmail:"",
+      proposeddog_daycareAddress:"",
+      proposeddog_daycarePriceBase:"",
+      proposeddog_daycareTax:"",    
     };
   },
   methods: {
     updateUsuario() {
       this.$store.dispatch("updateUsuario", [{
-        user: this.proposedClientUser,
-        password: this.proposedClientPassword,
-        client_name: this.proposedClientName,
-        client_phone: this.proposedClientPhone,
-        client_e_mail: this.proposedClientEmail,
-        client_address: this.proposedClientAddress,
-        client_price_base: this.proposedClientPriceBase,
-        client_tax: this.proposedClientTax        
-      }, "clients"])
-      .then(({ data }) => {
-          if (data === "") {
-            alert("Error al actualizar datos");
-          } else {
-            alert ("Has actualizado tus datos")
-        	  this.$store.dispatch("logout");
-            location.replace('/login')
-          }
-        });
+        user: this.proposeddog_daycareUser,
+        password: this.proposeddog_daycarePassword,
+        dog_daycare_name: this.proposeddog_daycareName,
+        dog_daycare_phone: this.proposeddog_daycarePhone,
+        dog_daycare_e_mail: this.proposeddog_daycareEmail,
+        dog_daycare_address: this.proposeddog_daycareAddress,
+        dog_daycare_price_base: this.proposeddog_daycarePriceBase,
+        dog_daycare_tax: this.proposeddog_daycareTax,
+        dog_daycare_type: true,
+        token: this.currentUser.token,
+        role: this.currentUser.role     
+      }, "dog_day_cares"])
+      .then(() => {
+        alert("Has actualizado tus datos");
+        this.$router.push({name: 'Home'});
+      });
     },
   },
   created() {
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
-        this.proposedClientUser = this.currentUser.user
-        this.proposedClientPassword = this.currentUser.password
-        this.proposedClientName = this.currentUser.dog_daycare_name
-        this.proposedClientPhone = this.currentUser.dog_daycare_phone
-        this.proposedClientEmail = this.currentUser.dog_daycare_e_mail
-        this.proposedClientAddress = this.currentUser.dog_daycare_address
-        this.proposedClientPriceBase = this.currentUser.dog_daycare_price_base
-        this.proposedClientTax = this.currentUser.dog_daycare_tax
+        this.proposeddog_daycareUser = this.currentUser.user
+        this.proposeddog_daycarePassword = this.currentUser.password
+        this.proposeddog_daycareName = this.currentUser.dog_daycare_name
+        this.proposeddog_daycarePhone = this.currentUser.dog_daycare_phone
+        this.proposeddog_daycareEmail = this.currentUser.dog_daycare_e_mail
+        this.proposeddog_daycareAddress = this.currentUser.dog_daycare_address
+        this.proposeddog_daycarePriceBase = this.currentUser.dog_daycare_price_base
+        this.proposeddog_daycareTax = this.currentUser.dog_daycare_tax
       } catch (e) {
         localStorage.removeItem("user");
       }

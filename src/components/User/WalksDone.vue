@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Paseos En Curso</h1>
+    <h1 class="mt-3">Paseos Que Debes Calificar</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card

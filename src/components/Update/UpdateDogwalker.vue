@@ -9,7 +9,7 @@
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
-            v-model="proposedClientUser"
+            v-model="proposeddog_walkerUser"
             required
             readonly
           >
@@ -24,7 +24,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="proposedClientPassword"
+            v-model="proposeddog_walkerPassword"
             type="password"
             required
           ></b-form-input>
@@ -34,7 +34,7 @@
         label="Tu Nombre Completo:" label-for="input-3">
           <b-form-input
             id="input-3"
-            v-model="proposedClientName"
+            v-model="proposeddog_walkerName"
             required
           ></b-form-input>
         </b-form-group>
@@ -46,7 +46,7 @@
         >
           <b-form-input
             id="input-5"
-            v-model="proposedClientEmail"
+            v-model="proposeddog_walkerEmail"
             type="email"
             required
           ></b-form-input>
@@ -59,7 +59,7 @@
         >
           <b-form-input
             id="input-4"
-            v-model="proposedClientPhone"
+            v-model="proposeddog_walkerPhone"
             type="number"
             required
           ></b-form-input>
@@ -82,42 +82,39 @@ export default {
   data() {
     return {
       currentUser:{},
-      proposedClientUser:"",
-      proposedClientPassword:"", 
-      proposedClientName:"",
-      proposedClientPhone:"",
-      proposedClientEmail:""    
+      proposeddog_walkerUser:"",
+      proposeddog_walkerPassword:"", 
+      proposeddog_walkerName:"",
+      proposeddog_walkerPhone:"",
+      proposeddog_walkerEmail:""    
     };
   },
   methods: {
     updateUsuario() {
       this.$store.dispatch("updateUsuario", [{
-        user: this.proposedClientUser,
-        password: this.proposedClientPassword,
-        client_name: this.proposedClientName,
-        client_phone: this.proposedClientPhone,
-        client_e_mail: this.proposedClientEmail
-      }, "clients"])
-      .then(({ data }) => {
-          if (data === "") {
-            alert("Error al actualizar datos");
-          } else {
-            alert ("Has actualizado tus datos")
-        	  this.$store.dispatch("logout");
-            location.replace('/login');
-          }
-        });
+        user: this.proposeddog_walkerUser,
+        password: this.proposeddog_walkerPassword,
+        dog_walker_name: this.proposeddog_walkerName,
+        dog_walker_phone: this.proposeddog_walkerPhone,
+        dog_walker_e_mail: this.proposeddog_walkerEmail,
+        token: this.currentUser.token,
+        role: this.currentUser.role
+      }, "dog_walkers"])
+      .then(() => {
+        alert("Has actualizado tus datos");
+        this.$router.push({name: 'Home'});
+      });
     },
   },
   created() {
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
-        this.proposedClientUser = this.currentUser.user
-        this.proposedClientPassword = this.currentUser.password
-        this.proposedClientName = this.currentUser.dog_walker_name
-        this.proposedClientPhone = this.currentUser.dog_walker_phone
-        this.proposedClientEmail = this.currentUser.dog_walker_e_mail
+        this.proposeddog_walkerUser = this.currentUser.user
+        this.proposeddog_walkerPassword = this.currentUser.password
+        this.proposeddog_walkerName = this.currentUser.dog_walker_name
+        this.proposeddog_walkerPhone = this.currentUser.dog_walker_phone
+        this.proposeddog_walkerEmail = this.currentUser.dog_walker_e_mail
       } catch (e) {
         localStorage.removeItem("user");
       }
