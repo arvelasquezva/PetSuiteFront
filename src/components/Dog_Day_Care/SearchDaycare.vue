@@ -23,39 +23,22 @@
       <b-card
         v-for="item in info"
         :key="item"
-        class="card mx-5 mb-5">
-        <b-form> 
-          <b-form-group label="User ID de guarderia:">
-            <b-form-input  
-                v-model="item.user" 
-                readonly>          
-            </b-form-input>
-          </b-form-group>
-          <b-form-group label="E-mail de guarderia:">
-            <b-form-input  
-                v-model="item.dog_daycare_e_mail" 
-                readonly>          
-            </b-form-input>
-          </b-form-group>
-          <b-form-group label="Telefono de guarderia:">
-            <b-form-input
-                v-model="item.dog_daycare_phone" 
-                readonly>          
-            </b-form-input>
-          </b-form-group>
-          <b-form-group label="Direccion de guarderia:">
-            <b-form-input
-                v-model="item.dog_daycare_address" 
-                readonly>          
-            </b-form-input>
-          </b-form-group>
-          <b-form-group label="Puntaje de guarderia:">
-            <b-form-input
-                v-model="item.dog_daycare_score" 
-                readonly>          
-            </b-form-input>
-          </b-form-group>
-        </b-form>        
+        tag="article"
+          style="max-width: 17rem;"
+          class="card">
+        <b-card-body>
+          <b-card-title><strong>{{item.dog_daycare_name}}</strong></b-card-title>
+          <b-card-sub-title>
+            <strong>Telefono: </strong>{{item.dog_daycare_phone}}
+            <strong>Dirección:</strong>  {{item.dog_daycare_address}}
+          </b-card-sub-title>
+          <b-card-text><strong>Puntaje: </strong>{{ item.dog_daycare_score }} </b-card-text>
+          <b-card-text><strong>Precio Base: </strong>$ {{ item.dog_daycare_price_base }} </b-card-text>
+          <b-card-text><strong>Precio Recargo: </strong>$ {{ item.dog_daycare_tax }} </b-card-text>
+        </b-card-body>
+        <router-link :to="{name: 'dogDayCares', params:{id: item.user}}">
+            <b-button variant="primary">Go to {{ item.dog_daycare_name }}</b-button>
+          </router-link>
       </b-card>
     </b-row>
 </div>
@@ -127,5 +110,15 @@ h2 {
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
   transition: 0.2s;
+}
+.card:not(:first-child) {
+  margin-left: -2rem;
+}
+.card:not(:last-child):hover,
+.card:not(:last-child):focus-within {
+  transform: translateY(-1rem);
+  ~ .card {
+    transform: translateX(2rem);
+  }
 }
 </style>
