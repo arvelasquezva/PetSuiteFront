@@ -20,6 +20,7 @@ export default new Vuex.Store({
         services: [], //Servicios de una Guarderia
         servicesUser: [], //Servicios que puede ver el cliente
         caresActive: [], //Peticiones Activas de una guarderia
+        caresInvoice: null, //Peticiones Activas de una guarderia
     },
     mutations: {
         SET_USER_PET(state, petData) {
@@ -72,6 +73,9 @@ export default new Vuex.Store({
         SET_CARES_ACTIVE(state, caresData) {
             state.caresActive = caresData;
         },
+        SET_CARES_INVOICE(state, invoiceData) {
+            state.caresInvoice = invoiceData;
+        },
 
         CLEAR_USER_DATA() {
             localStorage.removeItem('user');
@@ -116,7 +120,8 @@ export default new Vuex.Store({
             return axios.post("api/walkpetitions/create", credentials);
         },
         registerDayCarePetition({ commit }, credentials) {
-            return axios.post("/api/dog_day_care_invoices/load", credentials);
+            return axios
+                .post("/api/dog_day_care_invoices/load", credentials);
         },
         async getMascotaByUser({ commit }, credentials) {
             const { data } = await axios

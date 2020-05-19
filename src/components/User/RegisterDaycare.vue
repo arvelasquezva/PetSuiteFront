@@ -6,6 +6,7 @@
         <div class="col-md-5">
       <img height="300" src="@/assets/Images/Daycare.jpg" alt="image slot" />
       <h1>Valor: {{dog_daycare_invoice_price}}</h1>
+
       </div>
       <div class="col-md-7">
       <b-form @submit.prevent="makeDayCarePetition" class="pl-4">
@@ -77,10 +78,15 @@
           ></b-form-checkbox-group>
         </b-form-group>
         <!-- Fin de formulario -->
-        <b-button block pill type="submit" variant="success">
-          Confirma tu petición
+        <b-button block pill type="submit" variant="warning">
+          Solicita tu precio
         </b-button>
-        
+        <b-button
+            variant="success"
+            block
+            v-on:click="aceptarPeticion()"
+            >Confirma tu Petición</b-button
+          >
       </b-form>
       </div>
       </div>
@@ -119,7 +125,7 @@ export default {
       this.$store.dispatch("registerDayCarePetition", {
           dog_daycare_invoice_date: this.pickup_date + " " + this.pickup_time,
           dog_daycare_invoice_duration: this.dog_daycare_duration,
-          dog_daycare_invoice_status: true,
+          dog_daycare_invoice_status: "Propuesto",
           dog_daycare_invoice_dogdaycare_id: this.$route.params.id,
           dog_daycare_invoice_client_id: this.currentUser.user,
           dog_daycare_invoice_dog_id: this.dog_selected,
@@ -131,6 +137,24 @@ export default {
             alert("El perro ya se encuentra en un Guarderia");
           } else {
             this.dog_daycare_invoice_price = data.dog_daycare_invoice_price
+          }
+        });
+    },
+    aceptarPeticion() {
+      console.log(this.dog_daycare_duration);
+      this.$store.dispatch("registerDayCarePetition", {
+          dog_daycare_invoice_date: this.pickup_date + " " + this.pickup_time,
+          dog_daycare_invoice_duration: this.dog_daycare_duration,
+          dog_daycare_invoice_status: "Aceptado",
+          dog_daycare_invoice_dogdaycare_id: this.$route.params.id,
+          dog_daycare_invoice_client_id: this.currentUser.user,
+          dog_daycare_invoice_dog_id: this.dog_selected,
+          dog_daycare_invoice_services: this.selected
+        }).then(({ data }) => {
+          console.log(data);
+          if (data === "") {
+            alert("El perro ya se encuentra en un Guarderia");
+          } else {
             this.show = true;
           }
         });
