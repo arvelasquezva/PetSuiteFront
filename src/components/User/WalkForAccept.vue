@@ -1,8 +1,8 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Peticiones</h1>
-    <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
+    <h1 class="mt-3">Peticiones</h1>    
+    <b-row class="mt-1">      
+      <div class="cards mx-5 mb-5">         
         <b-card
           v-for="item in petitionsforActive"
           :key="item.id"
@@ -20,9 +20,10 @@
               <strong> {{ item.walk_petition_walker_user }}</strong> te propone:
             </b-card-text>
             <b-card-text
-              ><strong> ${{ item.precio_proposal }} </strong></b-card-text
-            >
-          </b-card-body>
+              ><strong> ${{ item.precio_proposal }} </strong>
+              </b-card-text>
+              <b-button v-on:click="obtenerDatosPaseador(item.walk_petition_walker_user);$bvToast.show('toast')" block pill type="submit" variant="success" >Ver Datos de {{ item.walk_petition_walker_user }}</b-button>                         
+          </b-card-body>          
           <b-form-group
             id="input-group-1"
             label="Que deseas hacer?:"
@@ -57,7 +58,21 @@
         </b-card>
       </div>
     </b-row>
-  </div>
+        <b-toast
+          id="toast"                   
+          title="Datos de Paseador"            
+          solid: true 
+          toaster="b-toaster-top-left"
+          position= "top-center"
+          class="toast"                       
+          >
+         User ID: {{info.user}} <br/>
+         Nombre del paseador: {{info.dog_walker_name}} <br/>
+         Telefono del Paseador: {{info.dog_walker_phone}}<br/>
+         E-mail del paseador: {{info.dog_walker_e_mail}}<br/>
+         Puntaje del Paseador: {{info.dog_walker_score}}
+        </b-toast>
+  </div>  
 </template>
 
 <script>
@@ -68,6 +83,7 @@ export default {
     return {
       show: false,
       currentUser: "",
+      info: [],
       state: "",
       Options: [
         { text: "Aceptar", value: "Aceptar" },
@@ -89,6 +105,12 @@ export default {
     this.getPetitionsforActive();
   },
   methods: {
+    obtenerDatosPaseador(dogWalker) {      
+      this.$store.dispatch("obtenerDatosPaseador", [{
+        cadena: dogWalker,
+      }, "clients"])
+      .then(response => (this.info = response.data));
+    },
     getPetitionsforActive() {
       this.$store.dispatch("getPetitionsforActive", {
         cadena: this.currentUser.user,
@@ -105,7 +127,7 @@ export default {
         })
         .then((this.show = true));
     },
-  },
+  }
 };
 </script>
 
@@ -141,5 +163,8 @@ h1 {
   ~ .card {
     transform: translateX(2rem);
   }
+}
+.toast {
+background-color:#40db9a
 }
 </style>

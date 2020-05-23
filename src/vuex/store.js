@@ -104,7 +104,9 @@ export default new Vuex.Store({
                     }
                 });
         },
-
+        obtenerDatosPaseador({ commit }, [credentials, userClass]) {
+            return axios.post("/api/" + userClass + "/mywalker", credentials);
+        },
         buscarGuarderia({ commit }, [credentials, userClass]) {
             return axios.post("/api/" + userClass + "/searchdaycarebyname", credentials);
         },
