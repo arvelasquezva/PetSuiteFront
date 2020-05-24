@@ -22,7 +22,7 @@
             <b-card-text
               ><strong> ${{ item.precio_proposal }} </strong>
               </b-card-text>
-              <b-button v-on:click="obtenerDatosPaseador(item.walk_petition_walker_user);$bvToast.show('toast')" block pill type="submit" variant="success" >Ver Datos de {{ item.walk_petition_walker_user }}</b-button>                         
+              <b-button v-on:click="obtenerDatosPaseador(item.walk_petition_walker_user);$bvToast.show('toast')" block type="submit" variant="success" >Ver Datos de {{ item.walk_petition_walker_user }}</b-button>                         
           </b-card-body>          
           <b-form-group
             id="input-group-1"
