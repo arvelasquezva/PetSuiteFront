@@ -59,7 +59,10 @@
             v-on:click="proposePetition(item.walk_petition_id)"
             >Proponle un precio a {{ item.user }}</b-button
           >
-          <b-modal v-model="show">
+          <b-modal 
+            v-model="show"
+            size="sm"
+            @ok="handleOk">
             <p class="my-4">Le has enviado a {{item.user}} $ {{valor}}</p>
           </b-modal>
         </b-card>
@@ -93,6 +96,9 @@ export default {
     this.$store.dispatch("getPetitionById");
   },
   methods: {
+    handleOk() {
+      location.reload();
+    },
     proposePetition(id_petition) {
       this.$store.dispatch("proposePetition", {
         walk_petition_walker_user: this.currentUser.user,

@@ -12,7 +12,7 @@
           <b-navbar-nav>
             <b-nav-item href="/MyPets">Mis Mascotas</b-nav-item>
             <b-nav-item href="/MyPetitions">Mis Peticiones</b-nav-item>
-            <b-nav-item href="/WalksDone">Califica tu paseo</b-nav-item>
+            <b-nav-item href="/WalksDone">Califica tus servicios</b-nav-item>
             <b-nav-item href="/SearchDaycare">Busca una guarderia</b-nav-item>
           </b-navbar-nav>
         </div>
@@ -42,7 +42,9 @@
           >
         </div>
         <div v-else>
-          <b-button class="mr-3" href="/Profile" variant="light"> Perfil </b-button>
+          <router-link :to="{name: 'Profile', params:{id: user.role}}">
+                <b-button class="mr-3" variant="light">Perfil {{user.user}}</b-button>
+            </router-link> 
           <b-button class="logoutButton" @click="logout" href="/login" variant="light"> Cierra Sesión</b-button>
         </div>
       </b-navbar-nav>
@@ -57,6 +59,7 @@ export default {
   name: "NavbarComponente",
   computed: {
     ...authComputed,
+    ...mapState(["user"]),
   },
   methods: {
     logout() {

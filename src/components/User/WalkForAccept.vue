@@ -36,7 +36,11 @@
               required
             ></b-form-select>
           </b-form-group>
-          <b-modal centered v-model="show">
+          <b-modal 
+            centered 
+            v-model="show"
+            size="sm"
+            @ok="handleOk">
             <p class="my-4">
               Has {{state}} el paseo para {{ item.dog_name }} por parte de
               {{ item.walk_petition_walker_user }}
@@ -105,6 +109,9 @@ export default {
     this.getPetitionsforActive();
   },
   methods: {
+    handleOk() {
+      location.reload();
+    },
     obtenerDatosPaseador(dogWalker) {      
       this.$store.dispatch("obtenerDatosPaseador", [{
         cadena: dogWalker,

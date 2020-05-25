@@ -1,24 +1,24 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Paseos Que Debes Calificar</h1>
+    <h1 class="mt-3">Guarderia Que Debes Calificar</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in walksDone"
+          v-for="item in caresInvoice"
           :key="item.id"
           tag="article"
           style="max-width: 17rem;"
           class="card"
         >
         <b-card-body>
-            <b-card-title> El paseo para: <strong>{{ item.dog_name }}</strong> ha terminado</b-card-title>
-            <b-card-text> El paseador ha sido: <strong>{{item.dog_walker_id}}</strong></b-card-text>
+            <b-card-title> El Cuidado para: <strong>{{ item.dog_daycare_invoice_dog_name }}</strong> ha terminado</b-card-title>
+            <b-card-text> La guarderia ha sido: <strong>{{item.dog_daycare_invoice_dogdaycare_id}}</strong></b-card-text>
           </b-card-body>
           <b-modal
             v-model="show"
             size="sm"
             @ok="handleOk">
-              <p class="my-4">Has calificado a {{item.dog_walker_id}}</p>
+              <p class="my-4">Has calificado a {{item.dog_daycare_invoice_dogdaycare_id}}</p>
           </b-modal>
         <b-form-group
               id="input-group-1"
@@ -35,8 +35,8 @@
         <b-button
             variant="success"
             block
-            v-on:click="calificarPaseador(item.walk_invoice_id, item.dog_walker_id,score )"
-            >Califica a {{item.dog_walker_id}}</b-button
+            v-on:click="calificarGuarderia(item.dog_daycare_invoice_id, item.dog_daycare_invoice_dogdaycare_id,score )"
+            >Califica a {{item.dog_daycare_invoice_dogdaycare_id}}</b-button
           >
         </b-card>
       </div>
@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["walksDone"]),
+    ...mapState(["caresInvoice"]),
   },
   created() {
     if (localStorage.getItem("user")) {
@@ -73,22 +73,23 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.walksProgress();
+    this.caresProgress();
   },
   methods: {
     handleOk() {
       location.reload();
     },
-    walksProgress() {
-      this.$store.dispatch("getWalksDone",{
-        cadena: this.currentUser.user,
+    caresProgress() {
+      this.$store.dispatch("getCaresDone",{
+        cadena1: this.currentUser.user,
+        cadena2: "Terminado"
       });
     },
-    calificarPaseador(walk_invoice_id,dog_walker_id, score){
-      this.$store.dispatch("rateWalker",{
-        walk_invoice_id : walk_invoice_id,
-        dog_walker_id : dog_walker_id,
-        walker_score: score
+    calificarGuarderia(dog_daycare_invoice_id,dog_daycare_invoice_dogdaycare_id, score){
+      this.$store.dispatch("rateCare",{
+        dog_daycare_invoice_id : dog_daycare_invoice_id,
+        dog_daycare_invoice_dogdaycare_id : dog_daycare_invoice_dogdaycare_id,
+        dog_daycare_invoice_score: score
       }).then(this.show=true)
     }
   },

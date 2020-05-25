@@ -48,9 +48,7 @@ created() {
   },
   methods: {
     getServices(){
-      this.$store.dispatch("getServicesByUser", {
-          cadena: this.currentUser.user
-          });
+      this.$store.dispatch("getServicesByUser", this.currentUser.user);
     }
   },
 };

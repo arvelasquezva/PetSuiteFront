@@ -20,7 +20,7 @@ export default new Vuex.Store({
         services: [], //Servicios de una Guarderia
         servicesUser: [], //Servicios que puede ver el cliente
         caresActive: [], //Peticiones Activas de una guarderia
-        caresInvoice: null, //Peticiones Activas de una guarderia
+        caresInvoice: [], //Peticiones terminadas de una guarderia
     },
     mutations: {
         SET_USER_PET(state, petData) {
@@ -29,27 +29,21 @@ export default new Vuex.Store({
         },
         SET_USER_PETITION(state, petitionData) {
             state.petitions = petitionData;
-            localStorage.setItem('petition', JSON.stringify(petitionData));
         },
         SET_WALKER_PETITION_ACTIVE(state, petitionsActive) {
             state.petitionsforActive = petitionsActive;
-            localStorage.setItem('petitionActive', JSON.stringify(petitionsActive));
         },
         SET_WALKER_WALKSACCEPT(state, walksAccept) {
             state.walksAccept = walksAccept;
-            localStorage.setItem('walksAccept', JSON.stringify(walksAccept));
         },
         SET_WALKER_WALKSPROGRESS(state, walksProgress) {
             state.walksProgress = walksProgress;
-            localStorage.setItem('walksProgress', JSON.stringify(walksProgress));
         },
         SET_USER_WALKSDONE(state, walksDone) {
             state.walksDone = walksDone;
-            localStorage.setItem('walksDone', JSON.stringify(walksDone));
         },
         SET_WALKER_PETS_ACTIVE(state, petsActive) {
             state.petsActive = petsActive;
-            localStorage.setItem('petsActive', JSON.stringify(petsActive));
         },
         SET_USER_DATA(state, userData) {
             state.user = userData;
@@ -60,15 +54,12 @@ export default new Vuex.Store({
         },
         SET_DOGDAYCARE_DATA(state, dogDayCareData) {
             state.dogDayCares = dogDayCareData;
-            localStorage.setItem('dogDayCares', JSON.stringify(dogDayCareData));
         },
         SET_DOGDAYCARE_SERVICES(state, servicesData) {
             state.services = servicesData;
-            localStorage.setItem('services', JSON.stringify(servicesData));
         },
         SET_CLIENT_SERVICES(state, servicesData) {
             state.servicesUser = servicesData;
-            localStorage.setItem('servicesUser', JSON.stringify(servicesData));
         },
         SET_CARES_ACTIVE(state, caresData) {
             state.caresActive = caresData;
@@ -79,14 +70,6 @@ export default new Vuex.Store({
 
         CLEAR_USER_DATA() {
             localStorage.removeItem('user');
-            localStorage.removeItem('pet');
-            localStorage.removeItem('petitions');
-            localStorage.removeItem('petitionsforActive');
-            localStorage.removeItem('walksDone');
-            localStorage.removeItem('walksProgress');
-            localStorage.removeItem('walksAccept');
-            localStorage.removeItem('petsActive');
-            localStorage.removeItem('services');
         }
     },
     actions: {
@@ -116,8 +99,8 @@ export default new Vuex.Store({
                 .post("/api/" + userClass + "/update", credentials);
             commit('SET_USER_DATA', data);
         },
-        async updateMascota({ commit }, [credentials, userClass]) {
-            await axios.post("/api/" + userClass + "/update", credentials);
+        async updateMascota({ commit }, credentials) {
+            await axios.post("/api/dogs/update", credentials);
         },
         async registerMascota({ commit }, credentials) {
             await axios.post("api/dogs/register", credentials);
@@ -131,25 +114,17 @@ export default new Vuex.Store({
         },
         async getMascotaByUser({ commit }, credentials) {
             const { data } = await axios
-                .post("api/dogs/findmydog", credentials);
+                .post("/api/dogs/findmydog", credentials);
             commit('SET_USER_PET', data);
         },
-        async getServicesByUser({ commit }) {
+        async getServicesByUser({ commit }, credentials) {
             const { data } = await axios
-                .get("api/dogdaycareservices/myServices", {
-                    params: {
-                        user: 'jose'
-                    }
-                });
+                .get("api/dogdaycareservices/myServices?user=" + credentials);
             commit('SET_DOGDAYCARE_SERVICES', data);
         },
-        async getServicesByClient({ commit }) {
+        async getServicesByClient({ commit }, credentials) {
             const { data } = await axios
-                .get("/api/clients/myServicesAvailables", {
-                    params: {
-                        user: 'jose'
-                    }
-                });
+                .get("/api/clients/myServicesAvailables?user=" + credentials);
             commit('SET_CLIENT_SERVICES', data);
         },
         async getPetitionById({ commit }) {
@@ -172,6 +147,11 @@ export default new Vuex.Store({
                 .post("api/walkinvoices/invoicesEndedClient", credentials);
             commit('SET_USER_WALKSDONE', data);
         },
+        async getCaresDone({ commit }, credentials) {
+            const { data } = await axios
+                .post("/api/clients/seeEndedCares", credentials);
+            commit('SET_CARES_INVOICE', data);
+        },
         async getDogDayCares({ commit }) {
             const { data } = await axios
                 .get("api/clients/allDogDayCares");
@@ -183,11 +163,15 @@ export default new Vuex.Store({
         },
         updateStatusCare({ commit }, credentials) {
             return axios
-                .post("/api/", credentials);
+                .post("/api/dog_day_care_invoices/endService", credentials);
         },
         rateWalker({ commit }, credentials) {
             return axios
                 .post("/api/walkinvoices/score", credentials);
+        },
+        rateCare({ commit }, credentials) {
+            return axios
+                .post("/api/dog_day_care_invoices/score", credentials);
         },
         proposePetition({ commit }, credentials) {
             return axios

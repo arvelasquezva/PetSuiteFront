@@ -67,9 +67,14 @@
 
         <b-button block pill type="submit" variant="success">Actualiza tus datos</b-button>
       </b-form>
-      <!-- <b-modal centered v-model="show">
-        <p class="my-4">Has actualizado tus datos de paseador</p>
-      </b-modal> -->
+      <b-modal 
+        centered 
+        v-model="show"
+        size="sm"
+        @ok="handleOk"
+        >
+        <p class="my-4">Has actualizado tus datos</p>
+      </b-modal>
     </div>
       </div>
     </div>
@@ -90,6 +95,9 @@ export default {
     };
   },
   methods: {
+    handleOk() {
+      location.reload();
+    },
     updateUsuario() {
       this.$store.dispatch("updateUsuario", [{
         user: this.proposeddog_walkerUser,

@@ -15,6 +15,8 @@
           <b-card-sub-title>
             <strong>Telefono: </strong>{{item.dog_daycare_phone}}
             <strong>Dirección:</strong>  {{item.dog_daycare_address}}
+            <strong v-if="item.dog_daycare_type=true"> Guarderia Oficial</strong>
+            <strong v-else> Hospeador</strong>
           </b-card-sub-title>
           <b-card-text><strong>Puntaje: </strong>{{ item.dog_daycare_score }} </b-card-text>
           <b-card-text><strong>Precio Base: </strong>$ {{ item.dog_daycare_price_base }} </b-card-text>

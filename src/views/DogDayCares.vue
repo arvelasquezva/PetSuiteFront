@@ -1,29 +1,48 @@
 <template>
-    <div>
-        <div class="row">
-          <div class="col-md-6">
-            <RegisterDaycare></RegisterDaycare>
-          </div>
-          <div class="col-md-6">
-            <InvoiceDaycare></InvoiceDaycare>
-          </div>
-        </div>
-        
+  <div>
+    <div class="row">
+      <div class="col-md-6">
+        <RegisterDaycare></RegisterDaycare>
+      </div>
+      <div class="col-md-6">
+        <InvoiceDaycare></InvoiceDaycare>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import RegisterDaycare from "@/components/User/RegisterDaycare.vue";
 import InvoiceDaycare from "@/components/User/InvoiceDaycare.vue";
 export default {
-    name: "DogDayCare",
-    components: {
-        RegisterDaycare,
-        InvoiceDaycare
+  name: "DogDayCare",
+  components: {
+    RegisterDaycare,
+    InvoiceDaycare,
+  },
+  data() {
+    return {
+      currentUser: "",
+    };
+  },
+  methods: {
+    getDogs() {
+      this.$store.dispatch("getMascotaByUser", {
+        cadena: this.currentUser.user,
+      });
     },
-}
+  },
+  created() {
+    if (localStorage.getItem("user")) {
+      try {
+        this.currentUser = JSON.parse(localStorage.getItem("user"));
+      } catch (e) {
+        localStorage.removeItem("user");
+      }
+    }
+    this.getDogs();
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

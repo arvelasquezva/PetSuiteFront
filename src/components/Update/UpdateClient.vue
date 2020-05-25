@@ -26,7 +26,7 @@
             id="input-2"
             v-model="proposedClientPassword"
             type="password"
-            required
+            required  
           ></b-form-input>
         </b-form-group>
 
@@ -84,7 +84,12 @@
           >Actualiza tus datos</b-button
         >
       </b-form>
-      <b-modal centered v-model="show">
+      <b-modal 
+        centered 
+        v-model="show"
+        size="sm"
+        @ok="handleOk"
+        >
         <p class="my-4">Has actualizado tus datos</p>
       </b-modal>
     </div>
@@ -109,6 +114,9 @@ export default {
     };
   },
   methods: {
+    handleOk() {
+      location.reload();
+    },
     updateUsuario() {      
       this.$store.dispatch("updateUsuario", [{
         user: this.proposedClientUser,

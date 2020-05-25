@@ -11,7 +11,7 @@
           class="card"
         >
           <b-card-body>
-            <b-card-title> Tienes un Servicio pendiente para <strong>{{ item.dog_daycare_invoice_client_id }}</strong></b-card-title>
+            <b-card-title> Tienes un Servicio pendiente para <strong>{{ item.dog_daycare_invoice_dog_name }}</strong></b-card-title>
             <b-card-sub-title class="mb-2" >Duración: {{ item.dog_daycare_invoice_duration }} Horas</b-card-sub-title>
             <b-card-text><strong>El precio a cobrar es: </strong>$ {{  item.dog_daycare_invoice_price}}</b-card-text>
             <b-card-text><strong>Los servicios que debes hacer es: </strong></b-card-text>
@@ -21,10 +21,14 @@
               >
              * {{value}}</b-card-text>
           </b-card-body>
-          <b-modal v-model="show">
-            <p class="my-4">Has terminado el servcio para {{ item.dog_name }}</p>
+          <b-modal 
+            v-model="show"
+            size="sm"
+            @ok="handleOk"
+          >
+            <p class="my-4">Has terminado el servicio para {{ item.dog_daycare_invoice_dog_name }}</p>
           </b-modal>
-          <b-button variant="danger" block v-on:click="actualizarEstado(item.diego)">Termina el Servicio</b-button>
+          <b-button variant="danger" block v-on:click="actualizarEstado(item.dog_daycare_invoice_id)">Termina el Servicio</b-button>
         </b-card>
       </div>
     </b-row>
@@ -55,14 +59,17 @@ export default {
     this.getCaresActive();
   },
   methods: {
+    handleOk() {
+      location.reload();
+    },
     getCaresActive() {
       this.$store.dispatch("getCaresActive", {
         cadena: this.currentUser.user,
       });
     },
-    actualizarEstado(walk_invoice_id){
+    actualizarEstado(dog_day_care_invoice_id){
       this.$store.dispatch("updateStatusCare",{
-        entero : walk_invoice_id
+        entero : dog_day_care_invoice_id
       }).then(this.show=true)
 
     }

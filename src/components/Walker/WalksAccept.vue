@@ -46,7 +46,11 @@
             v-on:click="actualizarEstado(item.walk_invoice_id)"
             >Empieza el Paseo</b-button
           >
-          <b-modal v-model="show">
+          <b-modal 
+            v-model="show"
+            size="sm"
+            @ok="handleOk"
+            >
             <p class="my-4">Has iniciado el paseo para {{ item.dog_name }}</p>
           </b-modal>
         </b-card>
@@ -79,6 +83,9 @@ export default {
     this.getWalksAccept();
   },
   methods: {
+    handleOk() {
+      location.reload();
+    },
     getWalksAccept() {
       this.$store.dispatch("getWalksAccept", {
         cadena: this.currentUser.user,

@@ -81,7 +81,11 @@
           Confirma tu petición
         </b-button>
       </b-form>
-      <b-modal centered v-model="show">
+      <b-modal 
+      centered 
+      v-model="show"
+      size="sm"
+      @ok="handleOk">
         <p class="my-4">Has creado una petición para un paseo</p>
       </b-modal>
     </div>
@@ -109,6 +113,9 @@ export default {
     ...mapGetters(["valuePets"]),
   },
   methods: {
+    handleOk() {
+      location.reload();
+    },
     registerPetition() {
       this.$store
         .dispatch("registerPetition", {

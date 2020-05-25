@@ -7,16 +7,20 @@ import Profile from '../views/Profile.vue';
 import DogDayCares from '../views/DogDayCares.vue';
 import Forbidden from '../views/Forbidden.vue';
 import DogDayCareServices from '../views/DogDayCareServices.vue';
+import Rate from '../views/Rate.vue';
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/Register/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/Register/GuarderiaComponente.vue';
 import HospeadorComponente from '@/components/Register/HospeadorComponente.vue';
+import UpdateDaycare from '@/components/Update/UpdateDaycare.vue';
+import UpdateDogwalker from '@/components/Update/UpdateDogwalker.vue';
+import UpdateClient from '@/components/Update/UpdateClient.vue';
 import WalkPetitionActive from '@/components/Walker/WalkPetitionActive.vue';
 import WalksAccept from '@/components/Walker/WalksAccept.vue';
 import WalksProgress from '@/components/Walker/WalksProgress.vue';
 import WalkForAccept from '@/components/User/WalkForAccept.vue';
 import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
-import WalksDone from '@/components/User/WalksDone.vue';
+
 import SearchDayCare from '@/components/Dog_Day_Care/SearchDaycare.vue';
 import CaresActive from '@/components/Dog_Day_Care/CaresActives.vue';
 import Vuex from 'vuex';
@@ -109,7 +113,7 @@ const routes = [{
         //Ruta para las ver recibos terminados y calificar paseador
         path: '/WalksDone',
         name: 'WalksDone',
-        component: WalksDone
+        component: Rate
     },
     {
         //Ruta para las ver los perros a cargo de un paseador
@@ -118,9 +122,15 @@ const routes = [{
         component: DogsInMyCharge
     },
     {
-        path: '/Profile',
+        path: '/Profile/:id',
         name: 'Profile',
-        component: Profile
+        component: Profile,
+        children: [
+            { path: '/ROLE_DOGDAYCARE', component: UpdateDaycare },
+            { path: '/ROLE_DOGWALKER', component: UpdateDogwalker },
+            { path: '/ROLE_CLIENT', component: UpdateClient },
+
+        ]
     },
     {
         path: '/SearchDaycare',

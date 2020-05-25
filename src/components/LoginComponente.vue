@@ -54,13 +54,7 @@ export default {
         user: this.user,
         password: this.password
       })
-      .then(({ data }) => {
-          if (data == null) {
-            alert("Error al Registrarte");
-          } else {
-        	this.$router.push({name: 'Home'})
-          }
-        });
+      .then(this.$router.push({name: 'Home'}));
     }
   }
 };

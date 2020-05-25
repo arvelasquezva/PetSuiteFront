@@ -26,7 +26,9 @@
         >Termina el Paseo</b-button
           >
           <b-modal
-        v-model="show">
+          v-model="show"
+          size="sm"
+          @ok="handleOk">
         <p class="my-4">Has terminado el paseo para {{ item.dog_name}}</p>
       </b-modal>
         </b-card>
@@ -49,13 +51,6 @@ export default {
     ...mapState(["walksProgress"]),
   },
   created() {
-    if (localStorage.getItem("walksProgress")) {
-      try {
-        this.Petition = JSON.parse(localStorage.getItem("walksProgress"));
-      } catch (e) {
-        localStorage.removeItem("walksProgress");
-      }
-    }
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
@@ -63,10 +58,13 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.walksProgress();
+    this.getWalksProgress();
   },
   methods: {
-    walksProgress() {
+    handleOk() {
+      location.reload();
+    },
+    getWalksProgress() {
       this.$store.dispatch("getWalksProgress",{
         cadena: this.currentUser.user,
       });
