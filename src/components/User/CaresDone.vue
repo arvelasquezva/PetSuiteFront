@@ -85,7 +85,7 @@ export default {
         cadena2: "Terminado"
       });
     },
-    calificarGuarderia(dog_daycare_invoice_id,dog_daycare_invoice_dogdaycare_id, score){
+    calificarGuarderia(dog_daycare_invoice_id,dog_daycare_invoice_dogdaycare_id, score) {
       this.$store.dispatch("rateCare",{
         dog_daycare_invoice_id : dog_daycare_invoice_id,
         dog_daycare_invoice_dogdaycare_id : dog_daycare_invoice_dogdaycare_id,
