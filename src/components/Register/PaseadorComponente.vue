@@ -123,6 +123,7 @@ export default {
   overflow: hidden;
 }
 .SignUp {
+  margin: 10px;
   display: flex;
   padding: 30px;
   border: 1px solid #eef6e1;

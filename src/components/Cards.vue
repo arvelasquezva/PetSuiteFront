@@ -12,8 +12,11 @@
           style="max-width: 15rem;"
           class="card"
         >
-          <router-link :to="{name: 'signUp', params:{id:item.title}}">
-            <b-button variant="primary" onClick="setTimeout(() => {  location.reload(); }, 250);" >Registrate como {{ item.title }}</b-button>
+        <b-card-body>
+          <b-card-text></b-card-text>
+        </b-card-body>
+          <router-link :to="item.routes">
+            <b-button variant="primary" >Registrate como {{ item.title }}</b-button>
           </router-link>
         </b-card>
       </div>

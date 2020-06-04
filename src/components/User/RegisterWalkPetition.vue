@@ -116,6 +116,11 @@ export default {
     handleOk() {
       location.reload();
     },
+    getDogs() {
+      this.$store.dispatch("getMascotaByUser", {
+        cadena: this.currentUser.user,
+      });
+    },
     registerPetition() {
       this.$store
         .dispatch("registerPetition", {
@@ -136,7 +141,7 @@ export default {
         });
     },
   },
-  mounted() {
+  created() {
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
@@ -144,6 +149,7 @@ export default {
         localStorage.removeItem("user");
       }
     }
+    this.getDogs();
   },
 };
 </script>

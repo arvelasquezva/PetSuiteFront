@@ -31,7 +31,7 @@
         </b-form-group>
 
         <b-button block pill type="submit" variant="success">Ingresa a PetSuite</b-button>
-        <b-button href="/signUp/all" block pill variant="danger">Unete a PetSuite</b-button
+        <b-button href="/signUp" block pill variant="danger">Unete a PetSuite</b-button
         >
       </b-form>
     </div>
@@ -70,6 +70,7 @@ export default {
   
 }
 .login {
+  margin-left: 10px;
   display: flex;
   padding: 30px;
   border: 1px solid #eef6e1;

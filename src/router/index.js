@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
+
 import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
-import MyPets from '../views/MyPets.vue';
+import MyPets from '../views/User/MyPets.vue';
 import Profile from '../views/Profile.vue';
-import DogDayCares from '../views/DogDayCares.vue';
+import DogDayCares from '../views/DogDayCares/DogDayCares.vue';
 import Forbidden from '../views/Forbidden.vue';
-import DogDayCareServices from '../views/DogDayCareServices.vue';
-import Rate from '../views/Rate.vue';
+import DogDayCareServices from '../views/DogDayCares/DogDayCareServices.vue';
+import Rate from '../views/User/Rate.vue';
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/Register/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/Register/GuarderiaComponente.vue';
@@ -34,16 +36,11 @@ const routes = [{
         name: 'Home',
         component: Home
     },
+    //Redireccionar Cualquier Pagina no existente a Home
     {
-        path: '/about',
-        name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/About.vue')
+        path: '*',
+        redirect: '/'
     },
-    { path: '*', redirect: '/' },
     {
         path: '/login',
         name: 'Login',
@@ -69,16 +66,14 @@ const routes = [{
         component: DogDayCareServices,
     },
     {
-        path: '/signUp/:id',
+        path: '/signUp',
         name: 'signUp',
         component: SignUp,
-        children: [
-            { path: '/signUp/Paseador', component: PaseadorComponente },
-            { path: '/signUp/Usuario', component: UsuarioComponente },
-            { path: '/signUp/Guarderia', component: GuarderiaComponente },
-            { path: '/signUp/Hospeador', component: HospeadorComponente },
-        ]
     },
+    { path: '/signUp/Paseadores', component: PaseadorComponente },
+    { path: '/signUp/Usuario', component: UsuarioComponente },
+    { path: '/signUp/Guarderias', component: GuarderiaComponente },
+    { path: '/signUp/Hospeadores', component: HospeadorComponente },
     {
         //Ruta para las Guarderias
         path: '/dogDayCares/:id',

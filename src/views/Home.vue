@@ -37,24 +37,13 @@ export default {
   },
   computed: {
     ...authComputed,
-    ...mapState(["pets"]),
   },
   methods: {
-    getDogs() {
-      this.$store.dispatch("getMascotaByUser", {
-        cadena: this.currentUser.user,
-      });
-    },
   },
-  created() {
-    if (localStorage.getItem("user")) {
-      try {
-        this.currentUser = JSON.parse(localStorage.getItem("user"));
-      } catch (e) {
-        localStorage.removeItem("user");
+  beforeCreate(){
+      if( !localStorage.getItem("user") ){
+        this.$router.push( {name: 'Login'} )
       }
-    }
-    this.getDogs();
   },
 };
 </script>
