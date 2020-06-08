@@ -137,7 +137,7 @@ export default {
     makeDayCarePetition() {
       console.log(this.dog_daycare_duration);
       this.$store
-        .dispatch("registerDayCarePetition", {
+        .dispatch("consultPriceCarePetition", {
           dog_daycare_invoice_date: this.pickup_date + " " + this.pickup_time,
           dog_daycare_invoice_duration: this.dog_daycare_duration,
           dog_daycare_invoice_status: "Propuesto",

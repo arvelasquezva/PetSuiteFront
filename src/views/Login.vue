@@ -21,11 +21,7 @@ export default {
     LoginComponente,
     Cards,
   },
-  beforeCreate(){
-      if( localStorage.getItem("user") ){
-        this.$router.push( {name: 'Home'} )
-      }
-  },
+  
   data() {
     return {
       Tarjetas: [

@@ -90,6 +90,7 @@ export default new Vuex.Store({
         obtenerDatosPaseador({ commit }, [credentials, userClass]) {
             return axios.post("/api/" + userClass + "/mywalker", credentials);
         },
+
         buscarGuarderia({ commit }, [credentials, userClass]) {
             return axios.post("/api/" + userClass + "/searchdaycarebyname", credentials);
         },
@@ -107,6 +108,14 @@ export default new Vuex.Store({
         },
         registerPetition({ commit }, credentials) {
             return axios.post("api/walkpetitions/create", credentials);
+        },
+        consultPriceCarePetition({ commit }, credentials) {
+            return axios
+                .post("/api/dog_day_care_invoices/consultPrice", credentials);
+        },
+        getNotificacion({ commit }, ) {
+            return axios
+                .get("/notify", );
         },
         registerDayCarePetition({ commit }, credentials) {
             return axios

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { authComputed } from "../vuex/helper.js";
+import { authComputed } from "@/vuex/helper.js";
 import WalksDone from "@/components/User/WalksDone.vue";
 import CaresDone from "@/components/User/CaresDone.vue";
 

@@ -1,27 +1,29 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
-
 import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
 import MyPets from '../views/User/MyPets.vue';
 import Profile from '../views/Profile.vue';
 import DogDayCares from '../views/DogDayCares/DogDayCares.vue';
-import Forbidden from '../views/Forbidden.vue';
 import DogDayCareServices from '../views/DogDayCares/DogDayCareServices.vue';
 import Rate from '../views/User/Rate.vue';
+
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/Register/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/Register/GuarderiaComponente.vue';
 import HospeadorComponente from '@/components/Register/HospeadorComponente.vue';
+
 import UpdateDaycare from '@/components/Update/UpdateDaycare.vue';
 import UpdateDogwalker from '@/components/Update/UpdateDogwalker.vue';
 import UpdateClient from '@/components/Update/UpdateClient.vue';
+
 import WalkPetitionActive from '@/components/Walker/WalkPetitionActive.vue';
 import WalksAccept from '@/components/Walker/WalksAccept.vue';
 import WalksProgress from '@/components/Walker/WalksProgress.vue';
-import WalkForAccept from '@/components/User/WalkForAccept.vue';
 import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
+import Notificacions from '@/components/Walker/Notifications.vue';
+
+import WalkForAccept from '@/components/User/WalkForAccept.vue';
 
 import SearchDayCare from '@/components/Dog_Day_Care/SearchDaycare.vue';
 import CaresActive from '@/components/Dog_Day_Care/CaresActives.vue';
@@ -56,9 +58,9 @@ const routes = [{
         component: MyPets,
     },
     {
-        path: '/Forbidden',
-        name: 'Forbidden',
-        component: Forbidden,
+        path: '/Notificacions',
+        name: 'Notificacions',
+        component: Notificacions,
     },
     {
         path: '/MyServices',
