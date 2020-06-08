@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { authComputed } from "../vuex/helper.js";
+import { authComputed } from "@/vuex/helper.js";
 import RegisterServices from "@/components/Dog_Day_Care/RegisterServices.vue";
 import ServicesComponente from "@/components/Dog_Day_Care/ServicesComponente.vue";
 

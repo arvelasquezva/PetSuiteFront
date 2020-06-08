@@ -2,11 +2,13 @@
   <div id="app">
     <NavbarComponente></NavbarComponente>
     <router-view />
+    <notifications-list />
   </div>
 </template>
 
 <script>
 import NavbarComponente from "@/components/NavbarComponente.vue";
+import NotificationsList from "@/components/NotificationsList.vue";
 import { mapGetters } from 'vuex'
 export default {
   name: 'app',
@@ -15,7 +17,8 @@ export default {
     ...mapGetters({ currentUser: 'currentUser' })
   },
   components: {
-    NavbarComponente
+    NavbarComponente,
+    NotificationsList
   }
 };
 </script>
