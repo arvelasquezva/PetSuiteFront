@@ -71,7 +71,6 @@ export default {
       this.$store.dispatch("updateStatusCare",{
         entero : dog_day_care_invoice_id
       }).then(this.show=true)
-
     }
   },
 };

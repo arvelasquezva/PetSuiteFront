@@ -113,10 +113,6 @@ export default new Vuex.Store({
             return axios
                 .post("/api/dog_day_care_invoices/consultPrice", credentials);
         },
-        getNotificacion({ commit }, ) {
-            return axios
-                .get("/notify", );
-        },
         registerDayCarePetition({ commit }, credentials) {
             return axios
                 .post("/api/dog_day_care_invoices/load", credentials);
