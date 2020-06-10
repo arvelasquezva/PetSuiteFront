@@ -1,10 +1,10 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Cuidados Pendientes</h1>
+    <h1 class="mt-3">Cuidados En Progreso</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in caresActive"
+          v-for="item in caresProgress"
           :key="item.id"
           tag="article"
           style="max-width: 20rem;"
@@ -14,7 +14,7 @@
             <b-card-title> Tienes un Servicio pendiente para <strong>{{ item.dog_daycare_invoice_dog_name }}</strong></b-card-title>
             <b-card-sub-title class="mb-2" >Duración: {{ item.dog_daycare_invoice_duration }} Horas</b-card-sub-title>
             <b-card-text><strong>El precio a cobrar es: </strong>$ {{  item.dog_daycare_invoice_price}}</b-card-text>
-            <b-card-text><strong>Los servicios que debes hacer es: </strong></b-card-text>
+            <b-card-text><strong>Los servicios que debiste hacer es: </strong></b-card-text>
             <b-card-text 
               v-for="(value,key) in item.dog_daycare_invoice_services_names" 
               v-bind:key="key"
@@ -28,7 +28,7 @@
           >
             <p class="my-4">Has terminado el servicio para {{ item.dog_daycare_invoice_dog_name }}</p>
           </b-modal>
-          <b-button variant="danger" block v-on:click="actualizarEstado(item.dog_daycare_invoice_id)">Termina el Servicio</b-button>
+          <b-button variant="success" block v-on:click="actualizarEstado(item.dog_daycare_invoice_id)">Termina el Servicio</b-button>
         </b-card>
       </div>
     </b-row>
@@ -38,7 +38,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "CaresActive",
+  name: "CaresInProgess",
   data() {
     return {
       show: false,
@@ -46,7 +46,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["caresActive"]),
+    ...mapState(["caresProgress"]),
   },
   created() {
     if (localStorage.getItem("user")) {
@@ -56,15 +56,16 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.getCaresActive();
+    this.getCaresInProgess();
   },
   methods: {
     handleOk() {
       location.reload();
     },
-    getCaresActive() {
-      this.$store.dispatch("getCaresActive", {
-        cadena: this.currentUser.user,
+    getCaresInProgess() {
+      this.$store.dispatch("getCaresInProgess", {
+        cadena1: this.currentUser.user,
+        cadena2: "En progreso",
       });
     },
     actualizarEstado(dog_day_care_invoice_id){

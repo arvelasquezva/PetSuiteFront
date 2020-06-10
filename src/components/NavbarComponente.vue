@@ -26,7 +26,8 @@
         <div v-else-if="rolIn==='ROLE_DOGDAYCARE'">
           <b-navbar-nav>
             <b-nav-item href="/MyServices">Mis Servicios</b-nav-item>
-            <b-nav-item href="/CaresActive">Cuidados Pendientes</b-nav-item>
+            <b-nav-item href="/CaresPending">Cuidados Por Empezar</b-nav-item>
+            <b-nav-item href="/CaresInProgess">Cuidados En Curso</b-nav-item>
           </b-navbar-nav>
         </div>
       </div>

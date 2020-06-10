@@ -19,8 +19,10 @@ export default new Vuex.Store({
         dogDayCares: [], //Guarderias
         services: [], //Servicios de una Guarderia
         servicesUser: [], //Servicios que puede ver el cliente
-        caresActive: [], //Peticiones Activas de una guarderia
+        caresPending: [], //Peticiones pendientes por empezar de una guarderia
+        caresProgress: [], //Cuidados en Progreso de una guarderia
         caresInvoice: [], //Peticiones terminadas de una guarderia
+        caresForBeginning: [], //Cuidados Aceptados para cancelar
     },
     mutations: {
         SET_USER_PET(state, petData) {
@@ -61,8 +63,14 @@ export default new Vuex.Store({
         SET_CLIENT_SERVICES(state, servicesData) {
             state.servicesUser = servicesData;
         },
-        SET_CARES_ACTIVE(state, caresData) {
-            state.caresActive = caresData;
+        SET_CARES_PENDING(state, caresData) {
+            state.caresPending = caresData;
+        },
+        SET_CARES_PROGRESS(state, caresData) {
+            state.caresProgress = caresData;
+        },
+        SET_CARES_FOR_BEGINNING(state, caresData) {
+            state.caresForBeginning = caresData;
         },
         SET_CARES_INVOICE(state, invoiceData) {
             state.caresInvoice = invoiceData;
@@ -168,7 +176,7 @@ export default new Vuex.Store({
         },
         updateStatusCare({ commit }, credentials) {
             return axios
-                .post("/api/dog_day_care_invoices/endService", credentials);
+                .post("/api/dog_day_care_invoices/updateCareInvoiceStatus", credentials);
         },
         rateWalker({ commit }, credentials) {
             return axios
@@ -192,14 +200,32 @@ export default new Vuex.Store({
                 .post("api/walkinvoices/dogsByWalkerAndStatusProgress", credentials);
             commit('SET_WALKER_PETS_ACTIVE', data);
         },
-        async getCaresActive({ commit }, credentials) {
+        async getCaresPending({ commit }, credentials) {
             const { data } = await axios
-                .post("api/dog_day_cares/pendingCaresList", credentials);
-            commit('SET_CARES_ACTIVE', data);
+                .post("api/dog_day_cares/CaresListStatus", credentials);
+            commit('SET_CARES_PENDING', data);
+        },
+        async getCaresInProgess({ commit }, credentials) {
+            const { data } = await axios
+                .post("api/dog_day_cares/CaresListStatus", credentials);
+            commit('SET_CARES_PROGRESS', data);
+        },
+        async getCaresForBeginning({ commit }, credentials) {
+            const { data } = await axios
+                .post("api/clients/CaresListStatus", credentials);
+            commit('SET_CARES_FOR_BEGINNING', data);
         },
         sendStatusPetition({ commit }, credentials) {
             return axios
                 .post("api/walkpetitions/denyoraccept", credentials);
+        },
+        cancelCare({ commit }, credentials) {
+            return axios
+                .post("api/dog_day_care_invoices/cancelPetition", credentials);
+        },
+        cancelWalk({ commit }, credentials) {
+            return axios
+                .post("/api/walkinvoices/cancelPetition", credentials);
         },
         registerServicesDogDayCare({ commit }, credentials) {
             return axios

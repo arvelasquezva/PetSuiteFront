@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
 import MyPets from '../views/User/MyPets.vue';
+import MyPetitions from '../views/User/MyPetitions.vue';
 import Profile from '../views/Profile.vue';
 import DogDayCares from '../views/DogDayCares/DogDayCares.vue';
 import DogDayCareServices from '../views/DogDayCares/DogDayCareServices.vue';
@@ -23,10 +24,11 @@ import WalksProgress from '@/components/Walker/WalksProgress.vue';
 import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
 import Notificacions from '@/components/Walker/Notifications.vue';
 
-import WalkForAccept from '@/components/User/WalkForAccept.vue';
+
 
 import SearchDayCare from '@/components/Dog_Day_Care/SearchDaycare.vue';
-import CaresActive from '@/components/Dog_Day_Care/CaresActives.vue';
+import CaresPending from '@/components/Dog_Day_Care/CaresPending.vue';
+import CaresInProgess from '@/components/Dog_Day_Care/CaresInProgess.vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
@@ -92,7 +94,7 @@ const routes = [{
         //Ruta para las peticiones a aceptar precio
         path: '/MyPetitions',
         name: 'MyPetitions',
-        component: WalkForAccept
+        component: MyPetitions
     },
     {
         //Ruta para las peticiones aceptadas
@@ -135,9 +137,14 @@ const routes = [{
         component: SearchDayCare
     },
     {
-        path: '/CaresActive',
-        name: 'CaresActive',
-        component: CaresActive
+        path: '/CaresPending',
+        name: 'CaresPending',
+        component: CaresPending
+    },
+    {
+        path: '/CaresInProgess',
+        name: 'CaresInProgess',
+        component: CaresInProgess
     }
 ]
 

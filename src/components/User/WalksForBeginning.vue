@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Paseos Por Empezar</h1>
+    <h1 class="mt-3">Paseos Solicitados</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
@@ -12,7 +12,7 @@
         >
           <b-card-body>
             <b-card-title>
-              No olvides pasear a
+              No olvides matar
               <strong>{{ item.dog_name }}</strong></b-card-title
             >
             <b-card-sub-title class="mb-2"
@@ -40,11 +40,7 @@
               }}
             </b-card-text>
           </b-card-body>
-
-          <b-modal v-model="show" size="sm" @ok="handleOk">
-            <p class="my-4">Has iniciado el paseo para {{ item.dog_name }}</p>
-          </b-modal>
-          <b-modal
+        <b-modal
             id="modal-prevent-closing"
             ref="modal"
             title="Cancelar"
@@ -68,15 +64,7 @@
               </b-form-group>
             </form>
           </b-modal>
-          <b-button
-            variant="success"
-            block
-            v-on:click="actualizarEstado(item.walk_invoice_id)"
-            >Empieza el Paseo</b-button
-          >
-          <b-button variant="danger" block v-b-modal.modal-prevent-closing user="'item'" v-on:click="sendInfo(item)"
-            >Cancela el Servicio</b-button
-          >
+          <b-button variant="danger" block v-b-modal.modal-prevent-closing user="'item'" v-on:click="sendInfo(item)"> Cancela el Servicio </b-button>
         </b-card>
       </div>
     </b-row>
@@ -86,14 +74,14 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "WalksAccept",
+  name: "WalksForBeginning",
   data() {
     return {
       show: false,
       currentUser: "",
       name: "",
       nameState: null,
-      selectedUser: "",
+      selectedUser: '',
     };
   },
   computed: {
@@ -111,7 +99,7 @@ export default {
   },
   methods: {
     sendInfo(item) {
-      this.selectedUser = item;
+        this.selectedUser = item;
     },
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity();
@@ -130,12 +118,7 @@ export default {
     },
     handleSubmit() {
       // Push the name to submitted names
-      this.cancelarServicio(
-        this.name,
-        this.selectedUser.walk_invoice_id,
-        this.selectedUser.client_id,
-        this.selectedUser.dog_walker_id
-      );
+      this.cancelarServicio(this.name, this.selectedUser.walk_invoice_id, this.selectedUser.dog_walker_id,this.selectedUser.client_id);
       // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");
@@ -149,20 +132,14 @@ export default {
         cadena: this.currentUser.user,
       });
     },
-    actualizarEstado(walk_invoice_id) {
-      this.$store
-        .dispatch("updateStatusWalk", {
-          entero: walk_invoice_id,
-        })
-        .then((this.show = true));
-    },
     cancelarServicio(name, id_petition, id_user_Cancelled, id_user_whoCancel) {
-      this.$store.dispatch("cancelWalk", {
-        id_petition: id_petition,
-        user_Cancelled: id_user_Cancelled,
-        user_whoCancel: id_user_whoCancel,
-        reasonCancellation: name,
-      });
+      this.$store
+        .dispatch("cancelWalk", {
+          id_petition : id_petition,
+          user_Cancelled : id_user_Cancelled,
+          user_whoCancel : id_user_whoCancel,
+          reasonCancellation : name
+        })
     },
   },
 };

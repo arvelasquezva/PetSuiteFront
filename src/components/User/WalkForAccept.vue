@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Peticiones</h1>    
+    <h1 class="mt-3">Paseos por aceptar precio</h1>    
     <b-row class="mt-1">      
       <div class="cards mx-5 mb-5">         
         <b-card

@@ -1,10 +1,10 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Paseos Por Empezar</h1>
+    <h1 class="mt-3">Cuidados Por Empezar</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in walksAccept"
+          v-for="item in caresPending"
           :key="item.id"
           tag="article"
           style="max-width: 20rem;"
@@ -12,38 +12,36 @@
         >
           <b-card-body>
             <b-card-title>
-              No olvides pasear a
-              <strong>{{ item.dog_name }}</strong></b-card-title
+              Tienes un Servicio pendiente para
+              <strong>{{
+                item.dog_daycare_invoice_dog_name
+              }}</strong></b-card-title
             >
             <b-card-sub-title class="mb-2"
-              >Raza: {{ item.dog_race }}</b-card-sub-title
+              >Duración:
+              {{ item.dog_daycare_invoice_duration }} Horas</b-card-sub-title
             >
             <b-card-text
-              ><strong>Debes recogerlo en: </strong
-              >{{ item.walk_invoice_address }}
-            </b-card-text>
-            <b-card-text
-              ><strong>El paseo debe empezar : </strong
-              >{{ item.walk_invoice_date }}
-            </b-card-text>
-            <b-card-text
-              ><strong>El paseo durará: </strong
-              >{{ item.walk_invoice_duration }} minutos</b-card-text
+              ><strong>El precio a cobrar es: </strong>$
+              {{ item.dog_daycare_invoice_price }}</b-card-text
             >
             <b-card-text
-              ><strong>El usuario {{ item.client_id }} te recomienda: </strong
-              >{{ item.walk_invoice_notes }}
-            </b-card-text>
+              ><strong>Los servicios que debes hacer es: </strong></b-card-text
+            >
             <b-card-text
-              ><strong>El precio de este paseo es: </strong>${{
-                item.walk_invoice_price
-              }}
+              v-for="(value, key) in item.dog_daycare_invoice_services_names"
+              v-bind:key="key"
+            >
+              * {{ value }}
             </b-card-text>
           </b-card-body>
-
           <b-modal v-model="show" size="sm" @ok="handleOk">
-            <p class="my-4">Has iniciado el paseo para {{ item.dog_name }}</p>
+            <p class="my-4">
+              Has empezado el cuidado para
+              {{ item.dog_daycare_invoice_dog_name }}
+            </p>
           </b-modal>
+
           <b-modal
             id="modal-prevent-closing"
             ref="modal"
@@ -71,10 +69,15 @@
           <b-button
             variant="success"
             block
-            v-on:click="actualizarEstado(item.walk_invoice_id)"
-            >Empieza el Paseo</b-button
+            v-on:click="actualizarEstado(item.dog_daycare_invoice_id)"
+            >Comienza el Servicio</b-button
           >
-          <b-button variant="danger" block v-b-modal.modal-prevent-closing user="'item'" v-on:click="sendInfo(item)"
+          <b-button
+            variant="danger"
+            block
+            v-b-modal.modal-prevent-closing
+            user="'item'"
+            v-on:click="sendInfo(item)"
             >Cancela el Servicio</b-button
           >
         </b-card>
@@ -86,7 +89,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "WalksAccept",
+  name: "CaresPending",
   data() {
     return {
       show: false,
@@ -97,7 +100,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["walksAccept"]),
+    ...mapState(["caresPending"]),
   },
   created() {
     if (localStorage.getItem("user")) {
@@ -107,7 +110,7 @@ export default {
         localStorage.removeItem("user");
       }
     }
-    this.getWalksAccept();
+    this.getCaresPending();
   },
   methods: {
     sendInfo(item) {
@@ -132,9 +135,9 @@ export default {
       // Push the name to submitted names
       this.cancelarServicio(
         this.name,
-        this.selectedUser.walk_invoice_id,
-        this.selectedUser.client_id,
-        this.selectedUser.dog_walker_id
+        this.selectedUser.dog_daycare_invoice_id,
+        this.selectedUser.dog_daycare_invoice_client_id,
+        this.selectedUser.dog_daycare_invoice_dogdaycare_id
       );
       // Hide the modal manually
       this.$nextTick(() => {
@@ -144,20 +147,21 @@ export default {
     handleOk() {
       location.reload();
     },
-    getWalksAccept() {
-      this.$store.dispatch("getWalksAccept", {
-        cadena: this.currentUser.user,
+    getCaresPending() {
+      this.$store.dispatch("getCaresPending", {
+        cadena1: this.currentUser.user,
+        cadena2: "Aceptado",
       });
     },
-    actualizarEstado(walk_invoice_id) {
+    actualizarEstado(dog_day_care_invoice_id) {
       this.$store
-        .dispatch("updateStatusWalk", {
-          entero: walk_invoice_id,
+        .dispatch("updateStatusCare", {
+          entero: dog_day_care_invoice_id,
         })
         .then((this.show = true));
     },
     cancelarServicio(name, id_petition, id_user_Cancelled, id_user_whoCancel) {
-      this.$store.dispatch("cancelWalk", {
+      this.$store.dispatch("cancelCare", {
         id_petition: id_petition,
         user_Cancelled: id_user_Cancelled,
         user_whoCancel: id_user_whoCancel,
