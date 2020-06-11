@@ -23,8 +23,12 @@ export default new Vuex.Store({
         caresProgress: [], //Cuidados en Progreso de una guarderia
         caresInvoice: [], //Peticiones terminadas de una guarderia
         caresForBeginning: [], //Cuidados Aceptados para cancelar
+        notifications: [] //Notificaciones de un Usuario
     },
     mutations: {
+        SET_USER_NOTIFY(state, notifyData) {
+            state.notifications = notifyData;
+        },
         SET_USER_PET(state, petData) {
             state.pets = petData;
             localStorage.setItem('pet', JSON.stringify(petData));
@@ -226,6 +230,9 @@ export default new Vuex.Store({
         cancelWalk({ commit }, credentials) {
             return axios
                 .post("/api/walkinvoices/cancelPetition", credentials);
+        },
+        getNotification({ commit }, credentials) {
+            commit('SET_USER_NOTIFY', credentials);
         },
         registerServicesDogDayCare({ commit }, credentials) {
             return axios

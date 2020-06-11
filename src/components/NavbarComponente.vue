@@ -1,6 +1,6 @@
 <template>
   <header
-    class="navbar bd-navbar flex-column flex-md-row navbar-dark navbar-expand"
+    class="navbar bd-navbar flex-column flex-md-row navbar-light navbar-expand"
   >
     <b-container>
       <b-navbar-brand href="/">

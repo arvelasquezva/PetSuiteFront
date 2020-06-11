@@ -19,10 +19,10 @@ import UpdateDogwalker from '@/components/Update/UpdateDogwalker.vue';
 import UpdateClient from '@/components/Update/UpdateClient.vue';
 
 import WalkPetitionActive from '@/components/Walker/WalkPetitionActive.vue';
-import WalksAccept from '@/components/Walker/WalksAccept.vue';
+import WalksAccepts from '@/views/Walker/WalksAccepts.vue';
 import WalksProgress from '@/components/Walker/WalksProgress.vue';
 import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
-import Notificacions from '@/components/Walker/Notifications.vue';
+
 
 
 
@@ -60,11 +60,6 @@ const routes = [{
         component: MyPets,
     },
     {
-        path: '/Notificacions',
-        name: 'Notificacions',
-        component: Notificacions,
-    },
-    {
         path: '/MyServices',
         name: 'MyServices',
         component: DogDayCareServices,
@@ -100,7 +95,7 @@ const routes = [{
         //Ruta para las peticiones aceptadas
         path: '/WalksAccept',
         name: 'WalksAccept',
-        component: WalksAccept
+        component: WalksAccepts
     },
     {
         //Ruta para las peticiones en progreso

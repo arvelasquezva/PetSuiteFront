@@ -54,7 +54,8 @@
               sendStatusPetitions(
                 item.dog_id,
                 item.precio_proposal,
-                item.walk_petition_walker_user
+                item.walk_petition_walker_user,
+                item.dog_name
               )
             "
             >{{ state }}</b-button
@@ -123,7 +124,7 @@ export default {
         cadena: this.currentUser.user,
       });
     },
-    sendStatusPetitions(dog_id, price, dogWalker) {
+    sendStatusPetitions(dog_id, price, dogWalker, dogName) {
       this.$store
         .dispatch("sendStatusPetition", {
           dog_id: dog_id,
@@ -131,6 +132,7 @@ export default {
           dog_walker_id: dogWalker,
           client_id: this.currentUser.user,
           walk_invoice_status: this.state,
+          dog_name: dogName,
         })
         .then((this.show = true));
     },

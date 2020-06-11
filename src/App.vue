@@ -23,7 +23,7 @@ export default {
 #app {
   font-family: "Montserrat", sans-serif;
   place-items: center;
-  background: #063869;
+  background: linear-gradient(to bottom, #000428, #004e92);
 }
 NavbarComponente{
   position: sticky;

@@ -56,7 +56,7 @@
           </b-form-group>
           <b-button
             variant="info"
-            v-on:click="proposePetition(item.walk_petition_id)"
+            v-on:click="proposePetition(item.walk_petition_id, item.dog_id)"
             >Proponle un precio a {{ item.user }}</b-button
           >
           <b-modal 
@@ -99,11 +99,12 @@ export default {
     handleOk() {
       location.reload();
     },
-    proposePetition(id_petition) {
+    proposePetition(id_petition, dog_id_petition) {
       this.$store.dispatch("proposePetition", {
         walk_petition_walker_user: this.currentUser.user,
         walk_petition_id: id_petition,
         precio_proposal: this.valor,
+        dog_id: dog_id_petition
       }).then(this.show=true);
     },
   },
