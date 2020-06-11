@@ -1,89 +1,67 @@
 <template>
   <div class="body">
     <div>
-    <h1 class="mt-3 text-center ">Busca una guarderia</h1>
-      <div class=" mx-1 mb-5">
-        <b-form @submit.prevent="buscarGuarderia">    
-          <b-form-group id="input-group-1" label-for="input-1">
-            <b-input-group>
-              <b-form-input
-                  id="input-1"  
-                  v-model="cadena"
-                  required 
-                  placeholder="Escribe lo que quieres buscar"         
-                >          
-              </b-form-input>
-                <template v-slot:append>
-                  <b-dropdown variant="success">
-                    <template v-slot:button-content>
-                      Categoria
-                    </template>
-                    <b-dropdown-item>Nombre</b-dropdown-item>
-                    <b-dropdown-item>Servicios</b-dropdown-item>   
-                    <b-dropdown-item>Calificacion</b-dropdown-item>
-                  </b-dropdown>                
-                </template>
-            </b-input-group>
-          </b-form-group>
-          <b-button block pill type="submit" variant="success">
-            Buscar
+      <h1 class="mt-3 text-center ">Busca una guarderia</h1>
+      <div class=" mx-1 mb-5">        
+        <h5 class="mt-6">Como quieres realizar tu busqueda</h5>
+        <div class="mt-3">          
+          <b-button v-on:click="toggleGeneral" squared variant="success">
+            Busqueda General
           </b-button>
-        </b-form>
+          <b-button v-on:click="toggleName" squared variant="success">
+           Por nombre
+          </b-button>
+          <b-button v-on:click="toggleService" squared variant="success">
+           Por servicio
+          </b-button>
+          <b-button v-on:click="toggleScore" squared variant="success">
+           Por Calificacion
+          </b-button>
+        </div>
+        <keep-alive>
+        <component v-bind:is= "component"/>
+        </keep-alive>
       </div>
-    <div id="app">
-  <h2 class="text-center mx-4 mb-4">Resultados</h2>
-    <b-row class="mt-1">
-      <b-card
-        v-for="item in info"
-        :key="item"
-        tag="article"
-          style="max-width: 17rem;"
-          class="card">
-        <b-card-body>
-          <b-card-title><strong>{{item.dog_daycare_name}}</strong></b-card-title>
-          <b-card-sub-title>
-            <strong>Telefono: </strong>{{item.dog_daycare_phone}}
-            <strong>Dirección:</strong>  {{item.dog_daycare_address}}
-          </b-card-sub-title>
-          <b-card-text><strong>Puntaje: </strong>{{ item.dog_daycare_score }} </b-card-text>
-          <b-card-text><strong>Precio Base: </strong>$ {{ item.dog_daycare_price_base }} </b-card-text>
-          <b-card-text><strong>Precio Recargo: </strong>$ {{ item.dog_daycare_tax }} </b-card-text>
-        </b-card-body>
-        <router-link :to="{name: 'dogDayCares', params:{id: item.user}}">
-            <b-button variant="primary">Go to {{ item.dog_daycare_name }}</b-button>
-          </router-link>
-      </b-card>
-      </b-row>
-    </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import SearchByScore from '@/components/Dog_Day_Care/SearchByScore.vue'
+import SearchByName from '@/components/Dog_Day_Care/SearchByName.vue'
+import SearchByService from '@/components/Dog_Day_Care/SearchByService.vue'
+import SearchGeneral from '@/components/Dog_Day_Care/SearchGeneral.vue'
 export default {
   name: "SearchDaycare",
+  components: { 
+    SearchByScore, SearchByName, SearchByService, SearchGeneral
+    },
   data() {
     return {
-    currentUser: {},
-    cadena: "",
-    info: []
+    component:"SearchGeneral"
     }
   },
-  computed: {
-    ...mapState(["daycares"]),
-  },
   methods: { 
-      getDaycare(){
-      this.$store.dispatch("getDogDayCares", {
-          user: this.currentUser.user
-          });
+    toggleName(){
+      if (this.component != SearchByName) {
+        this.component = SearchByName;
+      }
     },
-      buscarGuarderia() {      
-      this.$store.dispatch("buscarGuarderia", [{
-        cadena: this.cadena,
-      }, "clients"])
-      .then(response => (this.info = response.data));
+    toggleService(){
+     if (this.component != SearchByService) {
+        this.component = SearchByService;;
+      }
+    },
+    toggleScore(){
+      if (this.component != SearchByScore) {
+        this.component = SearchByScore;
+      }
+    },
+    toggleGeneral(){
+      if (this.component != SearchGeneral) {
+        this.component = SearchGeneral;;
+      }
     }
   },
     created() {
@@ -98,12 +76,17 @@ export default {
 
 };
 </script>
+
 <style lang="scss" scoped>
 h1 {
   color: #40db9a;
 }
 h2 {
   color: #40db9a;
+}
+h5 {
+  color: #40db9a;
+  text-align: center;
 }
 .body {
   margin: 0;
