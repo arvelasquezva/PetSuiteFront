@@ -5,12 +5,25 @@
       <div class=" mx-1 mb-5">
         <b-form @submit.prevent="buscarGuarderia">    
           <b-form-group id="input-group-1" label-for="input-1">
-            <b-form-input
-                id="input-1"  
-                v-model="cadena"
-                required          
-              >          
-            </b-form-input>
+            <b-input-group>
+              <b-form-input
+                  id="input-1"  
+                  v-model="cadena"
+                  required 
+                  placeholder="Escribe lo que quieres buscar"         
+                >          
+              </b-form-input>
+                <template v-slot:append>
+                  <b-dropdown variant="success">
+                    <template v-slot:button-content>
+                      Categoria
+                    </template>
+                    <b-dropdown-item>Nombre</b-dropdown-item>
+                    <b-dropdown-item>Servicios</b-dropdown-item>   
+                    <b-dropdown-item>Calificacion</b-dropdown-item>
+                  </b-dropdown>                
+                </template>
+            </b-input-group>
           </b-form-group>
           <b-button block pill type="submit" variant="success">
             Buscar
@@ -40,8 +53,8 @@
             <b-button variant="primary">Go to {{ item.dog_daycare_name }}</b-button>
           </router-link>
       </b-card>
-    </b-row>
-</div>
+      </b-row>
+    </div>
     </div>
   </div>
 </template>

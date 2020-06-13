@@ -79,9 +79,19 @@ export default new Vuex.Store({
         SET_CARES_INVOICE(state, invoiceData) {
             state.caresInvoice = invoiceData;
         },
-
         CLEAR_USER_DATA() {
             localStorage.removeItem('user');
+        },
+        PUSH_NOTIFICATION(state, notification) {
+            state.notifications.push({
+                ...notification,
+                id: (Math.random().toString(36) + Date.now().toString(36)).substr(2)
+            })
+        },
+        REMOVE_NOTIFICATION(state, notificationToRemove) {
+            state.notifications = state.notifications.filter(notification => {
+                return notification.id != notificationToRemove.id;
+            })
         }
     },
     actions: {
@@ -118,8 +128,12 @@ export default new Vuex.Store({
         async registerMascota({ commit }, credentials) {
             await axios.post("api/dogs/register", credentials);
         },
-        registerPetition({ commit }, credentials) {
-            return axios.post("api/walkpetitions/create", credentials);
+        registerPetition({ commit, dispatch }, credentials) {
+            return axios.post("api/walkpetitions/create", credentials)
+                .then(dispatch('addNotification', {
+                    type: 'success',
+                    message: 'Se ha creado una nueva peticion.'
+                }, { root: true }));
         },
         consultPriceCarePetition({ commit }, credentials) {
             return axios
@@ -174,9 +188,13 @@ export default new Vuex.Store({
                 .get("api/clients/allDogDayCares");
             commit('SET_DOGDAYCARE_DATA', data);
         },
-        updateStatusWalk({ commit }, credentials) {
+        updateStatusWalk({ commit, dispatch }, credentials) {
             return axios
-                .post("/api/walkinvoices/updateInvoiceStatus", credentials);
+                .post("/api/walkinvoices/updateInvoiceStatus", credentials)
+                .then(dispatch('addNotification', {
+                    type: 'success',
+                    message: 'Se ha actualizado el estado del paseo.'
+                }, { root: true }));
         },
         updateStatusCare({ commit }, credentials) {
             return axios
@@ -190,9 +208,13 @@ export default new Vuex.Store({
             return axios
                 .post("/api/dog_day_care_invoices/score", credentials);
         },
-        proposePetition({ commit }, credentials) {
+        proposePetition({ commit, dispatch }, credentials) {
             return axios
-                .post("api/walkpetitions/propose", credentials);
+                .post("api/walkpetitions/propose", credentials)
+                .then(dispatch('addNotification', {
+                    type: 'success',
+                    message: 'Se ha creado una propuesta para una peticion.'
+                }, { root: true }));
         },
         async getPetitionsforActive({ commit }, credentials) {
             const { data } = await axios
@@ -254,6 +276,12 @@ export default new Vuex.Store({
         },
         logout({ commit }) {
             commit('CLEAR_USER_DATA');
+        },
+        addNotification({ commit }, notification) {
+            commit('PUSH_NOTIFICATION', notification);
+        },
+        removeNotification({ commit }, notification) {
+            commit('REMOVE_NOTIFICATION', notification);
         }
     },
     getters: {

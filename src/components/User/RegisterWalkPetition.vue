@@ -41,7 +41,9 @@
           <b-form-timepicker
             id="input-3"
             now-button
+            label-now-button="Esta hora"
             reset-button
+            label-close-button="Cerrar"
             locale="en"
             v-model="pickup_time"
             required
