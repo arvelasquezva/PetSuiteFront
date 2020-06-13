@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <NavbarComponente></NavbarComponente>
+    <Notifications></Notifications>
     <router-view />
-    <notifications-list />
   </div>
 </template>
 
 <script>
 import NavbarComponente from "@/components/NavbarComponente.vue";
-import NotificationsList from "@/components/NotificationsList.vue";
+import Notifications from "@/components/Notifications.vue";
 import { mapGetters } from 'vuex'
 export default {
   name: 'app',
@@ -18,7 +18,7 @@ export default {
   },
   components: {
     NavbarComponente,
-    NotificationsList
+    Notifications
   }
 };
 </script>

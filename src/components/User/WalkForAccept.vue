@@ -81,7 +81,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
+import axios from 'axios';
 export default {
   name: "WalkForAccept",
   data() {
@@ -114,9 +115,9 @@ export default {
       location.reload();
     },
     obtenerDatosPaseador(dogWalker) {      
-      this.$store.dispatch("obtenerDatosPaseador", [{
+      axios.post("/api/clients/mywalker",{
         cadena: dogWalker,
-      }, "clients"])
+      })
       .then(response => (this.info = response.data));
     },
     getPetitionsforActive() {

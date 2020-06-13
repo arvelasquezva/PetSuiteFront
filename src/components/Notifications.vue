@@ -1,29 +1,29 @@
 <template>
-  <div>
-    <b-modal
-      v-model="show"
+  <div class="notifications-list">
+    <b-alert
+      dismissible
+      :show="showAlert"
       v-for="item in notifications"
       :key="item.id"
       size="sm"
-      @ok="handleOk(item.notification_id)"
+      @dismissed="handleOk(item.notification_id)"
     >
       <p class="my-4">
         {{ item.notification_description }}
       </p>
-    </b-modal>
+    </b-alert>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-import Notifications from "@/components/User/Notifications.vue";
 export default {
   name: "Notificacions",
   data() {
     return {
       currentUser: "",
-      show: false,
+      showAlert: false,
     };
   },
   computed: {
@@ -44,10 +44,10 @@ export default {
           })
           .then((response) => {
             if (Object.keys(response.data).length === 0) {
-              this.show = false;
+              this.showAlert = false;
             } else {
               this.$store.dispatch("getNotification", response.data);
-              this.show = true;
+              this.showAlert = true;
             }
           });
       }, 10000);
@@ -66,3 +66,12 @@ export default {
   beforeDestroy() {},
 };
 </script>
+<style>
+.notifications-list{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 15px;
+    width: 320px;
+}
+</style>
