@@ -83,10 +83,8 @@ export default {
       notification_description: "",
       nameState: null,
       selectedUser: "",
+      petsActive: []
     };
-  },
-  computed: {
-    ...mapState(["petsActive"]),
   },
   created() {
     if (localStorage.getItem("user")) {
@@ -128,8 +126,10 @@ export default {
       });
     },
     dogsInMyCharge() {
-      this.$store.dispatch("getDogsInMyCharge",{
+      axios.post("/api/dog_day_care_invoices/myCurrentDogList",{
         cadena: this.currentUser.user,
+      }).then((response) => {
+        this.petsActive = response.data;
       });
     },
     notificarCliente(description, dogName, dogOwner){

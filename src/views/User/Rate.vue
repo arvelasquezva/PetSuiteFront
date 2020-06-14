@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-md-12">
-      <WalksDone class="m-4"></WalksDone>
+      <WalksDone></WalksDone>
     </div>
     <div class="col-md-12">
       <CaresDone></CaresDone>

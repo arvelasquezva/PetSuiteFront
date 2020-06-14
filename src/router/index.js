@@ -5,9 +5,10 @@ import SignUp from '../views/SignUp.vue';
 import MyPets from '../views/User/MyPets.vue';
 import MyPetitions from '../views/User/MyPetitions.vue';
 import Profile from '../views/Profile.vue';
-import DogDayCares from '../views/DogDayCares/DogDayCares.vue';
+import DogDayCares from '../views/User/DogDayCares.vue';
 import DogDayCareServices from '../views/DogDayCares/DogDayCareServices.vue';
 import Rate from '../views/User/Rate.vue';
+import WalkInProgress from '../views/Walker/WalksInProgress.vue';
 
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/Register/UsuarioComponente.vue';
@@ -20,7 +21,6 @@ import UpdateClient from '@/components/Update/UpdateClient.vue';
 
 import WalkPetitionActive from '@/components/Walker/WalkPetitionActive.vue';
 import WalksAccepts from '@/views/Walker/WalksAccepts.vue';
-import WalksProgress from '@/components/Walker/WalksProgress.vue';
 import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
 
 
@@ -28,7 +28,7 @@ import DogsInMyCharge from '@/components/Walker/DogsInMyCharge.vue';
 
 import SearchDayCare from '@/components/Dog_Day_Care/SearchDaycare.vue';
 import CaresPending from '@/components/Dog_Day_Care/CaresPending.vue';
-import CaresInProgess from '@/components/Dog_Day_Care/CaresInProgess.vue';
+import CaresInProgess from '@/views/DogDayCares/CaresInProgress.vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
@@ -101,7 +101,7 @@ const routes = [{
         //Ruta para las peticiones en progreso
         path: '/WalksProgress',
         name: 'WalksProgress',
-        component: WalksProgress
+        component: WalkInProgress
     },
     {
         //Ruta para las ver recibos terminados y calificar paseador

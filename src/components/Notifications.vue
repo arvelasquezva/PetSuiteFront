@@ -8,6 +8,7 @@
       size="sm"
       @dismissed="handleOk(item.notification_id)"
     >
+      <h2><strong>{{ item.notification_subject }}</strong></h2>
       <p class="my-4">
         {{ item.notification_description }}
       </p>
@@ -41,7 +42,9 @@ export default {
           .post("/api/notifications/showMyNotifications", {
             user_id: this.currentUser.user,
             status: "No leido",
-          })
+          }, {headers: {
+            Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
+          }})
           .then((response) => {
             if (Object.keys(response.data).length === 0) {
               this.showAlert = false;
@@ -74,4 +77,5 @@ export default {
     margin-right: 15px;
     width: 320px;
 }
+
 </style>

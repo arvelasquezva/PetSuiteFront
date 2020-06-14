@@ -47,7 +47,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "WalksDone",
+  name: "CaresDone",
   data() {
     return {
       currentUser: "",
