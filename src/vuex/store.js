@@ -112,9 +112,17 @@ export default new Vuex.Store({
         obtenerDatosPaseador({ commit }, [credentials, userClass]) {
             return axios.post("/api/" + userClass + "/mywalker", credentials);
         },
-
-        buscarGuarderia({ commit }, [credentials, userClass]) {
+        buscarGuarderiaGeneral({ commit }, [credentials, userClass]) {
+            return axios.post("/api/" + userClass + "/searchdaycarebynameandservice", credentials);
+        },
+        buscarGuarderiaName({ commit }, [credentials, userClass]) {
             return axios.post("/api/" + userClass + "/searchdaycarebyname", credentials);
+        },
+        buscarGuarderiaService({ commit }, [credentials, userClass]) {
+            return axios.post("/api/" + userClass + "/searchdaycarebyservice", credentials);
+        },
+        buscarGuarderiaScore({ commit }, [credentials, userClass]) {
+            return axios.post("/api/" + userClass + "/searchdaycarebyscore", credentials);
         },
         async updateUsuario({ commit }, [credentials, userClass]) {
             console.log(credentials);
