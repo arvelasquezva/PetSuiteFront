@@ -1,5 +1,6 @@
 <template>
-    <div class="body">
+  <div class="body my-2">
+    <h1> Registrate como Hospeador </h1>
     <div class="SignUp">
       <img
         height="300"
@@ -85,9 +86,9 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success"
-          >Unete a PetSuite</b-button
-        >
+        <b-button block pill type="submit" variant="success">
+          Únete a PetSuite
+        </b-button>
       </b-form>
     </div>
   </div>
@@ -98,34 +99,38 @@ export default {
   name: "HospeadorComponente",
   data() {
     return {
-        user: "",
-        password: "",
-        dog_daycare_name: "",
-        dog_daycare_e_mail: "",
-        dog_daycare_phone: "",
-        dog_daycare_score: 0,
-        dog_daycare_address: "",
-        dog_daycare_type: false
+      user: "",
+      password: "",
+      dog_daycare_name: "",
+      dog_daycare_e_mail: "",
+      dog_daycare_phone: "",
+      dog_daycare_score: 0,
+      dog_daycare_address: "",
+      dog_daycare_type: false,
     };
   },
   methods: {
     registerUsuario() {
-      this.$store.dispatch("registerUsuario", [{
-        user: this.user,
-        password: this.password,
-        dog_daycare_name: this.dog_daycare_name,
-        dog_daycare_e_mail: this.dog_daycare_e_mail,
-        dog_daycare_phone: this.dog_daycare_phone,
-        dog_daycare_score: this.dog_daycare_score,
-        dog_daycare_address: this.dog_daycare_address,
-        dog_daycare_type: this.dog_daycare_type
-      }, "dog_day_cares"])
-      .then(({ data }) => {
+      this.$store
+        .dispatch("registerUsuario", [
+          {
+            user: this.user,
+            password: this.password,
+            dog_daycare_name: this.dog_daycare_name,
+            dog_daycare_e_mail: this.dog_daycare_e_mail,
+            dog_daycare_phone: this.dog_daycare_phone,
+            dog_daycare_score: this.dog_daycare_score,
+            dog_daycare_address: this.dog_daycare_address,
+            dog_daycare_type: this.dog_daycare_type,
+          },
+          "dog_day_cares",
+        ])
+        .then(({ data }) => {
           if (data === "") {
             alert("Error al Registrarte");
           } else {
-            alert ("Bienvenido a PetSuite")
-        	this.$router.push({name: 'Login'})
+            alert("Bienvenido a PetSuite");
+            this.$router.push({ name: "Login" });
           }
         });
     },
@@ -149,4 +154,3 @@ export default {
   background-color: #eef6e1;
 }
 </style>
-

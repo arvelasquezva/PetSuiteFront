@@ -1,88 +1,115 @@
 <template>
   <div>
     <h3 class="mt-3">Buscador por nombre</h3>
-      <b-form @submit.prevent="buscarGuarderiaName">    
-        <b-form-group id="input-group-1" label-for="input-1">
-          <b-input-group class="mt-3">
-            <b-form-input
-              id="input-1"  
-              v-model="cadena"
-              required
-              placeholder="Busca una guarderia por su nombre"
-            >
-            </b-form-input>
-            <b-input-group-append>
-              <b-button type="submit" variant="success">Buscar</b-button>
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
-      </b-form>
+    <b-form @submit.prevent="buscarGuarderiaName">
+      <b-form-group id="input-group-1" label-for="input-1">
+        <b-input-group class="mt-3">
+          <b-form-input
+            id="input-1"
+            v-model="cadena"
+            required
+            placeholder="Busca una guarderia por su nombre"
+          >
+          </b-form-input>
+          <b-input-group-append>
+            <b-button type="submit" variant="success">Buscar</b-button>
+          </b-input-group-append>
+        </b-input-group>
+      </b-form-group>
+    </b-form>
     <div id="app">
-  <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
-    <b-row class="mt-1">
-      <b-card
-        v-for="item in info"
-        :key="item"
-        tag="article"
-          style="max-width: 17rem;"
-          class="card">
-        <b-card-body>
-          <b-card-title><strong>{{item.dog_daycare_name}}</strong></b-card-title>
-          <b-card-sub-title>
-            <strong>Telefono: </strong>{{item.dog_daycare_phone}}
-            <strong>Dirección:</strong>  {{item.dog_daycare_address}}
-          </b-card-sub-title>
-          <b-card-text><strong>Puntaje: </strong>{{ item.dog_daycare_score }} </b-card-text>
-          <b-card-text><strong>Precio Base: </strong>$ {{ item.dog_daycare_price_base }} </b-card-text>
-          <b-card-text><strong>Precio Recargo: </strong>$ {{ item.dog_daycare_tax }} </b-card-text>
-        </b-card-body>
-        <router-link :to="{name: 'dogDayCares', params:{id: item.user}}">
-            <b-button variant="primary">Go to {{ item.dog_daycare_name }}</b-button>
-          </router-link>
-      </b-card>
+      <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
+      <b-row class="mt-1">
+        <div v-if="Object.keys(info).length === 0">
+          <NotFound class="mb-5"></NotFound>
+        </div>
+        <div v-else>
+          <b-card
+            v-for="item in info"
+            :key="item"
+            tag="article"
+            style="max-width: 17rem;"
+            class="card"
+          >
+            <b-card-body>
+              <b-card-title
+                ><strong>{{ item.dog_daycare_name }}</strong></b-card-title
+              >
+              <b-card-sub-title>
+                <strong>Telefono: </strong>{{ item.dog_daycare_phone }}
+                <strong>Dirección:</strong> {{ item.dog_daycare_address }}
+              </b-card-sub-title>
+              <b-card-text
+                ><strong>Puntaje: </strong>{{ item.dog_daycare_score }}
+              </b-card-text>
+              <b-card-text
+                ><strong>Precio Base: </strong>$
+                {{ item.dog_daycare_price_base }}
+              </b-card-text>
+              <b-card-text
+                ><strong>Precio Recargo: </strong>$ {{ item.dog_daycare_tax }}
+              </b-card-text>
+            </b-card-body>
+            <router-link
+              :to="{ name: 'dogDayCares', params: { id: item.user } }"
+            >
+              <b-button variant="primary"
+                >Go to {{ item.dog_daycare_name }}</b-button
+              >
+            </router-link>
+          </b-card>
+        </div>
       </b-row>
-    </div>  
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
+import  NotFound  from "@/components/NotFound.vue";
 export default {
-  name: 'SearchByName',
+  name: "SearchByName",
+  components:{
+    NotFound
+  },
   data() {
     return {
-    component:"SearchByName",
-    currentUser: {},
-    cadena: "",
-    info: []
-    }
+      component: "SearchByName",
+      currentUser: {},
+      cadena: "",
+      info: [],
+    };
   },
   computed: {
     ...mapState(["daycares"]),
   },
-  methods: { 
-      getDaycare(){
+  methods: {
+    getDaycare() {
       this.$store.dispatch("getDogDayCares", {
-          user: this.currentUser.user
-          });
+        user: this.currentUser.user,
+      });
     },
-      buscarGuarderiaName() {      
-      this.$store.dispatch("buscarGuarderiaName", [{
-        cadena: this.cadena,
-      }, "clients"])
-      .then(response => (this.info = response.data));
+    buscarGuarderiaName() {
+      this.$store
+        .dispatch("buscarGuarderiaName", [
+          {
+            cadena: this.cadena,
+          },
+          "clients",
+        ])
+        .then((response) => (this.info = response.data));
+    },
+  },
+  created() {
+    if (localStorage.getItem("user")) {
+      try {
+        this.currentUser = JSON.parse(localStorage.getItem("user"));
+      } catch (e) {
+        localStorage.removeItem("user");
+      }
     }
   },
-    created() {
-        if (localStorage.getItem("user")) {
-        try {
-            this.currentUser = JSON.parse(localStorage.getItem("user"));
-        } catch (e) {
-            localStorage.removeItem("user");
-            }
-        }
-    }
-}
+};
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>

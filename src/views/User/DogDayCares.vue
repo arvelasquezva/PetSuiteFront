@@ -1,11 +1,8 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <RegisterDaycare></RegisterDaycare>
-      </div>
-      <div class="col-md-6">
-        <InvoiceDaycare></InvoiceDaycare>
       </div>
     </div>
   </div>

@@ -9,7 +9,6 @@
             src="@/assets/Images/Daycare.jpg"
             alt="image slot"
           />
-          <h1>Valor: ${{ dog_daycare_invoice_price }}</h1>
         </div>
         <div class="col-md-7">
           <b-form @submit.prevent="makeDayCarePetition" class="pl-4">
@@ -33,7 +32,10 @@
               label-for="input-2"
             >
               <b-form-datepicker
+                placeholder="Selecciona Una Fecha"
                 id="example-datepicker"
+                :min="min"
+                :max="max"
                 v-model="pickup_date"
                 required
                 class="mb-2"
@@ -48,6 +50,7 @@
             >
               <b-form-timepicker
                 id="input-3"
+                placeholder="Selecciona Una Hora"
                 now-button
                 reset-button
                 locale="en"
@@ -81,10 +84,7 @@
               ></b-form-checkbox-group>
             </b-form-group>
             <!-- Fin de formulario -->
-            <b-button 
-              block pill 
-              type="submit" 
-              variant="warning">
+            <b-button block pill type="submit" variant="warning">
               Solicita tu precio
             </b-button>
             <b-button
@@ -97,12 +97,40 @@
           </b-form>
         </div>
       </div>
-      <b-modal 
-        centered 
-        v-model="show" 
-        size="sm"
-        @ok="handleOk">
+
+      <b-modal ok-only centered v-model="show" size="sm" @ok="handleOk">
         <p class="my-4">Has creado una petición para Guarderia</p>
+        <p class="my-4">Si deseas cancelarlo dirigete a <a href="/MyPetitions">Mis peticiones</a></p>
+      </b-modal>
+
+      <b-modal v-model="showPrice">
+        <template v-slot:modal-header="{ close }">
+          <h5>{{ invoice.dog_daycare_invoice_dogdaycare_id }}</h5>
+          <!-- Emulate built in modal header close button action -->
+          <b-button size="sm" variant="danger" @click="close()">
+           x
+          </b-button>
+        </template>
+        <p class="my-4">
+          <strong> Fecha del Servicio Solicitado: </strong
+          >{{ invoice.dog_daycare_invoice_date }}
+        </p>
+        <p class="my-4">
+          <strong> Horas Solicitadas: </strong
+          >{{ invoice.dog_daycare_invoice_duration }}
+        </p>
+        <p class="my-4">
+          <strong> Valor a Pagar: </strong> $ {{ invoice.dog_daycare_invoice_price }}
+        </p>
+        <template v-slot:modal-footer="{ ok, cancel}">
+          <!-- Emulate built in modal footer ok and cancel button actions -->
+          <b-button size="sm" variant="success" @click="aceptarPeticion()">
+            Aceptar
+          </b-button>
+          <b-button size="sm" variant="danger" @click="cancel()">
+            Cancel
+          </b-button>
+        </template>
       </b-modal>
     </div>
   </div>
@@ -114,15 +142,24 @@ import { mapState, mapGetters } from "vuex";
 export default {
   name: "RegisterDaycare",
   data() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const minDate = new Date(today);
+    const maxDate = new Date(today);
+    maxDate.setMonth(maxDate.getMonth() + 2);
     return {
       show: false,
+      showPrice: false,
       dog_daycare_invoice_price: 0,
+      invoice: "",
       selected: [],
       currentUser: "",
       dog_selected: "",
       pickup_date: "",
       pickup_time: "",
       dog_daycare_duration: "",
+      min: minDate,
+      max: maxDate,
     };
   },
   computed: {
@@ -147,16 +184,15 @@ export default {
           dog_daycare_invoice_services: this.selected,
         })
         .then(({ data }) => {
-          console.log(data);
           if (data === "") {
             alert("El perro ya se encuentra en un Guarderia");
           } else {
-            this.dog_daycare_invoice_price = data.dog_daycare_invoice_price;
+            this.invoice = data;
+            this.showPrice = true;
           }
         });
     },
     aceptarPeticion() {
-      console.log(this.dog_daycare_duration);
       this.$store
         .dispatch("registerDayCarePetition", {
           dog_daycare_invoice_date: this.pickup_date + " " + this.pickup_time,

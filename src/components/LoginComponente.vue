@@ -30,33 +30,55 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success">Ingresa a PetSuite</b-button>
-        <b-button href="/signUp" block pill variant="danger">Unete a PetSuite</b-button
+        <b-button block pill type="submit" variant="success"
+          >Ingresa a PetSuite</b-button
         >
+        <b-button href="/signUp" block pill variant="danger"> Únete a PetSuite </b-button>
       </b-form>
     </div>
+    <b-modal ok-only v-model="show" size="sm" @ok="handleOk">
+      <p class="my-4">El Usuario o Contraseña son incorrectos</p>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "LoginComponente",
   data() {
     return {
-        user: "",
-        password: ""
+      user: "",
+      password: "",
+      show: false,
     };
-    
   },
   methods: {
-    loginUsuario(){
-      this.$store.dispatch('login',{
-        user: this.user,
-        password: this.password
-      })
-      .then(this.$router.push({name: 'Home'}));
-    }
-  }
+    async loginUsuario() {
+      await axios
+        .post(
+          "/api/users/login",
+          {
+            user: this.user,
+            password: this.password,
+          },
+          {
+            headers: {
+              Authorization:
+                "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data === 0) {
+            this.show = true;
+          } else {
+            this.$store.dispatch("login", response.data);
+            this.$router.push({ name: "Home" });
+          }
+        });
+    },
+  },
 };
 </script>
 
@@ -67,7 +89,6 @@ export default {
   display: grid;
   place-items: center;
   overflow: hidden;
-  
 }
 .login {
   margin-left: 10px;

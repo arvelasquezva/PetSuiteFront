@@ -2,7 +2,10 @@
   <div class="body">
     <h1 class="mt-3">Paseos por aceptar precio</h1>    
     <b-row class="mt-1">      
-      <div class="cards mx-5 mb-5">         
+      <div v-if="Object.keys(petitionsforActive).length === 0">
+        <NotFound class="mb-5"></NotFound>
+      </div>
+      <div v-else class="cards mx-5 mb-5">         
         <b-card
           v-for="item in petitionsforActive"
           :key="item.id"
@@ -46,7 +49,7 @@
               {{ item.walk_petition_walker_user }}
             </p>
           </b-modal>
-          <b-button
+          <b-button v-if="state"
             block
             variant="success"
             type="submit"
@@ -83,8 +86,12 @@
 <script>
 import { mapState } from "vuex";
 import axios from 'axios';
+import  NotFound  from "@/components/NotFound.vue"; 
 export default {
   name: "WalkForAccept",
+  components:{
+    NotFound
+  },
   data() {
     return {
       show: false,

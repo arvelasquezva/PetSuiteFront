@@ -7,7 +7,10 @@
             <b-form-input
               id="input-1"  
               v-model="cadena"
+              type= "number"
               required
+              min="0" 
+              max="5"
               placeholder="Busca una guarderia por su calificación"
             >
             </b-form-input>
@@ -20,6 +23,10 @@
     <div id="app">
   <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
     <b-row class="mt-1">
+      <div v-if="Object.keys(info).length === 0">
+          <NotFound class="mb-5"></NotFound>
+        </div>
+        <div v-else>
       <b-card
         v-for="item in info"
         :key="item"
@@ -40,6 +47,7 @@
             <b-button variant="primary">Go to {{ item.dog_daycare_name }}</b-button>
           </router-link>
       </b-card>
+        </div>
       </b-row>
     </div>  
   </div>
@@ -47,8 +55,12 @@
 
 <script>
 import { mapState } from 'vuex';
+import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: 'SearchByScore',
+  components:{
+    NotFound
+  },
   data() {
     return {
     component:"SearchByScore",

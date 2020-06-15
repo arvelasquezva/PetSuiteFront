@@ -1,5 +1,6 @@
 <template>
-  <div class="body">
+  <div class="body my-2">
+    <h1> Registrate como Cliente </h1>
     <div class="SignUp">
       <img
         height="300"
@@ -86,9 +87,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success"
-          >Unete a PetSuite</b-button
-        >
+        <b-button block pill type="submit" variant="success"> Únete a PetSuite </b-button>
       </b-form>
     </div>
   </div>

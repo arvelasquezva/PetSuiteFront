@@ -1,8 +1,7 @@
 <template>
-  <div class="body">
+  <div class="body_card">
     <h1 class="mt-3">Guarderias</h1>
-    <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
+      <div class="cards mx-5 mb-5 col-md-12">
         <b-card
           v-for="item in dogDayCares"
           :key="item.id"
@@ -27,7 +26,6 @@
           </router-link>
         </b-card>
       </div>
-    </b-row>
   </div>
 </template>
 
@@ -57,16 +55,16 @@ export default {
 h1 {
   color: #40db9a;
 }
-.body {
+.body_card {
   margin: 0;
   height: auto;
   display: grid;
   place-items: center;
-  overflow: hidden;
 }
 
 .cards {
   display: flex;
+  
 }
 .card {
   color: #063869;

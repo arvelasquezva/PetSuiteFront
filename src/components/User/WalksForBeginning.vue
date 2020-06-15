@@ -2,7 +2,10 @@
   <div class="body">
     <h1 class="mt-3">Paseos Solicitados</h1>
     <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
+      <div v-if="Object.keys(walksAccept).length === 0">
+        <NotFound class="mb-5"></NotFound>
+      </div>
+      <div v-else class="cards mx-5 mb-5">
         <b-card
           v-for="item in walksAccept"
           :key="item.id"
@@ -12,35 +15,28 @@
         >
           <b-card-body>
             <b-card-title>
-              No olvides matar
-              <strong>{{ item.dog_name }}</strong></b-card-title
-            >
-            <b-card-sub-title class="mb-2"
-              >Raza: {{ item.dog_race }}</b-card-sub-title
-            >
+              No olvides que tu perro
+              <strong> {{ item.dog_name }} </strong> tiene un paseo
+            </b-card-title>
             <b-card-text
-              ><strong>Debes recogerlo en: </strong
+              ><strong>Lo van a recoger en: </strong
               >{{ item.walk_invoice_address }}
             </b-card-text>
             <b-card-text
-              ><strong>El paseo debe empezar : </strong
+              ><strong>El paseo va empezar: </strong
               >{{ item.walk_invoice_date }}
             </b-card-text>
-            <b-card-text
-              ><strong>El paseo durará: </strong
-              >{{ item.walk_invoice_duration }} minutos</b-card-text
-            >
-            <b-card-text
-              ><strong>El usuario {{ item.client_id }} te recomienda: </strong
-              >{{ item.walk_invoice_notes }}
+            <b-card-text>
+              <strong> El paseo durará: </strong>
+              {{ item.walk_invoice_duration }} minutos
             </b-card-text>
-            <b-card-text
-              ><strong>El precio de este paseo es: </strong>${{
+            <b-card-text>
+              <strong>El precio de este paseo es: </strong> ${{
                 item.walk_invoice_price
               }}
             </b-card-text>
           </b-card-body>
-        <b-modal
+          <b-modal
             id="modal-prevent-closing"
             ref="modal"
             title="Cancelar"
@@ -64,7 +60,15 @@
               </b-form-group>
             </form>
           </b-modal>
-          <b-button variant="danger" block v-b-modal.modal-prevent-closing user="'item'" v-on:click="sendInfo(item)"> Cancela el Servicio </b-button>
+          <b-button
+            variant="danger"
+            block
+            v-b-modal.modal-prevent-closing
+            user="'item'"
+            v-on:click="sendInfo(item)"
+          >
+            Cancela el Servicio
+          </b-button>
         </b-card>
       </div>
     </b-row>
@@ -73,15 +77,19 @@
 
 <script>
 import { mapState } from "vuex";
+import NotFound from "@/components/NotFound.vue";
 export default {
   name: "WalksForBeginning",
+  components: {
+    NotFound,
+  },
   data() {
     return {
       show: false,
       currentUser: "",
       name: "",
       nameState: null,
-      selectedUser: '',
+      selectedUser: "",
     };
   },
   computed: {
@@ -99,7 +107,7 @@ export default {
   },
   methods: {
     sendInfo(item) {
-        this.selectedUser = item;
+      this.selectedUser = item;
     },
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity();
@@ -118,7 +126,12 @@ export default {
     },
     handleSubmit() {
       // Push the name to submitted names
-      this.cancelarServicio(this.name, this.selectedUser.walk_invoice_id, this.selectedUser.dog_walker_id,this.selectedUser.client_id);
+      this.cancelarServicio(
+        this.name,
+        this.selectedUser.walk_invoice_id,
+        this.selectedUser.dog_walker_id,
+        this.selectedUser.client_id
+      );
       // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");
@@ -135,11 +148,12 @@ export default {
     cancelarServicio(name, id_petition, id_user_Cancelled, id_user_whoCancel) {
       this.$store
         .dispatch("cancelWalk", {
-          id_petition : id_petition,
-          user_Cancelled : id_user_Cancelled,
-          user_whoCancel : id_user_whoCancel,
-          reasonCancellation : name
-        }).then(location.reload());
+          id_petition: id_petition,
+          user_Cancelled: id_user_Cancelled,
+          user_whoCancel: id_user_whoCancel,
+          reasonCancellation: name,
+        })
+        .then(location.reload());
     },
   },
 };

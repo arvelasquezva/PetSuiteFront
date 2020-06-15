@@ -4,14 +4,11 @@
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
         <b-card
-          v-for="item in caresInvoice"
+          v-for="item in invoices"
           :key="item.id"
-          tag="article"
-          style="max-width: 17rem;"
-          class="card"
         >
           <b-card-body>
-            <b-card-title> <strong> {{ item.dog_daycare_invoice_price }}</strong></b-card-title>
+            <b-card-title> <strong> {{ item.dog_daycare_invoice_dogdaycare_id }}</strong></b-card-title>
           </b-card-body>
 
         </b-card>
@@ -21,12 +18,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex"; 
 export default {
     name: "InvoiceDaycare",
-    computed: {
-    ...mapState(["caresInvoice"]),
-  },
+    props:{
+      invoices: []
+    }
 }
 </script>
 <style lang="scss" scoped>

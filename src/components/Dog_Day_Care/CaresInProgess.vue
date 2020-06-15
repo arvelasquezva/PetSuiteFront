@@ -3,6 +3,10 @@
     <h1 class="mt-3">Cuidados En Progreso</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
+        <div v-if="Object.keys(caresProgress).length === 0">
+          <NotFound class="mb-5"></NotFound>
+        </div>
+        <div v-else>
         <b-card
           v-for="item in caresProgress"
           :key="item.id"
@@ -30,6 +34,7 @@
           </b-modal>
           <b-button variant="success" block v-on:click="actualizarEstado(item.dog_daycare_invoice_id)">Termina el Servicio</b-button>
         </b-card>
+        </div>
       </div>
     </b-row>
   </div>
@@ -37,8 +42,12 @@
 
 <script>
 import { mapState } from "vuex";
+import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: "CaresInProgess",
+  components:{
+    NotFound
+  },
   data() {
     return {
       show: false,

@@ -3,6 +3,10 @@
     <h1 class="mt-3">Cuidados Por Empezar</h1>
     <b-row class="mt-1">
       <div class="cards mx-5 mb-5">
+        <div v-if="Object.keys(caresPending).length === 0">
+          <NotFound class="mb-5"></NotFound>
+        </div>
+        <div v-else>
         <b-card
           v-for="item in caresPending"
           :key="item.id"
@@ -81,6 +85,7 @@
             >Cancela el Servicio</b-button
           >
         </b-card>
+        </div>
       </div>
     </b-row>
   </div>
@@ -88,8 +93,12 @@
 
 <script>
 import { mapState } from "vuex";
+import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: "CaresPending",
+  components:{
+    NotFound
+  },
   data() {
     return {
       show: false,

@@ -38,7 +38,7 @@
           <b-button href="/login" variant="light" class="ml-3">
             Inicia sesión</b-button
           >
-          <b-button href="/signUp/all" variant="light" class="ml-3">
+          <b-button href="/signUp" variant="light" class="ml-3">
             Registrate</b-button
           >
         </div>

@@ -15,7 +15,7 @@
           <template v-slot:img>
             <img
               height="480"
-              src="../assets/Images/Slide(1).png"
+              src="@/assets/Images/Slide(1).png"
               alt="image slot"
             />
           </template>
@@ -27,7 +27,7 @@
           <template v-slot:img>
             <img
               height="480"
-              src="../assets/Images/Slide(1).png"
+              src="@/assets/Images/Slide(2).png"
               alt="image slot"
             />
           </template>
@@ -39,7 +39,7 @@
           <template v-slot:img>
             <img
               height="480"
-              src="../assets/Images/Slide(1).png"
+              src="@/assets/Images/Slide(3).png"
               alt="image slot"
             />
           </template>

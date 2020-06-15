@@ -268,19 +268,8 @@ export default new Vuex.Store({
             return axios
                 .post("api/dogdaycareservices/load", credentials);
         },
-        async login({ commit }, credentials) {
-            const { data } = await axios
-                .post("/api/users/login", credentials, {
-                    headers: {
-                        "Content-type": "application/json",
-                        "Access-Control-Allow-Origin": "Content-Type",
-                        "Access-Control-Allow-Methods": "POST",
-                        "Access-Control-Allow-Headers": "*",
-                        "cache-control": "no-cache",
-                        Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
-                    }
-                });
-            commit('SET_USER_DATA', data);
+        login({ commit }, credentials) {
+            commit('SET_USER_DATA', credentials);
         },
         logout({ commit }) {
             commit('CLEAR_USER_DATA');

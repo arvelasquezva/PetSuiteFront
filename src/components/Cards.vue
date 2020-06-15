@@ -13,10 +13,12 @@
           class="card"
         >
         <b-card-body>
-          <b-card-text></b-card-text>
+          <b-card-text>
+            {{item.descripcion}}
+          </b-card-text>
         </b-card-body>
           <router-link :to="item.routes">
-            <b-button variant="primary" >Registrate como {{ item.title }}</b-button>
+            <b-button variant="primary" >Únete a PetSuite como {{ item.title }}</b-button>
           </router-link>
         </b-card>
       </div>

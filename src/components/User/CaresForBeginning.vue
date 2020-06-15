@@ -2,7 +2,10 @@
   <div class="body">
     <h1 class="mt-3">Servicios Solicitados</h1>
     <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
+      <div v-if="Object.keys(caresForBeginning).length === 0">
+          <NotFound class="mb-5"></NotFound>
+        </div>
+      <div v-else class="cards mx-5 mb-5">
         <b-card
           v-for="item in caresForBeginning"
           :key="item.id"
@@ -21,13 +24,14 @@
               >Duración:
               {{ item.dog_daycare_invoice_duration }} Horas</b-card-sub-title
             >
-            <b-card-text
-              ><strong>El precio a cobrar es: </strong>$
-              {{ item.dog_daycare_invoice_price }}</b-card-text
-            >
-            <b-card-text
-              ><strong>Los servicios que debes hacer es: </strong></b-card-text
-            >
+            <b-card-text>
+              <strong> El precio a pagar es: </strong> ${{
+                item.dog_daycare_invoice_price
+              }}
+            </b-card-text>
+            <b-card-text>
+              <strong>Los servicios que solicitaste son: </strong>
+            </b-card-text>
             <b-card-text
               v-for="(value, key) in item.dog_daycare_invoice_services_names"
               v-bind:key="key"
@@ -35,49 +39,53 @@
               * {{ value }}
             </b-card-text>
           </b-card-body>
-
-          <b-modal
-            id="modal-prevent-closing"
-            ref="modal"
-            title="Cancelar"
-            @show="resetModal"
-            @hidden="resetModal"
-            @ok="handleOk1"
-          >
-            <form ref="form" @submit.stop.prevent="handleSubmit">
-              <b-form-group
-                :state="nameState"
-                label="Razón Por la que Cancelas el Servicio"
-                label-for="razon-input"
-                invalid-feedback="name is required"
-              >
-                <b-form-input
-                  id="razon-input"
-                  v-model="name"
-                  :state="nameState"
-                  required
-                ></b-form-input>
-              </b-form-group>
-            </form>
-          </b-modal>
           <b-button
             variant="danger"
             block
             v-b-modal.modal-prevent-closing
             user="'item'"
             v-on:click="sendInfo(item)"
-            >Cancela el Servicio</b-button
           >
+            Cancela el Servicio
+          </b-button>
         </b-card>
       </div>
+      <b-modal
+        id="modal-prevent-closing"
+        ref="modal"
+        title="Cancelar"
+        @show="resetModal"
+        @hidden="resetModal"
+        @ok="handleOk1"
+      >
+        <form ref="form" @submit.stop.prevent="handleSubmit">
+          <b-form-group
+            :state="nameState"
+            label="Razón Por la que Cancelas el Servicio"
+            label-for="razon-input"
+            invalid-feedback="name is required"
+          >
+            <b-form-input
+              id="razon-input"
+              v-model="name"
+              :state="nameState"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </form>
+      </b-modal>
     </b-row>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: "CaresForBeginning",
+  components:{
+    NotFound
+  },
   data() {
     return {
       show: false,
@@ -110,9 +118,7 @@ export default {
       return valid;
     },
     handleOk1(bvModalEvt) {
-      // Prevent modal from closing
       bvModalEvt.preventDefault();
-      // Trigger submit handler
       this.handleSubmit();
     },
     resetModal() {
@@ -142,12 +148,14 @@ export default {
       });
     },
     cancelarServicio(name, id_petition, id_user_Cancelled, id_user_whoCancel) {
-      this.$store.dispatch("cancelCare", {
-        id_petition: id_petition,
-        user_Cancelled: id_user_Cancelled,
-        user_whoCancel: id_user_whoCancel,
-        reasonCancellation: name,
-      }).then(location.reload());
+      this.$store
+        .dispatch("cancelCare", {
+          id_petition: id_petition,
+          user_Cancelled: id_user_Cancelled,
+          user_whoCancel: id_user_whoCancel,
+          reasonCancellation: name,
+        })
+        .then(location.reload());
     },
   },
 };

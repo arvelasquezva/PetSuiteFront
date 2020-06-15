@@ -7,7 +7,7 @@
           v-for="item in services"
           :key="item.id"
           tag="article"
-          style="max-width: 17rem;"
+          style="max-width: 15rem;"
           class="card"
         >
         <b-card-body>

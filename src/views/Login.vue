@@ -27,23 +27,26 @@ export default {
       Tarjetas: [
         {
           id: 1,
-          title: "Paseadores",
+          title: "Paseador",
           imagen:
             "https://images.pexels.com/photos/165227/pexels-photo-165227.jpeg",
+          descripcion: "Te gusta salir a pasear con perros y tienes la vocación para su cuidado",
           routes: "signUp/Paseadores"
         },
         {
           id: 2,
-          title: "Guarderias",
+          title: "Guarderia",
           imagen:
             "https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg",
+          descripcion: "Tienes una empresa consolidada y registrada para el cuidado de perros",
           routes: "signUp/Guarderias"
         },
         {
           id: 3,
-          title: "Hospeadores",
+          title: "Hospeador",
           imagen:
             "https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg",
+          descripcion: "Tienes una casa con el espacio para cuidar a perritos pero no estás registrado como empresa",
           routes: "signUp/Hospeadores"
         },
       ],

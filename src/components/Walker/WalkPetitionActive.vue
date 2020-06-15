@@ -38,35 +38,45 @@
               >{{ item.walk_petition_notes }}
             </b-card-text>
           </b-card-body>
-
-          
-          <b-form-group
-            id="input-group-5"
-            label="Propon un precio:"
-            label-for="input-5"
-          >
-            <b-form-input
-              id="input-4"
-              v-model="valor"
-              required
-              placeholder="Ej: 10000"
-              type="number"
-              min="1000"
-            ></b-form-input>
-          </b-form-group>
           <b-button
-            variant="info"
-            v-on:click="proposePetition(item.walk_petition_id, item.dog_id)"
-            >Proponle un precio a {{ item.user }}</b-button
+            variant="primary"
+            block
+            v-b-modal.modal-prevent-closing
+            user="'item'"
+            v-on:click="sendInfo(item)"
           >
-          <b-modal 
-            v-model="show"
-            size="sm"
-            @ok="handleOk">
-            <p class="my-4">Le has enviado a {{item.user}} $ {{valor}}</p>
-          </b-modal>
+            Propon un precio
+          </b-button>
         </b-card>
       </div>
+      <b-modal ok-only v-model="show" size="sm" @ok="handleOk">
+      <p class="my-4">Has propuesto un precio correctamente</p>
+    </b-modal>
+      <b-modal
+        id="modal-prevent-closing"
+        ref="modal"
+        title="Precio"
+        @show="resetModal"
+        @hidden="resetModal"
+        @ok="handleOk1"
+      >
+        <form ref="form" @submit.stop.prevent="handleSubmit">
+          <b-form-group
+            :state="nameState"
+            label="Precio:"
+            label-for="razon-input"
+            invalid-feedback="Price is required"
+          >
+            <b-form-input
+              id="razon-input"
+              v-model="name"
+              type="number"
+              :state="nameState"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </form>
+      </b-modal>
     </b-row>
   </div>
 </template>
@@ -79,7 +89,9 @@ export default {
     return {
       show: false,
       currentUser: "",
-      valor: "",
+      name: "",
+      nameState: null,
+      selectedPet: "",
     };
   },
   computed: {
@@ -96,14 +108,42 @@ export default {
     this.$store.dispatch("getPetitionById");
   },
   methods: {
+    sendInfo(item) {
+      this.selectedPet = item;
+    },
+    checkFormValidity() {
+      const valid = this.$refs.form.checkValidity();
+      this.nameState = valid;
+      return valid;
+    },
+    handleOk1(bvModalEvt) {
+      bvModalEvt.preventDefault();
+      this.handleSubmit();
+    },
+    resetModal() {
+      this.name = "";
+      this.nameState = null;
+    },
+    handleSubmit() {
+      // Push the name to submitted names
+      this.proposePetition(
+        this.name,
+        this.selectedPet.walk_petition_id,
+        this.selectedPet.dog_id,
+      );
+      // Hide the modal manually
+      this.$nextTick(() => {
+        this.$bvModal.hide("modal-prevent-closing");
+      });
+    },
     handleOk() {
       location.reload();
     },
-    proposePetition(id_petition, dog_id_petition) {
+    proposePetition(price,id_petition, dog_id_petition) {
       this.$store.dispatch("proposePetition", {
         walk_petition_walker_user: this.currentUser.user,
         walk_petition_id: id_petition,
-        precio_proposal: this.valor,
+        precio_proposal: price,
         dog_id: dog_id_petition
       }).then(this.show=true);
     },
