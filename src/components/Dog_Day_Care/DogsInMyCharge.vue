@@ -118,7 +118,7 @@ export default {
       this.notificarCliente(
         this.notification_description,
         this.selectedUser.dog_name,
-        this.selectedUser.user,
+        this.selectedUser.client_id,
       );
       // Hide the modal manually
       this.$nextTick(() => {
