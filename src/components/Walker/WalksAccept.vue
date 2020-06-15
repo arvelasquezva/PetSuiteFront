@@ -162,7 +162,7 @@ export default {
         user_Cancelled: id_user_Cancelled,
         user_whoCancel: id_user_whoCancel,
         reasonCancellation: name,
-      });
+      }).then(location.reload());
     },
   },
 };
