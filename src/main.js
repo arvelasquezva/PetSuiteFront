@@ -15,6 +15,11 @@ Vue.use(VueAxios, axios);
 Vue.use(Vuex);
 
 axios.defaults.baseURL = 'https://petsuite.herokuapp.com/';
+axios.defaults.headers.common['Content-type'] = '';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS';
+axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+axios.defaults.headers.common['cache-control'] = 'no-cache';
 
 Vue.config.productionTip = false;
 
