@@ -14,6 +14,8 @@ Vue.use(IconsPlugin);
 Vue.use(VueAxios, axios);
 Vue.use(Vuex);
 
+axios.default.baseURL = 'https://petsuite.herokuapp.com/';
+
 Vue.config.productionTip = false;
 
 new Vue({
