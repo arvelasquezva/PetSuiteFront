@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit --watch"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.13.0",
     "core-js": "^3.6.4",
+    "flush-promises": "^1.0.2",
     "jwt-decode": "^2.2.0",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
@@ -21,8 +23,10 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",
+    "@vue/cli-plugin-unit-jest": "^4.4.4",
     "@vue/cli-plugin-vuex": "~4.2.0",
     "@vue/cli-service": "~4.2.0",
+    "@vue/test-utils": "^1.0.3",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11",
