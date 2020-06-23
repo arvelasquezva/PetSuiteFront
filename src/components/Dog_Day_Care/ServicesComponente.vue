@@ -2,12 +2,13 @@
   <div class="body">
     <h1 class="mt-3">{{ msg }}</h1>
     <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
+      <div v-if="Object.keys(services).length === 0">
+          <NotFound class="mb-5"></NotFound>
+      </div>
+      <div else class="cards mx-5 mb-5">
         <b-card
           v-for="item in services"
           :key="item.id"
-          tag="article"
-          style="max-width: 15rem;"
           class="card"
         >
         <b-card-body>
@@ -16,6 +17,7 @@
           <b-card-text><strong>Descripción: </strong>{{ item.dogdaycare_Service_Description }} </b-card-text>
         </b-card-body>
         </b-card>
+      
       </div>
     </b-row>
   </div>
@@ -23,8 +25,12 @@
 
 <script>
 import { mapState } from 'vuex';
+import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: "ServicesComponente",
+  components:{
+    NotFound
+  },
   data() {
     return {
     currentUser: "",

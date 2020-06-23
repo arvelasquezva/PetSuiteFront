@@ -6,8 +6,6 @@
         <b-card
           v-for="pet in pets"
           :key="pet.id"
-          tag="article"
-          style="max-width: 17rem;"
           class="card"
         >
           <b-card-body>
@@ -69,16 +67,18 @@ h1 {
   height: auto;
   display: grid;
   place-items: center;
-  overflow: hidden;
+  overflow-x: scroll;
 }
 
 .cards {
-  display: flex;
+  display: flex; 
+  padding: 1rem;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
   border-radius: 1rem;
+  min-width: 17rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
   transition: 0.2s;

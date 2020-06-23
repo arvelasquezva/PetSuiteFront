@@ -34,11 +34,15 @@
           >Ingresa a PetSuite</b-button
         >
         <b-button href="/signUp" block pill variant="danger"> Únete a PetSuite </b-button>
+          <b-button variant="primary" v-on:click="get()"> Get </b-button>
+    <b-button variant="warning" v-on:click="post()"> post </b-button>
       </b-form>
+    
     </div>
-    <b-modal ok-only v-model="show" size="sm" @ok="handleOk">
+    <b-modal ok-only v-model="show" size="sm">
       <p class="my-4">El Usuario o Contraseña son incorrectos</p>
     </b-modal>
+    
   </div>
 </template>
 
@@ -54,6 +58,15 @@ export default {
     };
   },
   methods: {
+    get(){
+      axios.get("/all");
+    },
+    post(){
+      axios.post("/dogList",
+      {
+        cadena: "Nicolas"
+      });
+    },
     async loginUsuario() {
       await axios
         .post(

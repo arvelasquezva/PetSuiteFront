@@ -28,7 +28,7 @@
             <!-- Fecha-->
             <b-form-group
               id="input-group-2"
-              label="Fecha de recogida de tu perro:"
+              label="Fecha para el servicio:"
               label-for="input-2"
             >
               <b-form-datepicker

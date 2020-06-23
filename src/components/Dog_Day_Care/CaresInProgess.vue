@@ -2,16 +2,13 @@
   <div class="body">
     <h1 class="mt-3">Cuidados En Progreso</h1>
     <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
-        <div v-if="Object.keys(caresProgress).length === 0">
+      <div v-if="Object.keys(caresProgress).length === 0">
           <NotFound class="mb-5"></NotFound>
         </div>
-        <div v-else>
+      <div v-else class="cards mx-5 mb-5">
         <b-card
           v-for="item in caresProgress"
           :key="item.id"
-          tag="article"
-          style="max-width: 20rem;"
           class="card"
         >
           <b-card-body>
@@ -35,7 +32,6 @@
           <b-button variant="success" block v-on:click="actualizarEstado(item.dog_daycare_invoice_id)">Termina el Servicio</b-button>
         </b-card>
         </div>
-      </div>
     </b-row>
   </div>
 </template>

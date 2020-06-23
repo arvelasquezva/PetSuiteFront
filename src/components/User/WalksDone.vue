@@ -2,7 +2,10 @@
   <div class="body">
     <h1 class="mt-3">Paseos Que Debes Calificar</h1>
     <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
+      <div v-if="Object.keys(walksDone).length === 0">
+          <NotFound class="mb-5"></NotFound>
+        </div>
+      <div v-else class="cards mx-5 mb-5">
         <b-card
           v-for="item in walksDone"
           :key="item.id"
@@ -46,8 +49,12 @@
 
 <script>
 import { mapState } from "vuex";
+import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: "WalksDone",
+  components:{
+    NotFound
+  },
   data() {
     return {
       currentUser: "",

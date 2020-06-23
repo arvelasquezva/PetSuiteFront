@@ -1,12 +1,10 @@
 <template>
   <div class="body_card">
     <h1 class="mt-3">Guarderias</h1>
-      <div class="cards mx-5 mb-5 col-md-12">
+      <div class="cards col-md-12">
         <b-card
           v-for="item in dogDayCares"
           :key="item.id"
-          tag="article"
-          style="max-width: 17rem;"
           class="card"
         >
         <b-card-body>
@@ -60,15 +58,18 @@ h1 {
   height: auto;
   display: grid;
   place-items: center;
+  
 }
 
 .cards {
   display: flex;
-  
+  overflow-x: scroll;
+  padding: 1rem;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
+  min-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);

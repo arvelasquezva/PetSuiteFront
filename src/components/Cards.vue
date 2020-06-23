@@ -8,8 +8,6 @@
           :key="item.id"
           :title="item.title"
           :img-src="item.imagen"
-          tag="article"
-          style="max-width: 15rem;"
           class="card"
         >
         <b-card-body>
@@ -58,6 +56,7 @@ h1 {
   color: #063869;
   background-color: #eef6e1;
   border-radius: 1rem;
+  max-width: 15rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
   transition: 0.2s;

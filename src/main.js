@@ -14,14 +14,14 @@ Vue.use(IconsPlugin);
 Vue.use(VueAxios, axios);
 Vue.use(Vuex);
 
-axios.defaults.baseURL = 'https://petsuite.herokuapp.com/';
+Vue.config.productionTip = false;
+
+axios.defaults.baseURL = 'http://186.155.54.20:9696/';
 axios.defaults.headers.common['Content-type'] = '';
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS';
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 axios.defaults.headers.common['cache-control'] = 'no-cache';
-
-Vue.config.productionTip = false;
 
 new Vue({
     router,

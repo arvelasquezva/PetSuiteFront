@@ -2,24 +2,24 @@
   <div class="body">
     <div>
       <h1 class="mt-3 text-center ">Busca una guarderia</h1>
-      <div class=" mx-1 mb-5">        
+      <div class=" mx-1 mb-5">
         <h5 class="mt-6">Como quieres realizar tu busqueda</h5>
-        <div class="mt-3">          
+        <div class="mt-3">
           <b-button v-on:click="toggleGeneral" squared variant="success">
             Busqueda General
           </b-button>
           <b-button v-on:click="toggleName" squared variant="success">
-           Por nombre
+            Por nombre
           </b-button>
           <b-button v-on:click="toggleService" squared variant="success">
-           Por servicio
+            Por servicio
           </b-button>
           <b-button v-on:click="toggleScore" squared variant="success">
-           Por Calificacion
+            Por Calificacion
           </b-button>
         </div>
         <keep-alive>
-        <component v-bind:is= "component"/>
+          <component v-bind:is="component" />
         </keep-alive>
       </div>
     </div>
@@ -27,53 +27,55 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import SearchByScore from '@/components/Dog_Day_Care/SearchByScore.vue'
-import SearchByName from '@/components/Dog_Day_Care/SearchByName.vue'
-import SearchByService from '@/components/Dog_Day_Care/SearchByService.vue'
-import SearchGeneral from '@/components/Dog_Day_Care/SearchGeneral.vue'
+import { mapState } from "vuex";
+import SearchByScore from "@/components/Dog_Day_Care/SearchByScore.vue";
+import SearchByName from "@/components/Dog_Day_Care/SearchByName.vue";
+import SearchByService from "@/components/Dog_Day_Care/SearchByService.vue";
+import SearchGeneral from "@/components/Dog_Day_Care/SearchGeneral.vue";
 export default {
   name: "SearchDaycare",
-  components: { 
-    SearchByScore, SearchByName, SearchByService, SearchGeneral
-    },
+  components: {
+    SearchByScore,
+    SearchByName,
+    SearchByService,
+    SearchGeneral,
+  },
   data() {
     return {
-    component:"SearchGeneral"
-    }
+      component: "SearchGeneral",
+    };
   },
-  methods: { 
-    toggleName(){
+  methods: {
+    toggleName() {
       if (this.component != SearchByName) {
         this.component = SearchByName;
       }
     },
-    toggleService(){
-     if (this.component != SearchByService) {
-        this.component = SearchByService;;
+    toggleService() {
+      if (this.component != SearchByService) {
+        this.component = SearchByService;
       }
     },
-    toggleScore(){
+    toggleScore() {
       if (this.component != SearchByScore) {
         this.component = SearchByScore;
       }
     },
-    toggleGeneral(){
+    toggleGeneral() {
       if (this.component != SearchGeneral) {
-        this.component = SearchGeneral;;
+        this.component = SearchGeneral;
+      }
+    },
+  },
+  created() {
+    if (localStorage.getItem("user")) {
+      try {
+        this.currentUser = JSON.parse(localStorage.getItem("user"));
+      } catch (e) {
+        localStorage.removeItem("user");
       }
     }
   },
-    created() {
-        if (localStorage.getItem("user")) {
-        try {
-            this.currentUser = JSON.parse(localStorage.getItem("user"));
-        } catch (e) {
-            localStorage.removeItem("user");
-            }
-        }
-    }
-
 };
 </script>
 

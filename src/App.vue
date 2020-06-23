@@ -2,7 +2,7 @@
   <div id="app">
     <NavbarComponente></NavbarComponente>
     <div v-if="loggedIn">
-    <Notifications></Notifications>
+          <Notifications></Notifications>
     </div>
     <router-view />
   </div>
@@ -11,29 +11,28 @@
 <script>
 import NavbarComponente from "@/components/NavbarComponente.vue";
 import Notifications from "@/components/Notifications.vue";
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 import { authComputed } from "@/vuex/helper.js";
 export default {
-  name: 'app',
+  name: "app",
   computed: {
     ...authComputed,
-    ...mapGetters({ currentUser: 'currentUser' })
+    ...mapGetters({ currentUser: "currentUser" }),
   },
   components: {
     NavbarComponente,
-    Notifications
-  }
+    Notifications,
+  },
 };
 </script>
 <style>
 #app {
-  font-family: 'Montserrat', 'Roboto';
+  font-family: "Montserrat", "Roboto";
   place-items: center;
-  background: 3a3a3a;
+  background: linear-gradient(to top, #43c6ac, #191654);
   overflow: auto;
 }
-NavbarComponente{
+NavbarComponente {
   position: sticky;
 }
-
 </style>

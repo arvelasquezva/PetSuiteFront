@@ -1,14 +1,15 @@
 <template>
   <div class="row">
     <div class="col-md-12">
+      <WalkForAccept></WalkForAccept>
+    </div>
+    <div class="col-md-12">
       <CaresForBeginning></CaresForBeginning>
     </div>
     <div class="col-md-12">
       <WalksForBeginning></WalksForBeginning>
     </div>
-    <div class="col-md-12">
-      <WalkForAccept></WalkForAccept>
-    </div>
+    
   </div>
 </template>
 
