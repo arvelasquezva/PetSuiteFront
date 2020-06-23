@@ -10,12 +10,10 @@
 
 <script>
 import RegisterDaycare from "@/components/User/RegisterDaycare.vue";
-import InvoiceDaycare from "@/components/User/InvoiceDaycare.vue";
 export default {
   name: "DogDayCare",
   components: {
     RegisterDaycare,
-    InvoiceDaycare,
   },
   data() {
     return {
