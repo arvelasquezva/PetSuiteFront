@@ -230,9 +230,6 @@ export default {
 </script>
 
 <style scoped>
-footer {
-  color: white;
-}
 .body {
   margin: 10px;
 
