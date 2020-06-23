@@ -26,9 +26,7 @@
             class="card"
           >
             <b-card-body>
-              <b-card-title
-                ><strong>{{ item.dog_daycare_name }}</strong></b-card-title
-              >
+              <b-card-title> <strong>{{ item.dog_daycare_name }} </strong> </b-card-title>
               <b-card-sub-title>
                 <strong>Telefono: </strong>{{ item.dog_daycare_phone }}
                 <strong>Dirección:</strong> {{ item.dog_daycare_address }}
@@ -36,12 +34,9 @@
               <b-card-text
                 ><strong>Puntaje: </strong>{{ item.dog_daycare_score }}
               </b-card-text>
-              <b-card-text
-                ><strong>Precio Base: </strong>$
-                {{ item.dog_daycare_price_base }}
+              <b-card-text> <strong> Precio Base: </strong>$ {{ item.dog_daycare_price_base }}
               </b-card-text>
-              <b-card-text
-                ><strong>Precio Recargo: </strong>$ {{ item.dog_daycare_tax }}
+              <b-card-text> <strong> Precio Recargo: </strong>$ {{ item.dog_daycare_tax }}
               </b-card-text>
             </b-card-body>
             <router-link
