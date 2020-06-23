@@ -1,67 +1,79 @@
 <template>
   <div>
     <h3 class="mt-3">Buscador por servicio</h3>
-      <b-form @submit.prevent="buscarGuarderiaService">    
-        <b-form-group id="input-group-1" label-for="input-1">
-          <b-input-group class="mt-3">
-            <b-form-input
-              id="input-1"  
-              v-model="cadena"
-              required
-              placeholder="Busca una guarderia por sus servicios"
+    <b-form @submit.prevent="buscarGuarderiaService">
+      <b-form-group id="input-group-1" label-for="input-1">
+        <b-input-group class="mt-3">
+          <b-form-input
+            id="input-1"
+            v-model="cadena"
+            required
+            placeholder="Busca una guarderia por sus servicios"
+          >
+          </b-form-input>
+          <b-input-group-append>
+            <b-button type="submit" variant="success">Buscar</b-button>
+          </b-input-group-append>
+        </b-input-group>
+      </b-form-group>
+    </b-form>
+    <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
+    <div class="cards col-md-12">
+      <b-row class="mt-1">
+        <b-card v-for="item in info" :key="item" class="card">
+          <b-card-body>
+            <b-card-title
+              ><strong>{{ item.dog_daycare_name }}</strong></b-card-title
             >
-            </b-form-input>
-            <b-input-group-append>
-              <b-button type="submit" variant="success">Buscar</b-button>
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
-      </b-form>
-    <div id="app">
-  <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
-    <b-row class="mt-1">
-      <b-card
-        v-for="item in info"
-        :key="item"
-        class="card">
-        <b-card-body>
-          <b-card-title><strong>{{item.dog_daycare_name}}</strong></b-card-title>
-          <b-card-sub-title>
-            <strong>Telefono: </strong>{{item.dog_daycare_phone}}
-            <strong>Dirección:</strong>  {{item.dog_daycare_address}}
-          </b-card-sub-title>
-          <b-card-text> <strong> Puntaje: </strong> {{ item.dog_daycare_score }} </b-card-text>
-          <b-card-text> <strong> Precio Base: </strong> $ {{ item.dog_daycare_price_base }} </b-card-text>
-          <b-card-text> <strong> Precio Recargo: </strong> $ {{ item.dog_daycare_tax }} </b-card-text>
-        </b-card-body>
-        <router-link :to="{name: 'dogDayCares', params:{id: item.user}}">
-            <b-button variant="primary"> Go to {{ item.dog_daycare_name }} </b-button>
+            <b-card-sub-title>
+              <strong>Telefono: </strong>{{ item.dog_daycare_phone }}
+              <strong>Dirección:</strong> {{ item.dog_daycare_address }}
+            </b-card-sub-title>
+            <b-card-text>
+              <strong> Puntaje: </strong> {{ item.dog_daycare_score }}
+            </b-card-text>
+            <b-card-text>
+              <strong> Precio Base: </strong> $
+              {{ item.dog_daycare_price_base }}
+            </b-card-text>
+            <b-card-text>
+              <strong> Precio Recargo: </strong> $ {{ item.dog_daycare_tax }}
+            </b-card-text>
+          </b-card-body>
+          <router-link :to="{ name: 'dogDayCares', params: { id: item.user } }">
+            <b-button variant="primary">
+              Go to {{ item.dog_daycare_name }}
+            </b-button>
           </router-link>
-      </b-card>
+        </b-card>
       </b-row>
-    </div>  
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SearchByService',
+  name: "SearchByService",
   data() {
     return {
-    component:"SearchByService",
-    cadena: "",
-    info: []
-    }
+      component: "SearchByService",
+      cadena: "",
+      info: [],
+    };
   },
-  methods: { 
-      buscarGuarderiaService() {      
-      this.$store.dispatch("buscarGuarderiaService", [{
-        cadena: this.cadena,
-      }, "clients"])
-      .then(response => (this.info = response.data));
-    }
+  methods: {
+    buscarGuarderiaService() {
+      this.$store
+        .dispatch("buscarGuarderiaService", [
+          {
+            cadena: this.cadena,
+          },
+          "clients",
+        ])
+        .then((response) => (this.info = response.data));
+    },
   },
-}
+};
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
