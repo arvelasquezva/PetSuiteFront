@@ -9,8 +9,6 @@
         <b-card
           v-for="item in caresForBeginning"
           :key="item.id"
-          tag="article"
-          style="max-width: 20rem;"
           class="card"
         >
           <b-card-body>
@@ -175,10 +173,13 @@ h1 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
+  padding: 1rem;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
+  min-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);

@@ -2,36 +2,33 @@
   <div class="body">
     <h1 class="mt-3">Perros a mi cargo</h1>
     <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
-        <b-card
-          v-for="item in petsActive"
-          :key="item.id"
-          tag="article"
-          style="max-width: 19rem;"
-          class="card"
-        >
-        <b-card-body>
-            <b-card-title> Tu perro se llama: <strong>{{ item.dog_name }}</strong></b-card-title>
-            <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
+      <div v-if="Object.keys(petsActive).length === 0">
+        <NotFound class="mb-5"></NotFound>
+      </div>
+      <div v-else class="cards mx-5 mb-5">
+        <b-card v-for="item in petsActive" :key="item.id" class="card">
+          <b-card-body>
+            <b-card-title>
+              Tu perro se llama:
+              <strong>{{ item.dog_name }}</strong></b-card-title
+            >
+            <b-card-sub-title class="mb-2"
+              >Raza: {{ item.dog_race }}</b-card-sub-title
+            >
             <b-card-text
-              ><strong>El perro le pertenece: </strong
-              >{{ item.user}}
+              ><strong>El perro le pertenece: </strong>{{ item.user }}
             </b-card-text>
             <b-card-text
-              ><strong>Peso: </strong
-              >{{ item.dog_weight }} kg
-            </b-card-text>  
-            <b-card-text
-              ><strong>Peso: </strong
-              >{{ item.dog_height }} cm
-            </b-card-text>  
-            <b-card-text
-              ><strong>Edad: </strong
-              >{{ item.dog_age}} años
+              ><strong>Peso: </strong>{{ item.dog_weight }} kg
             </b-card-text>
             <b-card-text
-              ><strong>Notas: </strong
-              >{{ item.dog_notes}} 
+              ><strong>Peso: </strong>{{ item.dog_height }} cm
+            </b-card-text>
+            <b-card-text
+              ><strong>Edad: </strong>{{ item.dog_age }} años
+            </b-card-text>
+            <b-card-text
+              ><strong>Notas: </strong>{{ item.dog_notes }}
             </b-card-text>
           </b-card-body>
           <b-modal
@@ -74,9 +71,13 @@
 
 <script>
 import { mapState } from "vuex";
-import axios from 'axios';
+import  NotFound  from "@/components/NotFound.vue";
+import axios from "axios";
 export default {
   name: "DogsInMyCharge",
+  components:{
+    NotFound
+  },
   data() {
     return {
       currentUser: "",
@@ -101,7 +102,8 @@ export default {
   methods: {
     sendInfo(item) {
       this.selectedUser = item;
-    },checkFormValidity() {
+    },
+    checkFormValidity() {
       const valid = this.$refs.form.checkValidity();
       this.nameState = valid;
       return valid;
@@ -120,7 +122,7 @@ export default {
       this.notificarCliente(
         this.notification_description,
         this.selectedUser.dog_name,
-        this.selectedUser.user,
+        this.selectedUser.user
       );
       // Hide the modal manually
       this.$nextTick(() => {
@@ -128,18 +130,18 @@ export default {
       });
     },
     dogsInMyCharge() {
-      this.$store.dispatch("getDogsInMyCharge",{
+      this.$store.dispatch("getDogsInMyCharge", {
         cadena: this.currentUser.user,
       });
     },
-    notificarCliente(description, dogName, dogOwner){
-      axios.post("/api/notifications/sendNotification",{
+    notificarCliente(description, dogName, dogOwner) {
+      axios.post("/api/notifications/sendNotification", {
         notification_subject: dogName,
         notification_description: description,
         notification_status: "No leido",
-        user: dogOwner
-      })
-    }
+        user: dogOwner,
+      });
+    },
   },
 };
 </script>
@@ -158,10 +160,12 @@ h1 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
+  min-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);

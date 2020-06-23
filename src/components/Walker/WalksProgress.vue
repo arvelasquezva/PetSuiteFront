@@ -2,35 +2,36 @@
   <div class="body">
     <h1 class="mt-3">Paseos En Curso</h1>
     <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
-        <b-card
-          v-for="item in walksProgress"
-          :key="item.id"
-          tag="article"
-          style="max-width: 20rem;"
-          class="card"
-        ><b-card-body>
-            <b-card-title> Termina el paseo para: <strong>{{ item.dog_name }}</strong></b-card-title>
-            <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
+      <div v-if="Object.keys(walksProgress).length === 0">
+        <NotFound class="mb-5"></NotFound>
+      </div>
+      <div v-else class="cards mx-5 mb-5">
+        <b-card v-for="item in walksProgress" :key="item.id" class="card"
+          ><b-card-body>
+            <b-card-title>
+              Termina el paseo para:
+              <strong>{{ item.dog_name }}</strong>
+            </b-card-title>
+            <b-card-sub-title class="mb-2">
+              Raza: {{ item.dog_race }}
+            </b-card-sub-title>
+            <b-card-text>
+              <strong>Debes dejarlo en: </strong>
+              {{ item.walk_invoice_address }}
+            </b-card-text>
             <b-card-text
-              ><strong>Debes dejarlo en: </strong
-              >{{ item.walk_invoice_address }}
-            </b-card-text>  
-            <b-card-text><strong>Debes cobrar: </strong>${{ item.walk_invoice_price }}
+              ><strong>Debes cobrar: </strong>${{ item.walk_invoice_price }}
             </b-card-text>
           </b-card-body>
-        <b-button
+          <b-button
             variant="danger"
             block
             v-on:click="actualizarEstado(item.walk_invoice_id)"
-        >Termina el Paseo</b-button
+            >Termina el Paseo</b-button
           >
-          <b-modal
-          v-model="show"
-          size="sm"
-          @ok="handleOk">
-        <p class="my-4">Has terminado el paseo para {{ item.dog_name}}</p>
-      </b-modal>
+          <b-modal v-model="show" size="sm" @ok="handleOk">
+            <p class="my-4">Has terminado el paseo para {{ item.dog_name }}</p>
+          </b-modal>
         </b-card>
       </div>
     </b-row>
@@ -39,11 +40,15 @@
 
 <script>
 import { mapState } from "vuex";
+import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: "WalksProgress",
+  components:{
+    NotFound
+  },
   data() {
     return {
-      show:false,
+      show: false,
       currentUser: "",
     };
   },
@@ -65,16 +70,17 @@ export default {
       location.reload();
     },
     getWalksProgress() {
-      this.$store.dispatch("getWalksProgress",{
+      this.$store.dispatch("getWalksProgress", {
         cadena: this.currentUser.user,
       });
     },
-    actualizarEstado(walk_invoice_id){
-      this.$store.dispatch("updateStatusWalk",{
-        entero : walk_invoice_id
-      }).then(this.show=true)
-
-    }
+    actualizarEstado(walk_invoice_id) {
+      this.$store
+        .dispatch("updateStatusWalk", {
+          entero: walk_invoice_id,
+        })
+        .then((this.show = true));
+    },
   },
 };
 </script>
@@ -93,10 +99,12 @@ h1 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
+  min-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);

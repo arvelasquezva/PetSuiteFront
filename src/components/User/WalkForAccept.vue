@@ -9,8 +9,6 @@
         <b-card
           v-for="item in petitionsforActive"
           :key="item.id"
-          tag="article"
-          style="max-width: 17rem;"
           class="card"
         >
           <b-card-body>
@@ -44,8 +42,12 @@
             v-model="show"
             size="sm"
             @ok="handleOk">
-            <p class="my-4">
-              Has {{state}} el paseo para {{ item.dog_name }} por parte de
+            <p v-if="state=='Aceptar'" class="my-4">
+              Has aceptado el paseo para {{ item.dog_name }} por parte de
+              {{ item.walk_petition_walker_user }}
+            </p>
+            <p v-else>
+              Has rechazado el precio para {{ item.dog_name }} por parte de
               {{ item.walk_petition_walker_user }}
             </p>
           </b-modal>
@@ -162,10 +164,13 @@ h1 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
+  padding: 1rem;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
+  min-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
