@@ -133,10 +133,6 @@ export default new Vuex.Store({
         },
         registerPetition({ commit, dispatch }, credentials) {
             return axios.post("api/walkpetitions/create", credentials)
-                .then(dispatch('addNotification', {
-                    type: 'success',
-                    message: 'Se ha creado una nueva peticion.'
-                }, { root: true }));
         },
         consultPriceCarePetition({ commit }, credentials) {
             return axios
@@ -194,10 +190,6 @@ export default new Vuex.Store({
         updateStatusWalk({ commit, dispatch }, credentials) {
             return axios
                 .post("/api/walkinvoices/updateInvoiceStatus", credentials)
-                .then(dispatch('addNotification', {
-                    type: 'success',
-                    message: 'Se ha actualizado el estado del paseo.'
-                }, { root: true }));
         },
         updateStatusCare({ commit }, credentials) {
             return axios
@@ -214,10 +206,6 @@ export default new Vuex.Store({
         proposePetition({ commit, dispatch }, credentials) {
             return axios
                 .post("api/walkpetitions/propose", credentials)
-                .then(dispatch('addNotification', {
-                    type: 'success',
-                    message: 'Se ha creado una propuesta para una peticion.'
-                }, { root: true }));
         },
         async getPetitionsforActive({ commit }, credentials) {
             const { data } = await axios
@@ -269,12 +257,6 @@ export default new Vuex.Store({
         logout({ commit }) {
             commit('CLEAR_USER_DATA');
         },
-        addNotification({ commit }, notification) {
-            commit('PUSH_NOTIFICATION', notification);
-        },
-        removeNotification({ commit }, notification) {
-            commit('REMOVE_NOTIFICATION', notification);
-        }
     },
     getters: {
         loggedIn(state) {
