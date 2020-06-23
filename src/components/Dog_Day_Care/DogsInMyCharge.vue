@@ -6,16 +6,12 @@
         <b-card
           v-for="item in petsActive"
           :key="item.id"
-          tag="article"
-          style="max-width: 19rem;"
           class="card"
         >
         <b-card-body>
             <b-card-title> Tu perro se llama: <strong>{{ item.dog_name }}</strong></b-card-title>
             <b-card-sub-title class="mb-2">Raza: {{item.dog_race}}</b-card-sub-title>
-            <b-card-text
-              ><strong>El perro le pertenece: </strong
-              >{{ item.user}}
+            <b-card-text> <strong> El perro le pertenece a : </strong> {{ item.clent_id}}
             </b-card-text>
             <b-card-text
               ><strong>Peso: </strong
@@ -161,6 +157,7 @@ h1 {
 }
 .card {
   color: #063869;
+  min-width: 20rem;
   background-color: #eef6e1;
   border-radius: 1rem;
   padding: 1.5rem;

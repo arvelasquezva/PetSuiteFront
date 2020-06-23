@@ -72,6 +72,9 @@
         </b-card>
       </div>
     </b-row>
+    <b-modal ok-only v-model="showFail" size="sm">
+      <p class="my-4">No se pudo cancelar el servicio</p>
+    </b-modal>
   </div>
 </template>
 
@@ -86,6 +89,7 @@ export default {
   data() {
     return {
       show: false,
+      showFail: false,
       currentUser: "",
       name: "",
       nameState: null,
@@ -153,7 +157,13 @@ export default {
           user_whoCancel: id_user_whoCancel,
           reasonCancellation: name,
         })
-        .then(location.reload());
+        .then((response) => {
+          if (response.data === false) {
+            this.showFail = true;
+          } else {
+            location.reload();
+          }
+        });
     },
   },
 };
