@@ -46,11 +46,26 @@
 
         <b-form-group
           id="input-group-4"
-          label="Tu correo electronico:"
+          label="NIT de tu Guarderia:"
           label-for="input-4"
         >
           <b-form-input
             id="input-4"
+            v-model="nit"
+            required
+            type="number" 
+            min="0"
+            placeholder="Agrega el digito de verificación"
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-5"
+          label="Tu correo electronico:"
+          label-for="input-5"
+        >
+          <b-form-input
+            id="input-5"
             v-model="dog_daycare_e_mail"
             required
             placeholder="Ej: xxxxx@xxxxx.com"
@@ -59,12 +74,12 @@
         </b-form-group>
 
         <b-form-group
-          id="input-group-5"
+          id="input-group-6"
           label="Tu numero de celular:"
-          label-for="input-5"
+          label-for="input-6"
         >
           <b-form-input
-            id="input-5"
+            id="input-6"
             v-model="dog_daycare_phone"
             required
             placeholder="Ej: 3208919191"
@@ -74,12 +89,12 @@
         </b-form-group>
 
         <b-form-group
-          id="input-group-6"
+          id="input-group-7"
           label="Tu Direccion:"
-          label-for="input-6"
+          label-for="input-7"
         >
           <b-form-input
-            id="input-6"
+            id="input-7"
             v-model="dog_daycare_address"
             required
             placeholder="Ej: Carrera 97 # 36 - 69 Sur"
@@ -87,12 +102,12 @@
         </b-form-group>
 
         <b-form-group
-          id="input-group-7"
+          id="input-group-8"
           label="Agrega un precio base por cuidado de mascota:"
-          label-for="input-7"
+          label-for="input-8"
         >
           <b-form-input
-            id="input-7"
+            id="input-8"
             v-model="dog_daycare_price_base"
             required
             type="number"
@@ -101,12 +116,12 @@
           ></b-form-input>
         </b-form-group>
         <b-form-group
-          id="input-group-8"
+          id="input-group-9"
           label="Agrega un impuesto por perros grandes:"
-          label-for="input-8"
+          label-for="input-9"
         >
           <b-form-input
-            id="input-7"
+            id="input-9"
             v-model="dog_daycare_tax"
             required
             type="number"
@@ -138,6 +153,7 @@ export default {
       dog_daycare_price_base: "",
       dog_daycare_tax: "",
       dog_daycare_type: true,
+      nit: "",
     };
   },
   methods: {

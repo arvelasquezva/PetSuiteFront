@@ -154,10 +154,12 @@ h1 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
 }
 .card {
   color: #063869;
   min-width: 20rem;
+  max-width: 25rem;
   background-color: #eef6e1;
   border-radius: 1rem;
   padding: 1.5rem;
