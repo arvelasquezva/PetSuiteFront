@@ -64,7 +64,7 @@ export default {
     post(){
       axios.post("/dogList",
       {
-        cadena: "Nicolas"
+        cadena: this.user,
       });
     },
     async loginUsuario() {
