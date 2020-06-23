@@ -65,6 +65,7 @@
             required
             placeholder="Ej: 3208919191"
             type="number"
+            min="3000000000"
           ></b-form-input>
         </b-form-group>
 
@@ -91,6 +92,7 @@
             v-model="dog_daycare_price_base"
             required
             type="number"
+            min="1000"
             placeholder="Ej: 10000"
           ></b-form-input>
         </b-form-group>
@@ -104,6 +106,7 @@
             v-model="dog_daycare_tax"
             required
             type="number"
+            min="1000"
             placeholder="Ej: 10000"
           ></b-form-input>
         </b-form-group>

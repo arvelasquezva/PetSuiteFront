@@ -51,6 +51,7 @@
             id="input-4"
             v-model="proposedClientPhone"
             type="number"
+            min="3000000000"
             required
           ></b-form-input>
         </b-form-group>

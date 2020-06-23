@@ -5,7 +5,7 @@
       <b-button variant="success" class= "ml-3" href="#Cliente">Cliente</b-button>
       <b-button variant="success" class= "ml-3" href="#Paseador">Paseador</b-button>
       <b-button variant="success" class= "ml-3" href="#Guarderia">Guarderia</b-button>
-      <b-button variant="success" class= "ml-3" href="#Hospeador">Hospeador</b-button>
+      <b-button variant="success" class= "ml-3" href="#Hospedador">Hospedador</b-button>
     </div>
     <section id="Cliente">
       <UsuarioComponente></UsuarioComponente>
@@ -16,22 +16,22 @@
     <section id="Guarderia">
       <GuarderiaComponente></GuarderiaComponente>
     </section>
-    <section id="Hospeador">
-      <HospeadorComponente></HospeadorComponente>
+    <section id="Hospedador">
+      <HospedadorComponente></HospedadorComponente>
     </section>
   </div>
 </template>
 
 <script>
 import GuarderiaComponente from "@/components/Register/GuarderiaComponente.vue";
-import HospeadorComponente from "@/components/Register/HospeadorComponente.vue";
+import HospedadorComponente from "@/components/Register/HospeadorComponente.vue";
 import PaseadorComponente from "@/components/Register/PaseadorComponente.vue";
 import UsuarioComponente from "@/components/Register/UsuarioComponente.vue";
 export default {
   name: "SignUp",
   components: {
     GuarderiaComponente,
-    HospeadorComponente,
+    HospedadorComponente,
     PaseadorComponente,
     UsuarioComponente,
   },

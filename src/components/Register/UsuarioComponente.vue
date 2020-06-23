@@ -57,6 +57,7 @@
             required
             placeholder="Ej: 3208919191"
             type="number"
+            min="3000000000"
           ></b-form-input>
         </b-form-group>
 
