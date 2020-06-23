@@ -4,17 +4,17 @@
       <h1 class="mt-3 text-center ">Busca una guarderia</h1>
       <div class=" mx-1 mb-5">
         <h5 class="mt-6">Como quieres realizar tu busqueda</h5>
-        <div class="mt-3">
-          <b-button v-on:click="toggleGeneral" squared variant="success">
+        <div class="d-flex mt-3">
+          <b-button class= "ml-3" v-on:click="toggleGeneral" squared variant="success">
             Busqueda General
           </b-button>
-          <b-button v-on:click="toggleName" squared variant="success">
+          <b-button class= "ml-3" v-on:click="toggleName" squared variant="success">
             Por nombre
           </b-button>
-          <b-button v-on:click="toggleService" squared variant="success">
+          <b-button class= "ml-3" v-on:click="toggleService" squared variant="success">
             Por servicio
           </b-button>
-          <b-button v-on:click="toggleScore" squared variant="success">
+          <b-button class= "ml-3" v-on:click="toggleScore" squared variant="success">
             Por Calificacion
           </b-button>
         </div>
