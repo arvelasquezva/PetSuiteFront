@@ -71,6 +71,7 @@
               id="razon-input"
               v-model="name"
               type="number"
+              min="1000"
               :state="nameState"
               required
             ></b-form-input>

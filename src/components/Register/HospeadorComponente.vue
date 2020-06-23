@@ -1,6 +1,6 @@
 <template>
   <div class="body my-2">
-    <h1> Registrate como Hospeador </h1>
+    <h1> Registrate como Hospedador </h1>
     <div class="SignUp">
       <img
         height="300"
@@ -70,6 +70,7 @@
             required
             placeholder="Ej: 3208919191"
             type="number"
+            min="3000000000"
           ></b-form-input>
         </b-form-group>
 
@@ -124,7 +125,7 @@
 
 <script>
 export default {
-  name: "HospeadorComponente",
+  name: "HospedadorComponente",
   data() {
     return {
       user: "",

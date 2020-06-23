@@ -61,6 +61,7 @@
             id="input-5"
             v-model="proposeddog_daycarePhone"
             type="number"
+            min="3000000000"
             required
           ></b-form-input>
         </b-form-group>
@@ -86,6 +87,7 @@
             id="input-7"
             v-model="proposeddog_daycarePriceBase"
             type="number"
+            min="1000"
           ></b-form-input>
         </b-form-group>
 

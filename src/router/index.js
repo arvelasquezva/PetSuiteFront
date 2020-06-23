@@ -13,7 +13,7 @@ import WalkInProgress from '../views/Walker/WalksInProgress.vue';
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
 import UsuarioComponente from '@/components/Register/UsuarioComponente.vue';
 import GuarderiaComponente from '@/components/Register/GuarderiaComponente.vue';
-import HospeadorComponente from '@/components/Register/HospeadorComponente.vue';
+import HospedadorComponente from '@/components/Register/HospeadorComponente.vue';
 
 import UpdateDaycare from '@/components/Update/UpdateDaycare.vue';
 import UpdateDogwalker from '@/components/Update/UpdateDogwalker.vue';
@@ -72,7 +72,7 @@ const routes = [{
     { path: '/signUp/Paseadores', component: PaseadorComponente },
     { path: '/signUp/Usuario', component: UsuarioComponente },
     { path: '/signUp/Guarderias', component: GuarderiaComponente },
-    { path: '/signUp/Hospeadores', component: HospeadorComponente },
+    { path: '/signUp/Hospedadores', component: HospedadorComponente },
     {
         //Ruta para las Guarderias
         path: '/dogDayCares/:id',

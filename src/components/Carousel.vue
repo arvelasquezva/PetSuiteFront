@@ -69,5 +69,8 @@ export default {
 </script>
 
 <style scoped>
-
+.carousel{
+  margin-left: calc(50%-50vw);
+  margin-right: calc(50%-50vw);
+}
 </style>
