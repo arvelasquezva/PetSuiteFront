@@ -110,7 +110,8 @@ h5 {
 .card {
   color: #063869;
   background-color: #eef6e1;
-  min-width: 20rem;
+  min-width: 15rem;
+  max-width: 21rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
