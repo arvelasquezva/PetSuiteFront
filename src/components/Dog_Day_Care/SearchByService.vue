@@ -20,61 +20,40 @@
     <div id="app">
   <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
     <b-row class="mt-1">
-      <div v-if="Object.keys(info).length === 0">
-          <NotFound class="mb-5"></NotFound>
-        </div>
-        <div v-else>
       <b-card
         v-for="item in info"
         :key="item"
-        tag="article"
-          style="max-width: 17rem;"
-          class="card">
+        class="card">
         <b-card-body>
           <b-card-title><strong>{{item.dog_daycare_name}}</strong></b-card-title>
           <b-card-sub-title>
             <strong>Telefono: </strong>{{item.dog_daycare_phone}}
             <strong>Dirección:</strong>  {{item.dog_daycare_address}}
           </b-card-sub-title>
-          <b-card-text><strong>Puntaje: </strong>{{ item.dog_daycare_score }} </b-card-text>
-          <b-card-text><strong>Precio Base: </strong>$ {{ item.dog_daycare_price_base }} </b-card-text>
-          <b-card-text><strong>Precio Recargo: </strong>$ {{ item.dog_daycare_tax }} </b-card-text>
+          <b-card-text> <strong> Puntaje: </strong> {{ item.dog_daycare_score }} </b-card-text>
+          <b-card-text> <strong> Precio Base: </strong> $ {{ item.dog_daycare_price_base }} </b-card-text>
+          <b-card-text> <strong> Precio Recargo: </strong> $ {{ item.dog_daycare_tax }} </b-card-text>
         </b-card-body>
         <router-link :to="{name: 'dogDayCares', params:{id: item.user}}">
-            <b-button variant="primary">Go to {{ item.dog_daycare_name }}</b-button>
+            <b-button variant="primary"> Go to {{ item.dog_daycare_name }} </b-button>
           </router-link>
       </b-card>
-        </div>
       </b-row>
     </div>  
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: 'SearchByService',
-  components:{
-    NotFound
-  },
   data() {
     return {
     component:"SearchByService",
-    currentUser: {},
     cadena: "",
     info: []
     }
   },
-  computed: {
-    ...mapState(["daycares"]),
-  },
   methods: { 
-      getDaycare(){
-      this.$store.dispatch("getDogDayCares", {
-          user: this.currentUser.user
-          });
-    },
       buscarGuarderiaService() {      
       this.$store.dispatch("buscarGuarderiaService", [{
         cadena: this.cadena,
@@ -82,15 +61,6 @@ export default {
       .then(response => (this.info = response.data));
     }
   },
-    created() {
-        if (localStorage.getItem("user")) {
-        try {
-            this.currentUser = JSON.parse(localStorage.getItem("user"));
-        } catch (e) {
-            localStorage.removeItem("user");
-            }
-        }
-    }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -119,10 +89,13 @@ h5 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
+  padding: 1rem;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
+  min-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);

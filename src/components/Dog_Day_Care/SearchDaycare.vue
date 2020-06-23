@@ -67,15 +67,6 @@ export default {
       }
     },
   },
-  created() {
-    if (localStorage.getItem("user")) {
-      try {
-        this.currentUser = JSON.parse(localStorage.getItem("user"));
-      } catch (e) {
-        localStorage.removeItem("user");
-      }
-    }
-  },
 };
 </script>
 
@@ -96,27 +87,5 @@ h5 {
   display: grid;
   place-items: center;
   overflow: hidden;
-}
-
-.cards {
-  display: flex;
-}
-.card {
-  color: #063869;
-  background-color: #eef6e1;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
-  transition: 0.2s;
-}
-.card:not(:first-child) {
-  margin-left: -2rem;
-}
-.card:not(:last-child):hover,
-.card:not(:last-child):focus-within {
-  transform: translateY(-1rem);
-  ~ .card {
-    transform: translateX(2rem);
-  }
 }
 </style>

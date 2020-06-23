@@ -17,18 +17,12 @@
         </b-input-group>
       </b-form-group>
     </b-form>
-    <div id="app">
+    <div class="cards col-md-12">
       <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
       <b-row class="mt-1">
-        <div v-if="Object.keys(info).length === 0">
-          <NotFound class="mb-5"></NotFound>
-        </div>
-        <div v-else>
           <b-card
             v-for="item in info"
             :key="item"
-            tag="article"
-            style="max-width: 17rem;"
             class="card"
           >
             <b-card-body>
@@ -58,37 +52,22 @@
               >
             </router-link>
           </b-card>
-        </div>
       </b-row>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-import  NotFound  from "@/components/NotFound.vue";
 export default {
   name: "SearchByName",
-  components:{
-    NotFound
-  },
   data() {
     return {
       component: "SearchByName",
-      currentUser: {},
       cadena: "",
       info: [],
     };
   },
-  computed: {
-    ...mapState(["daycares"]),
-  },
   methods: {
-    getDaycare() {
-      this.$store.dispatch("getDogDayCares", {
-        user: this.currentUser.user,
-      });
-    },
     buscarGuarderiaName() {
       this.$store
         .dispatch("buscarGuarderiaName", [
@@ -99,15 +78,6 @@ export default {
         ])
         .then((response) => (this.info = response.data));
     },
-  },
-  created() {
-    if (localStorage.getItem("user")) {
-      try {
-        this.currentUser = JSON.parse(localStorage.getItem("user"));
-      } catch (e) {
-        localStorage.removeItem("user");
-      }
-    }
   },
 };
 </script>
@@ -137,10 +107,13 @@ h5 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
+  padding: 1rem;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
+  min-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);

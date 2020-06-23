@@ -96,11 +96,13 @@ h1 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
   border-radius: 1rem;
+  min-width: 20rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
   transition: 0.2s;

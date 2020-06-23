@@ -6,7 +6,6 @@
           <NotFound class="mb-5"></NotFound>
         </div>
       <div else class="cards mx-5 mb-5">
-        
         <b-card
           v-for="item in caresPending"
           :key="item.id"
@@ -186,11 +185,11 @@ h1 {
   height: auto;
   display: grid;
   place-items: center;
-  overflow: hidden;
 }
 
 .cards {
   display: flex;
+  overflow-x: scroll;
 }
 .card {
   color: #063869;

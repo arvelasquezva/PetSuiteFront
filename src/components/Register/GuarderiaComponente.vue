@@ -1,9 +1,13 @@
 <template>
   <div class="body my-2">
-    <h1> Registrate como Guarderia </h1>
+    <h1>Registrate como Guarderia</h1>
     <div class="SignUp">
-      <img height="300" src="@/assets/Images/Guarderia(1).png" alt="image slot"/>
-   <b-form @submit.prevent="registerUsuario" class="pl-4">
+      <img
+        height="300"
+        src="@/assets/Images/Guarderia(1).png"
+        alt="image slot"
+      />
+      <b-form @submit.prevent="registerUsuario" class="pl-4">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
             id="input-1"
@@ -111,7 +115,9 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success"> Únete a PetSuite </b-button>
+        <b-button block pill type="submit" variant="success">
+          Únete a PetSuite
+        </b-button>
       </b-form>
     </div>
   </div>
@@ -122,38 +128,42 @@ export default {
   name: "GuarderiaComponente",
   data() {
     return {
-        user: "",
-        password: "",
-        dog_daycare_name: "",
-        dog_daycare_e_mail: "",
-        dog_daycare_phone: "",
-        dog_daycare_score: 0,
-        dog_daycare_address: "",
-        dog_daycare_price_base: "",
-        dog_daycare_tax: "",
-        dog_daycare_type: true
+      user: "",
+      password: "",
+      dog_daycare_name: "",
+      dog_daycare_e_mail: "",
+      dog_daycare_phone: "",
+      dog_daycare_score: 0,
+      dog_daycare_address: "",
+      dog_daycare_price_base: "",
+      dog_daycare_tax: "",
+      dog_daycare_type: true,
     };
   },
   methods: {
     registerUsuario() {
-      this.$store.dispatch("registerUsuario", [{
-        user: this.user,
-        password: this.password,
-        dog_daycare_name: this.dog_daycare_name,
-        dog_daycare_e_mail: this.dog_daycare_e_mail,
-        dog_daycare_phone: this.dog_daycare_phone,
-        dog_daycare_score: this.dog_daycare_score,
-        dog_daycare_address: this.dog_daycare_address,
-        dog_daycare_type: this.dog_daycare_type,
-        dog_daycare_price_base: this.dog_daycare_price_base,
-        dog_daycare_tax: this.dog_daycare_tax
-      },"dog_day_cares"])
-      .then(({ data }) => {
+      this.$store
+        .dispatch("registerUsuario", [
+          {
+            user: this.user,
+            password: this.password,
+            dog_daycare_name: this.dog_daycare_name,
+            dog_daycare_e_mail: this.dog_daycare_e_mail,
+            dog_daycare_phone: this.dog_daycare_phone,
+            dog_daycare_score: this.dog_daycare_score,
+            dog_daycare_address: this.dog_daycare_address,
+            dog_daycare_type: this.dog_daycare_type,
+            dog_daycare_price_base: this.dog_daycare_price_base,
+            dog_daycare_tax: this.dog_daycare_tax,
+          },
+          "dog_day_cares",
+        ])
+        .then(({ data }) => {
           if (data === "") {
             alert("Error al Registrarte");
           } else {
-            alert ("Bienvenido a PetSuite")
-        	this.$router.push({name: 'Login'})
+            alert("Bienvenido a PetSuite");
+            this.$router.push({ name: "Login" });
           }
         });
     },
