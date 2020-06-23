@@ -17,18 +17,12 @@
         </b-input-group>
       </b-form-group>
     </b-form>
+    <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
     <div class="cards col-md-12">
-      <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
       <b-row class="mt-1">
-        <b-card
-          v-for="item in info"
-          :key="item"
-          class="card"
-        >
+        <b-card v-for="item in info" :key="item" class="card">
           <b-card-body>
-            <b-card-title
-              ><strong>{{ item.dog_daycare_name }}</strong></b-card-title
-            >
+            <b-card-title> <strong>{{ item.dog_daycare_name }} </strong> </b-card-title>
             <b-card-sub-title>
               <strong>Telefono: </strong>{{ item.dog_daycare_phone }}
               <strong>Dirección:</strong> {{ item.dog_daycare_address }}
