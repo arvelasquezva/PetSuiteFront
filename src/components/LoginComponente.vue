@@ -34,8 +34,6 @@
           >Ingresa a PetSuite</b-button
         >
         <b-button href="/signUp" block pill variant="danger"> Únete a PetSuite </b-button>
-          <b-button variant="primary" v-on:click="get()"> Get </b-button>
-    <b-button variant="warning" v-on:click="post()"> post </b-button>
       </b-form>
     
     </div>
@@ -58,15 +56,6 @@ export default {
     };
   },
   methods: {
-    get(){
-      axios.get("/all");
-    },
-    post(){
-      axios.post("/dogList",
-      {
-        cadena: this.user,
-      });
-    },
     async loginUsuario() {
       await axios
         .post(
