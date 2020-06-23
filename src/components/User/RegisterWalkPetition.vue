@@ -26,6 +26,8 @@
         >
           <b-form-datepicker
             id="example-datepicker"
+            :min="min"
+            :max="max"
             v-model="pickup_date"
             required
             class="mb-2"
@@ -100,6 +102,11 @@ import { mapState, mapGetters } from "vuex";
 export default {
   name: "RegisterWalkPetition",
   data() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const minDate = new Date(today);
+    const maxDate = new Date(today);
+    maxDate.setMonth(maxDate.getMonth() + 2);
     return {
       show: false,
       currentUser: "",
@@ -108,6 +115,8 @@ export default {
       pickup_time: "",
       notes: "",
       walk_petition_duration: "",
+      min: minDate,
+      max: maxDate,
     };
   },
   computed: {
