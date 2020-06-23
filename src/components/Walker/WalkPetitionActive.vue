@@ -6,8 +6,6 @@
         <b-card
           v-for="item in petitions"
           :key="item.id"
-          tag="article"
-          style="max-width: 20rem;"
           class="card"
         >
           <b-card-body>
@@ -166,11 +164,15 @@ h1 {
 
 .cards {
   display: flex;
+  overflow-x: scroll;
+  padding: 1rem;
 }
 .card {
   color: #063869;
   background-color: #eef6e1;
   border-radius: 1rem;
+  min-width: 20rem;
+  max-width: 25rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
   transition: 0.2s;
