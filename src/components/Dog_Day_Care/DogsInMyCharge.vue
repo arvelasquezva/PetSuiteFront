@@ -2,7 +2,10 @@
   <div class="body">
     <h1 class="mt-3">Perros a mi cargo</h1>
     <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
+      <div v-if="Object.keys(petsActive).length === 0">
+        <NotFound class="mb-5"></NotFound>
+      </div>
+      <div v-else class="cards mx-5 mb-5">
         <b-card
           v-for="item in petsActive"
           :key="item.id"
@@ -69,9 +72,15 @@
 </template>
 
 <script>
+
 import { mapState } from "vuex";
-import axios from 'axios';
+import  NotFound  from "@/components/NotFound.vue";
+import axios from "axios";
 export default {
+  name: "DogsInMyCharge",
+  components:{
+    NotFound
+  },
   name: "DogsInMyCharge",
   data() {
     return {
