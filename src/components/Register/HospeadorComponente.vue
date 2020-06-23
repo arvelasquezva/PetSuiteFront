@@ -85,6 +85,34 @@
             placeholder="Ej: Carrera 97 # 36 - 69 Sur"
           ></b-form-input>
         </b-form-group>
+        <b-form-group
+          id="input-group-7"
+          label="Agrega un precio base por cuidado de mascota:"
+          label-for="input-7"
+        >
+          <b-form-input
+            id="input-7"
+            v-model="dog_daycare_price_base"
+            required
+            type="number"
+            min="0"
+            placeholder="Ej: 10000"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-8"
+          label="Agrega un impuesto por perros grandes:"
+          label-for="input-8"
+        >
+          <b-form-input
+            id="input-7"
+            v-model="dog_daycare_tax"
+            required
+            min="0"
+            type="number"
+            placeholder="Ej: 10000"
+          ></b-form-input>
+        </b-form-group>
 
         <b-button block pill type="submit" variant="success">
           Únete a PetSuite
@@ -107,6 +135,8 @@ export default {
       dog_daycare_score: 0,
       dog_daycare_address: "",
       dog_daycare_type: false,
+      dog_daycare_price_base: "",
+      dog_daycare_tax: "",
     };
   },
   methods: {
@@ -122,6 +152,8 @@ export default {
             dog_daycare_score: this.dog_daycare_score,
             dog_daycare_address: this.dog_daycare_address,
             dog_daycare_type: this.dog_daycare_type,
+            dog_daycare_price_base: this.dog_daycare_price_base,
+            dog_daycare_tax: this.dog_daycare_tax
           },
           "dog_day_cares",
         ])
