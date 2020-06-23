@@ -29,7 +29,7 @@ export default {
 #app {
   font-family: "Montserrat", "Roboto";
   place-items: center;
-  background: linear-gradient(to top, #232526, #414345);
+  background: linear-gradient(to top, #870000, #190a05);
   overflow: auto;
 }
 NavbarComponente {

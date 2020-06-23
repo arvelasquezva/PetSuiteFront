@@ -17,7 +17,7 @@ Vue.use(Vuex);
 Vue.config.productionTip = false;
 
 axios.defaults.baseURL = 'https://petsuite.herokuapp.com/';
-axios.defaults.headers.common['Content-type'] = '';
+axios.defaults.headers.common['Content-type'] = 'application/json';
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS';
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
