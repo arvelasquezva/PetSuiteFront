@@ -1,11 +1,6 @@
 <template>
   <div class="body">
     <div class="login">
-      <img
-        height="300"
-        src="../assets/Images/LogoSinFondo.png"
-        alt="image slot"
-      />
       <b-form @submit.prevent="loginUsuario">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
           <b-form-input
