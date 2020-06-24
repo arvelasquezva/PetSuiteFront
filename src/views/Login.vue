@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-8">
         <Cards msg="Servicios Que Ofrecemos" v-bind:cards="Tarjetas" ></Cards>
       </div>
       <div class="col-md-4">
@@ -54,4 +54,3 @@ export default {
   },
 };
 </script>
-<style></style>

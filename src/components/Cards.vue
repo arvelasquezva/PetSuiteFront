@@ -16,7 +16,7 @@
           </b-card-text>
         </b-card-body>
           <router-link :to="item.routes">
-            <b-button variant="primary" >Únete a PetSuite cómo {{ item.title }}</b-button>
+            <b-button class="cardsButton" >Únete a PetSuite como {{ item.title }}</b-button>
           </router-link>
         </b-card>
       </div>
@@ -51,9 +51,9 @@ export default {
 }
 .card {
   color: #063869;
-  background-color: #eef6e1;
+  background-color: white;
   border-radius: 1rem;
-  max-width: 15rem;
+  width: 17rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
   transition: 0.2s;
@@ -67,5 +67,10 @@ export default {
   ~ .card {
     transform: translateX(2rem);
   }
+}
+.cardsButton{
+  background: #ff5f6d;
+  border: none;
+  box-shadow: 3px 3px 12px 2px rgba(#ff5f6d, 0.2);
 }
 </style>

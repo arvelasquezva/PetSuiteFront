@@ -73,7 +73,7 @@ export default {
 }
 .card {
   color: #063869;
-  background-color: #eef6e1;
+  background-color: white;
   border-radius: 1rem;
   min-width: 17rem;
   padding: 1.5rem;

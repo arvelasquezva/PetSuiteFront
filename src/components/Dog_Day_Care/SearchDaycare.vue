@@ -5,16 +5,16 @@
       <div class=" mx-1 mb-5">
         <h5 class="mt-6">¿Cómo quieres realizar tu busqueda?</h5>
         <div class="d-flex mt-3">
-          <b-button class= "ml-3" v-on:click="toggleGeneral" squared variant="success">
+          <b-button class= "buscadorButton ml-3" v-on:click="toggleGeneral">
             Búsqueda General
           </b-button>
-          <b-button class= "ml-3" v-on:click="toggleName" squared variant="success">
+          <b-button class= "buscadorButton ml-3" v-on:click="toggleName">
             Por nombre
           </b-button>
-          <b-button class= "ml-3" v-on:click="toggleService" squared variant="success">
+          <b-button class= "buscadorButton ml-3" v-on:click="toggleService">
             Por servicio
           </b-button>
-          <b-button class= "ml-3" v-on:click="toggleScore" squared variant="success">
+          <b-button class= "buscadorButton ml-3" v-on:click="toggleScore">
             Por Calificación
           </b-button>
         </div>
@@ -77,5 +77,11 @@ export default {
   display: grid;
   place-items: center;
   overflow: hidden;
+}
+.buscadorButton{
+  background: #ffffff;
+  border-style: solid;
+  border-width: 1px;
+  color: black;
 }
 </style>

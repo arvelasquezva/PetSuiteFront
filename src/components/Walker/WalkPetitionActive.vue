@@ -167,7 +167,7 @@ export default {
 }
 .card {
   color: #063869;
-  background-color: #eef6e1;
+  background-color: white;
   border-radius: 1rem;
   min-width: 20rem;
   max-width: 25rem;

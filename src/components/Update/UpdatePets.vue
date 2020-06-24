@@ -162,7 +162,7 @@ export default {
 }
 .card {
   color: #063869;
-  background-color: #eef6e1;
+  background-color: white;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
