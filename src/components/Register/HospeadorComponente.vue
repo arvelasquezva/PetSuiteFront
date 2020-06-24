@@ -1,6 +1,6 @@
 <template>
   <div class="body my-2">
-    <h1> Registrate como Hospedador </h1>
+    <h1> Regístrate como Hospedador </h1>
     <div class="SignUp">
       <img
         height="300"
