@@ -71,16 +71,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: #40db9a;
-}
-h2 {
-  color: #40db9a;
-}
-h5 {
-  color: #40db9a;
-  text-align: center;
-}
 .body {
   margin: 0;
   height: auto;

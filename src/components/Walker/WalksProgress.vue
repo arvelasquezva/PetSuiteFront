@@ -86,9 +86,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: #40db9a;
-}
 .body {
   margin: 0;
   height: auto;

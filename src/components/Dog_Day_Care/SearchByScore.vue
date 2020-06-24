@@ -78,20 +78,6 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-h1 {
-  color: #40db9a;
-}
-h2 {
-  color: #40db9a;
-}
-h3 {
-  color: #40db9a;
-  text-align: center;
-}
-h5 {
-  color: #40db9a;
-  text-align: center;
-}
 .body {
   margin: 0;
   height: auto;

@@ -29,10 +29,24 @@ export default {
 #app {
   font-family: "Montserrat", "Roboto";
   place-items: center;
-  background: linear-gradient(to bottom, #141e30, #243b55);
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
   overflow: auto;
 }
 NavbarComponente {
   position: sticky;
+}
+h1 {
+  color: white; 
+}
+h2 {
+  color: white; 
+}
+h3 {
+  color: white; 
+  text-align: center;
+}
+h5 {
+  color: white; 
+  text-align: center;
 }
 </style>

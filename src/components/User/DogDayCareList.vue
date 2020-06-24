@@ -50,9 +50,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: #40db9a;
-}
 .body_card {
   margin: 0;
   height: auto;

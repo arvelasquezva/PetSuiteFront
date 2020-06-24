@@ -1,10 +1,10 @@
 <template>
   <div class="login">
     <div class="row">
-      <div class="col-md-6.5">
+      <div class="col-md-7">
         <Cards msg="Servicios Que Ofrecemos" v-bind:cards="Tarjetas" ></Cards>
       </div>
-      <div class="col-md-5.5">
+      <div class="col-md-4">
         <LoginComponente></LoginComponente>
       </div>
     </div>

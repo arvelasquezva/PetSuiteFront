@@ -35,10 +35,10 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <div v-if="!loggedIn">
-          <b-button href="/login" variant="light" class="ml-3">
+          <b-button href="/login" class="loginButton ml-3">
             Inicia sesión</b-button
           >
-          <b-button href="/signUp" variant="light" class="ml-3">
+          <b-button href="/signUp" variant="light" class="registerButton ml-3">
             Regístrate</b-button
           >
         </div>
@@ -72,9 +72,18 @@ export default {
 
 <style scoped>
 .bd-navbar {
-  background: #40db9a;
+  border-style: none;
+  background: white;
   position: sticky;
   top: 0;
   z-index: 1071;
+}
+.loginButton{
+  background: #ff5f6d;
+}
+.registerButton{
+  border-style: solid;
+  border-color: #ffc371;
+  border-width: 2px;
 }
 </style>

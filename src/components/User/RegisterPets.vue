@@ -128,10 +128,7 @@ export default {
   },
 };
 </script>
-<style>
-h1 {
-  color: #40db9a;
-}
+<style lang="scss" scoped>
 .body {
   margin: 0;
   height: auto;
