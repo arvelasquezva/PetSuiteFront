@@ -80,11 +80,15 @@ export default {
 </script>
 <style scoped>
 .notifications-list {
+  background: #01071f;
   z-index: 999;
   position: fixed;
   bottom: 0;
   right: 0;
   margin-right: 15px;
   width: 320px;
+}
+p{
+  color: white;
 }
 </style>
