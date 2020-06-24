@@ -28,12 +28,10 @@ export default {
 <style>
 #app {
   font-family: "Montserrat", "Roboto";
+  padding-top: 50px;
   place-items: center;
   background: linear-gradient(to right, #ff5f6d, #ffc371);
   overflow: auto;
-}
-NavbarComponente {
-  position: sticky;
 }
 h1 {
   color: white; 
