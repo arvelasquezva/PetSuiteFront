@@ -32,6 +32,7 @@ export default {
   place-items: center;
   background: linear-gradient(to right, #ff5f6d, #ffc371);
   overflow: auto;
+  width: 100%;
 }
 h1 {
   color: white; 
