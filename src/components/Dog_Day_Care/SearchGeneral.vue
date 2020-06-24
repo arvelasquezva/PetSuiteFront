@@ -38,8 +38,7 @@
             </b-card-text>
           </b-card-body>
           <router-link :to="{ name: 'dogDayCares', params: { id: item.user } }">
-            <b-button variant="primary"
-              >Go to {{ item.dog_daycare_name }}</b-button
+            <b-button variant="primary"> Ir a {{ item.dog_daycare_name }}</b-button
             >
           </router-link>
         </b-card>

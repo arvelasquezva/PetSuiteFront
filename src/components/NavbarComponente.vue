@@ -39,7 +39,7 @@
             Inicia sesión</b-button
           >
           <b-button href="/signUp" variant="light" class="ml-3">
-            Registrate</b-button
+            Regístrate</b-button
           >
         </div>
         <div v-else>

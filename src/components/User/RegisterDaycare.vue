@@ -70,7 +70,7 @@
                 required
                 placeholder="Ej: 5"
                 type="number"
-                min="0"
+                min="1"
               >
               </b-form-input>
             </b-form-group>
