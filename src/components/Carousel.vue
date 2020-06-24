@@ -1,6 +1,7 @@
 <template>
-    <div class="carousel">
+    <div>
       <b-carousel
+        class="carousel"
         id="carousel-1"
         v-model="slide"
         :interval="4000"
