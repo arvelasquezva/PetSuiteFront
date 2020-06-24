@@ -1,7 +1,11 @@
 <template>
   <div class="body">
-    <h1 v-if="guarderiaType == true">Solicita la guarderia {{ $route.params.id }}</h1>
-    <h1 v-if="guarderiaType == false">Solicita el hospedador {{ $route.params.id }}</h1>
+    <h1 v-if="guarderiaType == true">
+      Solicita la guarderia {{ $route.params.id }}
+    </h1>
+    <h1 v-else-if="guarderiaType == false">
+      Solicita el hospedador {{ $route.params.id }}
+    </h1>
     <div class="SignUp">
       <div class="row">
         <div class="col-md-5">
@@ -101,7 +105,10 @@
 
       <b-modal ok-only centered v-model="show" size="sm" @ok="handleOk">
         <p class="my-4">Has creado una petición para Guarderia</p>
-        <p class="my-4">Si deseas cancelarlo dirigete a <a href="/MyPetitions">Mis peticiones</a></p>
+        <p class="my-4">
+          Si deseas cancelarlo dirigete a
+          <a href="/MyPetitions">Mis peticiones</a>
+        </p>
       </b-modal>
 
       <b-modal v-model="showPrice">
@@ -109,7 +116,7 @@
           <h5>{{ invoice.dog_daycare_invoice_dogdaycare_id }}</h5>
           <!-- Emulate built in modal header close button action -->
           <b-button size="sm" variant="danger" @click="close()">
-           x
+            x
           </b-button>
         </template>
         <p class="my-4">
@@ -121,9 +128,10 @@
           >{{ invoice.dog_daycare_invoice_duration }}
         </p>
         <p class="my-4">
-          <strong> Valor a Pagar: </strong> $ {{ invoice.dog_daycare_invoice_price }}
+          <strong> Valor a Pagar: </strong> $
+          {{ invoice.dog_daycare_invoice_price }}
         </p>
-        <template v-slot:modal-footer="{ ok, cancel}">
+        <template v-slot:modal-footer="{ ok, cancel }">
           <!-- Emulate built in modal footer ok and cancel button actions -->
           <b-button size="sm" variant="success" @click="aceptarPeticion()">
             Aceptar
@@ -150,7 +158,7 @@ export default {
     maxDate.setMonth(maxDate.getMonth() + 2);
     return {
       show: false,
-      guarderiaType: null,
+      guarderiaType: false,
       showPrice: false,
       dog_daycare_invoice_price: 0,
       invoice: "",
@@ -172,15 +180,6 @@ export default {
   methods: {
     handleOk() {
       location.reload();
-    },
-    getTypeCare(){
-      this.$store.dispatch("getTypeDogCare", this.$route.params.id)
-      .then((response) => {
-          if (response.data == true) {
-            this.guarderiaType = true;
-          } else {
-            this.guarderiaType = false;
-          }});
     },
     makeDayCarePetition() {
       console.log(this.dog_daycare_duration);
@@ -226,6 +225,17 @@ export default {
     getServices() {
       this.$store.dispatch("getServicesByClient", this.$route.params.id);
     },
+    getTypeCare() {
+      this.$store
+        .dispatch("getTypeDogCare", this.$route.params.id)
+        .then((response) => {
+          if (response.data == true) {
+            this.guarderiaType = true;
+          } else {
+            this.guarderiaType = false;
+          }
+        });
+    },
   },
   mounted() {
     if (localStorage.getItem("user")) {
@@ -236,8 +246,6 @@ export default {
       }
     }
     this.getServices();
-  },
-  beforeCreate() {
     this.getTypeCare();
   },
 };
