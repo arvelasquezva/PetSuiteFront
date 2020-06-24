@@ -1,6 +1,7 @@
 <template>
   <div class="notifications-list">
     <b-alert
+      class="notification"
       dismissible
       :show="showAlert"
       v-for="item in notifications"
@@ -80,7 +81,6 @@ export default {
 </script>
 <style scoped>
 .notifications-list {
-  background: #01071f;
   z-index: 999;
   position: fixed;
   bottom: 0;
@@ -91,4 +91,9 @@ export default {
 p{
   color: white;
 }
+.notification{
+  background: #01071f;
+  border: none;
+}
+
 </style>

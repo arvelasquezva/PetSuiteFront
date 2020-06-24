@@ -1,8 +1,5 @@
 <template>
-  <header
-    class="navbar bd-navbar flex-column flex-md-row navbar-light navbar-expand"
-  >
-    <b-container>
+  <b-navbar class="navbarPetSuite">
       <b-navbar-brand href="/">
         <img src="@/assets/Images/Isotipo.png" alt="Isotipo" width="30px" />
         Petsuite
@@ -49,8 +46,7 @@
           <b-button class="logoutButton" @click="logout" href="/login" variant="light"> Cierra Sesión</b-button>
         </div>
       </b-navbar-nav>
-    </b-container>
-  </header>
+  </b-navbar>
 </template>
 
 <script>
@@ -71,11 +67,13 @@ export default {
 </script>
 
 <style scoped>
-.bd-navbar {
+.navbarPetSuite {
   border-style: none;
   background: white;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
+  color: black;
   z-index: 1071;
 }
 .loginButton{
