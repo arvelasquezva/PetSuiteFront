@@ -1,6 +1,7 @@
 <template>
   <div class="body">
-    <h1>Solicita la guarderia {{ $route.params.id }}</h1>
+    <h1 v-if="type==true">Solicita la guarderia {{ $route.params.id }}</h1>
+    <h1 v-if="type==false">Solicita el hospedador {{ $route.params.id }}</h1>
     <div class="SignUp">
       <div class="row">
         <div class="col-md-5">
@@ -149,6 +150,7 @@ export default {
     maxDate.setMonth(maxDate.getMonth() + 2);
     return {
       show: false,
+      type: false,
       showPrice: false,
       dog_daycare_invoice_price: 0,
       invoice: "",
@@ -170,6 +172,15 @@ export default {
   methods: {
     handleOk() {
       location.reload();
+    },
+    getTypeCare(){
+      this.$store.dispatch("getTypeDogCare", this.$route.params.id)
+      .then((response) => {
+          if (response.data == true) {
+            this.type = true;
+          } else {
+            this.type = false;
+          }});
     },
     makeDayCarePetition() {
       console.log(this.dog_daycare_duration);
@@ -225,6 +236,7 @@ export default {
       }
     }
     this.getServices();
+    this.getTypeCare();
   },
 };
 </script>

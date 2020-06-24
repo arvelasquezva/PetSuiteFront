@@ -157,6 +157,10 @@ export default new Vuex.Store({
                 .get("/api/clients/myServicesAvailables?user=" + credentials);
             commit('SET_CLIENT_SERVICES', data);
         },
+        async getTypeDogCare({ commit }, credentials) {
+            await axios
+                .get("/api/clients/typeOfMyCare?user=" + credentials);
+        },
         async getPetitionById({ commit }) {
             const { data } = await axios
                 .get("api/walkpetitions/all");
