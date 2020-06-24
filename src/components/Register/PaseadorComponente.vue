@@ -1,6 +1,6 @@
 <template>
   <div class="body my-2">
-    <h1> Regístrate como Paseador </h1>
+    <h1> Regístrate cómo Paseador </h1>
     <div class="SignUp">
       <img
         height="300"
@@ -46,21 +46,21 @@
 
         <b-form-group
           id="input-group-5"
-          label="Tu correo electronico:"
+          label="Tu correo electrónico:"
           label-for="input-5"
         >
           <b-form-input
             id="input-5"
             v-model="dog_walker_e_mail"
             required
-            placeholder="Ingresa tu correo electronico"
+            placeholder="Ingresa tu correo electrónico"
             type="email"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="input-group-4"
-          label="Tu numero de celular:"
+          label="Tu número de celular:"
           label-for="input-4"
         >
           <b-form-input
@@ -105,7 +105,7 @@ export default {
       }, "dog_walkers"])
       .then(({ data }) => {
           if (data === "") {
-            alert("Error al Registrarte");
+            alert("Error al Regístrarte");
           } else {
             alert ("Bienvenido a PetSuite")
         	this.$router.push({name: 'Login'})

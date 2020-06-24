@@ -25,9 +25,9 @@
               ><strong>Debes recogerlo en: </strong
               >{{ item.walk_invoice_address }}
             </b-card-text>
-            <b-card-text
-              ><strong>El paseo debe empezar : </strong
-              >{{ item.walk_invoice_date }}
+            <b-card-text>
+              <strong> El paseo debe empezar : </strong>
+              {{ item.walk_invoice_date }}
             </b-card-text>
             <b-card-text
               ><strong>El paseo durará: </strong

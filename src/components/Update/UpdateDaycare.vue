@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="body">
-      <h1>Actualiza Datos de Guarderia</h1>
+      <h1>Actualiza Datos de Guardería</h1>
     <div class="SignUp">      
       <img height="300" src="@/assets/Images/Guarderia(1).png" alt="image slot" />
       <b-form @submit.prevent="updateUsuario" class="pl-4">
@@ -29,7 +29,7 @@
 
         <b-form-group
           id="input-group-3"
-          label="Nombre de tu Guarderia:"
+          label="Nombre de tu Guardería:"
           label-for="input-3"
         >
           <b-form-input
@@ -41,7 +41,7 @@
 
         <b-form-group
           id="input-group-4"
-          label="Tu correo electronico:"
+          label="Tu correo electrónico:"
           label-for="input-4"
         >
           <b-form-input
@@ -54,7 +54,7 @@
 
         <b-form-group
           id="input-group-5"
-          label="Tu numero de celular:"
+          label="Tu número de celular:"
           label-for="input-5"
         >
           <b-form-input
@@ -68,7 +68,7 @@
 
         <b-form-group
           id="input-group-6"
-          label="Tu Direccion:"
+          label="Tu Dirección:"
           label-for="input-6"
         >
           <b-form-input

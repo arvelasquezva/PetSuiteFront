@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Registra tu servicio:</h1>
+    <h1 class="mt-3">Regístra tu servicio:</h1>
     <div class="SignUp">
       <b-form @submit.prevent="registerServicio">
         <b-form-group id="input-group-1" label="Nombre del servicio:" label-for="input-1">
@@ -39,9 +39,7 @@
           ></b-form-textarea>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success"
-          >Registra tu servicio</b-button
-        >
+        <b-button block pill type="submit" variant="success"> Regístra tu servicio </b-button>
       </b-form>
     </div>
   </div>
@@ -68,7 +66,7 @@ export default {
           dogdaycare_Service_Description: this.services_description,
         })
         .then(() => {
-          alert("Has registrado tu servicio " + this.services_name);
+          alert("Has regístrado tu servicio " + this.services_name);
           location.reload();
         });
     },

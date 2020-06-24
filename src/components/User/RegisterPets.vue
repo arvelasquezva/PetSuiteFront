@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Registra a tu perro:</h1>
+    <h1 class="mt-3">Regístra a tu perro:</h1>
     <div class="SignUp">
       <b-form @submit.prevent="registerMascota">
         <h2>Ingresa los datos de tu perro:</h2>
@@ -79,9 +79,7 @@
           ></b-form-textarea>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success"
-          >Registra a tu Mascota</b-button
-        >
+        <b-button block pill type="submit" variant="success"> Regístra a tu Mascota </b-button>
       </b-form>
     </div>
   </div>
@@ -114,7 +112,7 @@ export default {
           dog_notes: this.dog_notes,
         })
         .then(() => {
-          alert("Has registrado a " + this.dog_name);
+          alert("Has regístrado a " + this.dog_name);
           location.reload();
         });
     },

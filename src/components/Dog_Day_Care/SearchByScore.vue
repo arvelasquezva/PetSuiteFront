@@ -11,7 +11,7 @@
             required
             min="0"
             max="5"
-            placeholder="Busca una guarderia por su calificación"
+            placeholder="Busca una guardería por su calificación"
           >
           </b-form-input>
           <b-input-group-append>
@@ -29,7 +29,7 @@
               ><strong>{{ item.dog_daycare_name }}</strong></b-card-title
             >
             <b-card-sub-title>
-              <strong>Telefono: </strong>{{ item.dog_daycare_phone }}
+              <strong>Teléfono: </strong>{{ item.dog_daycare_phone }}
               <strong>Dirección:</strong> {{ item.dog_daycare_address }}
             </b-card-sub-title>
             <b-card-text> <strong>Puntaje: </strong>{{ item.dog_daycare_score }}

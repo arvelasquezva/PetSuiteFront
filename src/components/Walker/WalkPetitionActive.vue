@@ -16,7 +16,7 @@
               >{{ item.walk_petition_address }}
             </b-card-text>
             <b-card-text
-              ><strong>El paseo empezara: </strong
+              ><strong>El paseo empezará: </strong
               >{{ item.walk_petition_date_time }}
             </b-card-text>
             <b-card-text
@@ -43,7 +43,7 @@
             user="'item'"
             v-on:click="sendInfo(item)"
           >
-            Propon un precio
+            Propón un precio
           </b-button>
         </b-card>
       </div>
