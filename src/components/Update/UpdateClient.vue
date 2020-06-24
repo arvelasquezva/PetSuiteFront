@@ -44,7 +44,7 @@
 
         <b-form-group
           id="input-group-4"
-          label="Tu numero de celular:"
+          label="Tu número de celular:"
           label-for="input-4"
         >
           <b-form-input
@@ -58,7 +58,7 @@
 
         <b-form-group
           id="input-group-5"
-          label="Tu correo electronico:"
+          label="Tu correo electrónico:"
           label-for="input-5"
         >
           <b-form-input
@@ -71,7 +71,7 @@
 
         <b-form-group
           id="input-group-6"
-          label="Tu Direccion:"
+          label="Tu Dirección:"
           label-for="input-6"
         >
           <b-form-input

@@ -4,7 +4,7 @@
       <h1> Escoje Tu Rol en Petsuite </h1>
       <b-button variant="success" class= "ml-3" href="#Cliente">Cliente</b-button>
       <b-button variant="success" class= "ml-3" href="#Paseador">Paseador</b-button>
-      <b-button variant="success" class= "ml-3" href="#Guarderia">Guarderia</b-button>
+      <b-button variant="success" class= "ml-3" href="#Guarderia">Guardería</b-button>
       <b-button variant="success" class= "ml-3" href="#Hospedador">Hospedador</b-button>
     </div>
     <section id="Cliente">

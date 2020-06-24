@@ -1,6 +1,6 @@
 <template>
   <div class="body my-2">
-    <h1> Regístrate como Hospedador </h1>
+    <h1> Regístrate cómo Hospedador </h1>
     <div class="SignUp">
       <img
         height="300"
@@ -34,20 +34,20 @@
 
         <b-form-group
           id="input-group-3"
-          label="Nombre de tu Guarderia:"
+          label="Tu Nombre:"
           label-for="input-3"
         >
           <b-form-input
             id="input-3"
             v-model="dog_daycare_name"
             required
-            placeholder="El Nombre de tu Guarderia"
+            placeholder="El Nombre de tu guardería NO oficial"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="input-group-4"
-          label="Tu correo electronico:"
+          label="Tu correo electrónico:"
           label-for="input-4"
         >
           <b-form-input
@@ -61,7 +61,7 @@
 
         <b-form-group
           id="input-group-5"
-          label="Tu numero de celular:"
+          label="Tu número de celular:"
           label-for="input-5"
         >
           <b-form-input
@@ -76,7 +76,7 @@
 
         <b-form-group
           id="input-group-6"
-          label="Tu Direccion:"
+          label="Tu Dirección:"
           label-for="input-6"
         >
           <b-form-input
@@ -128,7 +128,7 @@ export default {
         ])
         .then(({ data }) => {
           if (data === "") {
-            alert("Error al Registrarte");
+            alert("Error al Regístrarte");
           } else {
             alert("Bienvenido a PetSuite");
             this.$router.push({ name: "Login" });

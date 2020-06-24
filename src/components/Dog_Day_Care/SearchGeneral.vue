@@ -8,7 +8,7 @@
             id="input-1"
             v-model="cadena"
             required
-            placeholder="Busca una guarderia"
+            placeholder="Busca una guardería"
           >
           </b-form-input>
           <b-input-group-append>
@@ -24,7 +24,7 @@
           <b-card-body>
             <b-card-title> <strong>{{ item.dog_daycare_name }} </strong> </b-card-title>
             <b-card-sub-title>
-              <strong>Telefono: </strong>{{ item.dog_daycare_phone }}
+              <strong>Teléfono: </strong>{{ item.dog_daycare_phone }}
               <strong>Dirección:</strong> {{ item.dog_daycare_address }}
             </b-card-sub-title>
             <b-card-text

@@ -54,7 +54,7 @@
 
         <b-form-group
           id="input-group-5"
-          label="Duración en Minutos:"
+          label="Ingresa el tiempo en minutos para el paseo:"
           label-for="input-5"
         >
           <b-form-input

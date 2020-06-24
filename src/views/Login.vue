@@ -35,10 +35,10 @@ export default {
         },
         {
           id: 2,
-          title: "Guarderia",
+          title: "Guardería",
           imagen:
             "https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg",
-          descripcion: "Tienes una empresa consolidada y registrada para el cuidado de perros",
+          descripcion: "Tienes una empresa consolidada y regístrada para el cuidado de perros",
           routes: "signUp/Guarderias"
         },
         {
@@ -46,7 +46,7 @@ export default {
           title: "Hospedador",
           imagen:
             "https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg",
-          descripcion: "Tienes una casa con el espacio para cuidar a perritos pero no estás registrado como empresa",
+          descripcion: "Tienes una casa con el espacio para cuidar a perritos pero no estás regístrado cómo empresa",
           routes: "signUp/Hospedadores"
         },
       ],

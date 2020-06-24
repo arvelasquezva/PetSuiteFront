@@ -1,6 +1,6 @@
 <template>
   <div class="body my-2">
-    <h1> Regístrate como Cliente </h1>
+    <h1> Regístrate cómo Cliente </h1>
     <div class="SignUp">
       <img
         height="300"
@@ -48,7 +48,7 @@
 
         <b-form-group
           id="input-group-4"
-          label="Tu numero de celular:"
+          label="Tu número de celular:"
           label-for="input-4"
         >
           <b-form-input
@@ -63,7 +63,7 @@
 
         <b-form-group
           id="input-group-5"
-          label="Tu correo electronico:"
+          label="Tu correo electrónico:"
           label-for="input-5"
         >
           <b-form-input
@@ -77,7 +77,7 @@
 
         <b-form-group
           id="input-group-6"
-          label="Tu Direccion:"
+          label="Tu Dirección:"
           label-for="input-6"
         >
           <b-form-input
@@ -119,7 +119,7 @@ export default {
       }, "clients"])
       .then(({ data }) => {
           if (data === "") {
-            alert("Error al Registrarte");
+            alert("Error al Regístrarte");
           } else {
             alert ("Bienvenido a PetSuite")
         	  this.$router.push({name: 'Login'})

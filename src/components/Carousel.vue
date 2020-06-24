@@ -11,7 +11,7 @@
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
       >
-        <b-carousel-slide caption="Necesitas un Guarderia o Un Paseador para tu perro? PetSuite">
+        <b-carousel-slide caption="¿Necesitas una guardería o un paseador para tu perro? PetSuite">
           <template v-slot:img>
             <img
               height="480"
@@ -22,7 +22,7 @@
         </b-carousel-slide>
 
         <b-carousel-slide
-          caption="Quieres saber la reputación y la calidad de quien cuida de tu mascota? PetSuite"
+          caption="¿Quieres saber la reputación y la calidad de quien cuida de tu mascota? PetSuite"
         >
           <template v-slot:img>
             <img
@@ -34,7 +34,7 @@
         </b-carousel-slide>
 
         <b-carousel-slide
-          caption="Algo de último momento y necesitas que alguien cuide a tu mascota? PetSuite"
+          caption="¿Algo de último momento y necesitas que alguien cuide a tu mascota? PetSuite"
         >
           <template v-slot:img>
             <img

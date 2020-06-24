@@ -1,6 +1,6 @@
 <template>
   <div class="body_card">
-    <h1 class="mt-3">Guarderias</h1>
+    <h1 class="mt-3">Guarderías</h1>
       <div class="cards col-md-12">
         <b-card
           v-for="item in dogDayCares"
@@ -10,10 +10,10 @@
         <b-card-body>
           <b-card-title><strong>{{item.dog_daycare_name}}</strong></b-card-title>
           <b-card-sub-title>
-            <strong v-if="item.dog_daycare_type == true"> Guarderia Oficial</strong>
+            <strong v-if="item.dog_daycare_type == true"> Guardería Oficial</strong>
             <strong v-else> Hospedador</strong>
           </b-card-sub-title>
-          <b-card-text><strong>Telefono: </strong>{{item.dog_daycare_phone}} </b-card-text>
+          <b-card-text><strong>Teléfono: </strong>{{item.dog_daycare_phone}} </b-card-text>
           <b-card-text><strong>Dirección:</strong>  {{item.dog_daycare_address}} </b-card-text>
           <b-card-text><strong>Puntaje: </strong>{{ item.dog_daycare_score }} </b-card-text>
           <b-card-text><strong>Precio Base: </strong>$ {{ item.dog_daycare_price_base }} </b-card-text>

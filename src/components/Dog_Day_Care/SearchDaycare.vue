@@ -1,12 +1,12 @@
 <template>
   <div class="body">
     <div>
-      <h1 class="mt-3 text-center ">Busca una guarderia</h1>
+      <h1 class="mt-3 text-center ">Busca una guardería</h1>
       <div class=" mx-1 mb-5">
-        <h5 class="mt-6">Como quieres realizar tu busqueda</h5>
+        <h5 class="mt-6">¿Cómo quieres realizar tu busqueda?</h5>
         <div class="d-flex mt-3">
           <b-button class= "ml-3" v-on:click="toggleGeneral" squared variant="success">
-            Busqueda General
+            Búsqueda General
           </b-button>
           <b-button class= "ml-3" v-on:click="toggleName" squared variant="success">
             Por nombre
@@ -15,7 +15,7 @@
             Por servicio
           </b-button>
           <b-button class= "ml-3" v-on:click="toggleScore" squared variant="success">
-            Por Calificacion
+            Por Calificación
           </b-button>
         </div>
         <keep-alive>

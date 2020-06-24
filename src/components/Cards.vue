@@ -16,7 +16,7 @@
           </b-card-text>
         </b-card-body>
           <router-link :to="item.routes">
-            <b-button variant="primary" >Únete a PetSuite como {{ item.title }}</b-button>
+            <b-button variant="primary" >Únete a PetSuite cómo {{ item.title }}</b-button>
           </router-link>
         </b-card>
       </div>

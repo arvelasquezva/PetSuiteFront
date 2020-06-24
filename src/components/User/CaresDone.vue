@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <h1 class="mt-3">Guarderia Que Debes Calificar</h1>
+    <h1 class="mt-3">Guardería Que Debes Calificar</h1>
     <b-row class="mt-1">
       <div v-if="Object.keys(caresInvoice).length === 0">
           <NotFound class="mb-5"></NotFound>
@@ -13,7 +13,7 @@
         >
         <b-card-body>
             <b-card-title> El Cuidado para: <strong>{{ item.dog_daycare_invoice_dog_name }}</strong> ha terminado</b-card-title>
-            <b-card-text> La guarderia ha sido: <strong>{{item.dog_daycare_invoice_dogdaycare_id}}</strong></b-card-text>
+            <b-card-text> La guardería ha sido: <strong>{{item.dog_daycare_invoice_dogdaycare_id}}</strong></b-card-text>
           </b-card-body>
           <b-modal
             v-model="show"

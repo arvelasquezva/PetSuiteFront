@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <h1 v-if="guarderiaType == true">
-      Solicita la guarderia {{ $route.params.id }}
+      Solicita la guardería {{ $route.params.id }}
     </h1>
     <h1 v-else-if="guarderiaType == false">
       Solicita el hospedador {{ $route.params.id }}
@@ -66,7 +66,7 @@
 
             <b-form-group
               id="input-group-5"
-              label="Duración en Horas:"
+              label="¿Cuántas horas deseas que dure tu cuidado?:"
               label-for="input-5"
             >
               <b-form-input
@@ -104,7 +104,7 @@
       </div>
 
       <b-modal ok-only centered v-model="show" size="sm" @ok="handleOk">
-        <p class="my-4">Has creado una petición para Guarderia</p>
+        <p class="my-4">Has creado una petición para una guardería</p>
         <p class="my-4">
           Si deseas cancelarlo dirigete a
           <a href="/MyPetitions">Mis peticiones</a>
@@ -195,7 +195,7 @@ export default {
         })
         .then(({ data }) => {
           if (data === "") {
-            alert("El perro ya se encuentra en un Guarderia");
+            alert("El perro ya se encuentra en un Guardería");
           } else {
             this.invoice = data;
             this.showPrice = true;
@@ -216,7 +216,7 @@ export default {
         .then(({ data }) => {
           console.log(data);
           if (data === "") {
-            alert("El perro ya se encuentra en un Guarderia");
+            alert("El perro ya se encuentra en un Guardería");
           } else {
             this.show = true;
           }

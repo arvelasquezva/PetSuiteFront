@@ -60,7 +60,7 @@
 
           <b-form-group
             id="input-group-6"
-            label="Algo mas?:"
+            label="¿Algo más?:"
             label-for="input-6"
           >
             <b-form-textarea

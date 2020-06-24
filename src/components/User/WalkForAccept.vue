@@ -78,9 +78,9 @@
           >
          User ID: {{info.user}} <br/>
          Nombre del paseador: {{info.dog_walker_name}} <br/>
-         Telefono del Paseador: {{info.dog_walker_phone}}<br/>
+         Teléfono del paseador: {{info.dog_walker_phone}}<br/>
          E-mail del paseador: {{info.dog_walker_e_mail}}<br/>
-         Puntaje del Paseador: {{info.dog_walker_score}}
+         Puntaje del paseador: {{info.dog_walker_score}}
         </b-toast>
   </div>  
 </template>
