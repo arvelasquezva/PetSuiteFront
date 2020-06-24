@@ -20,7 +20,7 @@
           <b-card-text><strong>Precio Recargo: </strong>$ {{ item.dog_daycare_tax }} </b-card-text>
         </b-card-body>
           <router-link :to="{name: 'dogDayCares', params:{id: item.user}}">
-            <b-button variant="primary"> Ir a {{ item.dog_daycare_name }}</b-button>
+            <b-button class="dogDayCareButton"> Ir a {{ item.dog_daycare_name }}</b-button>
           </router-link>
         </b-card>
       </div>
@@ -55,7 +55,6 @@ export default {
   height: auto;
   display: grid;
   place-items: center;
-  
 }
 
 .cards {
@@ -65,7 +64,7 @@ export default {
 }
 .card {
   color: #063869;
-  background-color: #eef6e1;
+  background-color: white;
   min-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
@@ -81,5 +80,10 @@ export default {
   ~ .card {
     transform: translateX(2rem);
   }
+}
+.dogDayCareButton{
+  background: #ff5f6d;
+  border: none;
+  box-shadow: 3px 3px 12px 2px rgba(#ff5f6d, 0.2);
 }
 </style>

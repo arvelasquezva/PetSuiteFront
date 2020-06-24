@@ -12,7 +12,7 @@
           >
           </b-form-input>
           <b-input-group-append>
-            <b-button type="submit" variant="success">Buscar</b-button>
+            <b-button type="submit" class="buscadorButton">Buscar</b-button>
           </b-input-group-append>
         </b-input-group>
       </b-form-group>
@@ -88,7 +88,7 @@ export default {
 }
 .card {
   color: #063869;
-  background-color: #eef6e1;
+  background-color: white;
   min-width: 15rem;
   max-width: 21rem;
   border-radius: 1rem;
@@ -106,5 +106,10 @@ export default {
   ~ .card {
     transform: translateX(2rem);
   }
+}
+.buscadorButton{
+  background: #ffffff;
+  border-style: none;
+  color: black;
 }
 </style>

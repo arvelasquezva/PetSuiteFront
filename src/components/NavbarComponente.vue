@@ -44,7 +44,7 @@
         </div>
         <div v-else>
           <router-link :to="{name: 'Profile', params:{id: user.role}}">
-                <b-button class="mr-3" variant="light">Perfil {{user.user}}</b-button>
+                <b-button class="perfilButton mr-3" variant="light">Perfil {{user.user}}</b-button>
             </router-link> 
           <b-button class="logoutButton" @click="logout" href="/login" variant="light"> Cierra Sesión</b-button>
         </div>
@@ -80,8 +80,20 @@ export default {
 }
 .loginButton{
   background: #ff5f6d;
+  border-style: none;
 }
 .registerButton{
+  background: #ffffff;
+  border-style: solid;
+  border-color: #ffc371;
+  border-width: 2px;
+}
+.logoutButton{
+  background: #ff5f6d;
+  border-style: none;
+}
+.perfilButton{
+  background: #ffffff;
   border-style: solid;
   border-color: #ffc371;
   border-width: 2px;

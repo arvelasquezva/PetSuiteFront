@@ -181,6 +181,6 @@ footer {
   padding: 30px;
   border: 1px solid #eef6e1;
   border-radius: 5px;
-  background-color: #eef6e1;
+  background-color: white;
 }
 </style>

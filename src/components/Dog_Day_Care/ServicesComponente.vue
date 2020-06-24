@@ -74,7 +74,7 @@ created() {
 }
 .card {
   color: #063869;
-  background-color: #eef6e1;
+  background-color: white;
   border-radius: 1rem;
   min-width: 10rem;
   max-width: 15rem;
