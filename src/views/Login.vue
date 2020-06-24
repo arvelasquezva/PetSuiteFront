@@ -46,7 +46,7 @@ export default {
           title: "Hospedador",
           imagen:
             "https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg",
-          descripcion: "Tienes una casa con el espacio para cuidar a perritos pero no estás regístrado cómo empresa",
+          descripcion: "Tienes una casa con el espacio para cuidar a perritos pero no estás regístrado como empresa",
           routes: "signUp/Hospedadores"
         },
       ],
