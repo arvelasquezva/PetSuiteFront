@@ -19,7 +19,7 @@
     </b-form>
     <h2 class="text-center mx-4 mb-4 mt-3">Resultados</h2>
     <div class="cards col-md-12">
-      <b-row class="mt-1">
+      
           <b-card
             v-for="item in info"
             :key="item"
@@ -47,7 +47,7 @@
               >
             </router-link>
           </b-card>
-      </b-row>
+      
     </div>
   </div>
 </template>

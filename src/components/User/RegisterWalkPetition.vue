@@ -89,6 +89,7 @@
       centered 
       v-model="show"
       size="sm"
+      ok-only
       @ok="handleOk">
         <p class="my-4">Has creado una petición para un paseo</p>
       </b-modal>

@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Paseos Solicitados</h1>
-    <b-row class="mt-1">
+    
       <div v-if="Object.keys(walksAccept).length === 0">
         <NotFound class="mb-5"></NotFound>
       </div>
@@ -69,7 +69,7 @@
           </b-button>
         </b-card>
       </div>
-    </b-row>
+    
     <b-modal ok-only v-model="showFail" size="sm">
       <p class="my-4">No se pudo cancelar el servicio</p>
     </b-modal>

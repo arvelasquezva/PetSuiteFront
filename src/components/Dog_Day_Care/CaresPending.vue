@@ -1,9 +1,8 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Cuidados Por Empezar</h1>
-    <b-row class="mt-1">
       <div v-if="Object.keys(caresPending).length === 0">
-          <NotFound class="mb-5"></NotFound>
+          <NotFound class="mx-5 mb-5"></NotFound>
         </div>
       <div else class="cards mx-5 mb-5">
         <b-card
@@ -82,7 +81,7 @@
           >
         </b-card>
         </div>
-    </b-row>
+    
   </div>
 </template>
 

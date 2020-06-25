@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Tus perros</h1>
-    <b-row class="mt-1">
+    
       <div class="cards mx-5 mb-5">
         <b-card
           v-for="pet in pets"
@@ -20,7 +20,7 @@
           </b-card-body>
         </b-card>
       </div>
-    </b-row>
+    
   </div>
 </template>
 

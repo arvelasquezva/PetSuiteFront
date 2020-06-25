@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Perros a mi cargo</h1>
-    <b-row class="mt-1">
+    
       <div v-if="Object.keys(petsActive).length === 0">
         <NotFound class="mb-5"></NotFound>
       </div>
@@ -65,7 +65,7 @@
           >
         </b-card>
       </div>
-    </b-row>
+    
   </div>
 </template>
 

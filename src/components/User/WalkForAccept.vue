@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Paseos por aceptar precio</h1>    
-    <b-row class="mt-1">      
+          
       <div v-if="Object.keys(petitionsforActive).length === 0">
         <NotFound class="mb-5"></NotFound>
       </div>
@@ -67,14 +67,11 @@
           >
         </b-card>
       </div>
-    </b-row>
+    
         <b-toast
+          class="toastData"
           id="toast"                   
-          title="Datos de Paseador"            
-          solid: true 
-          toaster="b-toaster-top-left"
-          position= "top-center"
-          class="toast"                       
+          title="Datos de Paseador"                     
           >
          User ID: {{info.user}} <br/>
          Nombre del paseador: {{info.dog_walker_name}} <br/>
@@ -184,7 +181,8 @@ export default {
     transform: translateX(2rem);
   }
 }
-.toast {
-background-color:#40db9a
+.toastData{
+  background: #01071f;
+  border: none;
 }
 </style>

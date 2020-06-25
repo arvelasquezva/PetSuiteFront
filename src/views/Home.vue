@@ -25,7 +25,7 @@
             <ServicesComponente msg="Tus Servicios"></ServicesComponente>
           </div>
           <div class="col-md-12">
-            <CaresPending msg="Tus Servicios"></CaresPending>
+            <CaresPending></CaresPending>
           </div>
         </div>
       </div>

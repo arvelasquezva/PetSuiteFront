@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <h1 class="mt-3">{{ msg }}</h1>
-    <b-row class="mt-1">
+    
       <div class="cards mx-5 mb-5">
         <b-card
           v-for="item in cards"
@@ -20,7 +20,7 @@
           </router-link>
         </b-card>
       </div>
-    </b-row>
+    
   </div>
 </template>
 

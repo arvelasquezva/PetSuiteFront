@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row class="mt-1">
+    <b-row>
       <b-col>
         <div class="banner">
           <img src="@/assets/Images/NotFound.png" width="100%" />
