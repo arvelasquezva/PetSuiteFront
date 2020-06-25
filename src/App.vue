@@ -33,6 +33,7 @@ export default {
   background: linear-gradient(to right, #ff5f6d, #ffc371);
   overflow: auto;
   width: 100%;
+  height: 100%;
 }
 h1 {
   color: white; 
