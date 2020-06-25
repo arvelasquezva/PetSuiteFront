@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Cuidados En Progreso</h1>
-    <b-row class="mt-1">
+    
       <div v-if="Object.keys(caresProgress).length === 0">
           <NotFound class="mb-5"></NotFound>
         </div>
@@ -32,7 +32,7 @@
           <b-button variant="success" block v-on:click="actualizarEstado(item.dog_daycare_invoice_id)">Termina el Servicio</b-button>
         </b-card>
         </div>
-    </b-row>
+    
   </div>
 </template>
 

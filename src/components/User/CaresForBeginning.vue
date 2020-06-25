@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Servicios Solicitados</h1>
-    <b-row class="mt-1">
+    
       <div v-if="Object.keys(caresForBeginning).length === 0">
           <NotFound class="mb-5"></NotFound>
         </div>
@@ -72,7 +72,7 @@
           </b-form-group>
         </form>
       </b-modal>
-    </b-row>
+    
   </div>
 </template>
 

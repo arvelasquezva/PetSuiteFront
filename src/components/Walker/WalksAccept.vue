@@ -1,7 +1,6 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Paseos Por Empezar</h1>
-    <b-row class="">
       <div v-if="Object.keys(walksAccept).length === 0">
         <NotFound class="mb-5"></NotFound>
       </div>
@@ -89,7 +88,7 @@
           </b-button>
         </b-card>
       </div>
-    </b-row>
+    
   </div>
 </template>
 

@@ -1,8 +1,7 @@
 <template>
-  <div class="body">
+  <div class="body_card">
     <h1 class="mt-3">Peticiones Activas</h1>
-    <b-row class="mt-1">
-      <div class="cards mx-5 mb-5">
+      <div class="cards col-md-12 mx-5">
         <b-card
           v-for="item in petitions"
           :key="item.id"
@@ -76,7 +75,6 @@
           </b-form-group>
         </form>
       </b-modal>
-    </b-row>
   </div>
 </template>
 
@@ -152,7 +150,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.body {
+.body_card {
   margin: 0;
   height: auto;
   display: grid;

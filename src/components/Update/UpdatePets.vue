@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <b-row class="mt-1">
+    
       <div class="cards mx-5 mb-5">
         <b-form @submit.prevent="updateMascota" class="pl-4">
           <b-form-group id="input-group-1" label="Nombre:" label-for="input-1">
@@ -76,7 +76,7 @@
           >
         </b-form>
       </div>
-    </b-row>
+    
   </div>
 </template>
 
