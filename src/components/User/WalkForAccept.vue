@@ -16,42 +16,28 @@
               ><strong>La Petición Para Tu Perro: </strong
               >{{ item.dog_name }}</b-card-title
             >
-            <b-card-text
-              >El paseador:
-              <strong> {{ item.walk_petition_walker_user }}</strong> te propone:
-            </b-card-text>
-            <b-card-text
-              ><strong> ${{ item.precio_proposal }} </strong>
+            <b-card-text> El paseador
+              <strong> {{ item.walk_petition_walker_user }} </strong> te propone:
+            <strong> ${{ item.precio_proposal }} </strong>
               </b-card-text>
-              <b-button v-on:click="obtenerDatosPaseador(item.walk_petition_walker_user);$bvToast.show('toast')" block type="submit" variant="success" >Ver Datos de {{ item.walk_petition_walker_user }}</b-button>                         
+              <b-button 
+                v-on:click="obtenerDatosPaseador(item.walk_petition_walker_user);$bvToast.show('toast')" 
+                block 
+                variant="dark"
+                class="datosPaseadorButton"> Ver datos de {{ item.walk_petition_walker_user }}
+              </b-button>                         
           </b-card-body>          
-          <b-form-group
-            id="input-group-1"
-            label="Que deseas hacer?:"
-            label-for="input-1"
-          >
-            <b-form-select
-              id="input-1"
-              v-model="state"
-              :options="Options"
-              required
-            ></b-form-select>
-          </b-form-group>
           <b-modal 
             centered 
+            ok-only
             v-model="show"
             size="sm"
             @ok="handleOk">
-            <p v-if="state=='Aceptar'" class="my-4">
-              Has aceptado el paseo para {{ item.dog_name }} por parte de
-              {{ item.walk_petition_walker_user }}
-            </p>
-            <p v-else>
-              Has rechazado el precio para {{ item.dog_name }} por parte de
-              {{ item.walk_petition_walker_user }}
+            <p class="my-4">
+              Se le notificará a {{ item.walk_petition_walker_user }} tu decisión.
             </p>
           </b-modal>
-          <b-button v-if="state"
+          <b-button
             block
             variant="success"
             type="submit"
@@ -60,17 +46,34 @@
                 item.dog_id,
                 item.precio_proposal,
                 item.walk_petition_walker_user,
-                item.dog_name
+                item.dog_name,
+                Aceptar
               )
             "
-            >{{ state }}</b-button
+            > Aceptar </b-button
+          >
+          <b-button
+            block
+            variant="danger"
+            type="submit"
+            v-on:click="
+              sendStatusPetitions(
+                item.dog_id,
+                item.precio_proposal,
+                item.walk_petition_walker_user,
+                item.dog_name,
+                Negar
+              )
+            "
+            > Denegar </b-button
           >
         </b-card>
       </div>
     
         <b-toast
           class="toastData"
-          id="toast"                   
+          id="toast"  
+          solid="true"                 
           title="Datos de Paseador"                     
           >
          User ID: {{info.user}} <br/>
@@ -96,11 +99,8 @@ export default {
       show: false,
       currentUser: "",
       info: [],
-      state: "",
-      Options: [
-        { text: "Aceptar", value: "Aceptar" },
-        { text: "Negar", value: "Negar" },
-      ],
+      Aceptar: "Aceptar",
+      Negar: "Negar",
     };
   },
   computed: {
@@ -131,14 +131,14 @@ export default {
         cadena: this.currentUser.user,
       });
     },
-    sendStatusPetitions(dog_id, price, dogWalker, dogName) {
+    sendStatusPetitions(dog_id, price, dogWalker, dogName, state) {
       this.$store
         .dispatch("sendStatusPetition", {
           dog_id: dog_id,
           walk_invoice_price: price,
           dog_walker_id: dogWalker,
           client_id: this.currentUser.user,
-          walk_invoice_status: this.state,
+          walk_invoice_status: state,
           dog_name: dogName,
         })
         .then((this.show = true));
@@ -165,7 +165,8 @@ export default {
 .card {
   color: #063869;
   background-color: white;
-  min-width: 20rem;
+  min-width: 15rem;
+  max-width: 20rem;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
@@ -184,5 +185,11 @@ export default {
 .toastData{
   background: #01071f;
   border: none;
+}
+.datosPaseadorButton{
+  background: #ff5f6d;
+  margin: auto;
+  border: none;
+  width: 75%;
 }
 </style>
