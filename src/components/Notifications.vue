@@ -25,13 +25,16 @@ import { mapState } from "vuex";
 export default {
   name: "Notificacions",
   data() {
+    var myError = "";
     return {
       currentUser: "",
       showAlert: false,
+      myError: "",
     };
   },
   computed: {
     ...mapState(["notifications"]),
+    ...mapState(["user"]),
   },
   methods: {
     handleOk(notification_id) {
@@ -55,9 +58,17 @@ export default {
               this.showAlert = true;
             }
           })
-          .catch(function (error) {
+          .catch((error) => {
             if (error.response) {
-              console.log("Error", error.response.data.message);
+              this.myError = error.response.data.message;
+              console.log("This is myError", this.myError);
+              if (this.myError.startsWith("JWT expired at")) {
+                alert("Debes Cambiar tu contraseña");
+                this.$router.push({
+                  name: "Profile",
+                  params: { id: this.currentUser.role },
+                });
+              }
             } else {
               console.log("Error", error.message);
             }

@@ -147,10 +147,6 @@ export default {
             console.log("Error", error.message);
           }
         });
-      if (myError.startsWith("JWT expired at")) {
-        alert("Debes Cambiar tu contraseña");
-        this.$router.push({ name: "Profile" , params:{id: user.role}});
-      }
       this.$store.dispatch("getMascotaByUser", this.dogs);
     },
     registerPetition() {
