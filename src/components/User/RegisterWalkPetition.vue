@@ -99,10 +99,12 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
+import axios from 'axios';
 
 export default {
   name: "RegisterWalkPetition",
   data() {
+    var myError= "";
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const minDate = new Date(today);
@@ -118,6 +120,7 @@ export default {
       walk_petition_duration: "",
       min: minDate,
       max: maxDate,
+      dogs: [],
     };
   },
   computed: {
@@ -129,7 +132,7 @@ export default {
     handleOk() {
       location.reload();
     },
-    async getMascotas() {
+    async getDogs() {
       await axios
         .post("/api/dogs/findmydog", { cadena: this.currentUser.user })
         .then((response) => {
@@ -137,20 +140,19 @@ export default {
         })
         .catch(function (error) {
           if (error.response) {
-            this.myError = error.response.data.message;
+            myError = error.response.data.message;
           } else if (error.request) {
             console.log(error.request);
           } else {
             console.log("Error", error.message);
           }
         });
-      if (this.myError.startsWith("JWT expired at")) {
+      if (myError.startsWith("JWT expired at")) {
         alert("Debes Cambiar tu contraseña");
         this.$router.push({ name: "Profile" , params:{id: user.role}});
       }
       this.$store.dispatch("getMascotaByUser", this.dogs);
     },
-  },
     registerPetition() {
       this.$store
         .dispatch("registerPetition", {
