@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\Register",
+    "\\src\\components\\User",
+    "\\src\\router",
+    "\\src\\vuex"
+  ],
+  "SelectedNode": "\\src\\main.js",
+  "PreviewInSolutionExplorer": false
+}

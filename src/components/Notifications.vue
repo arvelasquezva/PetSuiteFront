@@ -2,7 +2,7 @@
   <div class="notifications-list">
     <b-alert
       class="notification"
-      dismissible
+      dismissible=""
       :show="showAlert"
       v-for="item in notifications"
       :key="item.id"
@@ -20,80 +20,86 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapState } from "vuex";
-export default {
+  import axios from "axios";
+  import { mapState } from "vuex";
+  export default {
   name: "Notificacions",
   data() {
-    return {
-      currentUser: "",
-      showAlert: false,
-    };
+  return {
+  currentUser: "",
+  showAlert: false,
+  };
   },
   computed: {
-    ...mapState(["notifications"]),
+  ...mapState(["notifications"]),
   },
   methods: {
-    handleOk(notification_id) {
-      axios.post("/api/notifications/readNotification", {
-        entero: notification_id,
-      });
-    },
-    solicitarPeticion() {
-      setInterval(() => {
-        axios
-          .post(
-            "/api/notifications/showMyNotifications",
-            {
-              user_id: this.currentUser.user,
-              status: "No leido",
-            },
-            {
-              headers: {
-                Authorization:
-                  "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
-              },
-            }
-          )
-          .then((response) => {
-            if (Object.keys(response.data).length === 0) {
-              this.showAlert = false;
-            } else {
-              this.$store.dispatch("getNotification", response.data);
-              this.showAlert = true;
-            }
-          });
-      }, 10000);
-    },
+  handleOk(notification_id) {
+  axios.post("/api/notifications/readNotification", {
+  entero: notification_id,
+  });
+  },
+  solicitarPeticion() {
+  setInterval(() => {
+  axios
+  .post(
+  "/api/notifications/showMyNotifications",
+  {
+  user_id: this.currentUser.user,
+  status: "No leido",
+  },
+  {
+  headers: {
+  Authorization:
+  "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+  },
+  }
+  )
+
+  .then((response) => {
+  if (Object.keys(response.data).length === 0) {
+  this.showAlert = false;
+  } else {
+  this.$store.dispatch("getNotification", response.data);
+  this.showAlert = true;
+  }
+  })
+  .catch(function (error){
+  if (error.response){
+  console.log(error.response)
+  }
+  });
+  }, 10000);
+  },
   },
   created() {
-    this.solicitarPeticion();
-    if (localStorage.getItem("user")) {
-      try {
-        this.currentUser = JSON.parse(localStorage.getItem("user"));
-      } catch (e) {
-        localStorage.removeItem("user");
-      }
-    }
+  this.solicitarPeticion();
+  if (localStorage.getItem("user")) {
+  try {
+  this.currentUser = JSON.parse(localStorage.getItem("user"));
+  } catch (e) {
+  localStorage.removeItem("user");
+  }
+  }
   },
   beforeDestroy() {},
-};
+  };
 </script>
-<style scoped>
-.notifications-list {
+<style scoped="">
+  .notifications-list {
   z-index: 999;
   position: fixed;
   bottom: 0;
   right: 0;
   margin-right: 15px;
   width: 320px;
-}
-p{
+  }
+  p{
   color: white;
-}
-.notification{
+  }
+  .notification{
   background: #01071f;
   border: none;
-}
+  }
 
 </style>
