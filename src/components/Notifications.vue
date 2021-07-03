@@ -35,47 +35,42 @@
   },
   methods: {
 
-    handleOk(notification_id) {
-      axios.post("/api/notifications/readNotification", {
-        entero: notification_id,
-      });
-    },
-    solicitarPeticion() {
-      setInterval(() => {
-        axios
-          .post(
-            "/api/notifications/showMyNotifications",
-            {
-              user_id: this.currentUser.user,
-              status: "No leido",
-            },
-            {
-              headers: {
-                Authorization:
-                  "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
-              },
-            }
-          )
+  handleOk(notification_id) {
+  axios.post("/api/notifications/readNotification", {
+  entero: notification_id,
+  });
+  },
+  solicitarPeticion() {
+  setInterval(() => {
+  axios
+  .post(
+  "/api/notifications/showMyNotifications",
+  {
+  user_id: this.currentUser.user,
+  status: "No leido",
+  }
 
-          .then((response) => {
-            if (Object.keys(response.data).length === 0) {
-              this.showAlert = false;
-            } else {
-              this.$store.dispatch("getNotification", response.data);
-              this.showAlert = true;
-            }
-          })
-          .catch(function (error) {
-            if (error.response) {
-              console.log(error.response.status);
-            } else if (error.request) {
-              console.log(error.request);
-            } else {
-              console.log("Error", error.message);
-            }
-          });
-      }, 10000);
-    },
+  )
+
+  .then((response) => {
+  if (Object.keys(response.data).length === 0) {
+  this.showAlert = false;
+  } else {
+  this.$store.dispatch("getNotification", response.data);
+  this.showAlert = true;
+  }
+  })
+  .catch(function (error) {
+  if (error.response) {
+  console.log("Error", error.response.data.message);
+  
+
+  }  else {
+  console.log("Error", error.message);
+  }
+  });
+  }, 10000);
+  },
 
   },
   created() {
