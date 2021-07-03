@@ -16,7 +16,6 @@ export default new Vuex.Store({
         walksProgress: [], //Paseos en progreso
         walksDone: [], //Paseos terminados para calificar
         petsActive: [], //Perros a cargo de un paseador
-        dogDayCares: [], //Guarderias
         services: [], //Servicios de una Guarderia
         servicesUser: [], //Servicios que puede ver el cliente
         caresPending: [], //Peticiones pendientes por empezar de una guarderia
@@ -56,9 +55,6 @@ export default new Vuex.Store({
             localStorage.setItem('user', JSON.stringify(userData))
             axios.defaults.headers.common['Authorization'] = `Token ${userData.token
                 }`;
-        },
-        SET_DOGDAYCARE_DATA(state, dogDayCareData) {
-            state.dogDayCares = dogDayCareData;
         },
         SET_DOGDAYCARE_SERVICES(state, servicesData) {
             state.services = servicesData;
@@ -182,27 +178,6 @@ export default new Vuex.Store({
             const { data } = await axios
                 .post("/api/clients/seeEndedCares", credentials);
             commit('SET_CARES_INVOICE', data);
-        },
-        async getDogDayCares({ commit }) {
-            await axios
-                .get("api/clients/allDogDayCares")
-                .then((response) => {
-
-                    const { data } = response.data
-                })
-                .catch(function (error) {
-                    if (error.response) {
-                        console.log(error.response.status);
-                    }
-                    else if (error.request) {
-                        console.log(error.request);
-                    }
-                    else {
-                        console.log('Error', error.message);
-                    }
-                });
-
-            commit('SET_DOGDAYCARE_DATA', data);
         },
         updateStatusWalk({ commit, dispatch }, credentials) {
             return axios

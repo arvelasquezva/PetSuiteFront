@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapState(["pets"]),
-    ...mapState(["user"])
+    ...mapState(["user"]),
   },
   created() {
     if (localStorage.getItem("user")) {
@@ -56,9 +56,12 @@ export default {
   methods: {
     async getMascotas() {
       await axios
-        .post("/api/dogs/findmydog", { cadena: this.currentUser.user })
+        .post("/api/dogs/findmydog", { 
+          cadena: this.currentUser.user 
+        })
         .then((response) => {
           this.dogs = response.data;
+          this.$store.dispatch("getMascotaByUser", this.dogs);
         })
         .catch(function (error) {
           if (error.response) {
@@ -71,9 +74,8 @@ export default {
         });
       if (this.myError.startsWith("JWT expired at")) {
         alert("Debes Cambiar tu contraseña");
-        this.$router.push({ name: "Profile" , params:{id: user.role}});
+        this.$router.push({ name: "Profile", params: { id: user.role } });
       }
-      this.$store.dispatch("getMascotaByUser", this.dogs);
     },
   },
 };
