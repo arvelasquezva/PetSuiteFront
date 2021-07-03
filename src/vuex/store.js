@@ -54,8 +54,7 @@ export default new Vuex.Store({
         SET_USER_DATA(state, userData) {
             state.user = userData;
             localStorage.setItem('user', JSON.stringify(userData))
-            axios.defaults.headers.common['Authorization'] = `Token ${
-                userData.token
+            axios.defaults.headers.common['Authorization'] = `Token ${userData.token
                 }`;
         },
         SET_DOGDAYCARE_DATA(state, dogDayCareData) {
@@ -143,8 +142,22 @@ export default new Vuex.Store({
                 .post("/api/dog_day_care_invoices/load", credentials);
         },
         async getMascotaByUser({ commit }, credentials) {
-            const { data } = await axios
-                .post("/api/dogs/findmydog", credentials);
+            await axios
+                .post("/api/dogs/findmydog", credentials)
+                .then((response) => {
+                    const { data } = response.data
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        console.log(error.response.status);
+                    }
+                    else if (error.request) {
+                        console.log(error.request);
+                    }
+                    else {
+                        console.log('Error', error.message);
+                    }
+                });
             commit('SET_USER_PET', data);
         },
         async getServicesByUser({ commit }, credentials) {
@@ -187,8 +200,22 @@ export default new Vuex.Store({
             commit('SET_CARES_INVOICE', data);
         },
         async getDogDayCares({ commit }) {
-            const { data } = await axios
-                .get("api/clients/allDogDayCares");
+            await axios
+                .get("api/clients/allDogDayCares")
+                .then((response) => {
+                    const { data } = response.data
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        console.log(error.response.status);
+                    }
+                    else if (error.request) {
+                        console.log(error.request);
+                    }
+                    else {
+                        console.log('Error', error.message);
+                    }
+                });
             commit('SET_DOGDAYCARE_DATA', data);
         },
         updateStatusWalk({ commit, dispatch }, credentials) {

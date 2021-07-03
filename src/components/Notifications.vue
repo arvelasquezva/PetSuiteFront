@@ -55,12 +55,22 @@ export default {
               },
             }
           )
+
           .then((response) => {
             if (Object.keys(response.data).length === 0) {
               this.showAlert = false;
             } else {
               this.$store.dispatch("getNotification", response.data);
               this.showAlert = true;
+            }
+          })
+          .catch(function (error) {
+            if (error.response) {
+              console.log(error.response.status);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log("Error", error.message);
             }
           });
       }, 10000);
@@ -88,12 +98,11 @@ export default {
   margin-right: 15px;
   width: 320px;
 }
-p{
+p {
   color: white;
 }
-.notification{
+.notification {
   background: #01071f;
   border: none;
 }
-
 </style>
