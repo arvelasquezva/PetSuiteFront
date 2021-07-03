@@ -1,26 +1,28 @@
 <template>
   <div class="body">
     <h1 class="mt-3">Tus perros</h1>
-    
-      <div class="cards mx-5 mb-5">
-        <b-card
-          v-for="pet in pets"
-          :key="pet.id"
-          class="card"
-        >
-          <b-card-body>
-            <b-card-title
-              ><strong>{{ pet.dog_name }}</strong></b-card-title>
-            <b-card-sub-title>
-              <strong>Raza: </strong>{{ pet.dog_race }}
-            </b-card-sub-title>
-             <b-card-text><strong>Peso: </strong>{{ pet.dog_weight }} Kg</b-card-text>
-             <b-card-text><strong>Edad: </strong>{{ pet.dog_age }} años </b-card-text>
-             <b-card-text><strong>Altura: </strong>{{ pet.dog_height }} Cm</b-card-text>
-          </b-card-body>
-        </b-card>
-      </div>
-    
+
+    <div class="cards mx-5 mb-5">
+      <b-card v-for="pet in pets" :key="pet.id" class="card">
+        <b-card-body>
+          <b-card-title
+            ><strong>{{ pet.dog_name }}</strong></b-card-title
+          >
+          <b-card-sub-title>
+            <strong>Raza: </strong>{{ pet.dog_race }}
+          </b-card-sub-title>
+          <b-card-text
+            ><strong>Peso: </strong>{{ pet.dog_weight }} Kg</b-card-text
+          >
+          <b-card-text
+            ><strong>Edad: </strong>{{ pet.dog_age }} años
+          </b-card-text>
+          <b-card-text
+            ><strong>Altura: </strong>{{ pet.dog_height }} Cm</b-card-text
+          >
+        </b-card-body>
+      </b-card>
+    </div>
   </div>
 </template>
 
@@ -33,10 +35,13 @@ export default {
   data() {
     return {
       currentUser: {},
+      dogs: [],
+      myError: "",
     };
   },
   computed: {
     ...mapState(["pets"]),
+    ...mapState(["user"])
   },
   created() {
     if (localStorage.getItem("user")) {
@@ -49,10 +54,26 @@ export default {
     this.getMascotas();
   },
   methods: {
-    getMascotas() {
-      this.$store.dispatch("getMascotaByUser", {
-        cadena: this.currentUser.user,
-      });
+    async getMascotas() {
+      await axios
+        .post("/api/dogs/findmydog", { cadena: this.currentUser.user })
+        .then((response) => {
+          this.dogs = response.data;
+        })
+        .catch(function (error) {
+          if (error.response) {
+            this.myError = error.response.data.message;
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("Error", error.message);
+          }
+        });
+      if (this.myError.startsWith("JWT expired at")) {
+        alert("Debes Cambiar tu contraseña");
+        this.$router.push({ name: "Profile" , params:{id: user.role}});
+      }
+      this.$store.dispatch("getMascotaByUser", this.dogs);
     },
   },
 };
@@ -68,7 +89,7 @@ export default {
 }
 
 .cards {
-  display: flex; 
+  display: flex;
   padding: 1rem;
 }
 .card {

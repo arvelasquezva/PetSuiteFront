@@ -122,17 +122,35 @@ export default {
   },
   computed: {
     ...mapState(["pets"]),
+    ...mapState(["user"]),
     ...mapGetters(["valuePets"]),
   },
   methods: {
     handleOk() {
       location.reload();
     },
-    getDogs() {
-      this.$store.dispatch("getMascotaByUser", {
-        cadena: this.currentUser.user,
-      });
+    async getMascotas() {
+      await axios
+        .post("/api/dogs/findmydog", { cadena: this.currentUser.user })
+        .then((response) => {
+          this.dogs = response.data;
+        })
+        .catch(function (error) {
+          if (error.response) {
+            this.myError = error.response.data.message;
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("Error", error.message);
+          }
+        });
+      if (this.myError.startsWith("JWT expired at")) {
+        alert("Debes Cambiar tu contraseña");
+        this.$router.push({ name: "Profile" , params:{id: user.role}});
+      }
+      this.$store.dispatch("getMascotaByUser", this.dogs);
     },
+  },
     registerPetition() {
       this.$store
         .dispatch("registerPetition", {

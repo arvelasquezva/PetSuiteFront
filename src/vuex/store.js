@@ -141,26 +141,8 @@ export default new Vuex.Store({
             return axios
                 .post("/api/dog_day_care_invoices/load", credentials);
         },
-        async getMascotaByUser({ commit }, credentials) {
-            await axios
-                .post("/api/dogs/findmydog", credentials)
-                .then((response) => {
-
-                    const { data } = response.data
-                })
-                .catch(function (error) {
-                    if (error.response) {
-                        console.log(error.response.status);
-                    }
-                    else if (error.request) {
-                        console.log(error.request);
-                    }
-                    else {
-                        console.log('Error', error.message);
-                    }
-                });
-
-            commit('SET_USER_PET', data);
+        async getMascotaByUser({ commit }, dogs) {
+            commit('SET_USER_PET', dogs);
         },
         async getServicesByUser({ commit }, credentials) {
             const { data } = await axios

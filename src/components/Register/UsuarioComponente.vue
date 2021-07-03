@@ -1,12 +1,8 @@
 <template>
   <div class="body my-2">
-    <h1> Regístrate cómo Cliente </h1>
+    <h1>Regístrate cómo Cliente</h1>
     <div class="SignUp">
-      <img
-        height="300"
-        src="@/assets/Images/Usuario(1).png"
-        alt="image slot"
-      />
+      <img height="300" src="@/assets/Images/Usuario(1).png" alt="image slot" />
 
       <b-form @submit.prevent="registerUsuario" class="pl-4">
         <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
@@ -88,13 +84,16 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success"> Únete a PetSuite </b-button>
+        <b-button block pill type="submit" variant="success">
+          Únete a PetSuite
+        </b-button>
       </b-form>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "UsuarioComponente",
   data() {
@@ -109,20 +108,30 @@ export default {
   },
   methods: {
     registerUsuario() {
-      this.$store.dispatch("registerUsuario", [{
-        user: this.user,
-        password: this.password,
-        client_name: this.client_name,
-        client_phone: this.client_phone,
-        client_e_mail: this.client_e_mail,
-        client_address: this.client_address
-      }, "clients"])
-      .then(({ data }) => {
+      axios
+        .post(
+          "/api/clients/load",
+          {
+            user: this.user,
+            password: this.password,
+            client_name: this.client_name,
+            client_phone: this.client_phone,
+            client_e_mail: this.client_e_mail,
+            client_address: this.client_address,
+          },
+          {
+            headers: {
+              Authorization:
+                "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+            },
+          }
+        )
+        .then(({ data }) => {
           if (data === "") {
             alert("Error al Regístrarte");
           } else {
-            alert ("Bienvenido a PetSuite")
-        	  this.$router.push({name: 'Login'})
+            alert("Bienvenido a PetSuite");
+            this.$router.push({ name: "Login" });
           }
         });
     },
