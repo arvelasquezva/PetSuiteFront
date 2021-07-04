@@ -33,7 +33,7 @@ const options = {
     'Access-Control-Allow-Origin': '*',
   },
   data: {
-    number: "+573124890620"
+    number: "+57"+this.user.phone
   }}
 
 export default {

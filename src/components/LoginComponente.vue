@@ -25,8 +25,14 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success">
-          Ingresa a PetSuite</b-button
+        <vue-recaptcha
+          @verify="onVerify"
+          sitekey="6LfOinIbAAAAALEDAwEttTjlDBV82jWfz7bnEn_O"
+        >
+        </vue-recaptcha>
+
+        <b-button block pill type="submit" variant="success"
+          >Ingresa a PetSuite</b-button
         >
         <b-button href="/signUp" block pill variant="danger">
           Únete a PetSuite
@@ -36,11 +42,15 @@
     <b-modal ok-only v-model="show" size="sm">
       <p class="my-4">El Usuario o Contraseña son incorrectos</p>
     </b-modal>
+    <b-modal v-model="show1" size="sm">
+      <p class="my-4">Captcha incorrecto</p>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import VueRecaptcha from "vue-recaptcha";
 export default {
   name: "LoginComponente",
   data() {
@@ -48,16 +58,18 @@ export default {
       user: "",
       password: "",
       show: false,
+      robot: false,
+      show1: false,
     };
   },
   methods: {
-    async loginUsuario() {
+    onVerify: async function (response) {
+      console.log(response);
       await axios
         .post(
-          "/api/users/login",
+          "/api/users/captcha",
           {
-            user: this.user,
-            password: this.password,
+            cadena: response,
           },
           {
             headers: {
@@ -66,15 +78,47 @@ export default {
             },
           }
         )
-        .then((response) => {
-          if (response.data === 0) {
-            this.show = true;
+        .then((res) => {
+          console.log(res);
+          if (res.data == true) {
+            this.robot = true;
           } else {
-            this.$store.dispatch("login", response.data);
-            this.$router.push({ name: "Autenticacion" });
+            this.show1 = true;
+            this.robot = false;
           }
         });
     },
+    async loginUsuario() {
+      if (this.robot) {
+        await axios
+          .post(
+            "/api/users/login",
+            {
+              user: this.user,
+              password: this.password,
+            },
+            {
+              headers: {
+                Authorization:
+                  "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+              },
+            }
+          )
+          .then((response) => {
+            if (response.data === 0) {
+              this.show = true;
+            } else {
+              this.$store.dispatch("login", response.data);
+              this.$router.push({ name: "Autenticacion" });
+            }
+          });
+      } else {
+        this.show1 = true;
+      }
+    },
+  },
+  components: {
+    "vue-recaptcha": VueRecaptcha,
   },
 };
 </script>
