@@ -8,6 +8,7 @@ import Profile from '../views/Profile.vue';
 import DogDayCares from '../views/User/DogDayCares.vue';
 import DogDayCareServices from '../views/DogDayCares/DogDayCareServices.vue';
 import Rate from '../views/User/Rate.vue';
+import Verificacion from '../views/User/Verificacion.vue';
 import WalkInProgress from '../views/Walker/WalksInProgress.vue';
 
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
@@ -114,6 +115,12 @@ const routes = [{
         path: '/DogsInMyCharge',
         name: 'DogsInMyCharge',
         component: DogsInMyCharge
+    },
+    {
+        //Ruta para la doble autenticación
+        path: '/autenticacion',
+        name: 'Autenticacion',
+        component: Verificacion
     },
     {
         path: '/Profile/:id',

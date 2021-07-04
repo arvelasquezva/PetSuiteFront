@@ -56,6 +56,7 @@ export default new Vuex.Store({
             axios.defaults.headers.common['Authorization'] = `Token ${userData.token
                 }`;
         },
+
         SET_DOGDAYCARE_SERVICES(state, servicesData) {
             state.services = servicesData;
         },

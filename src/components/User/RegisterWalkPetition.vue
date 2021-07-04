@@ -2,7 +2,6 @@
   <div class="body">
     <h1>Solicita un Paseo</h1>
     <div class="SignUp">
-      
       <img height="300" src="@/assets/Images/Walker.jpg" alt="image slot" />
       <b-form @submit.prevent="registerPetition" class="pl-4">
         <!--Perro-->
@@ -85,12 +84,7 @@
           Confirma tu petición
         </b-button>
       </b-form>
-      <b-modal 
-      centered 
-      v-model="show"
-      size="sm"
-      ok-only
-      @ok="handleOk">
+      <b-modal centered v-model="show" size="sm" ok-only @ok="handleOk">
         <p class="my-4">Has creado una petición para un paseo</p>
       </b-modal>
     </div>
@@ -99,12 +93,10 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import axios from 'axios';
 
 export default {
   name: "RegisterWalkPetition",
   data() {
-    var myError= "";
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const minDate = new Date(today);
@@ -121,18 +113,18 @@ export default {
       min: minDate,
       max: maxDate,
       dogs: [],
+      myError: "",
     };
   },
   computed: {
-    ...mapState(["pets"]),
-    ...mapState(["user"]),
+    ...mapState(["pets", "user"]),
     ...mapGetters(["valuePets"]),
   },
   methods: {
     handleOk() {
       location.reload();
     },
-    async getDogs() {
+    async getMascotas() {
       await axios
         .post("/api/dogs/findmydog", { cadena: this.currentUser.user })
         .then((response) => {
@@ -140,14 +132,19 @@ export default {
         })
         .catch(function (error) {
           if (error.response) {
-            myError = error.response.data.message;
+            this.myError = error.response.data.message;
           } else if (error.request) {
             console.log(error.request);
           } else {
             console.log("Error", error.message);
           }
         });
-      this.$store.dispatch("getMascotaByUser", this.dogs);
+      if (this.myError.startsWith("JWT expired at")) {
+        alert("Debes Cambiar tu contraseña");
+        this.$router.push({ name: "Profile", params: { id: this.user.role } });
+      } else {
+        this.$store.dispatch("getMascotaByUser", this.dogs);
+      }
     },
     registerPetition() {
       this.$store

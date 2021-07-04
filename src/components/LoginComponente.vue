@@ -25,17 +25,17 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button block pill type="submit" variant="success"
-          >Ingresa a PetSuite</b-button
+        <b-button block pill type="submit" variant="success">
+          Ingresa a PetSuite</b-button
         >
-        <b-button href="/signUp" block pill variant="danger"> Únete a PetSuite </b-button>
+        <b-button href="/signUp" block pill variant="danger">
+          Únete a PetSuite
+        </b-button>
       </b-form>
-    
     </div>
     <b-modal ok-only v-model="show" size="sm">
       <p class="my-4">El Usuario o Contraseña son incorrectos</p>
     </b-modal>
-    
   </div>
 </template>
 
@@ -71,7 +71,7 @@ export default {
             this.show = true;
           } else {
             this.$store.dispatch("login", response.data);
-            this.$router.push({ name: "Home" });
+            this.$router.push({ name: "Autenticacion" });
           }
         });
     },
