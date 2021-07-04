@@ -2,7 +2,7 @@
   <div class="body">
     <div class="login">
       <b-form @submit.prevent="dobleLogin">
-        <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
+        <b-form-group id="input-group-1" label="Código:" label-for="input-1">
           <b-form-input
             id="input-1"
             v-model="mensaje"
@@ -12,7 +12,7 @@
         </b-form-group>
 
         <b-button block pill type="submit" variant="success">
-          Verificáte</b-button
+          Verifícate</b-button
         >
       </b-form>
     </div>
@@ -22,33 +22,45 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
+const options = {
+  url: 'http://localhost:8085/sendmessage',
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+    'Access-Control-Allow-Origin': '*',
+  },
+  data: {
+    number: "+573124890620"
+  }}
+
 export default {
   name: "Verificacion",
   computed: {
     ...mapState(["user"]),
   },
   data() {
+    
     return {
       mensaje: "",
       mensajeRespuesta : ""
     };
   },
-  beforeCreate(){
+  created(){
       this.sendMessage();
   },
   methods: {
-    async sendMessage() {
-        console.log(this.user);
-      await axios
-        .post("localhost:8085/sendmessage", {
-          number: "+57" + this.user.phone,
-        })
-        .then((response) => {
-          this.mensajeRespuesta = response.data;
-        });
+    sendMessage(){
+      axios(options)
+  .then(response => {
+    console.log(response.data);
+    this.mensajeRespuesta = response.data;
+  });
     },
     dobleLogin (){
-        if(this.mensajeRespuesta==this.mensajeRespuesta){
+        if(this.mensajeRespuesta==this.mensaje){
             this.$router.push({ name: "Home" });
         }
         else{

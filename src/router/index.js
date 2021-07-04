@@ -8,7 +8,7 @@ import Profile from '../views/Profile.vue';
 import DogDayCares from '../views/User/DogDayCares.vue';
 import DogDayCareServices from '../views/DogDayCares/DogDayCareServices.vue';
 import Rate from '../views/User/Rate.vue';
-import Verificacion from '../views/User/Verificacion.vue';
+import Verificacion from '../views/Verificacion.vue';
 import WalkInProgress from '../views/Walker/WalksInProgress.vue';
 
 import PaseadorComponente from '@/components/Register/PaseadorComponente.vue';
