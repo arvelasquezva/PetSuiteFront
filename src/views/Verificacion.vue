@@ -22,19 +22,7 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-const options = {
-  url: 'http://localhost:8085/sendmessage',
-  method: 'POST',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json;charset=UTF-8',
-    'Access-Control-Allow-Headers': '*',
-    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-    'Access-Control-Allow-Origin': '*',
-  },
-  data: {
-    number: "+57"+this.user.phone
-  }}
+//const options =
 
 export default {
   name: "Verificacion",
@@ -42,31 +30,50 @@ export default {
     ...mapState(["user"]),
   },
   data() {
-    
     return {
       mensaje: "",
-      mensajeRespuesta : ""
+      mensajeRespuesta: "",
+      currentUser: {},
     };
   },
-  created(){
-      this.sendMessage();
+  created() {
+    if (localStorage.getItem("user")) {
+      try {
+        this.currentUser = JSON.parse(localStorage.getItem("user"));
+      } catch (e) {
+        localStorage.removeItem("user");
+      }
+    }
+    this.sendMessage();
+    //console.log(this.currentUser.client_phone)
   },
   methods: {
-    sendMessage(){
-      axios(options)
-  .then(response => {
-    console.log(response.data);
-    this.mensajeRespuesta = response.data;
-  });
+    sendMessage() {
+      //console.log(this.currentUser.client_phone);
+      console.log(this.currentUser);
+      axios({
+        url: "http://localhost:8085/sendmessage",
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+        },
+
+        data: { number: "+57" + this.currentUser.client_phone },
+      }).then((response) => {
+        this.mensajeRespuesta = response.data;
+      });
     },
-    dobleLogin (){
-        if(this.mensajeRespuesta==this.mensaje){
-            this.$router.push({ name: "Home" });
-        }
-        else{
-            alert("Error del mensaje")
-        }
-    }
+    dobleLogin() {
+      if (this.mensajeRespuesta == this.mensaje) {
+        this.$router.push({ name: "Home" });
+      } else {
+        alert("Error del mensaje");
+      }
+    },
   },
 };
 </script>

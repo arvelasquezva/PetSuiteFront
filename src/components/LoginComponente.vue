@@ -63,7 +63,7 @@ export default {
     };
   },
   methods: {
-    onVerify: async function (response) {
+    async onVerify(response) {
       console.log(response);
       await axios
         .post(

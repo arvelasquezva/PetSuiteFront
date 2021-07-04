@@ -116,7 +116,6 @@ export default new Vuex.Store({
             return axios.post("/api/" + userClass + "/searchdaycarebyscore", credentials);
         },
         async updateUsuario({ commit }, [credentials, userClass]) {
-            console.log(credentials);
             const { data } = await axios
                 .post("/api/" + userClass + "/update", credentials);
             commit('SET_USER_DATA', data);
