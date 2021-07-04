@@ -1,6 +1,6 @@
 <template>
   <div class="body my-2">
-    <h1> Regístrate cómo Hospedador </h1>
+    <h1>Regístrate cómo Hospedador</h1>
     <div class="SignUp">
       <img
         height="300"
@@ -32,11 +32,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-3"
-          label="Tu Nombre:"
-          label-for="input-3"
-        >
+        <b-form-group id="input-group-3" label="Tu Nombre:" label-for="input-3">
           <b-form-input
             id="input-3"
             v-model="dog_daycare_name"
@@ -115,6 +111,16 @@
           ></b-form-input>
         </b-form-group>
 
+        <vue-recaptcha
+          @verify="onVerify"
+          sitekey="6LfOinIbAAAAALEDAwEttTjlDBV82jWfz7bnEn_O"
+        >
+        </vue-recaptcha>
+
+        <b-modal v-model="show1" size="sm">
+          <p class="my-4">Captcha incorrecto</p>
+        </b-modal>
+
         <b-button block pill type="submit" variant="success">
           Únete a PetSuite
         </b-button>
@@ -124,6 +130,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import VueRecaptcha from "vue-recaptcha";
 export default {
   name: "HospedadorComponente",
   data() {
@@ -138,35 +146,69 @@ export default {
       dog_daycare_type: false,
       dog_daycare_price_base: "",
       dog_daycare_tax: "",
+      robot: false,
+      show1: false,
     };
   },
   methods: {
-    registerUsuario() {
-      this.$store
-        .dispatch("registerUsuario", [
+    onVerify: async function (response) {
+      console.log(response);
+      await axios
+        .post(
+          "/api/users/captcha",
           {
-            user: this.user,
-            password: this.password,
-            dog_daycare_name: this.dog_daycare_name,
-            dog_daycare_e_mail: this.dog_daycare_e_mail,
-            dog_daycare_phone: this.dog_daycare_phone,
-            dog_daycare_score: this.dog_daycare_score,
-            dog_daycare_address: this.dog_daycare_address,
-            dog_daycare_type: this.dog_daycare_type,
-            dog_daycare_price_base: this.dog_daycare_price_base,
-            dog_daycare_tax: this.dog_daycare_tax
+            cadena: response,
           },
-          "dog_day_cares",
-        ])
-        .then(({ data }) => {
-          if (data === "") {
-            alert("Error al Regístrarte");
+          {
+            headers: {
+              Authorization:
+                "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.data == true) {
+            this.robot = true;
           } else {
-            alert("Bienvenido a PetSuite");
-            this.$router.push({ name: "Login" });
+            this.show1 = true;
+            this.robot = false;
           }
         });
     },
+    registerUsuario() {
+      if (this.robot) {
+        this.$store
+          .dispatch("registerUsuario", [
+            {
+              user: this.user,
+              password: this.password,
+              dog_daycare_name: this.dog_daycare_name,
+              dog_daycare_e_mail: this.dog_daycare_e_mail,
+              dog_daycare_phone: this.dog_daycare_phone,
+              dog_daycare_score: this.dog_daycare_score,
+              dog_daycare_address: this.dog_daycare_address,
+              dog_daycare_type: this.dog_daycare_type,
+              dog_daycare_price_base: this.dog_daycare_price_base,
+              dog_daycare_tax: this.dog_daycare_tax,
+            },
+            "dog_day_cares",
+          ])
+          .then(({ data }) => {
+            if (data === "") {
+              alert("Error al Regístrarte");
+            } else {
+              alert("Bienvenido a PetSuite");
+              this.$router.push({ name: "Login" });
+            }
+          });
+      } else {
+        this.show1 = true;
+      }
+    },
+  },
+  components: {
+    "vue-recaptcha": VueRecaptcha,
   },
 };
 </script>

@@ -84,6 +84,16 @@
           ></b-form-input>
         </b-form-group>
 
+        <vue-recaptcha
+          @verify="onVerify"
+          sitekey="6LfOinIbAAAAALEDAwEttTjlDBV82jWfz7bnEn_O"
+        >
+        </vue-recaptcha>
+
+        <b-modal v-model="show1" size="sm">
+          <p class="my-4">Captcha incorrecto</p>
+        </b-modal>
+
         <b-button block pill type="submit" variant="success">
           Únete a PetSuite
         </b-button>
@@ -94,6 +104,7 @@
 
 <script>
 import axios from "axios";
+import VueRecaptcha from "vue-recaptcha";
 export default {
   name: "UsuarioComponente",
   data() {
@@ -104,20 +115,18 @@ export default {
       client_phone: "",
       client_e_mail: "",
       client_address: "",
+      robot: false,
+      show1: false,
     };
   },
   methods: {
-    registerUsuario() {
-      axios
+    onVerify: async function (response) {
+      console.log(response);
+      await axios
         .post(
-          "/api/clients/load",
+          "/api/users/captcha",
           {
-            user: this.user,
-            password: this.password,
-            client_name: this.client_name,
-            client_phone: this.client_phone,
-            client_e_mail: this.client_e_mail,
-            client_address: this.client_address,
+            cadena: response,
           },
           {
             headers: {
@@ -126,15 +135,51 @@ export default {
             },
           }
         )
-        .then(({ data }) => {
-          if (data === "") {
-            alert("Error al Regístrarte");
+        .then((res) => {
+          console.log(res);
+          if (res.data == true) {
+            this.robot = true;
           } else {
-            alert("Bienvenido a PetSuite");
-            this.$router.push({ name: "Login" });
+            this.show1 = true;
+            this.robot = false;
           }
         });
     },
+    registerUsuario() {
+      if (this.robot) {
+        axios
+          .post(
+            "/api/clients/load",
+            {
+              user: this.user,
+              password: this.password,
+              client_name: this.client_name,
+              client_phone: this.client_phone,
+              client_e_mail: this.client_e_mail,
+              client_address: this.client_address,
+            },
+            {
+              headers: {
+                Authorization:
+                  "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q",
+              },
+            }
+          )
+          .then(({ data }) => {
+            if (data === "") {
+              alert("Error al Regístrarte");
+            } else {
+              alert("Bienvenido a PetSuite");
+              this.$router.push({ name: "Login" });
+            }
+          });
+      } else {
+        this.show1 = true;
+      }
+    },
+  },
+  components: {
+    "vue-recaptcha": VueRecaptcha,
   },
 };
 </script>
