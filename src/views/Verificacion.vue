@@ -71,7 +71,7 @@ export default {
       if (this.mensajeRespuesta == this.mensaje) {
         this.$router.push({ name: "Home" });
       } else {
-        alert("Error del mensaje");
+        alert("El codigo no ha sido satisfactorio");
       }
     },
   },

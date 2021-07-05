@@ -41,7 +41,7 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "DogDayCareList",
   data() {
@@ -60,11 +60,17 @@ export default {
         .then((response) => {
           this.dogDayCares = response.data;
         })
-        .catch(function (error) {
+        .catch((error) => {
           if (error.response) {
             this.myError = error.response.data.message;
-          } else if (error.request) {
-            console.log(error.request);
+            console.log("This is myError", this.myError);
+            if (this.myError.startsWith("JWT expired at")) {
+              alert("Debes Cambiar tu contraseña");
+              this.$router.push({
+                name: "Profile",
+                params: { id: this.currentUser.role },
+              });
+            }
           } else {
             console.log("Error", error.message);
           }

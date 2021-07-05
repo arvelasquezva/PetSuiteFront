@@ -33,8 +33,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["notifications"]),
-    ...mapState(["user"]),
+    ...mapState(["notifications", "user"]),
   },
   methods: {
     handleOk(notification_id) {

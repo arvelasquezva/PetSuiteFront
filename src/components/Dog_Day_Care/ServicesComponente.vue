@@ -1,39 +1,41 @@
 <template>
   <div class="body">
     <h1 class="mt-3">{{ msg }}</h1>
-      <div v-if="Object.keys(services).length === 0">
-          <NotFound class="mb-5"></NotFound>
-      </div>
-      <div else class="cards mx-5 mb-5">
-        <b-card
-          v-for="item in services"
-          :key="item.id"
-          class="card"
-        >
+    <div v-if="Object.keys(services).length === 0">
+      <NotFound class="mb-5"></NotFound>
+    </div>
+    <div else class="cards mx-5 mb-5">
+      <b-card v-for="item in services" :key="item.id" class="card">
         <b-card-body>
-          <b-card-title><strong>{{item.dogdaycare_Service_Name}}</strong></b-card-title>
-          <b-card-sub-title>$ {{item.dogdaycare_Service_Price}}</b-card-sub-title>
-          <b-card-text><strong>Descripción: </strong>{{ item.dogdaycare_Service_Description }} </b-card-text>
+          <b-card-title
+            ><strong>{{ item.dogdaycare_Service_Name }}</strong></b-card-title
+          >
+          <b-card-sub-title
+            >$ {{ item.dogdaycare_Service_Price }}</b-card-sub-title
+          >
+          <b-card-text
+            ><strong>Descripción: </strong
+            >{{ item.dogdaycare_Service_Description }}
+          </b-card-text>
         </b-card-body>
-        </b-card>
-      
-      </div>
-    
+      </b-card>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import  NotFound  from "@/components/NotFound.vue";
+import { mapState } from "vuex";
+import axios from "axios";
+import NotFound from "@/components/NotFound.vue";
 export default {
   name: "ServicesComponente",
-  components:{
-    NotFound
+  components: {
+    NotFound,
   },
   data() {
     return {
-    currentUser: "",
-    }
+      currentUser: "",
+    };
   },
   computed: {
     ...mapState(["services"]),
@@ -41,7 +43,7 @@ export default {
   props: {
     msg: String,
   },
-created() {
+  created() {
     if (localStorage.getItem("user")) {
       try {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
@@ -52,9 +54,28 @@ created() {
     this.getServices();
   },
   methods: {
-    getServices(){
-      this.$store.dispatch("getServicesByUser", this.currentUser.user);
-    }
+    async getServices() {
+      await axios
+        .get("api/dogdaycareservices/myServices?user=" + this.currentUser.user)
+        .then((response) => {
+          this.$store.dispatch("getServicesByUser", response.data);
+        })
+        .catch((error) => {
+          if (error.response) {
+            this.myError = error.response.data.message;
+            console.log("This is myError", this.myError);
+            if (this.myError.startsWith("JWT expired at")) {
+              alert("Debes Cambiar tu contraseña");
+              this.$router.push({
+                name: "Profile",
+                params: { id: this.currentUser.role },
+              });
+            }
+          } else {
+            console.log("Error", error.message);
+          }
+        });
+    },
   },
 };
 </script>

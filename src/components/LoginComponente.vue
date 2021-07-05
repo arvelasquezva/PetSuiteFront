@@ -1,29 +1,30 @@
 <template>
   <div class="body">
     <div class="login">
-      <b-form @submit.prevent="loginUsuario">
-        <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
-          <b-form-input
-            id="input-1"
-            v-model="user"
-            required
-            placeholder="Ingresa tu User ID"
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="input-group-2"
-          label="Tu contraseña:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="password"
-            required
-            placeholder="Ingresa una contraseña"
-            type="password"
-          ></b-form-input>
-        </b-form-group>
+      <b-form @submit.stop.prevent="loginUsuario">
+        <label for="feedback-user">User ID</label>
+        <b-form-input
+          id="feedback-user"
+          v-model="user"
+          :state="validationUser"
+          required
+          placeholder="Ingresa tu User ID"
+        ></b-form-input>
+        <b-form-invalid-feedback :state="validationUser">
+          Tu User ID debe tener almenos 6 caracteres
+        </b-form-invalid-feedback>
+        <label for="feedback-password">Contraseña</label>
+        <b-form-input
+          id="input-2"
+          v-model="password"
+          :state="validationPassword"
+          required
+          placeholder="Ingresa una contraseña"
+          type="password"
+        ></b-form-input>
+        <b-form-invalid-feedback :state="validationPassword">
+          Tu contraseña debe tener almenos 6 caracteres
+        </b-form-invalid-feedback>
 
         <vue-recaptcha
           @verify="onVerify"
@@ -61,6 +62,14 @@ export default {
       robot: false,
       show1: false,
     };
+  },
+  computed: {
+    validationUser() {
+        return this.user.length > 6
+      },
+    validationPassword() {
+        return this.user.length > 6
+      }
   },
   methods: {
     async onVerify(response) {

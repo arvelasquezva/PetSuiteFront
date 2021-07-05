@@ -117,7 +117,11 @@ export default new Vuex.Store({
         },
         async updateUsuario({ commit }, [credentials, userClass]) {
             const { data } = await axios
-                .post("/api/" + userClass + "/update", credentials);
+                .post("/api/" + userClass + "/update", credentials, {
+                    headers: {
+                        Authorization: "Token eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyUGFzc3dvcmQiOiJudWxsIiwicm9sZSI6IlJPTEVfQ0xJRU5UIn0.Bf0RDUGwDNVUUl8jEWXka1uNymXTnFg7QiQfxK_dpDe0bfPpDmOERZu_3sdDSVDK2IWpWrf6pu23J54UQd1N4Q"
+                    }
+                })
             commit('SET_USER_DATA', data);
         },
         async updateMascota({ commit }, credentials) {
@@ -140,9 +144,7 @@ export default new Vuex.Store({
         async getMascotaByUser({ commit }, dogs) {
             commit('SET_USER_PET', dogs);
         },
-        async getServicesByUser({ commit }, credentials) {
-            const { data } = await axios
-                .get("api/dogdaycareservices/myServices?user=" + credentials);
+        async getServicesByUser({ commit }, data) {
             commit('SET_DOGDAYCARE_SERVICES', data);
         },
         async getServicesByClient({ commit }, credentials) {
@@ -154,9 +156,7 @@ export default new Vuex.Store({
             return axios
                 .get("/api/clients/typeOfMyCare?user=" + credentials);
         },
-        async getPetitionById({ commit }) {
-            const { data } = await axios
-                .get("api/walkpetitions/all");
+        async getPetitionById({ commit }, data) {
             commit('SET_USER_PETITION', data);
         },
         async getWalksAccept({ commit }, credentials) {
