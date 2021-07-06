@@ -11,7 +11,7 @@
           placeholder="Ingresa tu User ID"
         ></b-form-input>
         <b-form-invalid-feedback :state="validationUser">
-          Tu User ID debe tener almenos 6 caracteres
+          Tu User ID debe tener almenos 8 caracteres
         </b-form-invalid-feedback>
         <label for="feedback-password">Contraseña</label>
         <b-form-input
@@ -23,15 +23,15 @@
           type="password"
         ></b-form-input>
         <b-form-invalid-feedback :state="validationPassword">
-          Tu contraseña debe tener almenos 6 caracteres
+          Tu contraseña debe tener almenos 8 caracteres
         </b-form-invalid-feedback>
-
+        </br>
         <vue-recaptcha
           @verify="onVerify"
           sitekey="6LfOinIbAAAAALEDAwEttTjlDBV82jWfz7bnEn_O"
         >
         </vue-recaptcha>
-
+        </br>
         <b-button block pill type="submit" variant="success"
           >Ingresa a PetSuite</b-button
         >
@@ -65,10 +65,10 @@ export default {
   },
   computed: {
     validationUser() {
-        return this.user.length > 6
+        return this.user.length > 8
       },
     validationPassword() {
-        return this.user.length > 6
+        return this.password.length > 8
       }
   },
   methods: {

@@ -7,29 +7,31 @@
         src="@/assets/Images/Guarderia(1).png"
         alt="image slot"
       />
-      <b-form @submit.prevent="registerUsuario" class="pl-4">
-        <b-form-group id="input-group-1" label="User ID:" label-for="input-1">
-          <b-form-input
-            id="input-1"
-            v-model="user"
-            required
-            placeholder="Ej: DiegoAVelasquez"
-          ></b-form-input>
-        </b-form-group>
+      <b-form @submit.stop.prevent="registerUsuario" class="pl-4">
+        <label for="feedback-user">User ID</label>
+        <b-form-input
+          id="feedback-user"
+          v-model="user"
+          :state="validationUser"
+          required
+          placeholder="Ingresa tu User ID"
+        ></b-form-input>
+        <b-form-invalid-feedback :state="validationUser">
+          Tu User ID debe tener almenos 8 caracteres
+        </b-form-invalid-feedback>
+        <label for="feedback-password">Contraseña</label>
+        <b-form-input
+          id="input-2"
+          v-model="password"
+          :state="validationPassword"
+          required
+          placeholder="Ingresa una contraseña"
+          type="password"
+        ></b-form-input>
+        <b-form-invalid-feedback :state="validationPassword">
+          Tu contraseña debe tener almenos 8 caracteres
+        </b-form-invalid-feedback>
 
-        <b-form-group
-          id="input-group-2"
-          label="Tu Contraseña:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="password"
-            required
-            placeholder="Ingresa una contraseña"
-            type="password"
-          ></b-form-input>
-        </b-form-group>
 
         <b-form-group
           id="input-group-3"
@@ -129,13 +131,13 @@
             placeholder="Ej: 10000"
           ></b-form-input>
         </b-form-group>
-
+</br>
         <vue-recaptcha
           @verify="onVerify"
           sitekey="6LfOinIbAAAAALEDAwEttTjlDBV82jWfz7bnEn_O"
         >
         </vue-recaptcha>
-
+        </br>
         <b-modal v-model="show1" size="sm">
           <p class="my-4">Captcha incorrecto</p>
         </b-modal>
@@ -169,6 +171,14 @@ export default {
       robot: false,
       show1: false,
     };
+  },
+  computed: {
+    validationUser() {
+        return this.user.length > 8
+      },
+    validationPassword() {
+        return this.password.length > 8
+      }
   },
   methods: {
     onVerify: async function (response) {
